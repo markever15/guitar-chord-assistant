@@ -41,7 +41,7 @@ body { background-color: var(--bg-color); color: var(--text-color); padding: 20p
 .fretboard-container { position: relative; margin: 20px 0 35px 60px; height: 180px; }
 /* 🌟 프렛 폭을 일정 이상(터치하기 편한 크기)으로 유지하고, 화면이 좁으면 이 안에서만 가로 스크롤되게 함
    (오픈 스트링 O/X 표시는 이 스크롤 영역 밖에 있어서 스크롤해도 계속 보임) */
-.fretboard-scroll { position: relative; height: 100%; overflow-x: auto; overflow-y: hidden; }
+.fretboard-scroll { position: relative; overflow-x: auto; }
 .fretboard { position: relative; width: 100%; min-width: 600px; height: 180px; background: #1b1d23; border-left: 6px solid #e5c07b; overflow: visible; }
 .left-panel { flex: 1.4; min-width: 600px; }
 /* 왼쪽 프렛보드와 마찬가지로 스크롤해도 상단에 고정되어 계속 보이도록 */
@@ -61,6 +61,8 @@ button.active { background-color: var(--accent-color); color: white; }
 .fret-line { position: absolute; top: 0; width: 1px; height: 100%; background: var(--fret-color); }
 .fret-numbers { position: relative; width: 100%; min-width: 600px; height: 18px; margin-top: 6px; }
 .fret-number { position: absolute; top: 0; width: 30px; margin-left: -15px; text-align: center; font-size: 0.7rem; color: #828997; }
+/* 실제 기타 넥의 포지션 마커(점) — 3,5,7,9,12(더블),15프렛 */
+.fret-inlay-dot { position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%); border-radius: 50%; background: #3e4452; z-index: 0; pointer-events: none; }
 
 .string { position: absolute; left: 0; width: 100%; background: #7d8496; }
 

@@ -38,6 +38,28 @@ window.getNoteName = function(stringIdx, fret) {
     return window.chromScale[(baseIdx + fret) % 12];
 };
 
+// 🌟 실제 기타 넥에 있는 포지션 마커(점) — 3,5,7,9,15,17,19,21프렛은 점 하나, 12,24프렛(옥타브)은 점 두 개
+window.renderFretInlays = function(fb, fWidth, totalFrets, boardHeight) {
+    const singleDotFrets = [3, 5, 7, 9, 15, 17, 19, 21];
+    const doubleDotFrets = [12, 24];
+    const center = boardHeight / 2;
+
+    const addDot = (fret, top) => {
+        const dot = document.createElement('div');
+        dot.className = 'fret-inlay-dot';
+        dot.style.left = `${(fret - 0.5) * fWidth}px`;
+        dot.style.top = `${top}px`;
+        fb.appendChild(dot);
+    };
+
+    singleDotFrets.forEach(f => { if (f <= totalFrets) addDot(f, center); });
+    doubleDotFrets.forEach(f => {
+        if (f > totalFrets) return;
+        addDot(f, center - 25);
+        addDot(f, center + 25);
+    });
+};
+
 function activateTab(targetId) {
     const targetTab = document.querySelector(`.nav-tab[data-target="${targetId}"]`);
     const targetView = document.getElementById(targetId);

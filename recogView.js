@@ -33,9 +33,11 @@ window.recogView = {
             const num = document.createElement('div'); 
             num.className = 'fret-number'; 
             num.style.left = `${left - (fWidth/2)}px`; 
-            num.textContent = i === 0 ? 'Nut' : i; 
+            num.textContent = i === 0 ? 'Nut' : i;
             fn.appendChild(num);
         }
+
+        window.renderFretInlays(fb, fWidth, totalFrets, 180);
 
         // 2. 기타 줄(가로선) 및 터치 영역 생성
         for (let s = 0; s < stringCount; s++) {
