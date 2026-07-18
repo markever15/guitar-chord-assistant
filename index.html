@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Guitar Chord & Context Songwriting Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <nav class="main-nav">
+        <button class="nav-tab active" data-target="tab-recognizer">🔍 Chord Finder</button>
+        <button class="nav-tab" data-target="tab-dictionary">📖 Chord Dictionary</button>
+        <button class="nav-tab" data-target="tab-blog">✍️ Tips</button>
+    </nav>
+
+    <div id="tab-recognizer" class="page-view active">
+        <div class="recognizer-container">
+            <h2>🔍 Chord Finder</h2>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1.5; min-width: 450px; background: #1b1d23; border: 1px solid #2d313f; padding: 20px; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h4 style="margin:0; color: var(--text-light);">Click Frets to Detect</h4>
+                        <div style="display: flex; gap: 8px;">
+                            <button id="play-finder-btn" style="background:#2d313f; color:#fff; padding:4px 10px; font-size:0.8rem; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">🔊 Play</button>
+                            <button id="reset-finder-btn" style="background:#e06c75; color:#fff; padding:4px 10px; font-size:0.8rem; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Reset Frets</button>
+                        </div>
+                    </div>
+                    <div class="fretboard-container" style="margin: 20px 0 35px 40px;">
+                        <div class="open-string-indicators" id="finder-open-indicators" style="left:-25px;"></div>
+                        <div class="fretboard" id="finder-fretboard"></div>
+                        <div class="hover-detector" id="finder-hover-detector"></div>
+                        <div class="fret-numbers" id="finder-fret-numbers"></div>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 15px;">
+                    <div style="background: #1e222b; border: 1px solid #3e4452; padding: 20px; border-radius: 8px;">
+                        <h4 style="margin: 0 0 12px 0; color: var(--selected-card-border);">🕵️ Analysis Result</h4>
+                        <div id="recog-detected-name" style="font-size: 1.8rem; font-weight: bold; color: var(--highlight-color); margin-bottom: 5px;">Unknown</div>
+                        <div id="recog-detected-notes" style="font-size: 0.9rem; color: #abb2bf; margin-bottom: 15px;">Notes: None</div>
+                        <div class="analysis-status" id="analysis-status" style="margin:0; font-size:0.85rem; color:#828997;">Click frets to begin detection.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab-dictionary" class="page-view">
+        <div class="dict-layout">
+            <div class="left-panel">
+                <div class="sticky-container">
+                    <div class="fretboard-sticky">
+                        <div class="chord-header-container">
+                            <div class="chord-formula-bar">
+                                <span class="formula-title" id="formula-title">Select a Chord</span>
+                                <div class="notes-badges" id="notes-badges"></div>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="side-btn" id="play-chord-btn">🔊 Play</button>
+                                <button class="side-btn" id="show-all-btn">Show Notes</button>
+                            </div>
+                        </div>
+                        <div class="fretboard-container">
+                            <div class="open-string-indicators" id="open-indicators"></div>
+                            <div class="fretboard" id="fretboard"></div>
+                            <div class="hover-detector" id="hover-detector"></div>
+                            <div class="fret-numbers" id="fret-numbers"></div>
+                        </div>
+                        <div id="note-tooltip"></div>
+                        <div class="control-group" style="margin-top: 14px;">
+                            <div class="group-title">Root Note</div>
+                            <div class="root-grid" id="root-buttons"></div>
+                        </div>
+                    </div>
+                    <div class="control-group" style="margin-top: 20px;">
+                        <div class="group-title">Chord Quality</div>
+                        <div id="quality-buttons"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="chord-search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="chord-search-input" placeholder="Search by chord name" autocomplete="off" spellcheck="false">
+                    <div class="chord-search-feedback" id="chord-search-feedback"></div>
+                </div>
+                <div class="composition-section" style="margin-top: 0;">
+                    <div class="comp-header"><span class="comp-title">🎸 Slash Chords</span></div>
+                    <div class="progression-shelf" id="slash-chord-shelf"></div>
+                </div>
+                <div class="composition-section" style="margin-top: 20px;">
+                    <div class="comp-header"><span class="comp-title">🪵 Fretboard Voicing Positions</span></div>
+                    <div class="voicing-list" id="voicing-list" style="max-height: 200px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab-blog" class="page-view">
+        <div class="tips-container">
+            <h2>✍️ Tips</h2>
+
+            <div class="tip-card">
+                <h3>1. How to Read the Fretboard Diagrams</h3>
+                <p class="tip-excerpt">Learn what the O's, X's, finger numbers, and connecting bars on our fretboard diagrams actually mean before you touch a string.</p>
+                <a class="tip-read-more" href="tips/reading-fretboard-diagrams.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>2. Barre Chords: Why They're Hard (and How to Fix Them)</h3>
+                <p class="tip-excerpt">Barre chords buzz or mute out for almost everyone at first — here's exactly why, and how to fix it.</p>
+                <a class="tip-read-more" href="tips/barre-chords-tips.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>3. Chord Symbols Cheat Sheet</h3>
+                <p class="tip-excerpt">m, 7, maj7, sus4, dim, aug, add9... a quick reference for what every chord suffix actually changes.</p>
+                <a class="tip-read-more" href="tips/chord-symbols-cheat-sheet.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>4. Slash Chords Explained</h3>
+                <p class="tip-excerpt">What C/E or Am/G actually means, and why some slash chords are inversions while others aren't.</p>
+                <a class="tip-read-more" href="tips/slash-chords-explained.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>5. Essential Chord Progressions to Practice</h3>
+                <p class="tip-excerpt">Four progressions — from blues to jazz — that show up in more songs than almost anything else.</p>
+                <a class="tip-read-more" href="tips/essential-chord-progressions.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>6. Getting the Most Out of the Chord Finder</h3>
+                <p class="tip-excerpt">Click frets, get an instant chord ID. Here's how to get the most out of the Chord Finder tool.</p>
+                <a class="tip-read-more" href="tips/using-the-chord-finder.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>7. Capo Basics: How and Why to Use One</h3>
+                <p class="tip-excerpt">A capo lets you keep the shapes you know while changing the key entirely — here's how the math works.</p>
+                <a class="tip-read-more" href="tips/capo-basics.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>8. Open, Barre, and Power Chords — When to Use Each</h3>
+                <p class="tip-excerpt">Open, barre, or power chord — the right choice depends on genre and texture, not just difficulty.</p>
+                <a class="tip-read-more" href="tips/open-barre-power-chords.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>9. How to Transpose a Song to Any Key</h3>
+                <p class="tip-excerpt">Two reliable ways to move any song into a new key, plus the shortcut everyone forgets.</p>
+                <a class="tip-read-more" href="tips/how-to-transpose-a-song.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>10. Diatonic Chords: Building Progressions from a Scale</h3>
+                <p class="tip-excerpt">Every major scale hides seven chords inside it — here's the pattern behind progressions that always sound right.</p>
+                <a class="tip-read-more" href="tips/diatonic-chords.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>11. Strumming Patterns Every Beginner Should Know</h3>
+                <p class="tip-excerpt">The single most useful strumming pattern to learn first, plus how to keep your arm moving through the rests.</p>
+                <a class="tip-read-more" href="tips/strumming-patterns-for-beginners.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>12. Major vs. Minor: Why Chords Sound Happy or Sad</h3>
+                <p class="tip-excerpt">One semitone is the entire difference between a chord sounding happy or sad. Here's why.</p>
+                <a class="tip-read-more" href="tips/major-vs-minor-chords.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>13. Voice Leading: Making Chord Changes Sound Smoother</h3>
+                <p class="tip-excerpt">Smooth chord changes aren't about speed — they're about choosing voicings whose notes barely have to move.</p>
+                <a class="tip-read-more" href="tips/voice-leading-guitar.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>14. Extended Chords in Pop & R&B: 9ths, 11ths, and 13ths</h3>
+                <p class="tip-excerpt">9ths, 11ths, and 13ths add the lush color you hear in R&B and neo-soul — here's what they actually are.</p>
+                <a class="tip-read-more" href="tips/extended-chords-9-11-13.html">Read More →</a>
+            </div>
+
+            <div class="tip-card">
+                <h3>15. Practice Drills for Fast, Clean Chord Changes</h3>
+                <p class="tip-excerpt">Four focused drills to fix sloppy chord changes faster than just playing through songs.</p>
+                <a class="tip-read-more" href="tips/practice-drills-chord-changes.html">Read More →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="audio.js"></script>
+<script src="chords.js"></script>
+<script src="app.js"></script>
+<script src="dictView.js"></script>
+<script src="recogView.js"></script>
+</body>
+</html>
