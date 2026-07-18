@@ -18,8 +18,8 @@
     <div id="tab-recognizer" class="page-view active">
         <div class="recognizer-container">
             <h2>🔍 Chord Finder</h2>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                <div style="flex: 1.5; min-width: 450px; background: #1b1d23; border: 1px solid #2d313f; padding: 20px; border-radius: 8px;">
+            <div class="finder-layout">
+                <div class="finder-board-col">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                         <h4 style="margin:0; color: var(--text-light);">Click Frets to Detect</h4>
                         <div style="display: flex; gap: 8px;">
@@ -29,12 +29,14 @@
                     </div>
                     <div class="fretboard-container" style="margin: 20px 0 35px 40px;">
                         <div class="open-string-indicators" id="finder-open-indicators" style="left:-25px;"></div>
-                        <div class="fretboard" id="finder-fretboard"></div>
-                        <div class="hover-detector" id="finder-hover-detector"></div>
-                        <div class="fret-numbers" id="finder-fret-numbers"></div>
+                        <div class="fretboard-scroll">
+                            <div class="fretboard" id="finder-fretboard"></div>
+                            <div class="hover-detector" id="finder-hover-detector"></div>
+                            <div class="fret-numbers" id="finder-fret-numbers"></div>
+                        </div>
                     </div>
                 </div>
-                <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 15px;">
+                <div class="finder-result-col">
                     <div style="background: #1e222b; border: 1px solid #3e4452; padding: 20px; border-radius: 8px;">
                         <h4 style="margin: 0 0 12px 0; color: var(--selected-card-border);">🕵️ Analysis Result</h4>
                         <div id="recog-detected-name" style="font-size: 1.8rem; font-weight: bold; color: var(--highlight-color); margin-bottom: 5px;">Unknown</div>
@@ -63,9 +65,11 @@
                         </div>
                         <div class="fretboard-container">
                             <div class="open-string-indicators" id="open-indicators"></div>
-                            <div class="fretboard" id="fretboard"></div>
-                            <div class="hover-detector" id="hover-detector"></div>
-                            <div class="fret-numbers" id="fret-numbers"></div>
+                            <div class="fretboard-scroll">
+                                <div class="fretboard" id="fretboard"></div>
+                                <div class="hover-detector" id="hover-detector"></div>
+                                <div class="fret-numbers" id="fret-numbers"></div>
+                            </div>
                         </div>
                         <div id="note-tooltip"></div>
                         <div class="control-group" style="margin-top: 14px;">
@@ -91,7 +95,7 @@
                 </div>
                 <div class="composition-section" style="margin-top: 20px;">
                     <div class="comp-header"><span class="comp-title">🪵 Fretboard Voicing Positions</span></div>
-                    <div class="voicing-list" id="voicing-list" style="max-height: 200px;"></div>
+                    <div class="voicing-list" id="voicing-list"></div>
                 </div>
             </div>
         </div>

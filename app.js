@@ -91,19 +91,71 @@ const missingChordFormulas = {
 // 🌟 핵심: 기타리스트들이 실제로 사용하는 재즈/R&B 실전 파지법 뼈대 주입 
 // (너무 넓게 찢어지는 폼은 필터링에 걸리므로 안정적인 폼으로 엄선)
 const missingVoicingsForC = {
-    'm9':      [{ name: 'Cm9 Shape', desc: '', frets: [-1, 3, 1, 3, 3, -1], fingers: [-1, 2, 1, 3, 4, -1] }],
-    '11':      [{ name: 'C11 Shape', desc: '', frets: [-1, 3, 3, 3, 3, -1], fingers: [-1, 1, 1, 1, 1, -1] }],
-    'm11':     [{ name: 'Cm11 Shape', desc: '', frets: [8, -1, 8, 8, 6, -1], fingers: [3, -1, 4, 4, 1, -1] }],
-    'maj11':   [{ name: 'Cmaj11 Shape', desc: '', frets: [-1, 3, 2, 0, 0, 1], fingers: [-1, 3, 2, 0, 0, 1] }],
-    '13':      [{ name: 'C13 Shape', desc: '', frets: [8, -1, 8, 9, 10, -1], fingers: [1, -1, 2, 3, 4, -1] }],
-    'm13':     [{ name: 'Cm13 Shape', desc: '', frets: [8, -1, 8, 8, 10, -1], fingers: [1, -1, 2, 2, 4, -1] }],
-    'maj13':   [{ name: 'Cmaj13 Shape', desc: '', frets: [-1, 3, 2, 2, 0, 0], fingers: [-1, 3, 2, 1, 0, 0] }],
-    '7sus4':   [{ name: 'C7sus4 Shape', desc: '', frets: [-1, 3, 5, 3, 6, -1], fingers: [-1, 1, 3, 1, 4, -1] }],
-    '6/9':     [{ name: 'C6/9 Shape', desc: '', frets: [-1, 3, 2, 2, 3, -1], fingers: [-1, 2, 1, 1, 3, -1] }],
-    '7b9':     [{ name: 'C7b9 Shape', desc: '', frets: [-1, 3, 2, 3, 2, -1], fingers: [-1, 2, 1, 3, 1, -1] }],
-    '7#9':     [{ name: 'C7#9 Shape', desc: '', frets: [-1, 3, 2, 3, 4, -1], fingers: [-1, 2, 1, 3, 4, -1] }],
-    'm(maj7)': [{ name: 'Cm(maj7) Shape', desc: '', frets: [-1, 3, 5, 4, 4, 3], fingers: [-1, 1, 4, 2, 3, 1] }],
-    'm(add9)': [{ name: 'Cm(add9) Shape', desc: '', frets: [-1, 3, 1, 0, 3, -1], fingers: [-1, 3, 1, 0, 4, -1] }]
+    'm9':      [
+        { name: 'Cm9 Shape', desc: '', frets: [-1, 3, 1, 3, 3, -1], fingers: [-1, 2, 1, 3, 4, -1] },
+        { name: 'E Shape m9 (No 5th)', desc: '6th string root jazz m9 shell.', frets: [8, 5, 8, 8, -1, -1], fingers: [2, 1, 3, 4, -1, -1] },
+        { name: 'D Shape m9 (No 5th)', desc: '4th string root jazz m9 shell.', frets: [-1, -1, 10, 8, 11, 10], fingers: [-1, -1, 2, 1, 4, 3] }
+    ],
+    '11':      [
+        { name: 'C11 Shape', desc: '', frets: [-1, 3, 3, 3, 3, -1], fingers: [-1, 1, 1, 1, 1, -1] },
+        { name: 'E Shape 11 (No 3rd/5th)', desc: '6th string root quartal 11th shell.', frets: [8, 5, 8, -1, 6, -1], fingers: [3, 1, 4, -1, 2, -1] },
+        { name: 'D Shape 11 (No 3rd/5th)', desc: '4th string root quartal 11th shell.', frets: [-1, -1, 10, 10, 11, 10], fingers: [-1, -1, 1, 2, 4, 3] }
+    ],
+    'm11':     [
+        { name: 'Cm11 Shape', desc: '', frets: [8, -1, 8, 8, 6, -1], fingers: [3, -1, 4, 4, 1, -1] },
+        { name: 'A Shape m11 (No 5th/9th)', desc: '5th string root jazz m11 shell.', frets: [1, 3, 1, 3, -1, -1], fingers: [1, 3, 2, 4, -1, -1] },
+        { name: 'D Shape m11 (No 5th/9th)', desc: '4th string root jazz m11 shell.', frets: [-1, -1, 10, 10, 11, 11], fingers: [-1, -1, 1, 2, 3, 4] }
+    ],
+    'maj11':   [
+        { name: 'Cmaj11 Shape', desc: '', frets: [-1, 3, 2, 0, 0, 1], fingers: [-1, 3, 2, 0, 0, 1] },
+        { name: 'E Shape maj11 (No 5th/9th)', desc: '6th string root jazz maj11 shell.', frets: [8, -1, 9, 9, 6, -1], fingers: [2, -1, 3, 4, 1, -1] },
+        { name: 'D Shape maj11 (No 3rd/5th)', desc: '4th string root jazz maj11 shell.', frets: [-1, -1, 10, 10, 12, 10], fingers: [-1, -1, 1, 2, 4, 3] }
+    ],
+    '13':      [
+        { name: 'C13 Shape', desc: '', frets: [8, -1, 8, 9, 10, -1], fingers: [1, -1, 2, 3, 4, -1] },
+        { name: 'A Shape 13 (No 5th/9th)', desc: '5th string root jazz 13th shell.', frets: [-1, 3, 7, 3, 5, -1], fingers: [-1, 1, 4, 2, 3, -1] },
+        { name: 'D Shape 13 (No 5th/9th)', desc: '4th string root jazz 13th shell.', frets: [-1, -1, 10, 9, 10, 6], fingers: [-1, -1, 3, 2, 4, 1] }
+    ],
+    'm13':     [
+        { name: 'Cm13 Shape', desc: '', frets: [8, -1, 8, 8, 10, -1], fingers: [1, -1, 2, 2, 4, -1] },
+        { name: 'A Shape m13 (No 5th/9th)', desc: '5th string root jazz m13 shell.', frets: [5, 3, 1, 3, -1, -1], fingers: [4, 2, 1, 3, -1, -1] },
+        { name: 'D Shape m13 (No 5th/9th)', desc: '4th string root jazz m13 shell.', frets: [-1, -1, 10, 8, 10, 6], fingers: [-1, -1, 3, 2, 4, 1] }
+    ],
+    'maj13':   [
+        { name: 'Cmaj13 Shape', desc: '', frets: [-1, 3, 2, 2, 0, 0], fingers: [-1, 3, 2, 1, 0, 0] },
+        { name: 'E Shape maj13 (No 5th/9th)', desc: '6th string root jazz maj13 shell.', frets: [8, -1, 9, 9, 10, -1], fingers: [1, -1, 2, 3, 4, -1] },
+        { name: 'D Shape maj13 (No 5th/9th)', desc: '4th string root jazz maj13 shell.', frets: [-1, -1, 10, 9, 10, 7], fingers: [-1, -1, 3, 2, 4, 1] }
+    ],
+    '7sus4':   [
+        { name: 'C7sus4 Shape', desc: '', frets: [-1, 3, 5, 3, 6, -1], fingers: [-1, 1, 3, 1, 4, -1] },
+        { name: 'E Shape 7sus4 (No 5th)', desc: '6th string root jazz 7sus4 shell.', frets: [8, -1, 8, -1, 6, -1], fingers: [2, -1, 3, -1, 1, -1] },
+        { name: 'D Shape 7sus4 (No 5th)', desc: '4th string root jazz 7sus4 shell.', frets: [-1, -1, 10, 10, -1, 6], fingers: [-1, -1, 2, 3, -1, 1] }
+    ],
+    '6/9':     [
+        { name: 'C6/9 Shape', desc: '', frets: [-1, 3, 2, 2, 3, -1], fingers: [-1, 2, 1, 1, 3, -1] },
+        { name: 'E Shape 6/9 (No 5th)', desc: '6th string root, no barre needed.', frets: [8, 5, 7, 9, -1, -1], fingers: [3, 1, 2, 4, -1, -1] },
+        { name: 'D Shape 6/9 (No 5th)', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 9, 10, 10], fingers: [-1, -1, 2, 1, 3, 4] }
+    ],
+    '7b9':     [
+        { name: 'C7b9 Shape', desc: '', frets: [-1, 3, 2, 3, 2, -1], fingers: [-1, 2, 1, 3, 1, -1] },
+        { name: 'E Shape 7b9 (No 5th)', desc: '6th string root jazz 7b9 shell.', frets: [8, -1, 8, 6, 5, -1], fingers: [3, -1, 4, 2, 1, -1] },
+        { name: 'D Shape 7b9 (No 5th/7th)', desc: '4th string root jazz 7b9 shell.', frets: [-1, -1, 10, 9, -1, 9], fingers: [-1, -1, 3, 1, -1, 2] }
+    ],
+    '7#9':     [
+        { name: 'C7#9 Shape', desc: '', frets: [-1, 3, 2, 3, 4, -1], fingers: [-1, 2, 1, 3, 4, -1] },
+        { name: 'E Shape 7#9 (No 5th)', desc: '6th string root jazz 7#9 shell (Hendrix chord).', frets: [8, -1, 8, 8, 5, -1], fingers: [2, -1, 3, 4, 1, -1] },
+        { name: 'D Shape 7#9 (No 5th/7th)', desc: '4th string root jazz 7#9 shell (Hendrix chord).', frets: [-1, -1, 10, 8, -1, 12], fingers: [-1, -1, 2, 1, -1, 3] }
+    ],
+    'm(maj7)': [
+        { name: 'Cm(maj7) Shape', desc: '', frets: [-1, 3, 5, 4, 4, 3], fingers: [-1, 1, 4, 2, 3, 1] },
+        { name: 'E Shape m(maj7) (No 5th)', desc: '6th string root jazz shell voicing.', frets: [8, -1, 9, 8, -1, -1], fingers: [1, -1, 3, 2, -1, -1] },
+        { name: 'D Shape m(maj7) (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, -1, 12, 11], fingers: [-1, -1, 1, -1, 3, 2] }
+    ],
+    'm(add9)': [
+        { name: 'Cm(add9) Shape', desc: '', frets: [-1, 3, 1, 0, 3, -1], fingers: [-1, 3, 1, 0, 4, -1] },
+        { name: 'E Shape m(add9) (No 5th)', desc: '6th string root, no barre needed.', frets: [8, 5, -1, 8, -1, -1], fingers: [2, 1, -1, 3, -1, -1] },
+        { name: 'D Shape m(add9) (No 5th)', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 7, -1, 11], fingers: [-1, -1, 2, 1, -1, 3] }
+    ]
 };
 
 window.addEventListener('load', () => {

@@ -121,12 +121,20 @@ window.dictView = {
 
         // 🌟 핵심: 코드를 이동시키고 인체공학적(물리적)으로 잡을 수 있는지 검증하는 통합 헬퍼 함수
         const processVoicing = (v, off, nameSuffix) => {
-            const shiftedFrets = v.frets.map(f => f === -1 ? -1 : f + off);
+            // 🌟 "뮤트(-1)"와 "이동 후 프렛이 음수가 되어 -1과 값이 겹치는 경우"를 반드시 구분해야 함.
+            // 구분하지 않으면 루트음이 통째로 잘려나간 반쪽짜리 코드가 뮤트로 위장해 통과해버림(예: G#m7 버그).
+            let invalidShift = false;
+            const shiftedFrets = v.frets.map(f => {
+                if (f === -1) return -1;
+                const nf = f + off;
+                if (nf < 0) invalidShift = true;
+                return nf;
+            });
             const wasOpenShape = v.frets.includes(0);
-            
+
             const shiftedFingers = v.fingers.map((fing, idx) => {
                 if (off === 0) return fing === 0 ? -1 : fing; // 원본 폼에서도 0번 손가락은 강제 삭제
-                
+
                 if (wasOpenShape) {
                     if (v.frets[idx] === 0) return 1; // 개방현이었던 줄은 1번(바레)으로
                     if (fing > 0) return Math.min(4, fing + 1); // 나머지는 손가락 번호 +1
@@ -135,7 +143,7 @@ window.dictView = {
             });
 
             // 1. 렌더링 범위 이탈 필터링
-            if (shiftedFrets.some(f => f !== -1 && f < 0)) return null;
+            if (invalidShift) return null;
             if (shiftedFrets.some(f => f !== -1 && f > window.totalFrets)) return null;
 
             // 2. 물리적 한계 필터링 (손가락이 5프렛 이상 찢어지면 삭제)
@@ -143,15 +151,22 @@ window.dictView = {
             const fretSpan = activeFrets.length > 0 ? Math.max(...activeFrets) - Math.min(...activeFrets) : 0;
             if (fretSpan > 4) return null;
 
-            // 3. 중복 손가락 사용 방지 (검지(1)는 바레로 여러 줄 커버 가능하지만, 2, 3, 4번 손가락은 중복 불가)
+            // 3. 중복 손가락 사용 방지 (검지(1)는 바레로 여러 줄 커버 가능. 2, 3, 4번 손가락도
+            //    "같은 프렛"이면 미니 바레로 동시에 여러 줄을 누를 수 있으므로 허용하고,
+            //    "서로 다른 프렛"을 동시에 요구할 때만 물리적으로 불가능하므로 걸러낸다.)
             if (off !== 0) {
-                const fingerCounts = { 2: 0, 3: 0, 4: 0 };
-                shiftedFingers.forEach(fing => {
-                    if (fing >= 2 && fing <= 4) fingerCounts[fing]++;
+                const fretByFinger = {};
+                let fingerConflict = false;
+                shiftedFingers.forEach((fing, idx) => {
+                    if (fing >= 2 && fing <= 4) {
+                        const fret = shiftedFrets[idx];
+                        if (fretByFinger[fing] !== undefined && fretByFinger[fing] !== fret) {
+                            fingerConflict = true;
+                        }
+                        fretByFinger[fing] = fret;
+                    }
                 });
-                if (fingerCounts[2] > 1 || fingerCounts[3] > 1 || fingerCounts[4] > 1) {
-                    return null;
-                }
+                if (fingerConflict) return null;
             }
 
             return {

@@ -19,54 +19,83 @@ window.chordDatabase = {
     'C': {
         'Major': [
             { name: 'Open C Shape', desc: 'Standard open C chord.', frets: [-1, 3, 2, 0, 1, 0], fingers: [-1, 3, 2, 0, 1, 0] },
-            { name: 'A Shape (3rd Fret)', desc: 'Full 5-string barre shape.', frets: [-1, 3, 5, 5, 5, 3], fingers: [-1, 1, 3, 3, 3, 1] }
+            { name: 'A Shape (3rd Fret)', desc: 'Full 5-string barre shape.', frets: [-1, 3, 5, 5, 5, 3], fingers: [-1, 1, 3, 3, 3, 1] },
+            { name: 'D Shape Major', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 9, 8, -1], fingers: [-1, -1, 3, 2, 1, -1] }
         ],
         'm': [
-            { name: 'Cm (Muted)', desc: 'Muted bottom 4-string shape.', frets: [-1, 3, 5, 5, 4, -1], fingers: [-1, 1, 3, 4, 2, -1] }
+            { name: 'Cm (Muted)', desc: 'Muted bottom 4-string shape.', frets: [-1, 3, 5, 5, 4, -1], fingers: [-1, 1, 3, 4, 2, -1] },
+            { name: 'D Shape m', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 8, 8, -1], fingers: [-1, -1, 3, 1, 2, -1] }
         ],
         'm7': [
             { name: 'Am7 Shape (3rd Fret)', desc: 'Standard minor 7th barre.', frets: [-1, 3, 5, 3, 4, 3], fingers: [-1, 1, 3, 1, 2, 1] },
-            { name: 'Jazz m7 (3rd Fret)', desc: 'R&B voicing (5th string root, no 5th).', frets: [-1, 3, -1, 3, 4, -1], fingers: [-1, 1, -1, 2, 3, -1] }
+            { name: 'Jazz m7 (3rd Fret)', desc: 'R&B voicing (5th string root, no 5th).', frets: [-1, 3, -1, 3, 4, -1], fingers: [-1, 1, -1, 2, 3, -1] },
+            { name: 'E Shape m7 (No 5th)', desc: '6th string root, skip the 5th & 1st strings (no barre needed).', frets: [8, -1, 8, 8, 8, -1], fingers: [1, -1, 2, 3, 4, -1] },
+            { name: 'D Shape m7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 8, 11, -1], fingers: [-1, -1, 2, 1, 3, -1] }
         ],
         '5': [
-            { name: 'A5 Shape (3rd Fret)', desc: 'Rock power chord.', frets: [-1, 3, 5, 5, -1, -1], fingers: [-1, 1, 3, 4, -1, -1] }
+            { name: 'A5 Shape (3rd Fret)', desc: 'Rock power chord.', frets: [-1, 3, 5, 5, -1, -1], fingers: [-1, 1, 3, 4, -1, -1] },
+            { name: 'E Shape 5', desc: '6th string root power chord.', frets: [8, 10, -1, -1, -1, -1], fingers: [1, 2, -1, -1, -1, -1] },
+            { name: 'D Shape 5', desc: '4th string root power chord.', frets: [-1, -1, 10, -1, 8, -1], fingers: [-1, -1, 2, -1, 1, -1] }
         ],
         'sus2': [
-            { name: 'Open Csus2', desc: 'Open suspended 2nd chord.', frets: [-1, 3, 0, 0, 1, -1], fingers: [-1, 3, 0, 0, 1, -1] }
+            { name: 'Open Csus2', desc: 'Open suspended 2nd chord.', frets: [-1, 3, 0, 0, 1, -1], fingers: [-1, 3, 0, 0, 1, -1] },
+            { name: 'E Shape sus2', desc: '6th string root, no barre needed.', frets: [8, 5, 5, -1, -1, -1], fingers: [3, 1, 2, -1, -1, -1] },
+            { name: 'D Shape sus2', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, -1, 8, 10], fingers: [-1, -1, 2, -1, 1, 3] }
         ],
         'sus4': [
-            { name: 'Open Csus4', desc: 'Standard open suspended 4th.', frets: [-1, 3, 3, 0, 1, 1], fingers: [-1, 3, 4, 0, 1, 1] }
+            { name: 'Open Csus4', desc: 'Standard open suspended 4th.', frets: [-1, 3, 3, 0, 1, 1], fingers: [-1, 3, 4, 0, 1, 1] },
+            { name: 'E Shape sus4', desc: '6th string root, no barre needed.', frets: [8, 10, -1, 10, -1, -1], fingers: [1, 2, -1, 3, -1, -1] },
+            { name: 'D Shape sus4', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 10, 8, -1], fingers: [-1, -1, 2, 3, 1, -1] }
         ],
         '7': [
-            { name: 'Open C7 Shape', desc: 'Bluesy dominant 7th shape.', frets: [-1, 3, 2, 3, 1, 0], fingers: [-1, 3, 2, 4, 1, 0] }
+            { name: 'Open C7 Shape', desc: 'Bluesy dominant 7th shape.', frets: [-1, 3, 2, 3, 1, 0], fingers: [-1, 3, 2, 4, 1, 0] },
+            { name: 'E Shape 7 (No 5th)', desc: '6th string root jazz shell voicing.', frets: [8, -1, 8, 9, -1, -1], fingers: [1, -1, 2, 3, -1, -1] },
+            { name: 'D Shape 7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 9, 11, -1], fingers: [-1, -1, 2, 1, 3, -1] }
         ],
         'maj7': [
             { name: 'Open Cmaj7 Shape', desc: 'Standard acoustic Cmaj7.', frets: [-1, 3, 2, 0, 0, 0], fingers: [-1, 3, 2, 0, 0, 0] },
-            { name: 'Cmaj7 (No 5th)', desc: 'Muted 4th string jazzy voicing.', frets: [-1, 3, -1, 4, 5, -1], fingers: [-1, 1, -1, 2, 3, -1] }
+            { name: 'Cmaj7 (No 5th)', desc: 'Muted 4th string jazzy voicing.', frets: [-1, 3, -1, 4, 5, -1], fingers: [-1, 1, -1, 2, 3, -1] },
+            { name: 'D Shape maj7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 9, 12, -1], fingers: [-1, -1, 2, 1, 3, -1] }
         ],
         'm7b5': [
-            { name: 'Cm7b5', desc: 'Half-diminished jazz voicing.', frets: [-1, 3, 4, 3, 4, -1], fingers: [-1, 1, 3, 2, 4, -1] }
+            { name: 'Cm7b5', desc: 'Half-diminished jazz voicing.', frets: [-1, 3, 4, 3, 4, -1], fingers: [-1, 1, 3, 2, 4, -1] },
+            { name: 'E Shape m7b5 (No 5th)', desc: '6th string root half-diminished shell.', frets: [8, -1, 8, 8, 7, -1], fingers: [2, -1, 3, 4, 1, -1] },
+            { name: 'D Shape m7b5', desc: '4th string root half-diminished shell.', frets: [-1, -1, 10, 11, 11, 11], fingers: [-1, -1, 1, 2, 3, 4] }
         ],
         '9': [
-            { name: 'C9 Shape', desc: 'Jazz 5-string 9th chord.', frets: [-1, 3, 2, 3, 3, 3], fingers: [-1, 2, 1, 3, 3, 3] }
+            { name: 'C9 Shape', desc: 'Jazz 5-string 9th chord.', frets: [-1, 3, 2, 3, 3, 3], fingers: [-1, 2, 1, 3, 3, 3] },
+            { name: 'E Shape 9 (No 5th)', desc: '6th string root jazz 9th shell.', frets: [8, 5, 8, 9, -1, -1], fingers: [2, 1, 3, 4, -1, -1] },
+            { name: 'D Shape 9 (No 5th)', desc: '4th string root jazz 9th shell.', frets: [-1, -1, 10, 9, 11, 10], fingers: [-1, -1, 2, 1, 4, 3] }
         ],
         'maj9': [
-            { name: 'Cmaj9 Shape', desc: 'Lush major 9th.', frets: [-1, 3, 2, 4, 3, -1], fingers: [-1, 2, 1, 4, 3, -1] }
+            { name: 'Cmaj9 Shape', desc: 'Lush major 9th.', frets: [-1, 3, 2, 4, 3, -1], fingers: [-1, 2, 1, 4, 3, -1] },
+            { name: 'E Shape maj9 (No 5th)', desc: '6th string root jazz maj9 shell.', frets: [8, 5, 9, 9, -1, -1], fingers: [2, 1, 3, 3, -1, -1] },
+            { name: 'D Shape maj9 (No 5th)', desc: '4th string root jazz maj9 shell.', frets: [-1, -1, 10, 9, 12, 10], fingers: [-1, -1, 2, 1, 4, 3] }
         ],
         '6': [
-            { name: 'Open C6 Shape', desc: 'Sweet vintage 6th.', frets: [-1, 3, 2, 2, 1, 0], fingers: [-1, 3, 2, 2, 1, 0] }
+            { name: 'Open C6 Shape', desc: 'Sweet vintage 6th.', frets: [-1, 3, 2, 2, 1, 0], fingers: [-1, 3, 2, 2, 1, 0] },
+            { name: 'E Shape 6', desc: '6th string root, no barre needed.', frets: [8, 10, 7, 9, -1, -1], fingers: [2, 4, 1, 3, -1, -1] },
+            { name: 'D Shape 6 (No 5th)', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 9, 10, -1], fingers: [-1, -1, 2, 1, 3, -1] }
         ],
         'dim': [
-            { name: 'Cdim Shape', desc: 'Diminished triad.', frets: [-1, -1, 10, 8, 7, -1], fingers: [-1, -1, 3, 2, 1, -1] }
+            { name: 'Cdim Shape', desc: 'Diminished triad.', frets: [-1, -1, 10, 8, 7, -1], fingers: [-1, -1, 3, 2, 1, -1] },
+            { name: 'E Shape dim', desc: '6th string root diminished triad.', frets: [8, -1, -1, 8, 7, -1], fingers: [2, -1, -1, 3, 1, -1] },
+            { name: 'A Shape dim', desc: '5th string root diminished triad.', frets: [2, 3, 1, -1, -1, -1], fingers: [2, 3, 1, -1, -1, -1] }
         ],
         'dim7': [
-            { name: 'Cdim7 Shape', desc: 'Symmetrical dim7.', frets: [-1, 3, 4, 2, 4, -1], fingers: [-1, 2, 3, 1, 4, -1] }
+            { name: 'Cdim7 Shape', desc: 'Symmetrical dim7.', frets: [-1, 3, 4, 2, 4, -1], fingers: [-1, 2, 3, 1, 4, -1] },
+            { name: 'E Shape dim7', desc: '6th string root symmetrical dim7.', frets: [8, -1, 7, 8, 7, -1], fingers: [3, -1, 1, 4, 2, -1] },
+            { name: 'D Shape dim7', desc: '4th string root symmetrical dim7.', frets: [-1, -1, 10, 11, 10, 11], fingers: [-1, -1, 1, 3, 2, 4] }
         ],
         'add9': [
-            { name: 'Open Cadd9', desc: 'Standard acoustic Cadd9.', frets: [-1, 3, 2, 0, 3, 0], fingers: [-1, 2, 1, 0, 3, 0] }
+            { name: 'Open Cadd9', desc: 'Standard acoustic Cadd9.', frets: [-1, 3, 2, 0, 3, 0], fingers: [-1, 2, 1, 0, 3, 0] },
+            { name: 'E Shape add9 (No 5th)', desc: '6th string root, no barre needed.', frets: [8, 5, -1, 9, -1, -1], fingers: [2, 1, -1, 3, -1, -1] },
+            { name: 'D Shape add9 (No 5th)', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 9, -1, 10], fingers: [-1, -1, 2, 1, -1, 3] }
         ],
         'aug': [
-            { name: 'Caug Shape', desc: 'Standard augmented triad.', frets: [-1, 3, 2, 1, 1, -1], fingers: [-1, 3, 2, 1, 1, -1] }
+            { name: 'Caug Shape', desc: 'Standard augmented triad.', frets: [-1, 3, 2, 1, 1, -1], fingers: [-1, 3, 2, 1, 1, -1] },
+            { name: 'E Shape aug', desc: '6th string root augmented triad.', frets: [8, -1, -1, 9, 9, -1], fingers: [1, -1, -1, 2, 3, -1] },
+            { name: 'D Shape aug', desc: '4th string root augmented triad.', frets: [-1, -1, 10, 9, 9, -1], fingers: [-1, -1, 3, 1, 2, -1] }
         ]
     },
     'D': {
