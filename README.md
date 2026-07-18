@@ -6,7 +6,7 @@ An interactive guitar chord dictionary, reverse chord finder, and songwriting ti
 
 ## Why I built this
 
-As a guitar player, I kept running into the same problem: unlike a piano, where a chord is just "these keys, right there," the guitar lets you play the same chord in half a dozen different places on the neck — which makes memorizing chords genuinely harder. I looked around for a tool that would show me every practical way to play a given chord, but most of the guitar sites I found were either locked behind a paywall or only gave you one or two shapes per chord (usually just the open-position one). So I decided to just build the tool I actually wanted for myself.
+As a guitar player, I kept running into the same problem: the same chord can be played in half a dozen different places on the neck, and each shape gives it a slightly different color and feel. That's a big part of what makes the guitar such an expressive instrument — but it also means there's a lot more to memorize and understand than just "one chord, one shape," which makes the instrument genuinely harder to get a handle on. I looked around for a tool that would show me every practical way to play a given chord, but most of the guitar sites I found were either locked behind a paywall or only gave you one or two shapes per chord (usually just the open-position one). So I decided to just build the tool I actually wanted for myself.
 
 ## Features
 
