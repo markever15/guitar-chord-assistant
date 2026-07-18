@@ -4,6 +4,10 @@ An interactive guitar chord dictionary, reverse chord finder, and songwriting ti
 
 **Live demo:** https://markever15.github.io/guitar-chord-assistant/
 
+## Why I built this
+
+As a guitar player, I kept running into the same problem: unlike a piano, where a chord is just "these keys, right there," the guitar lets you play the same chord in half a dozen different places on the neck — which makes memorizing chords genuinely harder. I looked around for a tool that would show me every practical way to play a given chord, but most of the guitar sites I found were either locked behind a paywall or only gave you one or two shapes per chord (usually just the open-position one). So I decided to just build the tool I actually wanted for myself.
+
 ## Features
 
 ### 📖 Chord Dictionary
