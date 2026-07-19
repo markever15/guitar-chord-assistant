@@ -57,10 +57,23 @@ window.chordDatabase = {
             { name: 'High Shape (10th Fret)', desc: 'High-position voicing without the 5th.', frets: [-1, -1, 10, 12, -1, 11], fingers: [-1, -1, 1, 3, -1, 2] }
         ],
         'm7': [
+            { name: 'Weave Shape (3rd Fret)', desc: 'Interlocking low-position minor 7th voicing.', frets: [-1, 3, 1, 3, 1, 3], fingers: [-1, 3, 1, 3, 1, 3] },
+            { name: 'Rootless Shape (Jazz)', desc: 'Rootless jazz voicing (Eb-G-Bb upper structure).', frets: [-1, 1, -1, 3, 4, 3], fingers: [-1, 1, -1, 2, 4, 2] },
             { name: 'Am7 Shape (3rd Fret)', desc: 'Standard minor 7th barre.', frets: [-1, 3, 5, 3, 4, 3], fingers: [-1, 1, 3, 1, 2, 1] },
+            { name: 'Am7 Shape (Wide Top)', desc: 'Am7 shape with the b7 voiced up top.', frets: [-1, 3, 5, 3, 4, 6], fingers: [-1, 1, 3, 1, 2, 4] },
+            { name: 'Open Shape (3rd Fret)', desc: 'Open G string as the 5th, b7 voiced up top.', frets: [-1, 3, 5, 0, 4, 6], fingers: [-1, 1, 3, 0, 2, 4] },
+            { name: 'Layer Shape (3rd Fret)', desc: 'Am7 shape with the G string fretted for a doubled root.', frets: [-1, 3, 5, 5, 4, 6], fingers: [-1, 1, 3, 3, 2, 4] },
             { name: 'Jazz m7 (3rd Fret)', desc: 'R&B voicing (5th string root, no 5th).', frets: [-1, 3, -1, 3, 4, -1], fingers: [-1, 1, -1, 2, 3, -1] },
+            { name: 'E Shape m7 (8th Fret)', desc: 'Full 6-string E-shape minor 7th barre.', frets: [8, 10, 8, 8, 11, 8], fingers: [1, 3, 1, 1, 4, 1] },
+            { name: 'E Shape m7 (Doubled Root)', desc: 'E-shape m7 with the D string voicing the root.', frets: [8, 10, 10, 8, 11, 8], fingers: [1, 3, 3, 1, 4, 1] },
+            { name: 'E Shape m7 (High Reach)', desc: 'E-shape m7 with the b7 voiced up on the B string.', frets: [8, 10, 8, 8, 8, 11], fingers: [1, 3, 1, 1, 1, 4] },
+            { name: 'E Shape m7 (Wide)', desc: 'E-shape m7 with the 5th doubled up top.', frets: [8, 10, 8, 8, 11, 11], fingers: [1, 3, 1, 1, 4, 4] },
+            { name: 'E Shape m7 (Full)', desc: 'E-shape m7 with the root doubled on the D string.', frets: [8, 10, 10, 8, 11, 11], fingers: [1, 3, 3, 1, 4, 4] },
+            { name: 'E Shape m7 (Open Triad)', desc: 'E-shape m7 with the open G string as the 5th.', frets: [8, 10, 10, 0, 11, 11], fingers: [1, 3, 3, 0, 4, 4] },
             { name: 'E Shape m7 (No 5th)', desc: '6th string root, skip the 5th & 1st strings (no barre needed).', frets: [8, -1, 8, 8, 8, -1], fingers: [1, -1, 2, 3, 4, -1] },
-            { name: 'D Shape m7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 8, 11, -1], fingers: [-1, -1, 2, 1, 3, -1] }
+            { name: 'D Shape m7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 8, 11, -1], fingers: [-1, -1, 2, 1, 3, -1] },
+            { name: 'Shell Shape (10th Fret)', desc: '3-note high-position shell.', frets: [-1, -1, 10, 0, 11, 11], fingers: [-1, -1, 1, 0, 2, 2] },
+            { name: 'Shell Shape (Full G)', desc: 'Shell shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, 11, 11], fingers: [-1, -1, 1, 4, 2, 2] }
         ],
         '5': [
             { name: 'Nut Shape (Open 5th)', desc: 'Low-position power chord with the open G string as the 5th.', frets: [-1, 3, -1, 0, 1, 3], fingers: [-1, 2, -1, 0, 1, 2] },
