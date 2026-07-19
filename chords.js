@@ -20,10 +20,13 @@ window.chordDatabase = {
         'Major': [
             { name: 'Open C Shape', desc: 'Standard open C chord.', frets: [-1, 3, 2, 0, 1, 0], fingers: [-1, 3, 2, 0, 1, 0] },
             { name: 'A Shape (3rd Fret)', desc: 'Full 5-string barre shape.', frets: [-1, 3, 5, 5, 5, 3], fingers: [-1, 1, 3, 3, 3, 1] },
+            { name: 'E Shape (8th Fret)', desc: 'Full 6-string barre shape.', frets: [8, 10, 10, 9, 8, 8], fingers: [1, 3, 4, 2, 1, 1] },
             { name: 'D Shape Major', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 9, 8, -1], fingers: [-1, -1, 3, 2, 1, -1] }
         ],
         'm': [
             { name: 'Cm (Muted)', desc: 'Muted bottom 4-string shape.', frets: [-1, 3, 5, 5, 4, -1], fingers: [-1, 1, 3, 4, 2, -1] },
+            { name: 'A Shape m (3rd Fret)', desc: 'Full 5-string minor barre shape.', frets: [-1, 3, 5, 5, 4, 3], fingers: [-1, 1, 3, 4, 2, 1] },
+            { name: 'E Shape m (8th Fret)', desc: 'Full 6-string minor barre shape.', frets: [8, 10, 10, 8, 8, 8], fingers: [1, 3, 4, 1, 1, 1] },
             { name: 'D Shape m', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 8, 8, -1], fingers: [-1, -1, 3, 1, 2, -1] }
         ],
         'm7': [
