@@ -89,8 +89,24 @@ window.chordDatabase = {
         ],
         '7': [
             { name: 'Open C7 Shape', desc: 'Bluesy dominant 7th shape.', frets: [-1, 3, 2, 3, 1, 0], fingers: [-1, 3, 2, 4, 1, 0] },
+            { name: 'Barre Shape (3rd Fret)', desc: '5-string dominant 7th barre.', frets: [-1, 3, 5, 3, 5, 3], fingers: [-1, 1, 3, 1, 3, 1] },
+            { name: 'Barre Shape (Open Top)', desc: 'Barre shape with the high E string left open.', frets: [-1, 3, 5, 3, 5, 0], fingers: [-1, 1, 3, 1, 3, 0] },
+            { name: 'Barre Shape (Alt Top)', desc: 'Barre shape with the high E string voicing the b7 higher up.', frets: [-1, 3, 5, 3, 5, 6], fingers: [-1, 1, 3, 1, 3, 4] },
+            { name: 'Reach Shape (3rd Fret)', desc: 'Open G string as the 5th, b7 voiced up top.', frets: [-1, 3, 5, 0, 5, 6], fingers: [-1, 1, 3, 0, 3, 4] },
+            { name: 'Layer Shape (3rd Fret)', desc: 'A-shape barre with the b7 added on top.', frets: [-1, 3, 5, 5, 5, 6], fingers: [-1, 1, 3, 3, 3, 4] },
+            { name: 'Wide Shape (7th Fret)', desc: 'Spread dominant 7th voicing.', frets: [8, 7, 8, 0, 8, 0], fingers: [2, 1, 2, 0, 2, 0] },
+            { name: 'Open Shape (5th Fret)', desc: 'G-shape derived partial voicing.', frets: [8, 7, 8, 0, 5, 0], fingers: [3, 2, 3, 0, 1, 0] },
+            { name: 'G Shape 7 (5th Fret)', desc: 'Full 6-string G-shape dominant 7th barre.', frets: [8, 7, 5, 5, 5, 6], fingers: [3, 2, 1, 1, 1, 4] },
+            { name: 'E Shape 7 (8th Fret)', desc: 'Full 6-string E-shape barre.', frets: [8, 10, 8, 9, 8, 8], fingers: [1, 3, 1, 2, 1, 1] },
+            { name: 'E Shape 7 (Open Top)', desc: 'E-shape barre with the G and high E strings left open.', frets: [8, 10, 8, 0, 8, 0], fingers: [1, 3, 1, 0, 1, 0] },
+            { name: 'E Shape 7 (High Open)', desc: 'E-shape barre with the high E string left open.', frets: [8, 10, 8, 9, 8, 0], fingers: [1, 3, 1, 2, 1, 0] },
+            { name: 'E Shape 7 (Wide)', desc: 'E-shape barre with the b7 voiced up on the B string.', frets: [8, 10, 8, 9, 11, 8], fingers: [1, 3, 1, 2, 4, 1] },
             { name: 'E Shape 7 (No 5th)', desc: '6th string root jazz shell voicing.', frets: [8, -1, 8, 9, -1, -1], fingers: [1, -1, 2, 3, -1, -1] },
-            { name: 'D Shape 7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 9, 11, -1], fingers: [-1, -1, 2, 1, 3, -1] }
+            { name: 'D Shape 7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 9, 11, -1], fingers: [-1, -1, 2, 1, 3, -1] },
+            { name: 'Shell Shape (10th Fret)', desc: '3-note high-position shell.', frets: [-1, -1, 10, 0, 11, 0], fingers: [-1, -1, 1, 0, 2, 0] },
+            { name: 'Shell Shape (Full G)', desc: 'Shell shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, 11, 0], fingers: [-1, -1, 1, 4, 2, 0] },
+            { name: 'Climb Shape (10th Fret)', desc: 'Shell shape with the b7 voiced up top.', frets: [-1, -1, 10, 0, 11, 12], fingers: [-1, -1, 1, 0, 2, 4] },
+            { name: 'Climb Shape (Full)', desc: 'Climb shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, 11, 12], fingers: [-1, -1, 1, 3, 2, 3] }
         ],
         'maj7': [
             { name: 'Open Cmaj7 Shape', desc: 'Standard acoustic Cmaj7.', frets: [-1, 3, 2, 0, 0, 0], fingers: [-1, 3, 2, 0, 0, 0] },
