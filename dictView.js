@@ -109,11 +109,11 @@ window.dictView = {
     },
     getChordVoicings: function(root, quality) {
         if (!root || !quality) return [];
-        
+
         const db = window.chordDatabase || {};
         const specificVoicings = (db[root] && db[root][quality]) ? db[root][quality] : [];
         const offset = (window.rootOffset[root] - window.rootOffset['C'] + 12) % 12;
-        
+
         const baseVoicings = (db['C'] && db['C'][quality]) ? db['C'][quality] : (db['C'] && db['C']['Major'] ? db['C']['Major'] : []);
 
         const offsetsToTry = [offset - 12, offset, offset + 12];
@@ -203,91 +203,55 @@ window.dictView = {
         return allVoicings.sort((a, b) => {
             const hasOpenA = a.frets.includes(0);
             const hasOpenB = b.frets.includes(0);
-            
+
             if (hasOpenA && !hasOpenB) return -1;
             if (!hasOpenA && hasOpenB) return 1;
-            
+
             const activeFretsA = a.frets.filter(f => f > 0);
             const activeFretsB = b.frets.filter(f => f > 0);
             const minFretA = activeFretsA.length ? Math.min(...activeFretsA) : 0;
             const minFretB = activeFretsB.length ? Math.min(...activeFretsB) : 0;
-            
+
             if (minFretA !== minFretB) return minFretA - minFretB;
-            
+
             let lowestStringA = -1;
             for (let i = 5; i >= 0; i--) { if (a.frets[i] !== -1) { lowestStringA = i; break; } }
             let lowestStringB = -1;
             for (let i = 5; i >= 0; i--) { if (b.frets[i] !== -1) { lowestStringB = i; break; } }
-            
-            return lowestStringB - lowestStringA; 
+
+            return lowestStringB - lowestStringA;
         });
     },
 
-    renderSlashChordShelf: function(root, quality) {
-        const shelf = document.getElementById('slash-chord-shelf');
-        const compSection = document.querySelector('.composition-section'); 
-        if (!shelf) return;
-        shelf.innerHTML = '';
-
-        if (!root || !quality) {
-            if (compSection) compSection.style.display = 'none';
-            return;
-        }
-
-        const sDb = window.slashChordDatabase || {};
-        const rootGroup = sDb[root] || {};
-        let targetQuality = (quality === 'm' || quality === 'dim' || quality === 'dim7') ? 'm' : (quality === 'Major' ? 'Major' : 'None');
-
-        const items = rootGroup[targetQuality] || [];
-        if (items.length === 0) {
-            if (compSection) compSection.style.display = 'none';
-            return;
-        } else {
-            if (compSection) compSection.style.display = 'block';
-        }
-
-        items.forEach(item => {
-            const row = document.createElement('div');
-            row.className = 'prog-row';
-            row.style.cursor = 'pointer';
-            row.onclick = () => {
-                document.getElementById('formula-title').textContent = `${item.name} Positions`;
-                this.renderFretboardGrid();
-                this.renderOpenIndicators(item.frets);
-                this.renderMarkers(item.frets, item.fingers);
-                document.querySelectorAll('.voicing-card').forEach(c => c.classList.remove('active'));
-            };
-            row.innerHTML = `<div class="prog-desc"><strong style="color:var(--selected-card-border);font-size:1.05rem;">${item.name}</strong></div>`;
-            shelf.appendChild(row);
-        });
+    // 현재 재생/하이라이트의 기준이 되는 보이싱: 슬래시 코드가 선택돼 있으면 그게 우선, 아니면 메인 리스트의 선택된 인덱스
+    getActiveVoicing: function() {
+        if (window.selectedSlashVoicing) return window.selectedSlashVoicing;
+        if (!window.currentRoot || !window.currentQuality) return null;
+        const voicings = this.getChordVoicings(window.currentRoot, window.currentQuality);
+        return voicings[window.currentVoicingIndex] || voicings[0] || null;
     },
 
     renderAll: function() {
         const formulaTitle = document.getElementById('formula-title');
-        
+
         if (!window.currentRoot || !window.currentQuality) {
             if (formulaTitle) formulaTitle.textContent = "Select a Chord";
             document.getElementById('notes-badges').innerHTML = '';
-            this.renderFretboardGrid();
-            this.renderOpenIndicators([0, 0, 0, 0, 0, 0]);
-            this.renderMarkers(null, null);
-            this.renderVoicingCards([]);
-            this.buildHoverDetector();
+            this.renderVerticalVoicingGrid('voicing-list', [], 'Pick a root note and chord quality to see every practical voicing.');
             this.renderSlashChordShelf(null, null);
             return;
         }
 
         const voicings = this.getChordVoicings(window.currentRoot, window.currentQuality);
-        const activeVoicing = voicings[window.currentVoicingIndex] || voicings[0] || { frets: [0,0,0,0,0,0], fingers: [-1,-1,-1,-1,-1,-1] };
 
-        if (formulaTitle) formulaTitle.textContent = `${window.currentRoot} ${window.currentQuality} Tones`;
+        if (formulaTitle) {
+            formulaTitle.textContent = window.selectedSlashVoicing
+                ? `${window.selectedSlashVoicing.name}`
+                : `${window.currentRoot}${window.currentQuality === 'Major' ? '' : window.currentQuality}`;
+        }
 
         this.renderChordFormula();
-        this.renderFretboardGrid();
-        this.renderOpenIndicators(activeVoicing.frets);
-        this.renderMarkers(activeVoicing.frets, activeVoicing.fingers);
-        this.renderVoicingCards(voicings);
-        this.buildHoverDetector();
+        this.renderVerticalVoicingGrid('voicing-list', voicings, 'No practical voicing found for this chord within 15 frets.');
         this.renderSlashChordShelf(window.currentRoot, window.currentQuality);
     },
 
@@ -308,243 +272,187 @@ window.dictView = {
         });
     },
 
+    // 배지에 마우스를 올리면, 화면에 그려진 모든 세로형 다이어그램 카드에서 그 음이 나오는 자리를 하이라이트
     highlightSoundingNotes: function(targetNote) {
-        if (!window.currentRoot || !window.currentQuality) return;
-        const voicings = this.getChordVoicings(window.currentRoot, window.currentQuality);
-        const frets = (voicings[window.currentVoicingIndex] || {frets:[]}).frets;
-        if (!frets) return;
-        frets.forEach((fretValue, index) => {
-            if (fretValue === -1) return;
-            if (window.getNoteName(5 - index, fretValue) === targetNote) {
-                if (fretValue > 0) {
-                    document.querySelectorAll('#tab-dictionary .note-marker').forEach(m => {
-                        if (m.dataset.string === String(index) && m.dataset.fret === String(fretValue)) {
-                            m.classList.add('highlighted-marker'); m.textContent = targetNote;
-                        }
-                    });
-                } else {
-                    const strings = document.querySelectorAll('#tab-dictionary .string');
-                    if (strings[5 - index]) strings[5 - index].classList.add('highlighted-string');
-                    const openIndicators = document.querySelectorAll('#tab-dictionary .open-indicator');
-                    if (openIndicators[5 - index]) openIndicators[5 - index].classList.add('highlighted-open');
-                }
+        document.querySelectorAll('#tab-dictionary .v-dot').forEach(dot => {
+            if (dot.dataset.note === targetNote) {
+                dot.classList.add('highlighted-marker');
+                dot.dataset.prevText = dot.textContent;
+                dot.textContent = targetNote;
             }
+        });
+        document.querySelectorAll('#tab-dictionary .v-legend-cell.open').forEach(cell => {
+            if (cell.dataset.note === targetNote) cell.classList.add('highlighted-open');
         });
     },
 
     clearHighlights: function() {
-        if (!window.currentRoot || !window.currentQuality) return;
-        const voicings = this.getChordVoicings(window.currentRoot, window.currentQuality);
-        const fingers = (voicings[window.currentVoicingIndex] || {fingers:[]}).fingers;
-        document.querySelectorAll('#tab-dictionary .note-marker').forEach(m => {
-            m.classList.remove('highlighted-marker');
-            const sIdx = parseInt(m.dataset.string);
-            const fingerVal = fingers ? fingers[sIdx] : -1;
-            // 🌟 2중 잠금: fingerVal이 0보다 큰 경우에만 손가락 번호 출력
-            m.textContent = window.showAllNotesState ? window.getNoteName(5-sIdx, parseInt(m.dataset.fret)) : ((fingerVal !== undefined && fingerVal > 0) ? fingerVal : '');
+        document.querySelectorAll('#tab-dictionary .v-dot.highlighted-marker').forEach(dot => {
+            dot.classList.remove('highlighted-marker');
+            if (dot.dataset.prevText !== undefined) { dot.textContent = dot.dataset.prevText; delete dot.dataset.prevText; }
         });
-        document.querySelectorAll('#tab-dictionary .string').forEach(s => s.classList.remove('highlighted-string'));
-        document.querySelectorAll('#tab-dictionary .open-indicator').forEach(o => o.classList.remove('highlighted-open'));
+        document.querySelectorAll('#tab-dictionary .v-legend-cell.highlighted-open').forEach(cell => cell.classList.remove('highlighted-open'));
     },
 
-    renderFretboardGrid: function() {
-        const fb = document.getElementById('fretboard');
-        const fn = document.getElementById('fret-numbers');
-        if (!fb || !fn) return;
-        fb.innerHTML = ''; fn.innerHTML = '';
-        
-        const totalFrets = window.totalFrets || 15;
-        const stringCount = window.stringCount || 6;
-        const fWidth = fb.clientWidth > 0 ? fb.clientWidth / totalFrets : 740 / totalFrets;
+    // 표준 세로형 코드 다이어그램(줄=세로, 프렛=가로) 카드 하나를 만들어 반환
+    renderVerticalDiagram: function(voicing, isActive, onSelect) {
+        const frets = voicing.frets;
+        const fingers = voicing.fingers || [];
+        const activeFrets = frets.filter(f => f > 0);
+        const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
+        const maxFret = activeFrets.length ? Math.max(...activeFrets) : 0;
+        const startFret = minFret > 0 && minFret <= 1 ? 1 : (minFret > 0 ? minFret : 1);
+        const isNut = startFret === 1;
+        const numRows = Math.max(4, maxFret - startFret + 1);
 
-        for (let i = 0; i <= totalFrets; i++) {
-            const left = i * fWidth;
-            const line = document.createElement('div'); 
-            line.className = 'fret-line'; 
-            line.style.left = `${left}px`; 
-            line.style.height = '100%'; 
-            fb.appendChild(line);
-            
-            const num = document.createElement('div'); 
-            num.className = 'fret-number'; 
-            num.style.left = `${left - fWidth/2}px`; 
-            num.textContent = i === 0 ? 'Nut' : i;
-            fn.appendChild(num);
+        const card = document.createElement('div');
+        card.className = `v-chord-card ${isActive ? 'active' : ''}`;
+
+        const nameEl = document.createElement('div');
+        nameEl.className = 'v-chord-name';
+        nameEl.textContent = voicing.name;
+        card.appendChild(nameEl);
+
+        const diagram = document.createElement('div');
+        diagram.className = 'v-chord-diagram';
+
+        const legend = document.createElement('div');
+        legend.className = 'v-legend-row';
+        for (let s = 0; s < 6; s++) {
+            const cell = document.createElement('div');
+            cell.className = 'v-legend-cell';
+            cell.style.left = `${(s / 5) * 100}%`;
+            if (frets[s] === -1) { cell.textContent = 'X'; cell.classList.add('mute'); }
+            else if (frets[s] === 0) { cell.textContent = 'O'; cell.classList.add('open'); cell.dataset.note = window.getNoteName(5 - s, 0); }
+            legend.appendChild(cell);
+        }
+        diagram.appendChild(legend);
+
+        diagram.appendChild(document.createElement('div')).className = isNut ? 'v-nut-bar' : 'v-top-border';
+
+        const gridWrap = document.createElement('div');
+        gridWrap.className = 'v-grid-wrap';
+
+        if (!isNut) {
+            const posLabel = document.createElement('div');
+            posLabel.className = 'v-position-label';
+            posLabel.textContent = startFret;
+            gridWrap.appendChild(posLabel);
         }
 
-        window.renderFretInlays(fb, fWidth, totalFrets, 180);
+        const grid = document.createElement('div');
+        grid.className = 'v-grid';
+        grid.style.height = `${numRows * 32}px`;
 
-        const table = window.chordNotesTable || {};
-        const isChordSelected = window.currentRoot && window.currentQuality;
-        let notes = [];
-        
-        if (isChordSelected) {
-            notes = table[window.currentRoot]?.[window.currentQuality] || [window.currentRoot];
-        } else {
-            notes = (window.chromScale || []).concat(Object.values(window.displayFlatMap || {})); 
+        for (let s = 0; s < 6; s++) {
+            const line = document.createElement('div');
+            line.className = 'v-string-line';
+            line.style.left = `${(s / 5) * 100}%`;
+            grid.appendChild(line);
+        }
+        for (let r = 0; r <= numRows; r++) {
+            const line = document.createElement('div');
+            line.className = 'v-fret-line';
+            line.style.top = `${(r / numRows) * 100}%`;
+            grid.appendChild(line);
         }
 
-        for (let s = 0; s < stringCount; s++) {
-            const string = document.createElement('div'); 
-            string.className = 'string'; 
-            string.style.height = `${1 + s*0.5}px`; 
-            string.style.top = `${s*30 + 15}px`; 
-            string.style.width = '100%'; 
-            fb.appendChild(string);
-            
-            if (window.showAllNotesState) {
-                for (let f = 1; f <= totalFrets; f++) {
-                    const noteName = window.getNoteName(s, f);
-                    
-                    if (!isChordSelected || notes.includes(noteName)) {
-                        const lbl = document.createElement('div'); 
-                        lbl.className = 'fret-note-label'; 
-                        lbl.style.position = 'absolute';
-                        lbl.style.transform = 'translate(-50%, -50%)';
-                        lbl.style.zIndex = '5';
-                        lbl.style.padding = '2px 5px';
-                        lbl.style.borderRadius = '4px';
-                        lbl.style.fontSize = '0.75rem';
-                        lbl.style.fontWeight = 'bold';
-                        
-                        if (!isChordSelected) {
-                            lbl.style.color = '#abb2bf';
-                            lbl.style.border = '1px solid #3e4452';
-                            lbl.style.background = 'rgba(40, 44, 52, 0.9)';
-                        } else {
-                            lbl.style.color = '#1a1c23';
-                            lbl.style.border = '1px solid var(--highlight-color, #ffca28)';
-                            lbl.style.background = 'var(--highlight-color, #ffca28)';
-                            lbl.style.boxShadow = '0 0 8px rgba(255, 202, 40, 0.5)';
-                        }
-                        
-                        lbl.textContent = noteName; 
-                        lbl.style.left = `${f*fWidth - fWidth/2}px`; 
-                        lbl.style.top = `${s*30 + 15}px`; 
-                        fb.appendChild(lbl);
-                    }
-                }
-            }
-        }
-    },
-
-    renderOpenIndicators: function(frets) {
-        const container = document.getElementById('open-indicators');
-        if (!container || !frets) return;
-        container.innerHTML = '';
-        for (let i = 5; i >= 0; i--) {
-            const el = document.createElement('div'); el.className = `open-indicator ${frets[i] === 0 ? 'play' : frets[i] === -1 ? 'mute' : ''}`;
-            el.textContent = frets[i] === 0 ? 'O' : frets[i] === -1 ? 'X' : ''; container.appendChild(el);
-        }
-    },
-
-    renderMarkers: function(frets, fingers) {
-        const fretboardEl = document.getElementById('fretboard');
-        if (!fretboardEl) return;
-        fretboardEl.querySelectorAll('.note-marker').forEach(el => el.remove());
-        fretboardEl.querySelectorAll('.barre-finger-line').forEach(el => el.remove());
-        if (!frets) return;
-        
-        const totalFrets = window.totalFrets || 15;
-        const fWidth = fretboardEl.clientWidth > 0 ? fretboardEl.clientWidth / totalFrets : 740 / totalFrets;
-
-        if (fingers) {
-            const barreMap = {};
-            fingers.forEach((finger, idx) => {
-                const fret = frets[idx];
-                if (finger === 1 && fret > 0) {
-                    if (!barreMap[fret]) barreMap[fret] = [];
-                    barreMap[fret].push(idx);
-                }
-            });
-
-            for (const [fretStr, stringIndices] of Object.entries(barreMap)) {
-                if (stringIndices.length >= 2) {
-                    const fretVal = parseInt(fretStr);
-                    const minStrIdx = Math.min(...stringIndices);
-                    const maxStrIdx = Math.max(...stringIndices);
-                    const barreLine = document.createElement('div');
-                    barreLine.className = 'barre-finger-line';
-                    barreLine.style.position = 'absolute';
-                    barreLine.style.left = `${fretVal * fWidth - fWidth / 2}px`;
-                    barreLine.style.top = `${(5 - maxStrIdx) * 30 + 15}px`;
-                    barreLine.style.height = `${(maxStrIdx - minStrIdx) * 30}px`;
-                    fretboardEl.appendChild(barreLine);
-                }
-            }
-        }
-
-        frets.forEach((f, idx) => {
-            if (f > 0) {
-                const m = document.createElement('div'); m.className = `note-marker ${window.getNoteName(5-idx, f) === window.currentRoot ? 'root-note' : ''}`;
-                m.dataset.string = idx; m.dataset.fret = f;
-                const fingerVal = fingers ? fingers[idx] : -1;
-                // 🌟 2중 잠금: fingerVal이 0보다 큰 경우에만 출력되게 막음
-                m.textContent = window.showAllNotesState ? window.getNoteName(5-idx, f) : ((fingerVal !== undefined && fingerVal > 0) ? fingerVal : '');
-                
-                m.style.position = 'absolute';
-                m.style.transform = 'translate(-50%, -50%)';
-                m.style.left = `${f*fWidth - fWidth/2}px`; 
-                m.style.top = `${(5-idx)*30 + 15}px`;
-                
-                m.onmouseenter = () => { m.textContent = window.getNoteName(5-idx, f); m.classList.add('highlighted-marker'); };
-                m.onmouseleave = () => { m.textContent = window.showAllNotesState ? window.getNoteName(5-idx, f) : ((fingerVal !== undefined && fingerVal > 0) ? fingerVal : ''); m.classList.remove('highlighted-marker'); };
-                fretboardEl.appendChild(m);
-            }
+        // 검지(1번) 바레 표시줄
+        const barreMap = {};
+        fingers.forEach((fg, s) => {
+            if (fg === 1 && frets[s] > 0) { (barreMap[frets[s]] = barreMap[frets[s]] || []).push(s); }
         });
-    },
+        Object.entries(barreMap).forEach(([fretStr, strs]) => {
+            if (strs.length < 2) return;
+            const fret = parseInt(fretStr);
+            const rowIdx = fret - startFret;
+            if (rowIdx < 0 || rowIdx >= numRows) return;
+            const minS = Math.min(...strs), maxS = Math.max(...strs);
+            const bar = document.createElement('div');
+            bar.className = 'v-barre-bar';
+            bar.style.top = `${((rowIdx + 0.5) / numRows) * 100}%`;
+            bar.style.left = `${(minS / 5) * 100}%`;
+            bar.style.width = `${((maxS - minS) / 5) * 100}%`;
+            grid.appendChild(bar);
+        });
 
-    buildHoverDetector: function() {
-        const hd = document.getElementById('hover-detector'); if (!hd) return;
-        hd.innerHTML = ''; const tooltip = document.getElementById('note-tooltip');
-        const table = window.chordNotesTable || {};
-        const notes = (window.currentRoot && window.currentQuality) ? (table[window.currentRoot]?.[window.currentQuality] || [window.currentRoot]) : [];
-        const stringCount = window.stringCount || 6;
-        const totalFrets = window.totalFrets || 15;
-        
-        for (let s = 0; s < stringCount; s++) {
-            const row = document.createElement('div'); row.className = 'string-row';
-            for (let f = 1; f <= totalFrets; f++) {
-                const cell = document.createElement('div'); cell.className = 'fret-cell';
-                cell.onmouseenter = () => {
-                    if (!tooltip) return; const name = window.getNoteName(s, f); const isTone = notes.includes(name);
-                    tooltip.style.display = 'block'; tooltip.style.borderColor = isTone ? 'var(--highlight-color)' : '#61afef';
-                    tooltip.innerHTML = `${name} ${isTone ? '<span class="highlight-chord">★ Chord Tone</span>' : ''}`;
-                };
-                cell.onmousemove = (e) => { if (tooltip) { tooltip.style.left = `${e.clientX + 15}px`; tooltip.style.top = `${e.clientY + 15}px`; tooltip.style.position = 'fixed'; } };
-                cell.onmouseleave = () => { if (tooltip) tooltip.style.display = 'none'; };
-                row.appendChild(cell);
+        for (let s = 0; s < 6; s++) {
+            const fret = frets[s];
+            if (fret > 0) {
+                const rowIdx = fret - startFret;
+                if (rowIdx < 0 || rowIdx >= numRows) continue;
+                const noteName = window.getNoteName(5 - s, fret);
+                const dot = document.createElement('div');
+                dot.className = `v-dot ${noteName === window.currentRoot ? 'root' : ''}`;
+                dot.dataset.note = noteName;
+                dot.style.left = `${(s / 5) * 100}%`;
+                dot.style.top = `${((rowIdx + 0.5) / numRows) * 100}%`;
+                const fingerVal = fingers[s];
+                dot.textContent = window.showAllNotesState ? noteName : (fingerVal > 0 ? fingerVal : '');
+                grid.appendChild(dot);
             }
-            hd.appendChild(row);
         }
+
+        gridWrap.appendChild(grid);
+        diagram.appendChild(gridWrap);
+        card.appendChild(diagram);
+
+        if (onSelect) card.onclick = onSelect;
+        return card;
     },
 
-    renderVoicingCards: function(voicings) {
-        const list = document.getElementById('voicing-list'); if (!list) return;
+    renderVerticalVoicingGrid: function(containerId, voicings, emptyMessage) {
+        const list = document.getElementById(containerId);
+        if (!list) return;
         list.innerHTML = '';
+
+        if (!voicings || voicings.length === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'v-grid-empty';
+            empty.textContent = emptyMessage || 'No voicings to show.';
+            list.appendChild(empty);
+            return;
+        }
+
         voicings.forEach((v, idx) => {
-            const card = document.createElement('div'); 
-            card.className = `voicing-card ${idx === window.currentVoicingIndex ? 'active' : ''}`;
-            const activeFrets = v.frets.filter(f => f > 0); 
-            const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
-            
-            card.innerHTML = `
-                <div class="voicing-info">
-                    <h4>${v.name}</h4>
-                </div>
-                <div class="badge">${minFret === 0 ? 'Open' : 'Fret ' + minFret}</div>
-            `;
-            
-            card.onclick = () => { window.currentVoicingIndex = idx; this.renderAll(); };
+            const isActive = containerId === 'voicing-list'
+                ? (!window.selectedSlashVoicing && idx === window.currentVoicingIndex)
+                : (window.selectedSlashVoicing === v);
+            const card = this.renderVerticalDiagram(v, isActive, () => {
+                if (containerId === 'voicing-list') {
+                    window.currentVoicingIndex = idx;
+                    window.selectedSlashVoicing = null;
+                } else {
+                    window.selectedSlashVoicing = v;
+                }
+                this.renderAll();
+            });
             list.appendChild(card);
         });
     },
 
+    renderSlashChordShelf: function(root, quality) {
+        const compSection = document.getElementById('slash-chord-shelf')?.closest('.composition-section');
+        if (!root || !quality) {
+            if (compSection) compSection.style.display = 'none';
+            this.renderVerticalVoicingGrid('slash-chord-shelf', []);
+            return;
+        }
+
+        const sDb = window.slashChordDatabase || {};
+        const rootGroup = sDb[root] || {};
+        let targetQuality = (quality === 'm' || quality === 'dim' || quality === 'dim7') ? 'm' : (quality === 'Major' ? 'Major' : 'None');
+
+        const items = rootGroup[targetQuality] || [];
+        if (compSection) compSection.style.display = items.length === 0 ? 'none' : 'block';
+        this.renderVerticalVoicingGrid('slash-chord-shelf', items);
+    },
+
     updateButtons: function() {
-        Array.from(document.getElementById('root-buttons').children).forEach(b => 
+        Array.from(document.getElementById('root-buttons').children).forEach(b =>
             b.classList.toggle('active', b.textContent === window.currentRoot)
         );
-        document.querySelectorAll('#quality-buttons button').forEach(b => 
+        document.querySelectorAll('#quality-buttons button').forEach(b =>
             b.classList.toggle('active', b.textContent === window.currentQuality)
         );
     }
@@ -568,18 +476,19 @@ window.addEventListener('DOMContentLoaded', () => {
                 if (window.currentRoot === item.note) { window.currentRoot = null; }
                 else { window.currentRoot = item.note; }
                 window.currentVoicingIndex = 0;
+                window.selectedSlashVoicing = null;
                 window.dictView.updateButtons();
                 window.dictView.renderAll();
             };
             rArea.appendChild(b);
         });
     }
-    
+
     if(qArea) {
         qArea.style.display = 'flex';
         qArea.style.flexDirection = 'column';
         qArea.style.gap = '10px';
-        
+
         const qualityGroups = {
             'Common': ['Major', 'm', '5', 'aug', 'dim'],
             'Major': ['maj7', 'add9', '6', 'maj9', 'maj11', 'maj13', '6/9'],
@@ -599,66 +508,66 @@ window.addEventListener('DOMContentLoaded', () => {
             groupTitle.style.alignItems = 'center';
             groupTitle.style.padding = '4px 0';
             groupTitle.style.userSelect = 'none';
-            
+
             const titleText = document.createElement('span');
             titleText.textContent = groupName;
-            
+
             const toggleIcon = document.createElement('span');
             toggleIcon.style.fontSize = '0.7rem';
-            
+
             groupTitle.appendChild(titleText);
             groupTitle.appendChild(toggleIcon);
-            
+
             const grid = document.createElement('div');
             grid.className = 'btn-grid-quality';
-            
+
             const isDefaultOpen = groupName === 'Common';
             grid.style.display = isDefaultOpen ? 'grid' : 'none';
             toggleIcon.textContent = isDefaultOpen ? '▼' : '▶';
-            
+
             groupTitle.onclick = () => {
                 const isHidden = grid.style.display === 'none';
                 grid.style.display = isHidden ? 'grid' : 'none';
                 toggleIcon.textContent = isHidden ? '▼' : '▶';
             };
-            
+
             qualities.forEach(q => {
-                const b = document.createElement('button'); 
+                const b = document.createElement('button');
                 b.textContent = q;
-                b.onclick = () => { 
-                    if (window.currentQuality === q) { window.currentQuality = null; } 
+                b.onclick = () => {
+                    if (window.currentQuality === q) { window.currentQuality = null; }
                     else { window.currentQuality = q; }
-                    window.currentVoicingIndex = 0; 
-                    window.dictView.updateButtons(); 
-                    window.dictView.renderAll(); 
+                    window.currentVoicingIndex = 0;
+                    window.selectedSlashVoicing = null;
+                    window.dictView.updateButtons();
+                    window.dictView.renderAll();
                 };
                 grid.appendChild(b);
             });
-            
+
             const groupContainer = document.createElement('div');
             groupContainer.style.background = '#1b1d23';
             groupContainer.style.padding = '8px 12px';
             groupContainer.style.borderRadius = '6px';
             groupContainer.style.border = '1px solid #2d313f';
-            
+
             groupContainer.appendChild(groupTitle);
             groupContainer.appendChild(grid);
             qArea.appendChild(groupContainer);
         }
     }
-    
+
     const showBtn = document.getElementById('show-all-btn');
     if (showBtn) showBtn.onclick = () => { window.showAllNotesState = !window.showAllNotesState; showBtn.classList.toggle('active', window.showAllNotesState); showBtn.innerText = window.showAllNotesState ? "Hide Notes" : "Show Notes"; window.dictView.renderAll(); };
 
     const playChordBtn = document.getElementById('play-chord-btn');
     if (playChordBtn) {
         playChordBtn.onclick = () => {
-            if (!window.currentRoot || !window.currentQuality || !window.chordAudio) return;
-            const voicings = window.dictView.getChordVoicings(window.currentRoot, window.currentQuality);
-            const active = voicings[window.currentVoicingIndex] || voicings[0];
+            if (!window.chordAudio) return;
+            const active = window.dictView.getActiveVoicing();
             if (active) window.chordAudio.playFrets(active.frets);
         };
     }
-    
+
     window.dictView.updateButtons(); window.dictView.renderAll(); window.addEventListener('resize', () => window.dictView.renderAll());
 });
