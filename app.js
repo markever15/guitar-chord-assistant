@@ -169,9 +169,24 @@ const missingVoicingsForC = {
         { name: 'D Shape 7#9 (No 5th/7th)', desc: '4th string root jazz 7#9 shell (Hendrix chord).', frets: [-1, -1, 10, 8, -1, 12], fingers: [-1, -1, 2, 1, -1, 3] }
     ],
     'm(maj7)': [
+        { name: 'Open Shape (Nut)', desc: 'Low-position minor-major 7th voicing.', frets: [-1, 3, 1, 0, 0, 3], fingers: [-1, 3, 1, 0, 0, 3] },
+        { name: 'Reach Shape (Nut)', desc: 'Open-position voicing with a stretch on the G string.', frets: [-1, 3, 1, 4, 1, 3], fingers: [-1, 3, 1, 4, 1, 3] },
+        { name: 'Reach Shape (Open B)', desc: 'Reach shape with the B string left open.', frets: [-1, 3, 1, 4, 0, 3], fingers: [-1, 3, 1, 4, 0, 3] },
+        { name: 'Reach Shape (Doubled Eb)', desc: 'Reach shape with the B string fretted instead of open.', frets: [-1, 3, 1, 4, 4, 3], fingers: [-1, 3, 1, 4, 4, 3] },
         { name: 'Cm(maj7) Shape', desc: '', frets: [-1, 3, 5, 4, 4, 3], fingers: [-1, 1, 4, 2, 3, 1] },
+        { name: 'Spread Shape (5th Fret)', desc: 'Wide low-position voicing.', frets: [8, 6, 5, 5, 0, 7], fingers: [4, 2, 1, 1, 0, 3] },
+        { name: 'Spread Shape (Open B)', desc: 'Spread shape with the D string voicing the root.', frets: [8, 6, 5, 0, 0, 7], fingers: [4, 2, 1, 0, 0, 3] },
+        { name: 'Spread Shape (High Root)', desc: 'Spread shape with the root doubled on the high E string.', frets: [8, 6, 5, 5, 0, 8], fingers: [4, 2, 1, 1, 0, 4] },
+        { name: 'Spread Shape (Open, High Root)', desc: 'Spread shape with the root doubled and the G string left out.', frets: [8, 6, 5, 0, 0, 8], fingers: [4, 2, 1, 0, 0, 4] },
+        { name: 'Angular Shape (6th Fret)', desc: 'Wide voicing built on the D string.', frets: [8, 6, 9, 0, 0, 7], fingers: [3, 1, 4, 0, 0, 2] },
+        { name: 'Angular Shape (High Root)', desc: 'Angular shape with the root doubled on the high E string.', frets: [8, 6, 9, 0, 0, 8], fingers: [3, 1, 4, 0, 0, 3] },
+        { name: 'E Shape mM7 (8th Fret)', desc: 'Full 6-string E-shape minor-major 7th barre.', frets: [8, 10, 9, 8, 8, 8], fingers: [1, 3, 2, 1, 1, 1] },
         { name: 'E Shape m(maj7) (No 5th)', desc: '6th string root jazz shell voicing.', frets: [8, -1, 9, 8, -1, -1], fingers: [1, -1, 3, 2, -1, -1] },
-        { name: 'D Shape m(maj7) (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, -1, 12, 11], fingers: [-1, -1, 1, -1, 3, 2] }
+        { name: 'D Shape m(maj7) (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, -1, 12, 11], fingers: [-1, -1, 1, -1, 3, 2] },
+        { name: 'Shell Shape (10th Fret)', desc: '3-note high-position shell.', frets: [-1, -1, 10, 0, 0, 11], fingers: [-1, -1, 1, 0, 0, 2] },
+        { name: 'Shell Shape (Full G)', desc: 'Shell shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, 0, 11], fingers: [-1, -1, 1, 4, 0, 2] },
+        { name: 'Shell Shape (High B)', desc: 'Shell shape with the B string fretted instead of open.', frets: [-1, -1, 10, 0, 12, 11], fingers: [-1, -1, 1, 0, 4, 2] },
+        { name: 'Shell Shape (Full)', desc: 'Shell shape with the G and B strings both fretted.', frets: [-1, -1, 10, 12, 12, 11], fingers: [-1, -1, 1, 4, 4, 2] }
     ],
     'm(add9)': [
         { name: 'Cm(add9) Shape', desc: '', frets: [-1, 3, 1, 0, 3, -1], fingers: [-1, 3, 1, 0, 4, -1] },
