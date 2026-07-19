@@ -110,8 +110,23 @@ window.chordDatabase = {
         ],
         'maj7': [
             { name: 'Open Cmaj7 Shape', desc: 'Standard acoustic Cmaj7.', frets: [-1, 3, 2, 0, 0, 0], fingers: [-1, 3, 2, 0, 0, 0] },
+            { name: 'Bell Shape (Bright Top)', desc: 'Open Cmaj7 with the high E string fretted.', frets: [-1, 3, 2, 0, 0, 3], fingers: [-1, 3, 2, 0, 0, 4] },
+            { name: 'Bell Shape (Full)', desc: 'Bell shape with the G string also fretted.', frets: [-1, 3, 2, 4, 0, 3], fingers: [-1, 3, 2, 4, 0, 1] },
+            { name: 'Jazz Shape (3rd Fret)', desc: 'Classic jazz Cmaj7 voicing.', frets: [-1, 3, 5, 4, 5, 3], fingers: [-1, 1, 3, 2, 3, 1] },
+            { name: 'Jazz Shape (Open Top)', desc: 'Jazz shape with the high E string left open.', frets: [-1, 3, 5, 4, 5, 0], fingers: [-1, 1, 3, 2, 3, 0] },
+            { name: 'Open Shape (3rd Fret)', desc: 'Open-voiced Cmaj7 higher up the neck.', frets: [-1, 3, 5, 0, 0, 0], fingers: [-1, 1, 3, 0, 0, 0] },
+            { name: 'Open Shape (Add B)', desc: 'Open shape with the G string fretted.', frets: [-1, 3, 5, 4, 0, 0], fingers: [-1, 1, 3, 2, 0, 0] },
+            { name: 'Open Shape (Doubled Root)', desc: 'Open shape with the G string voicing the root.', frets: [-1, 3, 5, 5, 0, 0], fingers: [-1, 1, 3, 4, 0, 0] },
+            { name: 'Spread Shape (7th Fret)', desc: 'Wide dominant-position maj7 voicing.', frets: [8, 7, 9, 0, 0, 7], fingers: [2, 1, 4, 0, 0, 1] },
+            { name: 'Spread Shape (Open Top)', desc: 'Spread shape with the high E string left open.', frets: [8, 7, 9, 0, 0, 0], fingers: [2, 1, 4, 0, 0, 0] },
+            { name: 'E Shape maj7 (8th Fret)', desc: 'Full 6-string E-shape maj7 barre.', frets: [8, 10, 9, 9, 8, 8], fingers: [1, 3, 2, 2, 1, 1] },
+            { name: 'E Shape maj7 (Open Top)', desc: 'E-shape maj7 with the G and high E strings left open.', frets: [8, 10, 9, 0, 8, 0], fingers: [1, 3, 2, 0, 1, 0] },
+            { name: 'E Shape maj7 (High Open)', desc: 'E-shape maj7 with the high E string left open.', frets: [8, 10, 9, 9, 8, 0], fingers: [1, 3, 2, 2, 1, 0] },
+            { name: 'E Shape maj7 (Open Triad)', desc: 'E-shape maj7 with the top three strings left open.', frets: [8, 10, 9, 0, 0, 0], fingers: [1, 3, 2, 0, 0, 0] },
+            { name: 'E Shape maj7 (Doubled Root)', desc: 'E-shape maj7 with the D string voicing the root.', frets: [8, 10, 10, 0, 0, 0], fingers: [1, 3, 4, 0, 0, 0] },
             { name: 'Cmaj7 (No 5th)', desc: 'Muted 4th string jazzy voicing.', frets: [-1, 3, -1, 4, 5, -1], fingers: [-1, 1, -1, 2, 3, -1] },
-            { name: 'D Shape maj7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 9, 12, -1], fingers: [-1, -1, 2, 1, 3, -1] }
+            { name: 'D Shape maj7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 9, 12, -1], fingers: [-1, -1, 2, 1, 3, -1] },
+            { name: 'Shell Shape (10th Fret)', desc: 'High-position shell voicing.', frets: [-1, -1, 10, 0, 0, 0], fingers: [-1, -1, 1, 0, 0, 0] }
         ],
         'm7b5': [
             { name: 'Cm7b5', desc: 'Half-diminished jazz voicing.', frets: [-1, 3, 4, 3, 4, -1], fingers: [-1, 1, 3, 2, 4, -1] },
