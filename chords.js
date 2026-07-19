@@ -63,9 +63,19 @@ window.chordDatabase = {
             { name: 'D Shape m7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 8, 11, -1], fingers: [-1, -1, 2, 1, 3, -1] }
         ],
         '5': [
+            { name: 'Nut Shape (Open 5th)', desc: 'Low-position power chord with the open G string as the 5th.', frets: [-1, 3, -1, 0, 1, 3], fingers: [-1, 2, -1, 0, 1, 2] },
+            { name: 'Nut Shape (Sparse)', desc: 'Bare 2-note version of the nut shape.', frets: [-1, 3, -1, 0, -1, 3], fingers: [-1, 1, -1, 0, -1, 1] },
+            { name: 'Reach Shape (3rd Fret)', desc: 'Power chord with the open G string as the 5th.', frets: [-1, 3, 5, 0, -1, 3], fingers: [-1, 1, 3, 0, -1, 1] },
             { name: 'A5 Shape (3rd Fret)', desc: 'Rock power chord.', frets: [-1, 3, 5, 5, -1, -1], fingers: [-1, 1, 3, 4, -1, -1] },
+            { name: 'Layered Shape (3rd Fret)', desc: 'A5 shape with the high E string added.', frets: [-1, 3, 5, 5, -1, 3], fingers: [-1, 1, 3, 4, -1, 1] },
             { name: 'E Shape 5', desc: '6th string root power chord.', frets: [8, 10, -1, -1, -1, -1], fingers: [1, 2, -1, -1, -1, -1] },
-            { name: 'D Shape 5', desc: '4th string root power chord.', frets: [-1, -1, 10, -1, 8, -1], fingers: [-1, -1, 2, -1, 1, -1] }
+            { name: 'Split Shape (5th Fret)', desc: 'Power chord with the A string left out.', frets: [8, -1, 5, 5, 8, 8], fingers: [1, -1, 2, 3, 1, 1] },
+            { name: 'Split Shape (Open 5th)', desc: 'Split shape with the open G string as the 5th.', frets: [8, -1, 5, 0, 8, 8], fingers: [1, -1, 2, 0, 1, 1] },
+            { name: 'Sparse Shape (8th Fret)', desc: 'Power chord with the A and D strings left out.', frets: [8, -1, -1, 0, 8, 8], fingers: [1, -1, -1, 0, 1, 1] },
+            { name: 'Full Barre (8th Fret)', desc: 'Full 6-string power chord barre.', frets: [8, 10, 10, 0, 8, 8], fingers: [1, 3, 4, 0, 1, 1] },
+            { name: 'D Shape 5', desc: '4th string root power chord.', frets: [-1, -1, 10, -1, 8, -1], fingers: [-1, -1, 2, -1, 1, -1] },
+            { name: 'Duo Shape (10th Fret)', desc: 'Sparse high-position 2-note power chord.', frets: [-1, -1, 10, 0, -1, -1], fingers: [-1, -1, 1, 0, -1, -1] },
+            { name: 'Duo Shape (Wide)', desc: 'Duo shape voiced an octave apart.', frets: [-1, -1, 10, 12, -1, -1], fingers: [-1, -1, 1, 3, -1, -1] }
         ],
         'sus2': [
             { name: 'Open Csus2', desc: 'Open suspended 2nd chord.', frets: [-1, 3, 0, 0, 1, -1], fingers: [-1, 3, 0, 0, 1, -1] },
