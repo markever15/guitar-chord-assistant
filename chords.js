@@ -26,10 +26,22 @@ window.chordDatabase = {
         'm': [
             { name: 'Cm (Muted)', desc: 'Muted bottom 4-string shape.', frets: [-1, 3, 5, 5, 4, -1], fingers: [-1, 1, 3, 4, 2, -1] },
             { name: 'Compact Shape (Open 5th)', desc: 'Uses the open G string as the 5th.', frets: [-1, 3, 1, 0, 1, 3], fingers: [-1, 3, 1, 0, 2, 4] },
+            { name: 'Split Shape (Open 5th)', desc: 'Open G 5th with a stretch on the B string.', frets: [-1, 3, 1, 0, 4, 3], fingers: [-1, 1, 2, 0, 4, 3] },
+            { name: 'Trim Shape (Open 5th)', desc: 'Split shape with the D string left out.', frets: [-1, 3, -1, 0, 4, 3], fingers: [-1, 1, -1, 0, 3, 2] },
             { name: 'Wide Shape (Open 5th)', desc: 'Spread voicing using the open G string as the 5th.', frets: [-1, 3, 5, 0, 4, 3], fingers: [-1, 1, 4, 0, 3, 1] },
             { name: 'A Shape m (3rd Fret)', desc: 'Full 5-string minor barre shape.', frets: [-1, 3, 5, 5, 4, 3], fingers: [-1, 1, 3, 4, 2, 1] },
+            { name: 'Cluster Shape (5th Fret)', desc: 'Wide partial barre voicing.', frets: [8, 6, 5, 5, 8, 8], fingers: [1, 2, 3, 3, 1, 1] },
+            { name: 'Cluster Shape (Open 5th)', desc: 'Cluster voicing with the open G string as the 5th.', frets: [8, 6, 5, 0, 8, 8], fingers: [1, 2, 3, 0, 1, 1] },
+            { name: 'Bare Shape (Open 5th)', desc: 'Cluster shape with the D string left out.', frets: [8, 6, -1, 0, 8, 8], fingers: [2, 1, -1, 0, 3, 4] },
             { name: 'E Shape m (8th Fret)', desc: 'Full 6-string minor barre shape.', frets: [8, 10, 10, 8, 8, 8], fingers: [1, 3, 4, 1, 1, 1] },
-            { name: 'D Shape m', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 8, 8, -1], fingers: [-1, -1, 3, 1, 2, -1] }
+            { name: 'Stretch Shape (8th Fret)', desc: 'E-shape barre with an extended high E string.', frets: [8, 10, 10, 8, 8, 11], fingers: [1, 3, 4, 1, 1, 4] },
+            { name: 'Stretch Shape (Open 5th)', desc: 'Stretch shape with the open G string as the 5th.', frets: [8, 10, 10, 0, 8, 11], fingers: [1, 3, 4, 0, 1, 4] },
+            { name: 'D Shape m', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 8, 8, -1], fingers: [-1, -1, 3, 1, 2, -1] },
+            { name: 'Shell Shape (8th Fret)', desc: '4-string jazz shell voicing.', frets: [-1, -1, 10, 8, 8, 8], fingers: [-1, -1, 3, 1, 1, 1] },
+            { name: 'Reach Shape (8th Fret)', desc: 'Shell voicing with an extended high E string.', frets: [-1, -1, 10, 8, 8, 11], fingers: [-1, -1, 3, 1, 1, 4] },
+            { name: 'Reach Shape (Open 5th)', desc: 'Reach shape with the open G string as the 5th.', frets: [-1, -1, 10, 0, 8, 11], fingers: [-1, -1, 3, 0, 1, 4] },
+            { name: 'Sparse Shape (10th Fret)', desc: '3-note high-position voicing.', frets: [-1, -1, 10, 0, -1, 11], fingers: [-1, -1, 2, 0, -1, 3] },
+            { name: 'High Shape (10th Fret)', desc: 'High-position voicing without the 5th.', frets: [-1, -1, 10, 12, -1, 11], fingers: [-1, -1, 1, 3, -1, 2] }
         ],
         'm7': [
             { name: 'Am7 Shape (3rd Fret)', desc: 'Standard minor 7th barre.', frets: [-1, 3, 5, 3, 4, 3], fingers: [-1, 1, 3, 1, 2, 1] },
