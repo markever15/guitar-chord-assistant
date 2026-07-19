@@ -19,8 +19,13 @@ window.chordDatabase = {
     'C': {
         'Major': [
             { name: 'Open C Shape', desc: 'Standard open C chord.', frets: [-1, 3, 2, 0, 1, 0], fingers: [-1, 3, 2, 0, 1, 0] },
+            { name: 'Open Shape (High G)', desc: 'Open C with the high E string fretted for a brighter top note.', frets: [-1, 3, 2, 0, 1, 3], fingers: [-1, 3, 2, 0, 1, 4] },
+            { name: 'Drone Shape (3rd Fret)', desc: 'A-shape barre with the open G string as the 5th.', frets: [-1, 3, 5, 0, 5, 3], fingers: [-1, 1, 3, 0, 3, 1] },
+            { name: 'Drone Shape (Double Open)', desc: 'Drone shape with the high E string also left open.', frets: [-1, 3, 5, 0, 5, 0], fingers: [-1, 1, 3, 0, 3, 0] },
+            { name: 'Ring Shape (3rd Fret)', desc: 'A-shape barre with the high E string left open to ring.', frets: [-1, 3, 5, 5, 5, 0], fingers: [-1, 1, 3, 3, 3, 0] },
             { name: 'A Shape (3rd Fret)', desc: 'Full 5-string barre shape.', frets: [-1, 3, 5, 5, 5, 3], fingers: [-1, 1, 3, 3, 3, 1] },
             { name: 'E Shape (8th Fret)', desc: 'Full 6-string barre shape.', frets: [8, 10, 10, 9, 8, 8], fingers: [1, 3, 4, 2, 1, 1] },
+            { name: 'Shell Shape (8th Fret)', desc: '4-string jazz shell voicing.', frets: [-1, -1, 10, 9, 8, 8], fingers: [-1, -1, 3, 2, 1, 1] },
             { name: 'D Shape Major', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 9, 8, -1], fingers: [-1, -1, 3, 2, 1, -1] }
         ],
         'm': [
