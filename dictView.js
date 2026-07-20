@@ -30,6 +30,7 @@ const CHORD_SEARCH_QUALITY_ALIASES = {
     '9': '9',
     'maj9': 'maj9',
     '6': '6',
+    'm6': 'm6', 'min6': 'm6', '-6': 'm6',
     'dim': 'dim', 'o': 'dim',
     'dim7': 'dim7', 'o7': 'dim7',
     'add9': 'add9',
@@ -46,7 +47,29 @@ const CHORD_SEARCH_QUALITY_ALIASES = {
     '7b9': '7b9',
     '7#9': '7#9', '7+9': '7#9',
     'm(maj7)': 'm(maj7)', 'mmaj7': 'm(maj7)', 'minmaj7': 'm(maj7)', 'm/maj7': 'm(maj7)',
-    'm(add9)': 'm(add9)', 'madd9': 'm(add9)'
+    'm(add9)': 'm(add9)', 'madd9': 'm(add9)',
+    'm(maj9)': 'm(maj9)', 'mmaj9': 'm(maj9)', 'minmaj9': 'm(maj9)', 'm/maj9': 'm(maj9)',
+    'm(maj11)': 'm(maj11)', 'mmaj11': 'm(maj11)', 'minmaj11': 'm(maj11)', 'm/maj11': 'm(maj11)',
+    'm6/9': 'm6/9', 'm69': 'm6/9', 'min6/9': 'm6/9', 'm6add9': 'm6/9',
+    '7add11': '7add11', '7(add11)': '7add11', 'dom7add11': '7add11',
+    'maj7add11': 'maj7add11', 'maj7(add11)': 'maj7add11', 'm7add11': 'maj7add11', 'm7(add11)': 'maj7add11',
+    'm(maj7)add11': 'm(maj7)add11', 'mmaj7add11': 'm(maj7)add11', 'minmaj7add11': 'm(maj7)add11', 'm/maj7add11': 'm(maj7)add11',
+    'mm7add11': 'm(maj7)add11', 'mm7(add11)': 'm(maj7)add11',
+    '7add13': '7add13', '7(add13)': '7add13', 'dom7add13': '7add13',
+    'maj7add13': 'maj7add13', 'maj7(add13)': 'maj7add13',
+    'm7add13': 'm7add13', 'm7(add13)': 'm7add13', 'min7add13': 'm7add13', 'min7(add13)': 'm7add13',
+    'm(maj7)add13': 'm(maj7)add13', 'mmaj7add13': 'm(maj7)add13', 'minmaj7add13': 'm(maj7)add13', 'm/maj7add13': 'm(maj7)add13',
+    'mm7add13': 'm(maj7)add13', 'mm7(add13)': 'm(maj7)add13',
+    '7b5': '7b5', '7-5': '7b5', 'dom7b5': '7b5',
+    'aug7': 'aug7', '7#5': 'aug7', '7+5': 'aug7', '+7': 'aug7',
+    'aug7b9': 'aug7b9', '7#5b9': 'aug7b9', '+7b9': 'aug7b9', '7+5b9': 'aug7b9',
+    'm7#5': 'm7#5', 'm7+5': 'm7#5', 'min7#5': 'm7#5', 'm7(#5)': 'm7#5', 'min7(#5)': 'm7#5',
+    'm7b9': 'm7b9', 'min7b9': 'm7b9', 'm7(b9)': 'm7b9', 'min7(b9)': 'm7b9',
+    '6sus4': '6sus4',
+    '6sus2': '6sus2',
+    'maj7sus4': 'maj7sus4', 'maj7(sus4)': 'maj7sus4', 'm7sus4': 'maj7sus4', 'm7(sus4)': 'maj7sus4',
+    '7sus2': '7sus2', '7(sus2)': '7sus2', 'dom7sus2': '7sus2',
+    'maj7sus2': 'maj7sus2', 'maj7(sus2)': 'maj7sus2', 'm7sus2': 'maj7sus2', 'm7(sus2)': 'maj7sus2'
 };
 
 window.dictView = {
@@ -491,10 +514,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const qualityGroups = {
             'Common': ['Major', 'm', '5', 'aug', 'dim'],
-            'Major': ['maj7', 'add9', '6', 'maj9', 'maj11', 'maj13', '6/9'],
-            'Minor': ['m7', 'm(maj7)', 'm(add9)', 'm9', 'm11', 'm13'],
-            'Dominant': ['7', '9', '11', '13'],
-            'Sus & Altered': ['sus2', 'sus4', '7sus4', 'm7b5', 'dim7', '7b9', '7#9']
+            'Major': ['maj7', 'add9', '6', 'maj9', 'maj11', 'maj13', '6/9', 'maj7add11', 'maj7add13'],
+            'Minor': ['m7', 'm6', 'm6/9', 'm(maj7)', 'm(maj7)add11', 'm7add13', 'm(maj7)add13', 'm(add9)', 'm9', 'm(maj9)', 'm11', 'm(maj11)', 'm13'],
+            'Dominant': ['7', '9', '11', '13', '7add11', '7add13'],
+            'Sus & Altered': ['sus2', 'sus4', '7sus4', 'maj7sus4', '7sus2', 'maj7sus2', '6sus4', '6sus2', 'm7b5', 'm7#5', 'dim7', '7b9', '7#9', '7b5', 'aug7', 'aug7b9', 'm7b9']
         };
 
         for (const [groupName, qualities] of Object.entries(qualityGroups)) {

@@ -26,10 +26,9 @@ window.rootLayout = [
     { note: 'G#', row: 2, col: 5 }, { note: 'Bb', row: 2, col: 7 }
 ];
 
-// 🌟 누락되었던 'm9'을 포함하여 29개 전체 퀄리티 완벽 등록[cite: 1]
 window.qualities = [
-    'Major', 'm', 'm7', '7', 'maj7', 'sus2', 'sus4', '5', 'm7b5', '9', 'maj9', '6', 'dim', 'dim7', 'add9', 'aug',
-    'm9', '11', 'm11', 'maj11', '13', 'm13', 'maj13', '7sus4', '6/9', '7b9', '7#9', 'm(maj7)', 'm(add9)'
+    'Major', 'm', 'm7', '7', 'maj7', 'sus2', 'sus4', '5', 'm7b5', '9', 'maj9', '6', 'm6', 'dim', 'dim7', 'add9', 'aug',
+    'm9', '11', 'm11', 'maj11', '13', 'm13', 'maj13', '7sus4', '6/9', '7b9', '7#9', 'm(maj7)', 'm(add9)', 'm(maj9)', 'm(maj11)', 'm6/9', '7add11', 'maj7add11', 'm(maj7)add11', '7add13', 'maj7add13', 'm7add13', 'm(maj7)add13', '7b5', 'aug7', 'aug7b9', 'm7#5', 'm7b9', '6sus4', '6sus2', 'maj7sus4', '7sus2', 'maj7sus2'
 ];
 
 window.getNoteName = function(stringIdx, fret) {
