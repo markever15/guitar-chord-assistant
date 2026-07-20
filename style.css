@@ -64,6 +64,8 @@ button.active { background-color: var(--accent-color); color: white; }
 .note-marker { position: absolute; width: 26px; height: 26px; border-radius: 50%; background: var(--highlight-color); color: #1a1c23; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.4); z-index: 6; }
 .note-marker.root-note { background: var(--accent-color); color: #fff; }
 .note-marker.highlighted-marker { box-shadow: 0 0 0 3px rgba(255,255,255,0.5); }
+/* 🌟 Chord Finder "Show Notes": 지금 잡은 코드 톤이 넥 어디에 또 있는지 보여주는 흐릿한 참고용 마커 */
+.note-marker.ghost-marker { width: 20px; height: 20px; background: transparent; border: 1.5px solid var(--highlight-color); color: var(--highlight-color); opacity: 0.55; box-shadow: none; font-size: 0.65rem; cursor: default; z-index: 5; }
 
 .barre-finger-line { position: absolute; width: 6px; margin-left: -3px; background: var(--highlight-color); opacity: 0.45; border-radius: 3px; z-index: 1; }
 
