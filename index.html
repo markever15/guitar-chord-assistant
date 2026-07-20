@@ -75,13 +75,16 @@
                         <div class="group-title">Chord Quality</div>
                         <div id="quality-buttons"></div>
                     </div>
-                    <div class="composition-section" style="margin-top: 20px;">
-                        <div class="comp-header"><span class="comp-title">🎸 Slash Chords</span></div>
-                        <div class="vertical-voicing-grid" id="slash-chord-shelf"></div>
-                    </div>
                 </div>
             </div>
             <div class="right-panel">
+                <div class="composition-section" id="slash-chord-section" style="margin-bottom: 20px; display: none;">
+                    <div class="comp-header comp-header-toggle" id="slash-chord-header">
+                        <span class="comp-title">🎸 Slash Chords</span>
+                        <span class="comp-toggle-icon" id="slash-chord-toggle-icon">▶</span>
+                    </div>
+                    <div class="vertical-voicing-grid" id="slash-chord-shelf" style="display: none;"></div>
+                </div>
                 <div class="comp-header"><span class="comp-title">🪵 Voicings (Nut → 15th Fret)</span></div>
                 <div class="vertical-voicing-grid" id="voicing-list"></div>
             </div>

@@ -134,6 +134,8 @@ button.active { background-color: var(--accent-color); color: white; }
 .composition-section { background: #1b1d23; border: 1px solid #2d313f; padding: 16px; border-radius: 8px; box-shadow: 0 10px 18px -8px rgba(0,0,0,0.5); }
 .comp-header { margin-bottom: 10px; }
 .comp-title { font-weight: bold; color: var(--text-light); }
+.comp-header-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; margin-bottom: 0; }
+.comp-toggle-icon { font-size: 0.75rem; color: #828997; }
 .progression-shelf { display: flex; flex-direction: column; gap: 8px; }
 .prog-row { padding: 8px 12px; background: #222530; border-radius: 6px; border: 1px solid #2d313f; }
 .prog-row:hover { border-color: var(--selected-card-border); }
