@@ -49,54 +49,41 @@
     </div>
 
     <div id="tab-dictionary" class="page-view">
+        <div class="chord-header-container">
+            <div class="chord-formula-bar">
+                <span class="formula-title" id="formula-title">Select a Chord</span>
+                <div class="notes-badges" id="notes-badges"></div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="side-btn" id="play-chord-btn">🔊 Play</button>
+                <button class="side-btn" id="show-all-btn">Show Notes</button>
+            </div>
+        </div>
         <div class="dict-layout">
             <div class="left-panel">
                 <div class="sticky-container">
-                    <div class="fretboard-sticky">
-                        <div class="chord-header-container">
-                            <div class="chord-formula-bar">
-                                <span class="formula-title" id="formula-title">Select a Chord</span>
-                                <div class="notes-badges" id="notes-badges"></div>
-                            </div>
-                            <div style="display: flex; gap: 8px;">
-                                <button class="side-btn" id="play-chord-btn">🔊 Play</button>
-                                <button class="side-btn" id="show-all-btn">Show Notes</button>
-                            </div>
-                        </div>
-                        <div class="fretboard-container">
-                            <div class="open-string-indicators" id="open-indicators"></div>
-                            <div class="fretboard-scroll">
-                                <div class="fretboard" id="fretboard"></div>
-                                <div class="hover-detector" id="hover-detector"></div>
-                                <div class="fret-numbers" id="fret-numbers"></div>
-                            </div>
-                        </div>
-                        <div id="note-tooltip"></div>
-                        <div class="control-group" style="margin-top: 14px;">
-                            <div class="group-title">Root Note</div>
-                            <div class="root-grid" id="root-buttons"></div>
-                        </div>
+                    <div class="chord-search-bar">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="chord-search-input" placeholder="Search by chord name" autocomplete="off" spellcheck="false">
+                        <div class="chord-search-feedback" id="chord-search-feedback"></div>
+                    </div>
+                    <div class="control-group" style="margin-top: 14px;">
+                        <div class="group-title">Root Note</div>
+                        <div class="root-grid" id="root-buttons"></div>
                     </div>
                     <div class="control-group" style="margin-top: 20px;">
                         <div class="group-title">Chord Quality</div>
                         <div id="quality-buttons"></div>
                     </div>
+                    <div class="composition-section" style="margin-top: 20px;">
+                        <div class="comp-header"><span class="comp-title">🎸 Slash Chords</span></div>
+                        <div class="vertical-voicing-grid" id="slash-chord-shelf"></div>
+                    </div>
                 </div>
             </div>
             <div class="right-panel">
-                <div class="chord-search-bar">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="chord-search-input" placeholder="Search by chord name" autocomplete="off" spellcheck="false">
-                    <div class="chord-search-feedback" id="chord-search-feedback"></div>
-                </div>
-                <div class="composition-section" style="margin-top: 0;">
-                    <div class="comp-header"><span class="comp-title">🎸 Slash Chords</span></div>
-                    <div class="progression-shelf" id="slash-chord-shelf"></div>
-                </div>
-                <div class="composition-section" style="margin-top: 20px;">
-                    <div class="comp-header"><span class="comp-title">🪵 Fretboard Voicing Positions</span></div>
-                    <div class="voicing-list" id="voicing-list"></div>
-                </div>
+                <div class="comp-header"><span class="comp-title">🪵 Voicings (Nut → 15th Fret)</span></div>
+                <div class="vertical-voicing-grid" id="voicing-list"></div>
             </div>
         </div>
     </div>

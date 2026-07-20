@@ -22,20 +22,7 @@ body { background-color: var(--bg-color); color: var(--text-color); padding: 20p
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-/* 스크롤해도 기타 프렛보드가 상단에 고정되어 계속 보이도록 */
-.fretboard-sticky {
-    position: sticky;
-    top: 20px;
-    z-index: 60;
-    background: #14161d;
-    margin: -20px -20px 20px;
-    padding: 20px 20px 16px;
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0 16px 24px -12px rgba(0,0,0,0.6);
-}
-
 .controls-row { display: flex; gap: 20px; margin-top: 20px; }
-.voicing-list { max-height: 600px; overflow-y: auto; padding-right: 5px; }
 
 /* 기존 컴포넌트 스타일 유지 */
 .fretboard-container { position: relative; margin: 20px 0 35px 60px; height: 180px; }
@@ -43,9 +30,9 @@ body { background-color: var(--bg-color); color: var(--text-color); padding: 20p
    (오픈 스트링 O/X 표시는 이 스크롤 영역 밖에 있어서 스크롤해도 계속 보임) */
 .fretboard-scroll { position: relative; overflow-x: auto; }
 .fretboard { position: relative; width: 100%; min-width: 600px; height: 180px; background: #1b1d23; border-left: 6px solid #e5c07b; overflow: visible; }
-.left-panel { flex: 1.4; min-width: 600px; }
-/* 왼쪽 프렛보드와 마찬가지로 스크롤해도 상단에 고정되어 계속 보이도록 */
-.right-panel { flex: 0.5; min-width: 250px; position: sticky; top: 20px; align-self: flex-start; z-index: 60; }
+/* 🌟 왼쪽은 셀렉터(루트/퀄리티)만 있는 짧은 패널이라 스크롤해도 계속 보이게 고정 */
+.left-panel { flex: 0.9; min-width: 280px; position: sticky; top: 20px; align-self: flex-start; z-index: 60; }
+.right-panel { flex: 1.6; min-width: 320px; }
 
 /* Chord Finder 탭 레이아웃 */
 .finder-layout { display: flex; gap: 20px; flex-wrap: wrap; }
@@ -114,12 +101,34 @@ button.active { background-color: var(--accent-color); color: white; }
 .btn-grid-quality { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 6px; margin-top: 8px; }
 .btn-grid-quality button { padding: 6px; font-size: 0.8rem; }
 
-/* 보이싱 카드 */
-.voicing-card { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; margin-bottom: 6px; background: #1b1d23; border: 1px solid #2d313f; border-radius: 6px; cursor: pointer; }
-.voicing-card:hover { border-color: var(--selected-card-border); }
-.voicing-card.active { border-color: var(--selected-card-border); background: #1e2530; }
-.voicing-info h4 { margin: 0; font-size: 0.9rem; color: var(--text-light); }
-.voicing-card .badge { font-size: 0.75rem; padding: 3px 8px; border-radius: 10px; background: #2d313f; color: var(--text-color); white-space: nowrap; }
+/* 🌟 세로형 코드 다이어그램 카드 (표준 코드북 스타일: 줄=세로선, 프렛=가로선) */
+.vertical-voicing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.v-grid-empty { grid-column: 1 / -1; color: #828997; font-size: 0.9rem; padding: 24px; text-align: center; background: #1b1d23; border: 1px dashed #3e4452; border-radius: 8px; }
+
+.v-chord-card { background: #1b1d23; border: 1px solid #2d313f; border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+.v-chord-card:hover { border-color: var(--selected-card-border); }
+.v-chord-card.active { border-color: var(--selected-card-border); background: #1e2530; box-shadow: 0 0 0 1px var(--selected-card-border); }
+.v-chord-name { font-size: 0.72rem; font-weight: bold; color: var(--text-light); text-align: center; min-height: 28px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+.v-chord-diagram { display: flex; flex-direction: column; align-items: center; }
+
+.v-legend-row { position: relative; width: 132px; height: 16px; margin-bottom: 2px; }
+.v-legend-cell { position: absolute; top: 0; transform: translateX(-50%); width: 16px; text-align: center; font-size: 0.7rem; font-weight: bold; color: #4b5263; }
+.v-legend-cell.mute { color: var(--accent-color); }
+.v-legend-cell.open { color: var(--highlight-color); }
+.v-legend-cell.highlighted-open { color: #fff; }
+
+.v-nut-bar { width: 132px; height: 4px; background: #cfd3da; border-radius: 2px; margin-bottom: 1px; }
+.v-top-border { width: 132px; height: 1px; background: var(--fret-color); margin-bottom: 1px; }
+
+.v-grid-wrap { position: relative; display: flex; align-items: flex-start; }
+.v-position-label { font-size: 0.75rem; color: #828997; font-weight: bold; margin-right: 4px; }
+.v-grid { position: relative; width: 132px; }
+.v-string-line { position: absolute; top: 0; bottom: 0; width: 1px; background: #4b5263; }
+.v-fret-line { position: absolute; left: 0; right: 0; height: 1px; background: var(--fret-color); }
+.v-barre-bar { position: absolute; height: 20px; margin-top: -10px; background: var(--highlight-color); opacity: 0.4; border-radius: 8px; z-index: 1; }
+.v-dot { position: absolute; width: 20px; height: 20px; margin-left: -10px; margin-top: -10px; border-radius: 50%; background: var(--highlight-color); color: #1a1c23; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.68rem; z-index: 2; }
+.v-dot.root { background: var(--accent-color); color: #fff; }
+.v-dot.highlighted-marker { box-shadow: 0 0 0 3px rgba(255,255,255,0.6); }
 
 /* 슬래시 코드 / 진행 패널 */
 .composition-section { background: #1b1d23; border: 1px solid #2d313f; padding: 16px; border-radius: 8px; box-shadow: 0 10px 18px -8px rgba(0,0,0,0.5); }
