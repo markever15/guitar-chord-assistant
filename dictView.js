@@ -580,6 +580,18 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const slashHeader = document.getElementById('slash-chord-header');
+    const slashShelf = document.getElementById('slash-chord-shelf');
+    const slashToggleIcon = document.getElementById('slash-chord-toggle-icon');
+    if (slashHeader && slashShelf && slashToggleIcon) {
+        slashHeader.onclick = () => {
+            const isHidden = slashShelf.style.display === 'none';
+            slashShelf.style.display = isHidden ? 'grid' : 'none';
+            slashShelf.style.marginTop = isHidden ? '10px' : '0';
+            slashToggleIcon.textContent = isHidden ? '▼' : '▶';
+        };
+    }
+
     const showBtn = document.getElementById('show-all-btn');
     if (showBtn) showBtn.onclick = () => { window.showAllNotesState = !window.showAllNotesState; showBtn.classList.toggle('active', window.showAllNotesState); showBtn.innerText = window.showAllNotesState ? "Hide Notes" : "Show Notes"; window.dictView.renderAll(); };
 
