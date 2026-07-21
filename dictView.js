@@ -465,7 +465,7 @@ window.dictView = {
 
         const grid = document.createElement('div');
         grid.className = 'v-grid';
-        grid.style.height = `${numRows * 32}px`;
+        grid.style.height = `${numRows * 36}px`;
 
         for (let s = 0; s < 6; s++) {
             const line = document.createElement('div');
