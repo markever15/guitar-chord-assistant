@@ -246,7 +246,16 @@ window.dictView = {
             }
         });
 
-        // 2. C 코드 기준 변환 폼 대량 생성 - 위에서 이미 추가된 지정 파지법과 겹치는 프렛은 건너뜀
+        // 2. 자동 생성된 파지법(generatedVoicings) - 지정 파지법이 없는 루트/품질의 빈 자리를 채움.
+        //    지정 파지법과 겹치면 건너뜀 (지정 파지법이 항상 우선)
+        const generated = (window.generatedVoicings && window.generatedVoicings[root] && window.generatedVoicings[root][quality]) || [];
+        generated.forEach(gv => {
+            if (!allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(gv.frets))) {
+                allVoicings.push({ name: gv.name, frets: gv.frets, fingers: gv.fingers });
+            }
+        });
+
+        // 3. C 코드 기준 변환 폼 대량 생성 - 위에서 이미 추가된 파지법과 겹치는 프렛은 건너뜀
         baseVoicings.forEach(v => {
             offsetsToTry.forEach(off => {
                 const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`);
