@@ -75,8 +75,6 @@ function activateTab(targetId) {
     } else if (targetId === 'tab-recognizer' && window.recogView) {
         window.recogView.renderFinderFretboard();
         window.recogView.detectChordFromFinder();
-    } else if (targetId === 'tab-progression' && window.progView) {
-        window.progView.renderAll();
     }
 }
 
@@ -103,8 +101,5 @@ window.addEventListener('load', () => {
     }
     if (window.recogView) {
         window.recogView.renderFinderFretboard();
-    }
-    if (window.progView) {
-        window.progView.renderAll();
     }
 });
