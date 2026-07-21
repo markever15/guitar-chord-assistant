@@ -581,9 +581,9 @@ window.chordDatabase = {
             { name: 'Airy Shape (10th Fret)', desc: 'Open-string m9 voicing higher up the neck.', frets: [8, 10, 0, 0, 11, 11], fingers: [1, 2, 0, 0, 3, 3] }
         ],
         '11': [
-            { name: 'C11 Shape', desc: '', frets: [-1, 3, 3, 3, 3, -1], fingers: [-1, 1, 1, 1, 1, -1] },
-            { name: 'E Shape 11 (No 3rd/5th)', desc: '6th string root quartal 11th shell.', frets: [8, 5, 8, -1, 6, -1], fingers: [3, 1, 4, -1, 2, -1] },
-            { name: 'D Shape 11 (No 3rd/5th)', desc: '4th string root quartal 11th shell.', frets: [-1, -1, 10, 10, 11, 10], fingers: [-1, -1, 1, 2, 4, 3] },
+            { name: 'C11 Shape', desc: '', frets: [-1, 3, 3, 3, 3, 0], fingers: [-1, 1, 1, 1, 1, 0] },
+            { name: 'E Shape 11 (No 3rd/5th)', desc: '6th string root quartal 11th shell.', frets: [8, 5, 8, -1, 6, 0], fingers: [3, 1, 4, -1, 2, 0] },
+            { name: 'D Shape 11 (No 3rd/5th)', desc: '4th string root quartal 11th shell.', frets: [8, 8, 8, -1, 8, 0], fingers: [1, 1, 1, -1, 1, 0] },
             { name: 'Airy Shape (6th Fret)', desc: 'Open-string 11th voicing.', frets: [8, 7, 0, 0, 6, 6], fingers: [3, 2, 0, 0, 1, 1] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed 11th chord.', frets: [8, 8, 8, 9, 8, 10], fingers: [1, 1, 1, 2, 1, 3] },
             { name: 'Spread Shape (5th Fret)', desc: 'Wide-interval 11th voicing with open strings.', frets: [8, 5, 8, 0, 6, 0], fingers: [3, 1, 3, 0, 2, 0] },
@@ -595,7 +595,7 @@ window.chordDatabase = {
         ],
         'm11': [
             { name: 'Cm11 Shape', desc: '', frets: [8, -1, 8, 8, 6, -1], fingers: [3, -1, 4, 4, 1, -1] },
-            { name: 'A Shape m11 (No 5th/9th)', desc: '5th string root jazz m11 shell.', frets: [1, 3, 1, 3, -1, -1], fingers: [1, 3, 2, 4, -1, -1] },
+            { name: 'A Shape m11 (No 5th/9th)', desc: '5th string root jazz m11 shell.', frets: [8, 8, 8, 8, 8, 10], fingers: [1, 1, 1, 1, 1, 2] },
             { name: 'D Shape m11 (No 5th/9th)', desc: '4th string root jazz m11 shell.', frets: [-1, -1, 10, 10, 11, 11], fingers: [-1, -1, 1, 2, 3, 4] },
             { name: 'Airy Shape (6th Fret)', desc: 'Open-string m11 voicing.', frets: [8, 6, 0, 0, 6, 6], fingers: [2, 1, 0, 0, 1, 1] },
             { name: 'Cluster Shape (5th Fret)', desc: 'Close-position m11 voicing.', frets: [8, 5, 5, 8, 6, 6], fingers: [3, 1, 1, 3, 2, 2] },
@@ -605,7 +605,7 @@ window.chordDatabase = {
         'maj11': [
             { name: 'Cmaj11 Shape', desc: '', frets: [-1, 3, 2, 0, 0, 1], fingers: [-1, 3, 2, 0, 0, 1] },
             { name: 'E Shape maj11 (No 5th/9th)', desc: '6th string root jazz maj11 shell.', frets: [8, -1, 9, 9, 6, -1], fingers: [2, -1, 3, 4, 1, -1] },
-            { name: 'D Shape maj11 (No 3rd/5th)', desc: '4th string root jazz maj11 shell.', frets: [-1, -1, 10, 10, 12, 10], fingers: [-1, -1, 1, 2, 4, 3] },
+            { name: 'D Shape maj11 (No 3rd/5th)', desc: '4th string root jazz maj11 shell.', frets: [8, 7, 0, 0, 6, 7], fingers: [4, 2, 0, 0, 1, 3] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string maj11 voicing.', frets: [8, 8, 0, 0, 0, 0], fingers: [1, 1, 0, 0, 0, 0] },
             { name: 'Open Shape (8th Fret)', desc: 'Wide maj11 voicing with open high strings.', frets: [8, 10, 0, 10, 0, 0], fingers: [1, 2, 0, 2, 0, 0] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed maj11 chord.', frets: [8, 8, 9, 9, 8, 10], fingers: [1, 1, 2, 2, 1, 3] },
@@ -620,7 +620,7 @@ window.chordDatabase = {
         ],
         'm13': [
             { name: 'Cm13 Shape', desc: '', frets: [8, -1, 8, 8, 10, -1], fingers: [1, -1, 2, 2, 4, -1] },
-            { name: 'A Shape m13 (No 5th/9th)', desc: '5th string root jazz m13 shell.', frets: [5, 3, 1, 3, -1, -1], fingers: [4, 2, 1, 3, -1, -1] },
+            { name: 'A Shape m13 (No 5th/9th)', desc: '5th string root jazz m13 shell.', frets: [8, 0, 0, 8, 8, 6], fingers: [2, 0, 0, 3, 4, 1] },
             { name: 'D Shape m13 (No 5th/9th)', desc: '4th string root jazz m13 shell.', frets: [-1, -1, 10, 8, 10, 6], fingers: [-1, -1, 3, 2, 4, 1] }
         ],
         'maj13': [
@@ -727,14 +727,14 @@ window.chordDatabase = {
         '7b9': [
             { name: 'C7b9 Shape', desc: '', frets: [-1, 3, 2, 3, 2, -1], fingers: [-1, 2, 1, 3, 1, -1] },
             { name: 'E Shape 7b9 (No 5th)', desc: '6th string root jazz 7b9 shell.', frets: [8, -1, 8, 6, 5, -1], fingers: [3, -1, 4, 2, 1, -1] },
-            { name: 'D Shape 7b9 (No 5th/7th)', desc: '4th string root jazz 7b9 shell.', frets: [-1, -1, 10, 9, -1, 9], fingers: [-1, -1, 3, 1, -1, 2] },
+            { name: 'D Shape 7b9 (No 5th/7th)', desc: '4th string root jazz 7b9 shell.', frets: [8, -1, 8, 9, 8, 9], fingers: [1, -1, 1, 2, 1, 3] },
             { name: 'Open Shape (2nd Fret)', desc: '7b9 with open high E string.', frets: [-1, 3, 5, 3, 2, 0], fingers: [-1, 2, 3, 2, 1, 0] },
             { name: 'Open Shape (8th Fret)', desc: '7b9 with open D and high E strings.', frets: [8, 10, 11, 0, 11, 0], fingers: [1, 2, 3, 0, 3, 0] }
         ],
         '7#9': [
             { name: 'C7#9 Shape', desc: '', frets: [-1, 3, 2, 3, 4, -1], fingers: [-1, 2, 1, 3, 4, -1] },
             { name: 'E Shape 7#9 (No 5th)', desc: '6th string root jazz 7#9 shell (Hendrix chord).', frets: [8, -1, 8, 8, 5, -1], fingers: [2, -1, 3, 4, 1, -1] },
-            { name: 'D Shape 7#9 (No 5th/7th)', desc: '4th string root jazz 7#9 shell (Hendrix chord).', frets: [-1, -1, 10, 8, -1, 12], fingers: [-1, -1, 2, 1, -1, 3] },
+            { name: 'D Shape 7#9 (No 5th/7th)', desc: '4th string root jazz 7#9 shell (Hendrix chord).', frets: [8, -1, 8, 8, 8, 0], fingers: [1, -1, 1, 1, 1, 0] },
             { name: 'Open Shape (3rd Fret)', desc: '7#9 with open high E string.', frets: [-1, 3, 5, 3, 4, 0], fingers: [-1, 1, 3, 1, 2, 0] },
             { name: 'Open Shape (6th Fret)', desc: '7#9 with open G and high E strings.', frets: [8, 6, 8, 0, 8, 0], fingers: [2, 1, 2, 0, 2, 0] },
             { name: 'Open Shape (8th Fret)', desc: '7#9 with open high E string.', frets: [8, 10, 8, 8, 8, 0], fingers: [1, 2, 1, 1, 1, 0] },

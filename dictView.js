@@ -234,6 +234,20 @@ window.dictView = {
                 if (soundingIdx === -1) return null;
                 const bassNote = window.getNoteName(5 - soundingIdx, shiftedFrets[soundingIdx]);
                 if (bassNote !== root) return null;
+
+                // 5. 3rd/2nd/4th(코드 성격을 정하는 음)와, 코드 이름을 정하는 확장음(중간의 7th,
+                //    그리고 배열 맨 끝의 9th/11th/13th 등)이 빠지면 다른(더 단순한/애매한) 코드처럼
+                //    들리므로 반드시 있어야 함
+                const chordTones = window.chordNotesTable[root] && window.chordNotesTable[root][quality];
+                if (chordTones) {
+                    const requiredExtensions = new Set();
+                    if (chordTones.length >= 2) requiredExtensions.add(chordTones[1]);
+                    if (chordTones.length >= 4) requiredExtensions.add(chordTones[3]);
+                    if (chordTones.length >= 5) requiredExtensions.add(chordTones[chordTones.length - 1]);
+                    const soundingNotes = new Set();
+                    shiftedFrets.forEach((f, idx) => { if (f >= 0) soundingNotes.add(window.getNoteName(5 - idx, f)); });
+                    for (const ext of requiredExtensions) { if (!soundingNotes.has(ext)) return null; }
+                }
             }
 
             return {
