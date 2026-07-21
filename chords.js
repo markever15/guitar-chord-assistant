@@ -4,7 +4,8 @@
 window.excludedVoicings = {
     'D': {
         'm': [ [-1, 5, 3, 2, 3, 5] ],
-        '7': [ [-1, 5, 4, 5, 3, 2] ]
+        '7': [ [-1, 5, 4, 5, 3, 2] ],
+        'm9': [ [10, 12, 12, 10, 13, 12] ]
     }
 };
 
@@ -969,6 +970,10 @@ window.chordDatabase = {
             { name: 'E Shape (7th, D Root)', desc: '6th-string root with the D string fretted.', frets: [10, 0, 10, 9, 7, 0], fingers: [3, 0, 4, 2, 1, 0] },
             { name: 'E Shape (7th, Full)', desc: '6th-string root, full voicing.', frets: [10, 0, 7, 9, 7, 8], fingers: [4, 0, 1, 3, 1, 2] },
             { name: 'E Shape (7th, Open A)', desc: '6th-string root with the A string open.', frets: [10, 0, 0, 9, 7, 8], fingers: [4, 0, 0, 3, 1, 2] }
+        ],
+        'm9': [
+            { name: 'E Shape (10th, Open Top)', desc: '6th-string root, open high E string.', frets: [10, 12, 10, 10, 10, 0], fingers: [1, 2, 1, 1, 1, 0] },
+            { name: 'E Shape (7th, Open D)', desc: '6th-string root, open D string.', frets: [10, 7, 0, 10, 10, 8], fingers: [3, 1, 0, 4, 4, 2] }
         ]
     },
     'E': {
