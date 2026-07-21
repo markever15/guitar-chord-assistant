@@ -107,6 +107,110 @@ button.active { background-color: var(--accent-color); color: white; }
 .vertical-voicing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
 .v-grid-empty { grid-column: 1 / -1; color: #828997; font-size: 0.9rem; padding: 24px; text-align: center; background: #1b1d23; border: 1px dashed #3e4452; border-radius: 8px; }
 
+/* Progression Builder 탭 */
+.prog-intro { color: #828997; font-size: 0.9rem; max-width: 720px; margin: 8px 0 20px 0; line-height: 1.5; }
+.prog-layout { display: flex; gap: 20px; width: 100%; flex-wrap: wrap; }
+.prog-left-panel { flex: 1; min-width: 340px; background: #1b1d23; border: 1px solid #2d313f; padding: 20px; border-radius: 8px; }
+.prog-right-panel { flex: 1.2; min-width: 340px; }
+.prog-controls { display: flex; gap: 40px; flex-wrap: wrap; margin-bottom: 10px; }
+.prog-controls .root-grid { max-width: 340px; }
+.prog-scale-toggle { display: flex; gap: 8px; flex-wrap: wrap; }
+.prog-chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.prog-chip { display: flex; align-items: center; gap: 6px; background: #222530; border: 1px solid #2d313f; border-radius: 20px; padding: 8px 14px; cursor: grab; font-weight: bold; }
+.prog-chip:hover { border-color: var(--selected-card-border); }
+.prog-chip:active { cursor: grabbing; }
+.prog-chip.dragging { opacity: 0.4; }
+.prog-chip-numeral { color: #828997; font-size: 0.8rem; font-weight: normal; }
+.prog-chip-name { color: var(--text-light); }
+.prog-preset-chip { font-weight: normal; color: var(--text-color); cursor: pointer; }
+.prog-suggest-chip { background: #2a2130; border-color: var(--highlight-color); }
+.prog-suggest-chip .prog-chip-name { color: var(--highlight-color); }
+.prog-chip-remove { color: #828997; font-weight: bold; padding: 0 2px; margin-left: 2px; cursor: pointer; }
+.prog-chip-remove:hover { color: var(--accent-color); }
+
+/* 🌟 오른쪽의 "악보" 드롭존 - 오선지 느낌의 가로줄 배경, 드래그 오버 시 강조 */
+.prog-sheet {
+    min-height: 220px;
+    background:
+        repeating-linear-gradient(#1b1d23 0 43px, #2d313f 43px 44px) ,
+        #1b1d23;
+    background-size: 100% 44px;
+    border: 1px solid #2d313f;
+    border-radius: 8px;
+    padding: 24px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 14px 10px;
+    transition: border-color 0.15s, background-color 0.15s;
+}
+.prog-sheet.drag-over { border-color: var(--selected-card-border); background-color: #1e2530; }
+
+/* 🌟 마디(measure) 단위로 코드를 묶어서 보여주는 실제 악보 레이아웃 */
+.prog-sheet { align-items: stretch; }
+.prog-measure {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding: 18px 16px 6px 10px;
+    position: relative;
+    border-right: 2px solid #4b5263;
+}
+.prog-measure.last-measure { border-right: 4px double #cfd3da; padding-right: 20px; }
+.prog-measure-number { position: absolute; top: -2px; left: 6px; font-size: 0.68rem; color: #5b6272; font-weight: bold; }
+
+.prog-sheet-slot { position: relative; display: flex; flex-direction: column; align-items: center; cursor: grab; border-radius: 8px; padding: 4px; }
+.prog-sheet-slot:hover { background: #1e2530; }
+.prog-sheet-slot:active { cursor: grabbing; }
+.prog-sheet-slot.dragging { opacity: 0.4; }
+.prog-slot-numeral { font-size: 0.75rem; color: #828997; margin-bottom: 2px; }
+.prog-slot-name { font-size: 0.85rem; font-weight: bold; color: var(--text-light); margin-top: 2px; }
+.prog-slot-remove { position: absolute; top: -6px; right: -6px; width: 18px; height: 18px; border-radius: 50%; background: #2d313f; border: 1px solid #4b5263; color: #abb2bf; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.prog-slot-remove:hover { background: var(--accent-color); border-color: var(--accent-color); color: #fff; }
+.prog-slot-diagram-wrap { position: relative; }
+
+/* 세로형 다이어그램(v-chord-card)을 시트 안에서 작게 축소해서 보여주기 위한 래퍼 */
+.prog-mini-voicing { transform: scale(0.58); transform-origin: top left; overflow: hidden; }
+.prog-mini-voicing .v-chord-card { cursor: inherit; padding: 6px; }
+.prog-mini-voicing .v-chord-name { display: none; }
+
+/* 🌟 코드를 클릭/드롭했을 때 뜨는 파지법 선택 오버레이 */
+.prog-picker-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 11, 15, 0.72);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.prog-picker-overlay.open { display: flex; }
+.prog-picker-panel {
+    background: #1b1d23;
+    border: 1px solid #3e4452;
+    border-radius: 12px;
+    padding: 24px;
+    width: 320px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 20px 50px -12px rgba(0,0,0,0.7);
+}
+.prog-picker-title { font-size: 1.1rem; font-weight: bold; color: var(--text-light); margin-bottom: 2px; text-align: center; }
+.prog-picker-subtitle { font-size: 0.8rem; color: #828997; margin-bottom: 14px; text-align: center; }
+.prog-picker-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 10px; }
+.prog-picker-nav button { padding: 6px 14px; font-weight: bold; }
+.prog-picker-position { font-size: 0.8rem; color: #828997; min-width: 46px; text-align: center; }
+.prog-picker-voicing-name { font-size: 0.85rem; color: var(--highlight-color); font-weight: bold; margin-top: 8px; text-align: center; min-height: 20px; }
+.prog-picker-actions { display: flex; gap: 8px; margin-top: 18px; width: 100%; }
+.prog-picker-actions button { flex: 1; }
+.prog-picker-cancel { display: flex; justify-content: flex-end; width: 100%; margin-bottom: -8px; }
+.prog-picker-close { background: none; border: none; color: #828997; font-size: 1.1rem; cursor: pointer; padding: 2px 6px; }
+.prog-picker-close:hover { color: var(--text-light); }
+.prog-sheet-drop-marker { width: 3px; align-self: stretch; background: var(--selected-card-border); border-radius: 2px; }
+
 .v-chord-card { background: #1b1d23; border: 1px solid #2d313f; border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
 .v-chord-card:hover { border-color: var(--selected-card-border); }
 .v-chord-card.active { border-color: var(--selected-card-border); background: #1e2530; box-shadow: 0 0 0 1px var(--selected-card-border); }
@@ -177,4 +281,7 @@ button.active { background-color: var(--accent-color); color: white; }
 
     .finder-layout { flex-direction: column; }
     .finder-board-col, .finder-result-col { min-width: 0; width: 100%; }
+
+    .prog-layout { flex-direction: column; }
+    .prog-left-panel, .prog-right-panel { min-width: 0; width: 100%; }
 }
