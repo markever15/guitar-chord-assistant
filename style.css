@@ -113,22 +113,22 @@ button.active { background-color: var(--accent-color); color: white; }
 .v-chord-name { font-size: 0.72rem; font-weight: bold; color: var(--text-light); text-align: center; min-height: 28px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
 .v-chord-diagram { display: flex; flex-direction: column; align-items: center; }
 
-.v-legend-row { position: relative; width: 132px; height: 16px; margin-bottom: 2px; }
+.v-legend-row { position: relative; width: 104px; height: 16px; margin-bottom: 2px; }
 .v-legend-cell { position: absolute; top: 0; transform: translateX(-50%); width: 16px; text-align: center; font-size: 0.7rem; font-weight: bold; color: #4b5263; }
 .v-legend-cell.mute { color: var(--accent-color); }
 .v-legend-cell.open { color: var(--highlight-color); }
 .v-legend-cell.highlighted-open { color: #fff; }
 
-.v-nut-bar { width: 132px; height: 4px; background: #cfd3da; border-radius: 2px; margin-bottom: 1px; }
-.v-top-border { width: 132px; height: 1px; background: var(--fret-color); margin-bottom: 1px; }
+.v-nut-bar { width: 104px; height: 4px; background: #cfd3da; border-radius: 2px; margin-bottom: 1px; }
+.v-top-border { width: 104px; height: 1px; background: var(--fret-color); margin-bottom: 1px; }
 
 .v-grid-wrap { position: relative; display: flex; align-items: flex-start; }
 .v-position-label { font-size: 0.75rem; color: #828997; font-weight: bold; margin-right: 4px; }
-.v-grid { position: relative; width: 132px; }
+.v-grid { position: relative; width: 104px; }
 .v-string-line { position: absolute; top: 0; bottom: 0; width: 1px; background: #4b5263; }
 .v-fret-line { position: absolute; left: 0; right: 0; height: 1px; background: var(--fret-color); }
-.v-barre-bar { position: absolute; height: 20px; margin-top: -10px; background: var(--highlight-color); opacity: 0.4; border-radius: 8px; z-index: 1; }
-.v-dot { position: absolute; width: 20px; height: 20px; margin-left: -10px; margin-top: -10px; border-radius: 50%; background: var(--highlight-color); color: #1a1c23; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.68rem; z-index: 2; }
+.v-barre-bar { position: absolute; height: 18px; margin-top: -9px; background: var(--highlight-color); opacity: 0.4; border-radius: 8px; z-index: 1; }
+.v-dot { position: absolute; width: 18px; height: 18px; margin-left: -9px; margin-top: -9px; border-radius: 50%; background: var(--highlight-color); color: #1a1c23; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.65rem; z-index: 2; }
 .v-dot.root { background: var(--accent-color); color: #fff; }
 .v-dot.highlighted-marker { box-shadow: 0 0 0 3px rgba(255,255,255,0.6); }
 
