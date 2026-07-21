@@ -223,6 +223,13 @@ window.dictView = {
             });
         });
 
+        // 🌟 특정 코드에서 못 잡는(비현실적인) 파지법을 프렛 배열로 지정해 제외
+        const excluded = (window.excludedVoicings && window.excludedVoicings[root] && window.excludedVoicings[root][quality]) || [];
+        if (excluded.length) {
+            const exSet = new Set(excluded.map(f => f.join(',')));
+            allVoicings = allVoicings.filter(v => !exSet.has(v.frets.join(',')));
+        }
+
         // 정렬 로직 (1. 개방현 -> 2. 낮은 프렛 -> 3. 굵은 베이스 줄)
         return allVoicings.sort((a, b) => {
             const hasOpenA = a.frets.includes(0);
@@ -390,6 +397,9 @@ window.dictView = {
         Object.entries(barreMap).forEach(([fretStr, strs]) => {
             if (strs.length < 2) return;
             const fret = parseInt(fretStr);
+            // 🌟 검지 바레는 항상 최저 프렛에만 존재함. 최저 프렛보다 높은 곳의 "뒤쪽 바레"는
+            //    물리적으로 불가능(그 앞쪽에 눌러야 할 노트가 있음)하므로 막대를 안 그리고 점으로만 표시.
+            if (fret !== minFret) return;
             const rowIdx = fret - startFret;
             if (rowIdx < 0 || rowIdx >= numRows) return;
             const minS = Math.min(...strs), maxS = Math.max(...strs);
