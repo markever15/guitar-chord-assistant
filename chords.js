@@ -826,7 +826,21 @@ window.chordDatabase = {
             { name: 'Open D5', desc: 'Fat sounding open power chord.', frets: [-1, -1, 0, 2, 3, -1], fingers: [-1, -1, 0, 1, 3, -1] }
         ],
         'sus2': [
-            { name: 'Open Dsus2', desc: 'Dreamy open suspended 2.', frets: [-1, -1, 0, 2, 3, 0], fingers: [-1, -1, 0, 1, 3, 0] }
+            { name: 'Open Dsus2', desc: 'Dreamy open suspended 2.', frets: [-1, -1, 0, 2, 3, 0], fingers: [-1, -1, 0, 1, 3, 0] },
+            { name: 'Compact (2nd Fret)', desc: 'A-string root, no 5th.', frets: [-1, 5, 2, 2, 3, 0], fingers: [-1, 3, 1, 1, 2, 0] },
+            { name: 'A-Root (2nd Fret)', desc: 'A-string root with the open shell.', frets: [-1, 5, 0, 2, 3, 0], fingers: [-1, 3, 0, 1, 2, 0] },
+            { name: 'Compact Full (2nd Fret)', desc: 'A-string root, 5th doubled up top.', frets: [-1, 5, 2, 2, 5, 0], fingers: [-1, 2, 1, 1, 3, 0] },
+            { name: 'D-Root (2nd Fret)', desc: 'Open D root, wide voicing.', frets: [-1, -1, 0, 2, 5, 0], fingers: [-1, -1, 0, 1, 2, 0] },
+            { name: 'A-Root Wide (2nd Fret)', desc: 'A-string root, wide voicing.', frets: [-1, 5, 0, 2, 5, 0], fingers: [-1, 2, 0, 1, 3, 0] },
+            { name: 'Compact (2nd, High E)', desc: 'A-string root, high E added.', frets: [-1, 5, 2, 2, 3, 5], fingers: [-1, 3, 1, 1, 2, 4] },
+            { name: 'Compact Full (2nd, High E)', desc: 'A-string root, wide with high E.', frets: [-1, 5, 2, 2, 5, 5], fingers: [-1, 2, 1, 1, 3, 4] },
+            { name: 'A-Root (5th Fret)', desc: 'A-string root, upper structure.', frets: [-1, 5, 0, 7, 5, 5], fingers: [-1, 1, 0, 4, 2, 3] },
+            { name: 'D-Root (5th Fret)', desc: 'Open D root, top voicing.', frets: [-1, -1, 0, 7, 5, 5], fingers: [-1, -1, 0, 2, 1, 1] },
+            { name: 'E Shape (5th Fret)', desc: 'A-string root, full voicing.', frets: [-1, 5, 7, 7, 5, 5], fingers: [-1, 1, 2, 3, 1, 1] },
+            { name: 'E Shape (5th, Open E)', desc: 'A-string root, open high E.', frets: [-1, 5, 7, 7, 5, 0], fingers: [-1, 1, 2, 3, 1, 0] },
+            { name: 'Shell (9th Fret)', desc: 'Top-3 string sus2 shell.', frets: [-1, -1, 0, 9, 10, 0], fingers: [-1, -1, 0, 1, 2, 0] },
+            { name: 'E Shape Open (9th Fret)', desc: '6th-string root, open A/D strings.', frets: [10, 0, 0, 9, 10, 0], fingers: [2, 0, 0, 1, 3, 0] },
+            { name: 'Shell Full (9th Fret)', desc: 'Top-3 string sus2 shell, high E fretted.', frets: [-1, -1, 0, 9, 10, 10], fingers: [-1, -1, 0, 1, 2, 3] }
         ],
         'sus4': [
             { name: 'Open Dsus4', desc: 'Resolved to D major commonly.', frets: [-1, -1, 0, 2, 3, 3], fingers: [-1, -1, 0, 1, 3, 4] },
@@ -882,6 +896,24 @@ window.chordDatabase = {
             { name: 'E Shape (9th, D Root)', desc: '6th-string root with the D string fretted.', frets: [10, 0, 12, 10, 10, 9], fingers: [1, 0, 4, 2, 2, 1] },
             { name: 'E Shape Full (9th, A+D Root)', desc: 'Full 6th-string root, D and A both fretted.', frets: [10, 12, 12, 10, 10, 9], fingers: [2, 4, 4, 1, 1, 3] },
             { name: 'E Shape (10th Fret)', desc: 'Full 6-string movable barre.', frets: [10, 12, 11, 10, 10, 13], fingers: [2, 4, 3, 1, 1, 4] }
+        ],
+        '6': [
+            { name: 'Open D6 Shape', desc: 'Sweet vintage 6th, open position.', frets: [-1, -1, 0, 2, 0, 2], fingers: [-1, -1, 0, 1, 0, 2] },
+            { name: 'Compact (2nd Fret)', desc: 'A-string root, no 5th.', frets: [-1, 5, 0, 2, 0, 2], fingers: [-1, 3, 0, 1, 0, 2] },
+            { name: 'A-Root (2nd Fret)', desc: 'A-string root, full voicing.', frets: [-1, 5, 4, 2, 0, 2], fingers: [-1, 3, 2, 1, 0, 2] },
+            { name: 'A-Root Wide (2nd Fret)', desc: 'A-string root, wide voicing.', frets: [-1, 5, 4, 2, 0, 5], fingers: [-1, 2, 1, 1, 0, 3] },
+            { name: 'A-Root (3rd Fret)', desc: 'A-string root, closed voicing.', frets: [-1, 5, 4, 4, 3, 5], fingers: [-1, 3, 1, 1, 1, 4] },
+            { name: 'A-Root (4th Fret)', desc: 'A-string root, open B string.', frets: [-1, 5, 4, 4, 0, 5], fingers: [-1, 3, 1, 1, 0, 4] },
+            { name: 'A-Root Full (4th Fret)', desc: 'A-string root, 6th on top.', frets: [-1, 5, 4, 7, 0, 5], fingers: [-1, 2, 1, 4, 0, 3] },
+            { name: 'E Shape (10th Fret)', desc: '6th-string root, open B string.', frets: [10, 0, 0, 11, 0, 10], fingers: [2, 0, 0, 3, 0, 1] },
+            { name: 'E Shape (10th, A Root)', desc: '6th-string root, A string fretted.', frets: [10, 12, 0, 11, 0, 10], fingers: [2, 4, 0, 3, 0, 1] },
+            { name: 'E Shape (10th, D Root)', desc: '6th-string root, D string fretted.', frets: [10, 0, 12, 11, 0, 10], fingers: [2, 0, 4, 3, 0, 1] },
+            { name: 'E Shape (10th, B Root)', desc: '6th-string root, B string fretted.', frets: [10, 0, 0, 11, 12, 10], fingers: [2, 0, 0, 3, 4, 1] },
+            { name: 'E Shape Full (10th Fret)', desc: 'Full 6th-string root voicing.', frets: [10, 12, 12, 11, 12, 10], fingers: [1, 3, 3, 2, 3, 1] },
+            { name: 'Shell (12th Fret)', desc: 'Top-3 string 6th shell.', frets: [-1, -1, 12, 14, 12, 14], fingers: [-1, -1, 1, 3, 1, 4] },
+            { name: 'D-Root Shell (12th Fret)', desc: 'Open D, top-2 string voicing.', frets: [-1, -1, 0, 14, 12, 14], fingers: [-1, -1, 0, 2, 1, 3] },
+            { name: 'Shell Open B (12th Fret)', desc: 'Top-3 string, open B string.', frets: [-1, -1, 12, 14, 0, 14], fingers: [-1, -1, 1, 3, 0, 4] },
+            { name: 'D-Root Shell (14th Fret)', desc: 'Open D and B, top voicing.', frets: [-1, -1, 0, 14, 0, 14], fingers: [-1, -1, 0, 1, 0, 2] }
         ],
         'add9': [
             { name: 'Open Dadd9', desc: 'Beautiful open ringing strings.', frets: [-1, -1, 4, 2, 3, 0], fingers: [-1, -1, 3, 1, 2, 0] }
