@@ -126,11 +126,13 @@ function computeFingers(frets) {
         const budget = 4 - startFinger + 1;
         if (items.length > budget) return null;
         const result = {};
-        if (items.length === 1 && refFret !== undefined && items[0].fret - refFret >= 3 && startFinger < 4) {
-            items[0].strings.forEach(s => { result[s] = 4; });
-            return result;
-        }
-        items.forEach((item, i) => { item.strings.forEach(s => { result[s] = startFinger + i; }); });
+        // 🌟 남은 음들이 전부(하나든 여럿이든) 바레(기준 프렛)에서 3프렛 이상 떨어져 있으면,
+        //    검지 바로 옆 손가락부터 채우지 않고 새끼손가락 쪽으로 끝나도록 뒤로 밀어서 배정함
+        //    (인덱스 바로 옆 손가락으로 먼 음까지 이어 뻗는 건 부자연스러움 - 뻗는 힘이 좋은
+        //    손가락들을 씀)
+        const allFar = refFret !== undefined && startFinger < 4 && items.every(x => x.fret - refFret >= 3);
+        const effectiveStart = allFar ? Math.max(startFinger, 4 - items.length + 1) : startFinger;
+        items.forEach((item, i) => { item.strings.forEach(s => { result[s] = effectiveStart + i; }); });
         return result;
     }
 
