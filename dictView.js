@@ -199,17 +199,8 @@ window.dictView = {
             };
         };
 
-        // 1. C 코드 기준 변환 폼 대량 생성 및 필터링
-        baseVoicings.forEach(v => {
-            offsetsToTry.forEach(off => {
-                const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`);
-                if (result && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result.frets))) {
-                    allVoicings.push(result);
-                }
-            });
-        });
-
-        // 2. 특정 키 하드코딩 폼들 (원본 및 +12 옥타브 하이 포지션) 동일한 필터링 통과
+        // 1. 하드코딩된 지정 파지법을 먼저 넣어 이름/운지 우선권을 줌 (원본 및 +12 옥타브 하이 포지션)
+        //    → 아래 자동 변환 폼과 프렛이 겹치면 지정 파지법이 이기고, 안 겹치는 자동 생성분만 뒤에 추가됨
         specificVoicings.forEach(sv => {
             const result0 = processVoicing(sv, 0, sv.name);
             if (result0 && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result0.frets))) {
@@ -220,6 +211,16 @@ window.dictView = {
             if (result12 && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result12.frets))) {
                 allVoicings.push(result12);
             }
+        });
+
+        // 2. C 코드 기준 변환 폼 대량 생성 - 위에서 이미 추가된 지정 파지법과 겹치는 프렛은 건너뜀
+        baseVoicings.forEach(v => {
+            offsetsToTry.forEach(off => {
+                const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`);
+                if (result && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result.frets))) {
+                    allVoicings.push(result);
+                }
+            });
         });
 
         // 정렬 로직 (1. 개방현 -> 2. 낮은 프렛 -> 3. 굵은 베이스 줄)
@@ -324,7 +325,8 @@ window.dictView = {
         const activeFrets = frets.filter(f => f > 0);
         const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
         const maxFret = activeFrets.length ? Math.max(...activeFrets) : 0;
-        const startFret = minFret > 0 && minFret <= 1 ? 1 : (minFret > 0 ? minFret : 1);
+        // 🌟 프렛 1~4 안에 다 들어가는 파지법은 항상 너트(1프렛)부터 그림 (포지션 라벨 없이 오픈 코드처럼 보이게)
+        const startFret = (maxFret > 0 && maxFret <= 4) ? 1 : (minFret > 0 ? minFret : 1);
         const isNut = startFret === 1;
         const numRows = Math.max(4, maxFret - startFret + 1);
 
