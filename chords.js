@@ -509,7 +509,7 @@ window.chordDatabase = {
         'dim': [
             { name: 'Cdim Shape', desc: 'Diminished triad.', frets: [-1, -1, 10, 8, 7, -1], fingers: [-1, -1, 3, 2, 1, -1] },
             { name: 'E Shape dim', desc: '6th string root diminished triad.', frets: [8, -1, -1, 8, 7, -1], fingers: [2, -1, -1, 3, 1, -1] },
-            { name: 'A Shape dim', desc: '5th string root diminished triad.', frets: [2, 3, 1, -1, -1, -1], fingers: [2, 3, 1, -1, -1, -1] },
+            { name: 'A Shape dim', desc: '5th string root diminished triad.', frets: [-1, 3, 1, -1, -1, 2], fingers: [-1, 3, 1, -1, -1, 2] },
             { name: 'Thin Shape (1st Fret)', desc: 'Close-position dim voicing.', frets: [-1, 3, 1, -1, 1, 2], fingers: [-1, 3, 1, -1, 1, 2] },
             { name: 'Cluster Shape (2nd Fret)', desc: 'Close-position dim voicing.', frets: [-1, 3, 4, -1, 4, 2], fingers: [-1, 2, 3, -1, 3, 1] },
             { name: 'Airy Shape (10th Fret)', desc: 'Close-position dim voicing higher up the neck.', frets: [-1, -1, 10, 11, -1, 11], fingers: [-1, -1, 1, 2, -1, 2] },
@@ -917,49 +917,49 @@ window.chordDatabase = {
             { name: 'D-Root Shell (14th Fret)', desc: 'Open D and B, top voicing.', frets: [-1, -1, 0, 14, 0, 14], fingers: [-1, -1, 0, 1, 0, 2] }
         ],
         'add9': [
-            { name: 'Open Dadd9', desc: 'Beautiful open ringing strings.', frets: [-1, -1, 4, 2, 3, 0], fingers: [-1, -1, 3, 1, 2, 0] }
+            { name: 'Open Dadd9', desc: 'Beautiful open ringing strings.', frets: [-1, -1, 0, 2, 5, 2], fingers: [-1, -1, 0, 1, 2, 1] }
         ],
         'aug': [
             { name: 'Daug Shape', desc: 'Tense augmented passing chord.', frets: [-1, -1, 0, 3, 3, 2], fingers: [-1, -1, 0, 2, 3, 1] }
         ],
         'maj7add13': [
-            { name: 'Open Dmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [-1, 0, 0, 4, 2, 2], fingers: [-1, 0, 0, 2, 1, 1] }
+            { name: 'Open Dmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [-1, 5, 4, 6, 0, 5], fingers: [-1, 2, 1, 4, 0, 3] }
         ],
         'm7add13': [
-            { name: 'Open Dm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 0, 0, 5, 0, 1], fingers: [-1, 0, 0, 2, 0, 1] }
+            { name: 'Open Dm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 5, 3, 5, 0, 5], fingers: [-1, 2, 1, 3, 0, 4] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Dm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [-1, 0, 0, 4, 2, 1], fingers: [-1, 0, 0, 3, 2, 1] }
+            { name: 'Open Dm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [-1, 5, 3, 6, 0, 5], fingers: [-1, 2, 1, 4, 0, 3] }
         ],
         '7b5': [
             { name: 'Open D7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, -1, 0, 1, 1, 2], fingers: [-1, -1, 0, 1, 1, 2] }
         ],
         'aug7': [
-            { name: 'Open Daug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, 1, 0, -1, 1, 2], fingers: [-1, 1, 0, -1, 1, 2] }
+            { name: 'Open Daug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, -1, 0, 3, 1, 2], fingers: [-1, -1, 0, 3, 1, 2] }
         ],
         'aug7b9': [
-            { name: 'Open Daug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [-1, 3, 0, 3, 4, 2], fingers: [-1, 2, 0, 2, 3, 1] }
+            { name: 'Open Daug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [-1, 5, 4, 5, 4, 6], fingers: [-1, 2, 1, 3, 1, 4] }
         ],
         'm7#5': [
-            { name: 'Open Dm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 1, 0, -1, 1, 1], fingers: [-1, 1, 0, -1, 1, 1] }
+            { name: 'Open Dm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, -1, 0, 3, 1, 1], fingers: [-1, -1, 0, 2, 1, 1] }
         ],
         'm7b9': [
-            { name: 'Open Dm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [-1, 0, 0, 5, 4, 1], fingers: [-1, 0, 0, 3, 2, 1] }
+            { name: 'Open Dm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [10, 8, -1, 8, 10, 8], fingers: [2, 1, -1, 1, 3, 1] }
         ],
         '6sus4': [
-            { name: 'Open D6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, 0, 0, 0, 0, -1], fingers: [-1, 0, 0, 0, 0, -1] }
+            { name: 'Open D6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, -1, 0, 2, 0, 3], fingers: [-1, -1, 0, 1, 0, 2] }
         ],
         '6sus2': [
-            { name: 'Open D6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [0, 0, 0, -1, 0, 0], fingers: [0, 0, 0, -1, 0, 0] }
+            { name: 'Open D6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, -1, 0, 2, 0, 0], fingers: [-1, -1, 0, 1, 0, 0] }
         ],
         'maj7sus4': [
-            { name: 'Open Dmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, 0, 0, 0, 2, -1], fingers: [-1, 0, 0, 0, 1, -1] }
+            { name: 'Open Dmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, -1, 0, 0, 2, 5], fingers: [-1, -1, 0, 0, 1, 2] }
         ],
         '7sus2': [
-            { name: 'Open D7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [0, 0, 0, -1, 1, 0], fingers: [0, 0, 0, -1, 1, 0] }
+            { name: 'Open D7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, -1, 0, 2, 1, 0], fingers: [-1, -1, 0, 2, 1, 0] }
         ],
         'maj7sus2': [
-            { name: 'Open Dmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [0, 0, 0, -1, 2, 0], fingers: [0, 0, 0, -1, 1, 0] }
+            { name: 'Open Dmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, -1, 0, 2, 2, 0], fingers: [-1, -1, 0, 1, 1, 0] }
         ],
         '9': [
             { name: 'E Shape (9th Fret)', desc: '6th-string root, open high E string.', frets: [10, 9, 10, 9, 10, 0], fingers: [2, 1, 3, 1, 4, 0] },
@@ -1080,43 +1080,43 @@ window.chordDatabase = {
             { name: 'Faug Shape', desc: 'Mid-neck augmented shape.', frets: [-1, -1, 3, 2, 2, 1], fingers: [-1, -1, 4, 2, 3, 1] }
         ],
         'maj7add13': [
-            { name: 'Open Fmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [0, 0, 0, -1, 1, 1], fingers: [0, 0, 0, -1, 1, 1] }
+            { name: 'Open Fmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [1, 0, 0, -1, 1, 0], fingers: [1, 0, 0, -1, 2, 0] }
         ],
         'm7add13': [
-            { name: 'Open Fm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 3, 0, 1, 4, 1], fingers: [-1, 2, 0, 1, 3, 1] }
+            { name: 'Open Fm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [1, 3, 0, -1, 4, 4], fingers: [1, 2, 0, -1, 3, 4] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Fm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [0, -1, 0, 1, 1, 1], fingers: [0, -1, 0, 1, 1, 1] }
+            { name: 'Open Fm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [1, -1, 0, 1, 1, 0], fingers: [1, -1, 0, 2, 3, 0] }
         ],
         '7b5': [
-            { name: 'Open F7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 0, 1, -1, 0, 1], fingers: [-1, 0, 1, -1, 0, 1] }
+            { name: 'Open F7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [1, 0, 1, -1, 0, -1], fingers: [1, 0, 2, -1, 0, -1] }
         ],
         'aug7': [
-            { name: 'Open Faug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, 0, 1, -1, 2, 1], fingers: [-1, 0, 1, -1, 2, 1] }
+            { name: 'Open Faug7 Shape', desc: 'Open-position aug7 voicing.', frets: [1, 0, 1, -1, 2, -1], fingers: [1, 0, 2, -1, 3, -1] }
         ],
         'aug7b9': [
             { name: 'Open Faug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [1, 0, 1, -1, 2, 2], fingers: [1, 0, 1, -1, 2, 2] }
         ],
         'm7#5': [
-            { name: 'Open Fm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, -1, 1, 1, 2, 1], fingers: [-1, -1, 1, 1, 2, 1] }
+            { name: 'Open Fm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [1, -1, 1, 1, 2, -1], fingers: [1, -1, 1, 1, 2, -1] }
         ],
         'm7b9': [
             { name: 'Open Fm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [1, -1, 1, 1, 1, 2], fingers: [1, -1, 1, 1, 1, 2] }
         ],
         '6sus4': [
-            { name: 'Open F6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, 1, 0, -1, 1, 1], fingers: [-1, 1, 0, -1, 1, 1] }
+            { name: 'Open F6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [1, -1, 0, 3, 1, -1], fingers: [1, -1, 0, 3, 2, -1] }
         ],
         '6sus2': [
-            { name: 'Open F6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, -1, 0, 0, 1, 1], fingers: [-1, -1, 0, 0, 1, 1] }
+            { name: 'Open F6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [1, -1, 0, 0, 1, -1], fingers: [1, -1, 0, 0, 2, -1] }
         ],
         'maj7sus4': [
-            { name: 'Open Fmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [0, -1, 3, 3, 1, 0], fingers: [0, -1, 2, 2, 1, 0] }
+            { name: 'Open Fmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [1, 1, -1, -1, 1, 0], fingers: [1, 1, -1, -1, 1, 0] }
         ],
         '7sus2': [
-            { name: 'Open F7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, -1, 1, 0, 1, 1], fingers: [-1, -1, 1, 0, 1, 1] }
+            { name: 'Open F7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [1, 3, 1, 0, -1, -1], fingers: [1, 2, 1, 0, -1, -1] }
         ],
         'maj7sus2': [
-            { name: 'Open Fmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [0, -1, 3, 0, 1, 0], fingers: [0, -1, 2, 0, 1, 0] }
+            { name: 'Open Fmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, -1, 3, 0, 1, 0], fingers: [-1, -1, 2, 0, 1, 0] }
         ]
     },
     'G': {
@@ -1146,43 +1146,43 @@ window.chordDatabase = {
             { name: 'Gaug Shape', desc: 'Standard augmented triad.', frets: [3, 2, 1, 0, 0, -1], fingers: [3, 2, 1, 0, 0, -1] }
         ],
         'maj7add13': [
-            { name: 'Open Gmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [0, -1, 0, 0, 0, 2], fingers: [0, -1, 0, 0, 0, 1] }
+            { name: 'Open Gmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [3, 2, 4, 0, 3, 0], fingers: [2, 1, 4, 0, 3, 0] }
         ],
         'm7add13': [
-            { name: 'Open Gm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [0, 1, 0, 0, -1, 1], fingers: [0, 1, 0, 0, -1, 1] }
+            { name: 'Open Gm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [3, 1, 3, 0, 3, 0], fingers: [2, 1, 3, 0, 4, 0] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Gm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [0, 1, 0, 0, -1, 2], fingers: [0, 1, 0, 0, -1, 2] }
+            { name: 'Open Gm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [3, 1, 4, 0, 3, 0], fingers: [2, 1, 4, 0, 3, 0] }
         ],
         '7b5': [
-            { name: 'Open G7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 4, -1, 0, 0, 1], fingers: [-1, 2, -1, 0, 0, 1] }
+            { name: 'Open G7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [3, 4, -1, 0, 0, 1], fingers: [2, 3, -1, 0, 0, 1] }
         ],
         'aug7': [
-            { name: 'Open Gaug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, -1, 1, 0, 0, 1], fingers: [-1, -1, 1, 0, 0, 1] }
+            { name: 'Open Gaug7 Shape', desc: 'Open-position aug7 voicing.', frets: [3, -1, 1, 0, 0, 1], fingers: [3, -1, 1, 0, 0, 2] }
         ],
         'aug7b9': [
-            { name: 'Open Gaug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [1, -1, 1, 0, 0, 4], fingers: [1, -1, 1, 0, 0, 2] }
+            { name: 'Open Gaug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [3, -1, 1, 1, 0, 1], fingers: [4, -1, 1, 2, 0, 3] }
         ],
         'm7#5': [
-            { name: 'Open Gm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 1, 1, 0, -1, 1], fingers: [-1, 1, 1, 0, -1, 1] }
+            { name: 'Open Gm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [3, 1, 1, 0, -1, 1], fingers: [4, 1, 2, 0, -1, 3] }
         ],
         'm7b9': [
-            { name: 'Open Gm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [1, 1, 0, 0, -1, 4], fingers: [1, 1, 0, 0, -1, 2] }
+            { name: 'Open Gm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [3, 1, 0, 1, -1, 1], fingers: [4, 1, 0, 2, -1, 3] }
         ],
         '6sus4': [
-            { name: 'Open G6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [0, -1, 0, 0, 1, 0], fingers: [0, -1, 0, 0, 1, 0] }
+            { name: 'Open G6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [3, -1, 0, 0, 1, 0], fingers: [2, -1, 0, 0, 1, 0] }
         ],
         '6sus2': [
-            { name: 'Open G6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [0, 0, 0, 0, -1, 0], fingers: [0, 0, 0, 0, -1, 0] }
+            { name: 'Open G6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [3, 0, 0, 2, -1, 0], fingers: [2, 0, 0, 1, -1, 0] }
         ],
         'maj7sus4': [
-            { name: 'Open Gmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, -1, 0, 0, 1, 2], fingers: [-1, -1, 0, 0, 1, 2] }
+            { name: 'Open Gmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [3, -1, 0, 0, 1, 2], fingers: [3, -1, 0, 0, 1, 2] }
         ],
         '7sus2': [
-            { name: 'Open G7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, 0, 0, 0, -1, 1], fingers: [-1, 0, 0, 0, -1, 1] }
+            { name: 'Open G7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [3, 0, 0, 0, -1, 1], fingers: [2, 0, 0, 0, -1, 1] }
         ],
         'maj7sus2': [
-            { name: 'Open Gmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, 0, 0, 0, -1, 2], fingers: [-1, 0, 0, 0, -1, 1] }
+            { name: 'Open Gmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [3, 0, 0, 0, -1, 2], fingers: [2, 0, 0, 0, -1, 1] }
         ]
     },
     'A': {
@@ -1215,13 +1215,13 @@ window.chordDatabase = {
             { name: 'Aaug Shape', desc: 'Open position augmented.', frets: [-1, 0, 3, 2, 2, 1], fingers: [-1, 0, 4, 2, 3, 1] }
         ],
         'maj7add13': [
-            { name: 'Open Amaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [0, 0, 4, 1, 2, 0], fingers: [0, 0, 3, 1, 2, 0] }
+            { name: 'Open Amaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [-1, 0, 4, 1, 2, 0], fingers: [-1, 0, 3, 1, 2, 0] }
         ],
         'm7add13': [
-            { name: 'Open Am7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [0, 0, 4, 0, 1, 0], fingers: [0, 0, 2, 0, 1, 0] }
+            { name: 'Open Am7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 0, 4, 0, 1, 0], fingers: [-1, 0, 2, 0, 1, 0] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Am(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [0, 0, 4, 1, 1, 0], fingers: [0, 0, 2, 1, 1, 0] }
+            { name: 'Open Am(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [-1, 0, 4, 1, 1, 0], fingers: [-1, 0, 2, 1, 1, 0] }
         ],
         '7b5': [
             { name: 'Open A7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 0, 1, 0, 2, -1], fingers: [-1, 0, 1, 0, 2, -1] }
@@ -1236,22 +1236,22 @@ window.chordDatabase = {
             { name: 'Open Am7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 0, -1, 0, 1, 1], fingers: [-1, 0, -1, 0, 1, 1] }
         ],
         'm7b9': [
-            { name: 'Open Am7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [0, 0, 5, 3, 1, 0], fingers: [0, 0, 3, 2, 1, 0] }
+            { name: 'Open Am7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [-1, 0, 2, 3, 1, 3], fingers: [-1, 0, 2, 3, 1, 4] }
         ],
         '6sus4': [
-            { name: 'Open A6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [0, 0, 0, -1, -1, 2], fingers: [0, 0, 0, -1, -1, 1] }
+            { name: 'Open A6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, 0, 0, -1, 5, 2], fingers: [-1, 0, 0, -1, 2, 1] }
         ],
         '6sus2': [
-            { name: 'Open A6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [0, 0, 4, -1, 0, 0], fingers: [0, 0, 1, -1, 0, 0] }
+            { name: 'Open A6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, 0, 4, 2, 0, 0], fingers: [-1, 0, 2, 1, 0, 0] }
         ],
         'maj7sus4': [
-            { name: 'Open Amaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [0, 0, 0, 1, -1, 0], fingers: [0, 0, 0, 1, -1, 0] }
+            { name: 'Open Amaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, 0, 0, 1, -1, 0], fingers: [-1, 0, 0, 1, -1, 0] }
         ],
         '7sus2': [
-            { name: 'Open A7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [0, 0, -1, 0, 0, 0], fingers: [0, 0, -1, 0, 0, 0] }
+            { name: 'Open A7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, 0, -1, 0, 0, 0], fingers: [-1, 0, -1, 0, 0, 0] }
         ],
         'maj7sus2': [
-            { name: 'Open Amaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [0, 0, -1, 1, 0, 0], fingers: [0, 0, -1, 1, 0, 0] }
+            { name: 'Open Amaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, 0, -1, 1, 0, 0], fingers: [-1, 0, -1, 1, 0, 0] }
         ]
     },
     'B': {
@@ -1270,43 +1270,43 @@ window.chordDatabase = {
             { name: 'Baug Shape', desc: 'Tense augmented flavor.', frets: [-1, 2, 1, 0, 0, -1], fingers: [-1, 2, 1, 0, 0, -1] }
         ],
         'maj7add13': [
-            { name: 'Open Bmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [-1, 1, 1, 1, 0, 2], fingers: [-1, 1, 1, 1, 0, 2] }
+            { name: 'Open Bmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [7, 6, 6, -1, 7, 6], fingers: [2, 1, 1, -1, 3, 1] }
         ],
         'm7add13': [
-            { name: 'Open Bm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 0, 0, 1, 0, 2], fingers: [-1, 0, 0, 1, 0, 2] }
+            { name: 'Open Bm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 2, 4, 2, 3, 4], fingers: [-1, 1, 3, 1, 2, 4] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Bm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [-1, 1, 0, 1, 0, 2], fingers: [-1, 1, 0, 1, 0, 2] }
+            { name: 'Open Bm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [7, 9, 0, -1, 9, 6], fingers: [2, 3, 0, -1, 4, 1] }
         ],
         '7b5': [
-            { name: 'Open B7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 0, 1, -1, 0, 1], fingers: [-1, 0, 1, -1, 0, 1] }
+            { name: 'Open B7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 2, 1, 2, 0, 1], fingers: [-1, 3, 1, 4, 0, 2] }
         ],
         'aug7': [
-            { name: 'Open Baug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, 0, 1, 0, 0, -1], fingers: [-1, 0, 1, 0, 0, -1] }
+            { name: 'Open Baug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, 2, 1, 2, 0, 3], fingers: [-1, 2, 1, 3, 0, 4] }
         ],
         'aug7b9': [
-            { name: 'Open Baug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [-1, 0, 1, 5, 0, 3], fingers: [-1, 0, 1, 3, 0, 2] }
+            { name: 'Open Baug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [-1, 2, 1, 2, 1, 3], fingers: [-1, 2, 1, 3, 1, 4] }
         ],
         'm7#5': [
-            { name: 'Open Bm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 0, 0, 0, 0, -1], fingers: [-1, 0, 0, 0, 0, -1] }
+            { name: 'Open Bm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 2, 0, 0, 0, 5], fingers: [-1, 1, 0, 0, 0, 2] }
         ],
         'm7b9': [
-            { name: 'Open Bm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [-1, 0, 0, 5, 0, 2], fingers: [-1, 0, 0, 2, 0, 1] }
+            { name: 'Open Bm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [-1, 2, 0, 2, 1, 2], fingers: [-1, 2, 0, 3, 1, 4] }
         ],
         '6sus4': [
-            { name: 'Open B6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [0, -1, 4, 1, 0, 0], fingers: [0, -1, 2, 1, 0, 0] }
+            { name: 'Open B6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, 2, 4, 1, 0, 0], fingers: [-1, 2, 3, 1, 0, 0] }
         ],
         '6sus2': [
-            { name: 'Open B6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, 4, -1, 1, 0, 2], fingers: [-1, 3, -1, 1, 0, 2] }
+            { name: 'Open B6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, 2, -1, 1, 2, 2], fingers: [-1, 2, -1, 1, 3, 4] }
         ],
         'maj7sus4': [
-            { name: 'Open Bmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [0, -1, 4, 3, 0, 0], fingers: [0, -1, 2, 1, 0, 0] }
+            { name: 'Open Bmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, 2, 4, 3, 0, 0], fingers: [-1, 1, 3, 2, 0, 0] }
         ],
         '7sus2': [
-            { name: 'Open B7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, 0, -1, 4, 2, 2], fingers: [-1, 0, -1, 2, 1, 1] }
+            { name: 'Open B7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, 2, -1, 2, 2, 2], fingers: [-1, 1, -1, 1, 1, 1] }
         ],
         'maj7sus2': [
-            { name: 'Open Bmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, 4, -1, 3, 0, 2], fingers: [-1, 3, -1, 2, 0, 1] }
+            { name: 'Open Bmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, 2, -1, 3, 2, 2], fingers: [-1, 1, -1, 2, 1, 1] }
         ]
     }
 };

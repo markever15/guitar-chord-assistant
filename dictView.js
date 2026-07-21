@@ -176,7 +176,10 @@ window.dictView = {
         let allVoicings = [];
 
         // 🌟 핵심: 코드를 이동시키고 인체공학적(물리적)으로 잡을 수 있는지 검증하는 통합 헬퍼 함수
-        const processVoicing = (v, off, nameSuffix) => {
+        //    requireRootBass: true면 가장 낮게 울리는 음이 루트가 아닌 폼은 버림
+        //    (C 코드 모양을 그대로 옮기는 자동 변환 경로에서만 사용 - 확장음이 베이스에 오면
+        //     "이 루트의 코드"라는 정체성이 흐려짐. 직접 검증한 지정 파지법에는 적용 안 함)
+        const processVoicing = (v, off, nameSuffix, requireRootBass) => {
             // 🌟 "뮤트(-1)"와 "이동 후 프렛이 음수가 되어 -1과 값이 겹치는 경우"를 반드시 구분해야 함.
             // 구분하지 않으면 루트음이 통째로 잘려나간 반쪽짜리 코드가 뮤트로 위장해 통과해버림(예: G#m7 버그).
             let invalidShift = false;
@@ -225,6 +228,14 @@ window.dictView = {
                 if (fingerConflict) return null;
             }
 
+            // 4. 베이스(가장 낮게 울리는 줄)가 루트음이 아니면 버림 (확장음이 베이스면 어느 코드인지 헷갈림)
+            if (requireRootBass) {
+                const soundingIdx = shiftedFrets.findIndex(f => f >= 0);
+                if (soundingIdx === -1) return null;
+                const bassNote = window.getNoteName(5 - soundingIdx, shiftedFrets[soundingIdx]);
+                if (bassNote !== root) return null;
+            }
+
             return {
                 name: nameSuffix,
                 frets: shiftedFrets,
@@ -258,7 +269,7 @@ window.dictView = {
         // 3. C 코드 기준 변환 폼 대량 생성 - 위에서 이미 추가된 파지법과 겹치는 프렛은 건너뜀
         baseVoicings.forEach(v => {
             offsetsToTry.forEach(off => {
-                const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`);
+                const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`, true);
                 if (result && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result.frets))) {
                     allVoicings.push(result);
                 }
