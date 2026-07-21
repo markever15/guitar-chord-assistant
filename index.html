@@ -12,7 +12,6 @@
     <nav class="main-nav">
         <button class="nav-tab active" data-target="tab-recognizer">🔍 Chord Finder</button>
         <button class="nav-tab" data-target="tab-dictionary">📖 Chord Dictionary</button>
-        <button class="nav-tab" data-target="tab-progression">🎼 Progression Builder</button>
         <button class="nav-tab" data-target="tab-blog">✍️ Tips</button>
     </nav>
 
@@ -89,48 +88,6 @@
                 </div>
                 <div class="comp-header"><span class="comp-title">🪵 Voicings (Nut → 15th Fret)</span></div>
                 <div class="vertical-voicing-grid" id="voicing-list"></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="tab-progression" class="page-view">
-        <h2>🎼 Progression Builder</h2>
-        <p class="prog-intro">Pick a key, then drag or click chords to add them to the sheet on the right. Each time, flip through real fingerings and pick the one you want — it gets placed on the sheet in that exact shape, organized into measures like real sheet music. Click a chord already on the sheet to change its fingering.</p>
-
-        <div class="prog-layout">
-            <div class="prog-left-panel">
-                <div class="prog-controls">
-                    <div class="control-group">
-                        <div class="group-title">Key</div>
-                        <div class="root-grid" id="prog-key-buttons"></div>
-                    </div>
-                    <div class="control-group" style="margin-top: 20px;">
-                        <div class="group-title">Scale</div>
-                        <div class="prog-scale-toggle" id="prog-scale-buttons"></div>
-                    </div>
-                </div>
-
-                <div class="comp-header"><span class="comp-title">🎯 <span id="prog-suggestions-label">Good chords to start a progression with:</span></span></div>
-                <div class="prog-chip-row" id="prog-suggestions"></div>
-
-                <div class="comp-header" style="margin-top: 20px;"><span class="comp-title">All Diatonic Chords in This Key</span></div>
-                <div class="prog-chip-row" id="prog-diatonic-chords"></div>
-
-                <div class="comp-header" style="margin-top: 20px;"><span class="comp-title">Common Progressions</span></div>
-                <div class="prog-chip-row" id="prog-presets"></div>
-            </div>
-
-            <div class="prog-right-panel">
-                <div class="comp-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <span class="comp-title">🎼 Your Sheet</span>
-                    <div style="display:flex; gap:8px;">
-                        <button id="prog-export-btn" class="side-btn">📷 Export as Image</button>
-                        <button id="prog-clear-btn" class="side-btn">Clear</button>
-                    </div>
-                </div>
-                <div class="prog-sheet" id="prog-sequence">
-                    <div class="v-grid-empty" id="prog-sequence-empty">Drag or click chords on the left to build a progression.</div>
-                </div>
             </div>
         </div>
     </div>
@@ -232,13 +189,10 @@
     </div>
 </div>
 
-<div class="prog-picker-overlay" id="prog-picker-overlay"></div>
-
 <script src="audio.js"></script>
 <script src="chords.js"></script>
 <script src="app.js"></script>
 <script src="dictView.js"></script>
 <script src="recogView.js"></script>
-<script src="progView.js"></script>
 </body>
 </html>
