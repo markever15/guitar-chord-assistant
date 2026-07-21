@@ -230,27 +230,27 @@ window.dictView = {
             allVoicings = allVoicings.filter(v => !exSet.has(v.frets.join(',')));
         }
 
-        // 정렬 로직 (1. 개방현 -> 2. 낮은 프렛 -> 3. 굵은 베이스 줄)
+        // 🌟 정렬 로직: 넥 위치(최저 프렛) 순으로 1프렛 → 12프렛 나열.
+        //    같은 포지션이면 (1) 개방현 있는 쉬운 폼 먼저 (2) 저음줄부터 울리는 폼 먼저
         return allVoicings.sort((a, b) => {
-            const hasOpenA = a.frets.includes(0);
-            const hasOpenB = b.frets.includes(0);
-
-            if (hasOpenA && !hasOpenB) return -1;
-            if (!hasOpenA && hasOpenB) return 1;
-
             const activeFretsA = a.frets.filter(f => f > 0);
             const activeFretsB = b.frets.filter(f => f > 0);
             const minFretA = activeFretsA.length ? Math.min(...activeFretsA) : 0;
             const minFretB = activeFretsB.length ? Math.min(...activeFretsB) : 0;
 
+            // 1순위: 최저 프렛 오름차순 (넥 아래쪽 → 위쪽)
             if (minFretA !== minFretB) return minFretA - minFretB;
 
-            let lowestStringA = -1;
-            for (let i = 5; i >= 0; i--) { if (a.frets[i] !== -1) { lowestStringA = i; break; } }
-            let lowestStringB = -1;
-            for (let i = 5; i >= 0; i--) { if (b.frets[i] !== -1) { lowestStringB = i; break; } }
+            // 2순위: 같은 포지션이면 개방현 있는 폼 먼저
+            const hasOpenA = a.frets.includes(0);
+            const hasOpenB = b.frets.includes(0);
+            if (hasOpenA !== hasOpenB) return hasOpenA ? -1 : 1;
 
-            return lowestStringB - lowestStringA;
+            // 3순위: 더 굵은 베이스 줄(저음)부터 울리는 폼 먼저
+            let bassA = 6, bassB = 6;
+            for (let i = 0; i < 6; i++) { if (a.frets[i] !== -1) { bassA = i; break; } }
+            for (let i = 0; i < 6; i++) { if (b.frets[i] !== -1) { bassB = i; break; } }
+            return bassA - bassB;
         });
     },
 
