@@ -77,32 +77,67 @@ const CHORD_SEARCH_QUALITY_ALIASES = {
 //   - 최저 프렛의 줄들은 검지(1) 바레. 단, 바레 양 끝 사이에 '개방현'이 있으면 바레 불가 → 각자 다른 손가락
 //   - 나머지 눌러야 할 줄은 프렛 오름차순, 같은 프렛이면 6번줄 우선으로 2·3·4 배정 (같은 프렛이어도 다른 손가락)
 function computeFingers(frets) {
-    const fingers = frets.map(f => (f === -1 ? -1 : (f === 0 ? 0 : 0)));
     const fretted = [];
     frets.forEach((f, s) => { if (f > 0) fretted.push({ s, f }); });
-    if (fretted.length === 0) return fingers;
+    if (fretted.length === 0) return frets.map(f => (f === -1 ? -1 : 0));
 
-    const minFret = Math.min(...fretted.map(x => x.f));
-    const minStrings = fretted.filter(x => x.f === minFret).map(x => x.s).sort((a, b) => a - b);
+    // 바레 없이 4손가락 이내로 되면 그냥 프렛 낮은 순(같은 프렛이면 6번줄에 가까운 순)으로 배정
+    if (fretted.length <= 4) {
+        const sorted = [...fretted].sort((a, b) => a.f - b.f || a.s - b.s);
+        const result = frets.map(f => (f === -1 ? -1 : 0));
+        sorted.forEach((x, i) => { result[x.s] = i + 1; });
+        return result;
+    }
 
-    // 바레 양 끝 사이에 개방현(0)이 있으면 검지 바레 불가
-    let openBetween = false;
-    if (minStrings.length >= 2) {
-        for (let s = minStrings[0] + 1; s < minStrings[minStrings.length - 1]; s++) {
-            if (frets[s] === 0) { openBetween = true; break; }
+    // 남은 음들 중, 같은 프렛을 짚은 줄들이 이어지는(사이에 열린 줄이나 다른 프렛 음이 안 끼는,
+    // 뮤트된 줄은 껴도 되는) 구간을 바레 후보로 찾음 - 검지 바레 하나로 끝나지 않으면 남은 음에
+    // 대해 재귀적으로 또 다른 손가락(2번, 3번...)의 바레도 시도함 (실제 기타에서 흔한 이중 바레 형태)
+    function barreGroups(remaining) {
+        const byFret = {};
+        remaining.forEach(x => { (byFret[x.f] = byFret[x.f] || []).push(x.s); });
+        const groups = [];
+        Object.keys(byFret).forEach(fretStr => {
+            const fret = Number(fretStr);
+            const strings = byFret[fretStr].sort((a, b) => a - b);
+            let current = [strings[0]];
+            for (let i = 1; i < strings.length; i++) {
+                const prev = current[current.length - 1];
+                let interrupted = false;
+                for (let k = prev + 1; k < strings[i]; k++) { if (frets[k] !== -1) { interrupted = true; break; } }
+                if (interrupted) { if (current.length >= 2) groups.push({ fret, group: [...current] }); current = [strings[i]]; }
+                else current.push(strings[i]);
+            }
+            if (current.length >= 2) groups.push({ fret, group: [...current] });
+        });
+        return groups;
+    }
+
+    // fingerNum번 손가락부터 remaining을 4번 손가락 이내로 다 배정할 수 있으면 {줄:손가락번호} 반환
+    function assign(remaining, fingerNum) {
+        if (fingerNum > 4) return remaining.length === 0 ? {} : null;
+        const budget = 4 - fingerNum + 1;
+        if (remaining.length <= budget) {
+            const result = {};
+            [...remaining].sort((a, b) => a.f - b.f || a.s - b.s).forEach((x, i) => { result[x.s] = fingerNum + i; });
+            return result;
         }
+        const groups = barreGroups(remaining);
+        if (groups.length === 0) return null;
+        // 가장 많은 줄을 아우르는(=손가락을 가장 많이 아끼는) 바레부터 시도, 동률이면 낮은 프렛 우선
+        groups.sort((a, b) => b.group.length - a.group.length || a.fret - b.fret);
+        for (const g of groups) {
+            const rest = remaining.filter(x => !g.group.includes(x.s));
+            const sub = assign(rest, fingerNum + 1);
+            if (sub) { g.group.forEach(s => { sub[s] = fingerNum; }); return sub; }
+        }
+        return null;
     }
 
-    const assigned = new Set();
-    let next = 1;
-    if (minStrings.length >= 2 && !openBetween) {
-        minStrings.forEach(s => { fingers[s] = 1; assigned.add(s); });
-        next = 2;
-    }
-
-    const rest = fretted.filter(x => !assigned.has(x.s)).sort((a, b) => a.f - b.f || a.s - b.s);
-    rest.forEach(x => { fingers[x.s] = Math.min(next, 4); next++; });
-    return fingers;
+    const assignment = assign(fretted, 1);
+    if (!assignment) return null;
+    const result = frets.map(f => (f === -1 ? -1 : 0));
+    Object.keys(assignment).forEach(s => { result[s] = assignment[s]; });
+    return result;
 }
 
 window.dictView = {
@@ -235,18 +270,13 @@ window.dictView = {
                 const bassNote = window.getNoteName(5 - soundingIdx, shiftedFrets[soundingIdx]);
                 if (bassNote !== root) return null;
 
-                // 5. 3rd/2nd/4th(코드 성격을 정하는 음)와, 코드 이름을 정하는 확장음(중간의 7th,
-                //    그리고 배열 맨 끝의 9th/11th/13th 등)이 빠지면 다른(더 단순한/애매한) 코드처럼
-                //    들리므로 반드시 있어야 함
+                // 5. 코드 공식에 있는 음은 하나도 빠짐없이 다 울려야 함 (최대 6음이라 6줄로 항상 가능함)
+                //    하나라도 빠지면 다른(더 단순한/애매한) 코드처럼 들림
                 const chordTones = window.chordNotesTable[root] && window.chordNotesTable[root][quality];
                 if (chordTones) {
-                    const requiredExtensions = new Set();
-                    if (chordTones.length >= 2) requiredExtensions.add(chordTones[1]);
-                    if (chordTones.length >= 4) requiredExtensions.add(chordTones[3]);
-                    if (chordTones.length >= 5) requiredExtensions.add(chordTones[chordTones.length - 1]);
                     const soundingNotes = new Set();
                     shiftedFrets.forEach((f, idx) => { if (f >= 0) soundingNotes.add(window.getNoteName(5 - idx, f)); });
-                    for (const ext of requiredExtensions) { if (!soundingNotes.has(ext)) return null; }
+                    for (const tone of chordTones) { if (!soundingNotes.has(tone)) return null; }
                 }
             }
 
@@ -396,7 +426,8 @@ window.dictView = {
     renderVerticalDiagram: function(voicing, isActive, onSelect) {
         const frets = voicing.frets;
         // 🌟 저장된 fingers 대신 항상 규칙 기반으로 계산 → 전체 코드 손가락 번호 일관성 보장
-        const fingers = computeFingers(frets);
+        // (바레로도 4손가락 안에 못 들어가는 예외적인 기존 데이터가 있을 경우를 대비한 안전장치)
+        const fingers = computeFingers(frets) || frets.map(f => (f === -1 ? -1 : (f > 0 ? Math.min(frets.filter(x => x > 0 && x <= f).length, 4) : 0)));
         const activeFrets = frets.filter(f => f > 0);
         const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
         const maxFret = activeFrets.length ? Math.max(...activeFrets) : 0;
@@ -465,9 +496,6 @@ window.dictView = {
         Object.entries(barreMap).forEach(([fretStr, strs]) => {
             if (strs.length < 2) return;
             const fret = parseInt(fretStr);
-            // 🌟 검지 바레는 항상 최저 프렛에만 존재함. 최저 프렛보다 높은 곳의 "뒤쪽 바레"는
-            //    물리적으로 불가능(그 앞쪽에 눌러야 할 노트가 있음)하므로 막대를 안 그리고 점으로만 표시.
-            if (fret !== minFret) return;
             const rowIdx = fret - startFret;
             if (rowIdx < 0 || rowIdx >= numRows) return;
             const minS = Math.min(...strs), maxS = Math.max(...strs);
