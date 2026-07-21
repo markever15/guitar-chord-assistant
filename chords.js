@@ -1,5 +1,10 @@
 // chords.js
 
+// 🌟 특정 코드에서 물리적으로 못 잡는 자동 생성 파지법을 프렛 배열로 지정해 목록에서 제외
+window.excludedVoicings = {
+    'D': { 'm': [ [-1, 5, 3, 2, 3, 5] ] }
+};
+
 window.chordNotesTable = {
     'C': { 'Major': ['C', 'E', 'G'], 'm': ['C', 'Eb', 'G'], 'm7': ['C', 'Eb', 'G', 'Bb'], 'm7b5': ['C', 'Eb', 'F#', 'Bb'], '5': ['C', 'G'], 'sus2': ['C', 'D', 'G'], '9': ['C', 'E', 'G', 'Bb', 'D'], 'maj9': ['C', 'E', 'G', 'B', 'D'], '6': ['C', 'E', 'G', 'A'], 'sus4': ['C', 'F', 'G'], '7': ['C', 'E', 'G', 'Bb'], 'maj7': ['C', 'E', 'G', 'B'], 'dim': ['C', 'Eb', 'F#'], 'dim7': ['C', 'Eb', 'F#', 'A'], 'add9': ['C', 'E', 'G', 'D'], 'aug': ['C', 'E', 'G#'] , 'm9': ['C', 'Eb', 'G', 'Bb', 'D'], '11': ['C', 'E', 'G', 'Bb', 'D', 'F'], 'm11': ['C', 'Eb', 'G', 'Bb', 'D', 'F'], 'maj11': ['C', 'E', 'G', 'B', 'D', 'F'], '13': ['C', 'E', 'G', 'Bb', 'D', 'A'], 'm13': ['C', 'Eb', 'G', 'Bb', 'D', 'A'], 'maj13': ['C', 'E', 'G', 'B', 'D', 'A'], '7sus4': ['C', 'F', 'G', 'Bb'], '6/9': ['C', 'E', 'G', 'A', 'D'], '7b9': ['C', 'E', 'G', 'Bb', 'C#'], '7#9': ['C', 'E', 'G', 'Bb', 'Eb'], 'm(maj7)': ['C', 'Eb', 'G', 'B'], 'm(add9)': ['C', 'Eb', 'G', 'D'] , 'm6': ['C', 'Eb', 'G', 'A'], 'm(maj9)': ['C', 'Eb', 'G', 'B', 'D'], 'm(maj11)': ['C', 'Eb', 'G', 'B', 'D', 'F'], 'm6/9': ['C', 'Eb', 'G', 'A', 'D'], '7add11': ['C', 'E', 'G', 'Bb', 'F'], 'maj7add11': ['C', 'E', 'G', 'B', 'F'], 'm(maj7)add11': ['C', 'Eb', 'G', 'B', 'F'], '7add13': ['C', 'E', 'G', 'Bb', 'A'], 'maj7add13': ['C', 'E', 'G', 'B', 'A'], 'm7add13': ['C', 'Eb', 'G', 'Bb', 'A'], 'm(maj7)add13': ['C', 'Eb', 'G', 'B', 'A'], '7b5': ['C', 'E', 'F#', 'Bb'], 'aug7': ['C', 'E', 'G#', 'Bb'], 'aug7b9': ['C', 'E', 'G#', 'Bb', 'C#'], 'm7#5': ['C', 'Eb', 'G#', 'Bb'], 'm7b9': ['C', 'Eb', 'G', 'Bb', 'C#'], '6sus4': ['C', 'F', 'G', 'A'], '6sus2': ['C', 'D', 'G', 'A'], 'maj7sus4': ['C', 'F', 'G', 'B'], '7sus2': ['C', 'D', 'G', 'Bb'], 'maj7sus2': ['C', 'D', 'G', 'B'] },
     'C#': { 'Major': ['C#', 'F', 'G#'], 'm': ['C#', 'E', 'G#'], 'm7': ['C#', 'E', 'G#', 'B'], 'm7b5': ['C#', 'E', 'G', 'B'], '5': ['C#', 'G#'], 'sus2': ['C#', 'Eb', 'G#'], '9': ['C#', 'F', 'G#', 'B', 'Eb'], 'maj9': ['C#', 'F', 'G#', 'C', 'Eb'], '6': ['C#', 'F', 'G#', 'Bb'], 'sus4': ['C#', 'F#', 'G#'], '7': ['C#', 'F', 'G#', 'B'], 'maj7': ['C#', 'F', 'G#', 'C'], 'dim': ['C#', 'E', 'G'], 'dim7': ['C#', 'E', 'G', 'Bb'], 'add9': ['C#', 'F', 'G#', 'Eb'], 'aug': ['C#', 'F', 'A'] , 'm9': ['C#', 'E', 'G#', 'B', 'Eb'], '11': ['C#', 'F', 'G#', 'B', 'Eb', 'F#'], 'm11': ['C#', 'E', 'G#', 'B', 'Eb', 'F#'], 'maj11': ['C#', 'F', 'G#', 'C', 'Eb', 'F#'], '13': ['C#', 'F', 'G#', 'B', 'Eb', 'Bb'], 'm13': ['C#', 'E', 'G#', 'B', 'Eb', 'Bb'], 'maj13': ['C#', 'F', 'G#', 'C', 'Eb', 'Bb'], '7sus4': ['C#', 'F#', 'G#', 'B'], '6/9': ['C#', 'F', 'G#', 'Bb', 'Eb'], '7b9': ['C#', 'F', 'G#', 'B', 'D'], '7#9': ['C#', 'F', 'G#', 'B', 'E'], 'm(maj7)': ['C#', 'E', 'G#', 'C'], 'm(add9)': ['C#', 'E', 'G#', 'Eb'] , 'm6': ['C#', 'E', 'G#', 'Bb'], 'm(maj9)': ['C#', 'E', 'G#', 'C', 'Eb'], 'm(maj11)': ['C#', 'E', 'G#', 'C', 'Eb', 'F#'], 'm6/9': ['C#', 'E', 'G#', 'Bb', 'Eb'], '7add11': ['C#', 'F', 'G#', 'B', 'F#'], 'maj7add11': ['C#', 'F', 'G#', 'C', 'F#'], 'm(maj7)add11': ['C#', 'E', 'G#', 'C', 'F#'], '7add13': ['C#', 'F', 'G#', 'B', 'Bb'], 'maj7add13': ['C#', 'F', 'G#', 'C', 'Bb'], 'm7add13': ['C#', 'E', 'G#', 'B', 'Bb'], 'm(maj7)add13': ['C#', 'E', 'G#', 'C', 'Bb'], '7b5': ['C#', 'F', 'G', 'B'], 'aug7': ['C#', 'F', 'A', 'B'], 'aug7b9': ['C#', 'F', 'A', 'B', 'D'], 'm7#5': ['C#', 'E', 'A', 'B'], 'm7b9': ['C#', 'E', 'G#', 'B', 'D'], '6sus4': ['C#', 'F#', 'G#', 'Bb'], '6sus2': ['C#', 'Eb', 'G#', 'Bb'], 'maj7sus4': ['C#', 'F#', 'G#', 'C'], '7sus2': ['C#', 'Eb', 'G#', 'B'], 'maj7sus2': ['C#', 'Eb', 'G#', 'C'] },
@@ -794,7 +799,16 @@ window.chordDatabase = {
             { name: 'E Shape (10th Fret)', desc: 'Full 6-string E-shape barre.', frets: [10, 12, 12, 11, 10, 10], fingers: [1, 3, 4, 2, 1, 1] }
         ],
         'm': [
-            { name: 'Open Dm Shape', desc: 'Standard open D minor.', frets: [-1, -1, 0, 2, 3, 1], fingers: [-1, -1, 0, 2, 3, 1] }
+            { name: 'Open Dm Shape', desc: 'Standard open D minor.', frets: [-1, -1, 0, 2, 3, 1], fingers: [-1, -1, 0, 2, 3, 1] },
+            { name: 'A Shape (5th Fret, Open D)', desc: 'A-shape minor with the open D string.', frets: [-1, 5, 0, 7, 6, 5], fingers: [-1, 1, 0, 4, 3, 2] },
+            { name: 'A Shape (5th Fret, Top 4)', desc: 'Top-4 string A-shape minor voicing.', frets: [-1, -1, 0, 7, 6, 5], fingers: [-1, -1, 0, 3, 2, 1] },
+            { name: 'Octave Shape (7th Fret)', desc: '6th-string root with the open D string.', frets: [10, 8, 0, 7, 10, 10], fingers: [3, 2, 0, 1, 4, 4] },
+            { name: 'Shell Shape (10th Fret)', desc: 'Top-3 string minor triad barre.', frets: [-1, -1, 0, 10, 10, 10], fingers: [-1, -1, 0, 1, 1, 1] },
+            { name: 'E Shape (10th, Open)', desc: '6th-string root, open A and D strings.', frets: [10, 0, 0, 10, 10, 13], fingers: [1, 0, 0, 2, 3, 4] },
+            { name: 'Reach Shape (10th Fret)', desc: 'Top-3 string voicing with the b3 up top.', frets: [-1, -1, 0, 10, 10, 13], fingers: [-1, -1, 0, 1, 1, 4] },
+            { name: 'E Shape (10th, A Root)', desc: 'E-shape minor with the A string doubling the 5th.', frets: [10, 12, 0, 10, 10, 13], fingers: [1, 4, 0, 2, 3, 4] },
+            { name: 'E Shape (10th, D Root)', desc: 'E-shape minor with the D string fretted, A open.', frets: [10, 0, 12, 10, 10, 13], fingers: [1, 0, 4, 2, 3, 4] },
+            { name: 'E Shape (10th Fret)', desc: 'Full 6-string E-shape minor barre.', frets: [10, 12, 12, 10, 10, 13], fingers: [1, 4, 4, 2, 3, 4] }
         ],
         'm7': [
             { name: 'Open Dm7 Shape', desc: 'Easy open minor 7th.', frets: [-1, -1, 0, 2, 1, 1], fingers: [-1, -1, 0, 2, 1, 1] }
