@@ -72,6 +72,39 @@ const CHORD_SEARCH_QUALITY_ALIASES = {
     'maj7sus2': 'maj7sus2', 'maj7(sus2)': 'maj7sus2', 'm7sus2': 'maj7sus2', 'm7(sus2)': 'maj7sus2'
 };
 
+// 🌟 손가락 번호를 frets에서 자동 계산 (모든 코드가 동일 규칙을 따르도록).
+//   - 규칙: 프렛이 낮고 6번줄(인덱스 0)에 가까울수록 낮은 번호
+//   - 최저 프렛의 줄들은 검지(1) 바레. 단, 바레 양 끝 사이에 '개방현'이 있으면 바레 불가 → 각자 다른 손가락
+//   - 나머지 눌러야 할 줄은 프렛 오름차순, 같은 프렛이면 6번줄 우선으로 2·3·4 배정 (같은 프렛이어도 다른 손가락)
+function computeFingers(frets) {
+    const fingers = frets.map(f => (f === -1 ? -1 : (f === 0 ? 0 : 0)));
+    const fretted = [];
+    frets.forEach((f, s) => { if (f > 0) fretted.push({ s, f }); });
+    if (fretted.length === 0) return fingers;
+
+    const minFret = Math.min(...fretted.map(x => x.f));
+    const minStrings = fretted.filter(x => x.f === minFret).map(x => x.s).sort((a, b) => a - b);
+
+    // 바레 양 끝 사이에 개방현(0)이 있으면 검지 바레 불가
+    let openBetween = false;
+    if (minStrings.length >= 2) {
+        for (let s = minStrings[0] + 1; s < minStrings[minStrings.length - 1]; s++) {
+            if (frets[s] === 0) { openBetween = true; break; }
+        }
+    }
+
+    const assigned = new Set();
+    let next = 1;
+    if (minStrings.length >= 2 && !openBetween) {
+        minStrings.forEach(s => { fingers[s] = 1; assigned.add(s); });
+        next = 2;
+    }
+
+    const rest = fretted.filter(x => !assigned.has(x.s)).sort((a, b) => a.f - b.f || a.s - b.s);
+    rest.forEach(x => { fingers[x.s] = Math.min(next, 4); next++; });
+    return fingers;
+}
+
 window.dictView = {
     // 사용자가 입력한 문자열(예: "Cmaj7", "F#m7", "Bbsus4")을 { root, quality }로 해석
     parseChordQuery: function(rawQuery) {
@@ -328,7 +361,8 @@ window.dictView = {
     // 표준 세로형 코드 다이어그램(줄=세로, 프렛=가로) 카드 하나를 만들어 반환
     renderVerticalDiagram: function(voicing, isActive, onSelect) {
         const frets = voicing.frets;
-        const fingers = voicing.fingers || [];
+        // 🌟 저장된 fingers 대신 항상 규칙 기반으로 계산 → 전체 코드 손가락 번호 일관성 보장
+        const fingers = computeFingers(frets);
         const activeFrets = frets.filter(f => f > 0);
         const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
         const maxFret = activeFrets.length ? Math.max(...activeFrets) : 0;

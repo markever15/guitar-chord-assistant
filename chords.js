@@ -2,7 +2,10 @@
 
 // 🌟 특정 코드에서 물리적으로 못 잡는 자동 생성 파지법을 프렛 배열로 지정해 목록에서 제외
 window.excludedVoicings = {
-    'D': { 'm': [ [-1, 5, 3, 2, 3, 5] ] }
+    'D': {
+        'm': [ [-1, 5, 3, 2, 3, 5] ],
+        '7': [ [-1, 5, 4, 5, 3, 2] ]
+    }
 };
 
 window.chordNotesTable = {
@@ -823,7 +826,16 @@ window.chordDatabase = {
             { name: 'Open Dsus4', desc: 'Resolved to D major commonly.', frets: [-1, -1, 0, 2, 3, 3], fingers: [-1, -1, 0, 1, 3, 4] }
         ],
         '7': [
-            { name: 'Open D7 Shape', desc: 'Folksy dominant 7th.', frets: [-1, -1, 0, 2, 1, 2], fingers: [-1, -1, 0, 2, 1, 3] }
+            { name: 'Open D7 Shape', desc: 'Folksy dominant 7th.', frets: [-1, -1, 0, 2, 1, 2], fingers: [-1, -1, 0, 2, 1, 3] },
+            { name: 'Compact (4th Fret)', desc: 'A-string root, no 5th.', frets: [-1, 5, 4, 5, -1, 5], fingers: [-1, 2, 1, 3, -1, 4] },
+            { name: 'A-Root (5th Fret)', desc: 'A-string root with the b7 on top.', frets: [-1, 5, 0, 5, 7, 5], fingers: [-1, 1, 0, 2, 4, 3] },
+            { name: 'D-Root (5th Fret)', desc: 'Open D root, upper structure.', frets: [-1, -1, 0, 5, 7, 5], fingers: [-1, -1, 0, 1, 2, 1] },
+            { name: 'E Shape (7th Fret)', desc: '6th-string root, open A/D strings.', frets: [10, 0, 0, 7, 7, 8], fingers: [3, 0, 0, 1, 1, 2] },
+            { name: 'E Shape Full (7th Fret)', desc: '6th-string root with the b7 on the D string.', frets: [10, 0, 10, 7, 7, 8], fingers: [3, 0, 4, 1, 1, 2] },
+            { name: 'E Shape (7th, D top)', desc: '6th-string root, D doubled on top.', frets: [10, 0, 10, 7, 7, 10], fingers: [2, 0, 3, 1, 1, 4] },
+            { name: 'Shell (8th Fret)', desc: 'Top-4 string 7th shell voicing.', frets: [-1, -1, 0, 11, 10, 8], fingers: [-1, -1, 0, 3, 2, 1] },
+            { name: 'E Shape (8th Fret)', desc: '6th-string root, open A/D strings.', frets: [10, 0, 0, 11, 10, 8], fingers: [2, 0, 0, 4, 3, 1] },
+            { name: 'E Shape (8th, no G)', desc: '6th-string root, muted G string.', frets: [10, 9, 0, -1, 10, 8], fingers: [3, 2, 0, -1, 4, 1] }
         ],
         'maj7': [
             { name: 'Open Dmaj7 Shape', desc: 'Lush major 7th open.', frets: [-1, -1, 0, 2, 2, 2], fingers: [-1, -1, 0, 1, 1, 1] }
