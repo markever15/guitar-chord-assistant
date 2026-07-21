@@ -89,12 +89,11 @@ function computeFingers(frets) {
         return result;
     }
 
-    // 남은 음들 중, 같은 프렛을 짚은 줄들이 이어지는(사이에 열린 줄이나 다른 프렛 음이 안 끼는,
-    // 뮤트된 줄은 껴도 되는) 구간을 바레 후보로 찾음 - 검지 바레 하나로 끝나지 않으면 남은 음에
-    // 대해 재귀적으로 또 다른 손가락(2번, 3번...)의 바레도 시도함 (실제 기타에서 흔한 이중 바레 형태)
-    function barreGroups(remaining) {
+    // 같은 프렛을 짚은 줄들이 이어지는(사이에 열린 줄이나 다른 프렛 음이 안 끼는, 뮤트된 줄은
+    // 껴도 되는) 구간을 손가락 하나로 묶을 수 있는 그룹으로 봄 (1줄짜리 = 그냥 단독 음)
+    function findGroups(items) {
         const byFret = {};
-        remaining.forEach(x => { (byFret[x.f] = byFret[x.f] || []).push(x.s); });
+        items.forEach(x => { (byFret[x.f] = byFret[x.f] || []).push(x.s); });
         const groups = [];
         Object.keys(byFret).forEach(fretStr => {
             const fret = Number(fretStr);
@@ -104,49 +103,56 @@ function computeFingers(frets) {
                 const prev = current[current.length - 1];
                 let interrupted = false;
                 for (let k = prev + 1; k < strings[i]; k++) { if (frets[k] !== -1) { interrupted = true; break; } }
-                if (interrupted) { if (current.length >= 2) groups.push({ fret, group: [...current] }); current = [strings[i]]; }
+                if (interrupted) { groups.push({ fret, strings: [...current] }); current = [strings[i]]; }
                 else current.push(strings[i]);
             }
-            if (current.length >= 2) groups.push({ fret, group: [...current] });
+            groups.push({ fret, strings: [...current] });
         });
         return groups;
     }
 
-    // fingerNum번 손가락부터 remaining을 4번 손가락 이내로 다 배정할 수 있으면 {줄:손가락번호} 반환
-    // refFret: 바레(검지)를 짚은 프렛 - 여기서 3프렛 이상 떨어진 음은 옆 손가락으로 이어 뻗기엔
-    // 너무 머니까 새끼손가락(4번)으로 따로 보냄
-    function assign(remaining, fingerNum, refFret) {
-        if (fingerNum > 4) return remaining.length === 0 ? {} : null;
-        const budget = 4 - fingerNum + 1;
-        if (remaining.length <= budget) {
-            const result = {};
-            const sorted = [...remaining].sort((a, b) => a.f - b.f || a.s - b.s);
-            const farOnes = refFret !== undefined ? sorted.filter(x => x.f - refFret >= 3) : [];
-            if (farOnes.length === 1 && fingerNum < 4) {
-                const near = sorted.filter(x => x !== farOnes[0]);
-                near.forEach((x, i) => { result[x.s] = fingerNum + i; });
-                result[farOnes[0].s] = 4;
-            } else {
-                sorted.forEach((x, i) => { result[x.s] = fingerNum + i; });
-            }
+    // 그룹/단독 음들을 프렛 오름차순(동률이면 6번줄에 가까운 쪽)으로 정렬해 손가락 번호를 순서대로 매김.
+    // 딱 하나만 남았는데 기준 프렛(refFret, 보통 바레)에서 3프렛 이상 떨어져 있으면 옆 손가락으로
+    // 이어 뻗기엔 너무 머니까 새끼손가락(4번)으로 바로 보냄
+    function assignSequential(items, startFinger, refFret) {
+        items.sort((a, b) => a.fret - b.fret || Math.min(...a.strings) - Math.min(...b.strings));
+        const budget = 4 - startFinger + 1;
+        if (items.length > budget) return null;
+        const result = {};
+        if (items.length === 1 && refFret !== undefined && items[0].fret - refFret >= 3 && startFinger < 4) {
+            items[0].strings.forEach(s => { result[s] = 4; });
             return result;
         }
-        const groups = barreGroups(remaining);
-        if (groups.length === 0) return null;
-        // 가장 많은 줄을 아우르는(=손가락을 가장 많이 아끼는) 바레부터 시도, 동률이면 낮은 프렛 우선
-        groups.sort((a, b) => b.group.length - a.group.length || a.fret - b.fret);
-        for (const g of groups) {
-            const rest = remaining.filter(x => !g.group.includes(x.s));
-            const sub = assign(rest, fingerNum + 1, refFret !== undefined ? refFret : g.fret);
-            if (sub) { g.group.forEach(s => { sub[s] = fingerNum; }); return sub; }
-        }
-        return null;
+        items.forEach((item, i) => { item.strings.forEach(s => { result[s] = startFinger + i; }); });
+        return result;
     }
 
-    const assignment = assign(fretted, 1, undefined);
-    if (!assignment) return null;
+    // 1) 확장 바레 시도: 최저 프렛(F)을 짚은 줄이 2개 이상이면, 그 최소~최대 줄 범위를 검지 하나로
+    //    감싸고(그 구간 안의 더 높은 프렛 음은 다른 손가락이 검지 위에서 눌러 처리 - 실제 바레코드
+    //    기법, 예: F코드) 나머지를 처리
+    const F = Math.min(...fretted.map(x => x.f));
+    const atF = fretted.filter(x => x.f === F).map(x => x.s);
+    if (atF.length >= 2) {
+        const minS = Math.min(...atF), maxS = Math.max(...atF);
+        let blocked = false;
+        for (let s = minS; s <= maxS; s++) { if (frets[s] === 0) { blocked = true; break; } }
+        if (!blocked) {
+            const remaining = fretted.filter(x => x.s < minS || x.s > maxS || x.f > F);
+            const assigned = assignSequential(findGroups(remaining), 2, F);
+            if (assigned) {
+                const result = frets.map(f => (f === -1 ? -1 : 0));
+                for (let s = minS; s <= maxS; s++) { if (frets[s] === F) result[s] = 1; }
+                Object.keys(assigned).forEach(s => { result[s] = assigned[s]; });
+                return result;
+            }
+        }
+    }
+
+    // 2) 확장 바레가 안 되거나 부족하면, 전체를 같은 프렛끼리만 묶어서 프렛 오름차순으로 배정
+    const assigned2 = assignSequential(findGroups(fretted), 1, undefined);
+    if (!assigned2) return null;
     const result = frets.map(f => (f === -1 ? -1 : 0));
-    Object.keys(assignment).forEach(s => { result[s] = assignment[s]; });
+    Object.keys(assigned2).forEach(s => { result[s] = assigned2[s]; });
     return result;
 }
 
