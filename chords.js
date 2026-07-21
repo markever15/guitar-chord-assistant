@@ -975,6 +975,9 @@ window.chordDatabase = {
             { name: 'E Shape (7th Fret)', desc: '6th-string root, full voicing.', frets: [10, 0, 10, 0, 7, 0], fingers: [2, 0, 3, 0, 1, 0] },
             { name: 'E Shape (8th, Open A)', desc: '6th-string root with the A string open.', frets: [10, 0, 10, 11, 8, 0], fingers: [2, 0, 3, 4, 1, 0] }
         ],
+        'm11': [
+            { name: 'E Shape (8th, Open G/Top)', desc: '6th-string root, open G and high E strings.', frets: [10, 8, 10, 0, 10, 0], fingers: [2, 1, 3, 0, 4, 0] }
+        ],
         'maj11': [
             { name: 'E Shape (10th, Open Top)', desc: '6th-string root, open high E string.', frets: [10, 10, 11, 11, 10, 0], fingers: [1, 1, 3, 4, 2, 0] },
             { name: 'E Shape (8th, Open A)', desc: '6th-string root with the A string open.', frets: [10, 0, 11, 11, 8, 0], fingers: [2, 0, 3, 4, 1, 0] }
