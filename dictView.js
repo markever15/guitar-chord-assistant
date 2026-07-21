@@ -81,13 +81,20 @@ function computeFingers(frets) {
     frets.forEach((f, s) => { if (f > 0) fretted.push({ s, f }); });
     if (fretted.length === 0) return frets.map(f => (f === -1 ? -1 : 0));
 
-    // 바레 없이 4손가락 이내로 되면 그냥 프렛 낮은 순(같은 프렛이면 6번줄에 가까운 순)으로 배정
-    if (fretted.length <= 4) {
+    // 그냥 프렛 오름차순(동률이면 6번줄 가까운 순)으로 손가락 매기는 단순 배정
+    function naiveAssign() {
         const sorted = [...fretted].sort((a, b) => a.f - b.f || a.s - b.s);
         const result = frets.map(f => (f === -1 ? -1 : 0));
         sorted.forEach((x, i) => { result[x.s] = i + 1; });
         return result;
     }
+
+    // 🌟 4손가락 안에 들어가고, 유독 멀리 떨어진 음(다른 음들과 2프렛 이상 차이나는 외톨이 음)도
+    //    없으면 굳이 바레로 묶을 필요 없이 단순 배정이 더 자연스러움 (E/A/Em/Am 오픈코드처럼
+    //    같은 프렛에 인접한 두 줄이 있어도 그냥 손가락 두 개 따로 쓰는 게 표준 운지법인 경우가 많음)
+    const distinctFrets = [...new Set(fretted.map(x => x.f))].sort((a, b) => a - b);
+    const hasFarOutlier = distinctFrets.length >= 2 && (distinctFrets[distinctFrets.length - 1] - distinctFrets[distinctFrets.length - 2]) >= 2;
+    if (fretted.length <= 4 && !hasFarOutlier) return naiveAssign();
 
     // 같은 프렛을 짚은 줄들이 이어지는(사이에 열린 줄이나 다른 프렛 음이 안 끼는, 뮤트된 줄은
     // 껴도 되는) 구간을 손가락 하나로 묶을 수 있는 그룹으로 봄 (1줄짜리 = 그냥 단독 음)
@@ -111,16 +118,27 @@ function computeFingers(frets) {
         return groups;
     }
 
-    // 그룹/단독 음들을 프렛 오름차순(동률이면 6번줄에 가까운 쪽)으로 정렬해 손가락 번호를 순서대로 매김.
-    // 딱 하나만 남았는데 기준 프렛(refFret, 보통 바레)에서 3프렛 이상 떨어져 있으면 옆 손가락으로
-    // 이어 뻗기엔 너무 머니까 새끼손가락(4번)으로 바로 보냄
+    // 그룹/단독 음들을 프렛 오름차순(동률이면 6번줄에 가까운 쪽)으로 정렬해 손가락 번호를 매김.
+    // 바레(refFret) 기준으로 실제 손가락이 뻗는 자연스러운 각도를 반영: 0~1프렛 차이=검지
+    // 바로 옆(2번), 2프렛 차이=3번, 3프렛 이상=4번 - 멀어질수록 더 뻗는 힘 좋은 손가락을 씀
     function assignSequential(items, startFinger, refFret) {
         items.sort((a, b) => a.fret - b.fret || Math.min(...a.strings) - Math.min(...b.strings));
         const budget = 4 - startFinger + 1;
         if (items.length > budget) return null;
         const result = {};
-        if (items.length === 1 && refFret !== undefined && items[0].fret - refFret >= 3 && startFinger < 4) {
-            items[0].strings.forEach(s => { result[s] = 4; });
+        if (refFret !== undefined) {
+            const desired = items.map(item => {
+                const gap = item.fret - refFret;
+                return Math.min(4, Math.max(startFinger, gap <= 1 ? 2 : gap === 2 ? 3 : 4));
+            });
+            for (let i = desired.length - 2; i >= 0; i--) { desired[i] = Math.min(desired[i], desired[i + 1] - 1); }
+            let prev = startFinger - 1;
+            for (let i = 0; i < items.length; i++) {
+                const finger = Math.max(desired[i], prev + 1, startFinger);
+                if (finger > 4) return null;
+                items[i].strings.forEach(s => { result[s] = finger; });
+                prev = finger;
+            }
             return result;
         }
         items.forEach((item, i) => { item.strings.forEach(s => { result[s] = startFinger + i; }); });
@@ -150,10 +168,15 @@ function computeFingers(frets) {
 
     // 2) 확장 바레가 안 되거나 부족하면, 전체를 같은 프렛끼리만 묶어서 프렛 오름차순으로 배정
     const assigned2 = assignSequential(findGroups(fretted), 1, undefined);
-    if (!assigned2) return null;
-    const result = frets.map(f => (f === -1 ? -1 : 0));
-    Object.keys(assigned2).forEach(s => { result[s] = assigned2[s]; });
-    return result;
+    if (assigned2) {
+        const result = frets.map(f => (f === -1 ? -1 : 0));
+        Object.keys(assigned2).forEach(s => { result[s] = assigned2[s]; });
+        return result;
+    }
+    // 바레로도 안 묶이는데 원래 4개 이하였다면(먼 외톨이 음 때문에 바레를 시도했던 경우),
+    // 그냥 단순 배정으로라도 결과를 냄
+    if (fretted.length <= 4) return naiveAssign();
+    return null;
 }
 
 window.dictView = {
