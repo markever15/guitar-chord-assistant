@@ -40,18 +40,9 @@ window.recogView = {
 
         window.renderFretInlays(fb, fWidth, totalFrets, 180);
 
-        // 🌟 "Show Notes" 켜짐 + 하나 이상 노트가 선택돼 있으면, 지금 잡은 코드 톤이
-        // 넥 전체 어디어디에 또 있는지 흐릿한 마커로 보여줌 (개방현 fret 0은 별도 O/X 인디케이터가
-        // 이미 담당하므로 겹치지 않게 1프렛부터만 표시)
-        const activeNotes = new Set();
-        if (window.finderShowNotesState && window.getNoteName) {
-            for (let s = 0; s < stringCount; s++) {
-                const fret = window.finderUserFrets[s];
-                if (fret !== -1 && fret !== undefined && fret !== null) {
-                    activeNotes.add(window.getNoteName(s, fret));
-                }
-            }
-        }
+        // 🌟 "Show Notes"가 켜지면 선택 여부와 상관없이 지판 전체(1프렛~마지막 프렛)의
+        // 음이름을 다 보여줌 (개방현 fret 0은 별도 O/X 인디케이터가 이미 담당하므로 겹치지 않게 1프렛부터만 표시)
+        const showAllNotes = window.finderShowNotesState && window.getNoteName;
 
         // 2. 기타 줄(가로선) 및 터치 영역 생성
         for (let s = 0; s < stringCount; s++) {
@@ -116,11 +107,10 @@ window.recogView = {
                 fb.appendChild(m);
             }
 
-            if (activeNotes.size > 0) {
+            if (showAllNotes) {
                 for (let f = 1; f <= totalFrets; f++) {
                     if (f === window.finderUserFrets[s]) continue; // 실제 유저 마커와 겹치지 않게 건너뜀
                     const note = window.getNoteName(s, f);
-                    if (!activeNotes.has(note)) continue;
 
                     const ghost = document.createElement('div');
                     ghost.className = 'note-marker ghost-marker';

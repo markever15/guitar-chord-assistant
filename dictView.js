@@ -77,32 +77,83 @@ const CHORD_SEARCH_QUALITY_ALIASES = {
 //   - 최저 프렛의 줄들은 검지(1) 바레. 단, 바레 양 끝 사이에 '개방현'이 있으면 바레 불가 → 각자 다른 손가락
 //   - 나머지 눌러야 할 줄은 프렛 오름차순, 같은 프렛이면 6번줄 우선으로 2·3·4 배정 (같은 프렛이어도 다른 손가락)
 function computeFingers(frets) {
-    const fingers = frets.map(f => (f === -1 ? -1 : (f === 0 ? 0 : 0)));
     const fretted = [];
     frets.forEach((f, s) => { if (f > 0) fretted.push({ s, f }); });
-    if (fretted.length === 0) return fingers;
+    if (fretted.length === 0) return frets.map(f => (f === -1 ? -1 : 0));
 
-    const minFret = Math.min(...fretted.map(x => x.f));
-    const minStrings = fretted.filter(x => x.f === minFret).map(x => x.s).sort((a, b) => a - b);
+    // 바레 없이 4손가락 이내로 되면 그냥 프렛 낮은 순(같은 프렛이면 6번줄에 가까운 순)으로 배정
+    if (fretted.length <= 4) {
+        const sorted = [...fretted].sort((a, b) => a.f - b.f || a.s - b.s);
+        const result = frets.map(f => (f === -1 ? -1 : 0));
+        sorted.forEach((x, i) => { result[x.s] = i + 1; });
+        return result;
+    }
 
-    // 바레 양 끝 사이에 개방현(0)이 있으면 검지 바레 불가
-    let openBetween = false;
-    if (minStrings.length >= 2) {
-        for (let s = minStrings[0] + 1; s < minStrings[minStrings.length - 1]; s++) {
-            if (frets[s] === 0) { openBetween = true; break; }
+    // 같은 프렛을 짚은 줄들이 이어지는(사이에 열린 줄이나 다른 프렛 음이 안 끼는, 뮤트된 줄은
+    // 껴도 되는) 구간을 손가락 하나로 묶을 수 있는 그룹으로 봄 (1줄짜리 = 그냥 단독 음)
+    function findGroups(items) {
+        const byFret = {};
+        items.forEach(x => { (byFret[x.f] = byFret[x.f] || []).push(x.s); });
+        const groups = [];
+        Object.keys(byFret).forEach(fretStr => {
+            const fret = Number(fretStr);
+            const strings = byFret[fretStr].sort((a, b) => a - b);
+            let current = [strings[0]];
+            for (let i = 1; i < strings.length; i++) {
+                const prev = current[current.length - 1];
+                let interrupted = false;
+                for (let k = prev + 1; k < strings[i]; k++) { if (frets[k] !== -1) { interrupted = true; break; } }
+                if (interrupted) { groups.push({ fret, strings: [...current] }); current = [strings[i]]; }
+                else current.push(strings[i]);
+            }
+            groups.push({ fret, strings: [...current] });
+        });
+        return groups;
+    }
+
+    // 그룹/단독 음들을 프렛 오름차순(동률이면 6번줄에 가까운 쪽)으로 정렬해 손가락 번호를 순서대로 매김.
+    // 딱 하나만 남았는데 기준 프렛(refFret, 보통 바레)에서 3프렛 이상 떨어져 있으면 옆 손가락으로
+    // 이어 뻗기엔 너무 머니까 새끼손가락(4번)으로 바로 보냄
+    function assignSequential(items, startFinger, refFret) {
+        items.sort((a, b) => a.fret - b.fret || Math.min(...a.strings) - Math.min(...b.strings));
+        const budget = 4 - startFinger + 1;
+        if (items.length > budget) return null;
+        const result = {};
+        if (items.length === 1 && refFret !== undefined && items[0].fret - refFret >= 3 && startFinger < 4) {
+            items[0].strings.forEach(s => { result[s] = 4; });
+            return result;
+        }
+        items.forEach((item, i) => { item.strings.forEach(s => { result[s] = startFinger + i; }); });
+        return result;
+    }
+
+    // 1) 확장 바레 시도: 최저 프렛(F)을 짚은 줄이 2개 이상이면, 그 최소~최대 줄 범위를 검지 하나로
+    //    감싸고(그 구간 안의 더 높은 프렛 음은 다른 손가락이 검지 위에서 눌러 처리 - 실제 바레코드
+    //    기법, 예: F코드) 나머지를 처리
+    const F = Math.min(...fretted.map(x => x.f));
+    const atF = fretted.filter(x => x.f === F).map(x => x.s);
+    if (atF.length >= 2) {
+        const minS = Math.min(...atF), maxS = Math.max(...atF);
+        let blocked = false;
+        for (let s = minS; s <= maxS; s++) { if (frets[s] === 0) { blocked = true; break; } }
+        if (!blocked) {
+            const remaining = fretted.filter(x => x.s < minS || x.s > maxS || x.f > F);
+            const assigned = assignSequential(findGroups(remaining), 2, F);
+            if (assigned) {
+                const result = frets.map(f => (f === -1 ? -1 : 0));
+                for (let s = minS; s <= maxS; s++) { if (frets[s] === F) result[s] = 1; }
+                Object.keys(assigned).forEach(s => { result[s] = assigned[s]; });
+                return result;
+            }
         }
     }
 
-    const assigned = new Set();
-    let next = 1;
-    if (minStrings.length >= 2 && !openBetween) {
-        minStrings.forEach(s => { fingers[s] = 1; assigned.add(s); });
-        next = 2;
-    }
-
-    const rest = fretted.filter(x => !assigned.has(x.s)).sort((a, b) => a.f - b.f || a.s - b.s);
-    rest.forEach(x => { fingers[x.s] = Math.min(next, 4); next++; });
-    return fingers;
+    // 2) 확장 바레가 안 되거나 부족하면, 전체를 같은 프렛끼리만 묶어서 프렛 오름차순으로 배정
+    const assigned2 = assignSequential(findGroups(fretted), 1, undefined);
+    if (!assigned2) return null;
+    const result = frets.map(f => (f === -1 ? -1 : 0));
+    Object.keys(assigned2).forEach(s => { result[s] = assigned2[s]; });
+    return result;
 }
 
 window.dictView = {
@@ -176,7 +227,10 @@ window.dictView = {
         let allVoicings = [];
 
         // 🌟 핵심: 코드를 이동시키고 인체공학적(물리적)으로 잡을 수 있는지 검증하는 통합 헬퍼 함수
-        const processVoicing = (v, off, nameSuffix) => {
+        //    requireRootBass: true면 가장 낮게 울리는 음이 루트가 아닌 폼은 버림
+        //    (C 코드 모양을 그대로 옮기는 자동 변환 경로에서만 사용 - 확장음이 베이스에 오면
+        //     "이 루트의 코드"라는 정체성이 흐려짐. 직접 검증한 지정 파지법에는 적용 안 함)
+        const processVoicing = (v, off, nameSuffix, requireRootBass) => {
             // 🌟 "뮤트(-1)"와 "이동 후 프렛이 음수가 되어 -1과 값이 겹치는 경우"를 반드시 구분해야 함.
             // 구분하지 않으면 루트음이 통째로 잘려나간 반쪽짜리 코드가 뮤트로 위장해 통과해버림(예: G#m7 버그).
             let invalidShift = false;
@@ -186,18 +240,6 @@ window.dictView = {
                 if (nf < 0) invalidShift = true;
                 return nf;
             });
-            const wasOpenShape = v.frets.includes(0);
-
-            const shiftedFingers = v.fingers.map((fing, idx) => {
-                if (off === 0) return fing === 0 ? -1 : fing; // 원본 폼에서도 0번 손가락은 강제 삭제
-
-                if (wasOpenShape) {
-                    if (v.frets[idx] === 0) return 1; // 개방현이었던 줄은 1번(바레)으로
-                    if (fing > 0) return Math.min(4, fing + 1); // 나머지는 손가락 번호 +1
-                }
-                return fing === 0 ? -1 : fing;
-            });
-
             // 1. 렌더링 범위 이탈 필터링
             if (invalidShift) return null;
             if (shiftedFrets.some(f => f !== -1 && f > window.totalFrets)) return null;
@@ -207,22 +249,27 @@ window.dictView = {
             const fretSpan = activeFrets.length > 0 ? Math.max(...activeFrets) - Math.min(...activeFrets) : 0;
             if (fretSpan > 4) return null;
 
-            // 3. 중복 손가락 사용 방지 (검지(1)는 바레로 여러 줄 커버 가능. 2, 3, 4번 손가락도
-            //    "같은 프렛"이면 미니 바레로 동시에 여러 줄을 누를 수 있으므로 허용하고,
-            //    "서로 다른 프렛"을 동시에 요구할 때만 물리적으로 불가능하므로 걸러낸다.)
-            if (off !== 0) {
-                const fretByFinger = {};
-                let fingerConflict = false;
-                shiftedFingers.forEach((fing, idx) => {
-                    if (fing >= 2 && fing <= 4) {
-                        const fret = shiftedFrets[idx];
-                        if (fretByFinger[fing] !== undefined && fretByFinger[fing] !== fret) {
-                            fingerConflict = true;
-                        }
-                        fretByFinger[fing] = fret;
-                    }
-                });
-                if (fingerConflict) return null;
+            // 3. 실제 손가락 배치 알고리즘(computeFingers)으로 4손가락 이내에 진짜 잡을 수 있는지 검증
+            //    (렌더링 시점에도 항상 이 알고리즘으로 다시 계산하므로, 필터링도 같은 기준을 써야
+            //    "필터는 통과했는데 화면엔 이상한 손가락 번호로 뜨는" 불일치가 안 생김)
+            const shiftedFingers = computeFingers(shiftedFrets);
+            if (!shiftedFingers) return null;
+
+            // 4. 베이스(가장 낮게 울리는 줄)가 루트음이 아니면 버림 (확장음이 베이스면 어느 코드인지 헷갈림)
+            if (requireRootBass) {
+                const soundingIdx = shiftedFrets.findIndex(f => f >= 0);
+                if (soundingIdx === -1) return null;
+                const bassNote = window.getNoteName(5 - soundingIdx, shiftedFrets[soundingIdx]);
+                if (bassNote !== root) return null;
+
+                // 5. 코드 공식에 있는 음은 하나도 빠짐없이 다 울려야 함 (최대 6음이라 6줄로 항상 가능함)
+                //    하나라도 빠지면 다른(더 단순한/애매한) 코드처럼 들림
+                const chordTones = window.chordNotesTable[root] && window.chordNotesTable[root][quality];
+                if (chordTones) {
+                    const soundingNotes = new Set();
+                    shiftedFrets.forEach((f, idx) => { if (f >= 0) soundingNotes.add(window.getNoteName(5 - idx, f)); });
+                    for (const tone of chordTones) { if (!soundingNotes.has(tone)) return null; }
+                }
             }
 
             return {
@@ -246,10 +293,19 @@ window.dictView = {
             }
         });
 
-        // 2. C 코드 기준 변환 폼 대량 생성 - 위에서 이미 추가된 지정 파지법과 겹치는 프렛은 건너뜀
+        // 2. 자동 생성된 파지법(generatedVoicings) - 지정 파지법이 없는 루트/품질의 빈 자리를 채움.
+        //    지정 파지법과 겹치면 건너뜀 (지정 파지법이 항상 우선)
+        const generated = (window.generatedVoicings && window.generatedVoicings[root] && window.generatedVoicings[root][quality]) || [];
+        generated.forEach(gv => {
+            if (!allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(gv.frets))) {
+                allVoicings.push({ name: gv.name, frets: gv.frets, fingers: gv.fingers });
+            }
+        });
+
+        // 3. C 코드 기준 변환 폼 대량 생성 - 위에서 이미 추가된 파지법과 겹치는 프렛은 건너뜀
         baseVoicings.forEach(v => {
             offsetsToTry.forEach(off => {
-                const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`);
+                const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`, true);
                 if (result && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result.frets))) {
                     allVoicings.push(result);
                 }
@@ -362,7 +418,8 @@ window.dictView = {
     renderVerticalDiagram: function(voicing, isActive, onSelect) {
         const frets = voicing.frets;
         // 🌟 저장된 fingers 대신 항상 규칙 기반으로 계산 → 전체 코드 손가락 번호 일관성 보장
-        const fingers = computeFingers(frets);
+        // (바레로도 4손가락 안에 못 들어가는 예외적인 기존 데이터가 있을 경우를 대비한 안전장치)
+        const fingers = computeFingers(frets) || frets.map(f => (f === -1 ? -1 : (f > 0 ? Math.min(frets.filter(x => x > 0 && x <= f).length, 4) : 0)));
         const activeFrets = frets.filter(f => f > 0);
         const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
         const maxFret = activeFrets.length ? Math.max(...activeFrets) : 0;
@@ -431,9 +488,6 @@ window.dictView = {
         Object.entries(barreMap).forEach(([fretStr, strs]) => {
             if (strs.length < 2) return;
             const fret = parseInt(fretStr);
-            // 🌟 검지 바레는 항상 최저 프렛에만 존재함. 최저 프렛보다 높은 곳의 "뒤쪽 바레"는
-            //    물리적으로 불가능(그 앞쪽에 눌러야 할 노트가 있음)하므로 막대를 안 그리고 점으로만 표시.
-            if (fret !== minFret) return;
             const rowIdx = fret - startFret;
             if (rowIdx < 0 || rowIdx >= numRows) return;
             const minS = Math.min(...strs), maxS = Math.max(...strs);

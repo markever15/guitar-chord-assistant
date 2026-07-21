@@ -4,7 +4,8 @@
 window.excludedVoicings = {
     'D': {
         'm': [ [-1, 5, 3, 2, 3, 5] ],
-        '7': [ [-1, 5, 4, 5, 3, 2] ]
+        '7': [ [-1, 5, 4, 5, 3, 2] ],
+        'm9': [ [10, 12, 12, 10, 13, 12] ]
     }
 };
 
@@ -65,21 +66,21 @@ window.chordDatabase = {
             { name: 'High Shape (10th Fret)', desc: 'High-position voicing without the 5th.', frets: [-1, -1, 10, 12, -1, 11], fingers: [-1, -1, 1, 3, -1, 2] }
         ],
         'm7': [
-            { name: 'Weave Shape (3rd Fret)', desc: 'Interlocking low-position minor 7th voicing.', frets: [-1, 3, 1, 3, 1, 3], fingers: [-1, 3, 1, 3, 1, 3] },
+            { name: 'Weave Shape (3rd Fret)', desc: 'Interlocking low-position minor 7th voicing.', frets: [-1, 3, 1, 3, 1, 3], fingers: [-1, 2, 1, 3, 1, 4] },
             { name: 'Rootless Shape (Jazz)', desc: 'Rootless jazz voicing (Eb-G-Bb upper structure).', frets: [-1, 1, -1, 3, 4, 3], fingers: [-1, 1, -1, 2, 4, 2] },
             { name: 'Am7 Shape (3rd Fret)', desc: 'Standard minor 7th barre.', frets: [-1, 3, 5, 3, 4, 3], fingers: [-1, 1, 3, 1, 2, 1] },
             { name: 'Am7 Shape (Wide Top)', desc: 'Am7 shape with the b7 voiced up top.', frets: [-1, 3, 5, 3, 4, 6], fingers: [-1, 1, 3, 1, 2, 4] },
             { name: 'Open Shape (3rd Fret)', desc: 'Open G string as the 5th, b7 voiced up top.', frets: [-1, 3, 5, 0, 4, 6], fingers: [-1, 1, 3, 0, 2, 4] },
             { name: 'Layer Shape (3rd Fret)', desc: 'Am7 shape with the G string fretted for a doubled root.', frets: [-1, 3, 5, 5, 4, 6], fingers: [-1, 1, 3, 3, 2, 4] },
-            { name: 'Jazz m7 (3rd Fret)', desc: 'R&B voicing (5th string root, no 5th).', frets: [-1, 3, -1, 3, 4, -1], fingers: [-1, 1, -1, 2, 3, -1] },
-            { name: 'E Shape m7 (8th Fret)', desc: 'Full 6-string E-shape minor 7th barre.', frets: [8, 10, 8, 8, 11, 8], fingers: [1, 3, 1, 1, 4, 1] },
-            { name: 'E Shape m7 (Doubled Root)', desc: 'E-shape m7 with the D string voicing the root.', frets: [8, 10, 10, 8, 11, 8], fingers: [1, 3, 3, 1, 4, 1] },
+            { name: 'Jazz m7 (3rd Fret)', desc: 'R&B voicing (5th string root, no 5th).', frets: [-1, 3, 5, 3, 4, -1], fingers: [-1, 1, 4, 2, 3, -1] },
+            { name: 'E Shape m7 (8th Fret)', desc: 'Full 6-string E-shape minor 7th barre.', frets: [8, 10, 8, 8, 11, 8], fingers: [1, 2, 1, 1, 3, 1] },
+            { name: 'E Shape m7 (Doubled Root)', desc: 'E-shape m7 with the D string voicing the root.', frets: [8, 10, 10, 8, 11, 8], fingers: [1, 2, 2, 1, 3, 1] },
             { name: 'E Shape m7 (High Reach)', desc: 'E-shape m7 with the b7 voiced up on the B string.', frets: [8, 10, 8, 8, 8, 11], fingers: [1, 3, 1, 1, 1, 4] },
             { name: 'E Shape m7 (Wide)', desc: 'E-shape m7 with the 5th doubled up top.', frets: [8, 10, 8, 8, 11, 11], fingers: [1, 3, 1, 1, 4, 4] },
             { name: 'E Shape m7 (Full)', desc: 'E-shape m7 with the root doubled on the D string.', frets: [8, 10, 10, 8, 11, 11], fingers: [1, 3, 3, 1, 4, 4] },
             { name: 'E Shape m7 (Open Triad)', desc: 'E-shape m7 with the open G string as the 5th.', frets: [8, 10, 10, 0, 11, 11], fingers: [1, 3, 3, 0, 4, 4] },
             { name: 'E Shape m7 (No 5th)', desc: '6th string root, skip the 5th & 1st strings (no barre needed).', frets: [8, -1, 8, 8, 8, -1], fingers: [1, -1, 2, 3, 4, -1] },
-            { name: 'D Shape m7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 8, 11, -1], fingers: [-1, -1, 2, 1, 3, -1] },
+            { name: 'D Shape m7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [8, 10, 8, 8, -1, 8], fingers: [2, 3, 1, 1, -1, 1] },
             { name: 'Shell Shape (10th Fret)', desc: '3-note high-position shell.', frets: [-1, -1, 10, 0, 11, 11], fingers: [-1, -1, 1, 0, 2, 2] },
             { name: 'Shell Shape (Full G)', desc: 'Shell shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, 11, 11], fingers: [-1, -1, 1, 4, 2, 2] }
         ],
@@ -139,10 +140,10 @@ window.chordDatabase = {
             { name: 'Shell Shape (Full G)', desc: 'Shell shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, -1, 13], fingers: [-1, -1, 1, 3, -1, 4] }
         ],
         '7': [
-            { name: 'Open C7 Shape', desc: 'Bluesy dominant 7th shape.', frets: [-1, 3, 2, 3, 1, 0], fingers: [-1, 3, 2, 4, 1, 0] },
-            { name: 'Barre Shape (3rd Fret)', desc: '5-string dominant 7th barre.', frets: [-1, 3, 5, 3, 5, 3], fingers: [-1, 1, 3, 1, 3, 1] },
+            { name: 'Open C7 Shape', desc: 'Bluesy dominant 7th shape.', frets: [-1, 3, 2, 3, -1, 3], fingers: [-1, 2, 1, 3, -1, 4] },
+            { name: 'Barre Shape (3rd Fret)', desc: '5-string dominant 7th barre.', frets: [-1, 3, 5, 3, 5, 3], fingers: [-1, 1, 2, 1, 3, 1] },
             { name: 'Barre Shape (Open Top)', desc: 'Barre shape with the high E string left open.', frets: [-1, 3, 5, 3, 5, 0], fingers: [-1, 1, 3, 1, 3, 0] },
-            { name: 'Barre Shape (Alt Top)', desc: 'Barre shape with the high E string voicing the b7 higher up.', frets: [-1, 3, 5, 3, 5, 6], fingers: [-1, 1, 3, 1, 3, 4] },
+            { name: 'Barre Shape (Alt Top)', desc: 'Barre shape with the high E string voicing the b7 higher up.', frets: [-1, 3, 5, 3, 5, 6], fingers: [-1, 1, 2, 1, 3, 4] },
             { name: 'Reach Shape (3rd Fret)', desc: 'Open G string as the 5th, b7 voiced up top.', frets: [-1, 3, 5, 0, 5, 6], fingers: [-1, 1, 3, 0, 3, 4] },
             { name: 'Layer Shape (3rd Fret)', desc: 'A-shape barre with the b7 added on top.', frets: [-1, 3, 5, 5, 5, 6], fingers: [-1, 1, 3, 3, 3, 4] },
             { name: 'Wide Shape (7th Fret)', desc: 'Spread dominant 7th voicing.', frets: [8, 7, 8, 0, 8, 0], fingers: [2, 1, 2, 0, 2, 0] },
@@ -152,8 +153,8 @@ window.chordDatabase = {
             { name: 'E Shape 7 (Open Top)', desc: 'E-shape barre with the G and high E strings left open.', frets: [8, 10, 8, 0, 8, 0], fingers: [1, 3, 1, 0, 1, 0] },
             { name: 'E Shape 7 (High Open)', desc: 'E-shape barre with the high E string left open.', frets: [8, 10, 8, 9, 8, 0], fingers: [1, 3, 1, 2, 1, 0] },
             { name: 'E Shape 7 (Wide)', desc: 'E-shape barre with the b7 voiced up on the B string.', frets: [8, 10, 8, 9, 11, 8], fingers: [1, 3, 1, 2, 4, 1] },
-            { name: 'E Shape 7 (No 5th)', desc: '6th string root jazz shell voicing.', frets: [8, -1, 8, 9, -1, -1], fingers: [1, -1, 2, 3, -1, -1] },
-            { name: 'D Shape 7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 9, 11, -1], fingers: [-1, -1, 2, 1, 3, -1] },
+            { name: 'E Shape 7 (No 5th)', desc: '6th string root jazz shell voicing.', frets: [8, -1, 8, 0, 8, 0], fingers: [1, -1, 2, 0, 3, 0] },
+            { name: 'D Shape 7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [8, 10, 8, -1, -1, 0], fingers: [1, 3, 2, -1, -1, 0] },
             { name: 'Shell Shape (10th Fret)', desc: '3-note high-position shell.', frets: [-1, -1, 10, 0, 11, 0], fingers: [-1, -1, 1, 0, 2, 0] },
             { name: 'Shell Shape (Full G)', desc: 'Shell shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, 11, 0], fingers: [-1, -1, 1, 4, 2, 0] },
             { name: 'Climb Shape (10th Fret)', desc: 'Shell shape with the b7 voiced up top.', frets: [-1, -1, 10, 0, 11, 12], fingers: [-1, -1, 1, 0, 2, 4] },
@@ -163,7 +164,7 @@ window.chordDatabase = {
             { name: 'Open Cmaj7 Shape', desc: 'Standard acoustic Cmaj7.', frets: [-1, 3, 2, 0, 0, 0], fingers: [-1, 3, 2, 0, 0, 0] },
             { name: 'Bell Shape (Bright Top)', desc: 'Open Cmaj7 with the high E string fretted.', frets: [-1, 3, 2, 0, 0, 3], fingers: [-1, 3, 2, 0, 0, 4] },
             { name: 'Bell Shape (Full)', desc: 'Bell shape with the G string also fretted.', frets: [-1, 3, 2, 4, 0, 3], fingers: [-1, 3, 2, 4, 0, 1] },
-            { name: 'Jazz Shape (3rd Fret)', desc: 'Classic jazz Cmaj7 voicing.', frets: [-1, 3, 5, 4, 5, 3], fingers: [-1, 1, 3, 2, 3, 1] },
+            { name: 'Jazz Shape (3rd Fret)', desc: 'Classic jazz Cmaj7 voicing.', frets: [-1, 3, 5, 4, 5, 3], fingers: [-1, 1, 3, 2, 4, 1] },
             { name: 'Jazz Shape (Open Top)', desc: 'Jazz shape with the high E string left open.', frets: [-1, 3, 5, 4, 5, 0], fingers: [-1, 1, 3, 2, 3, 0] },
             { name: 'Open Shape (3rd Fret)', desc: 'Open-voiced Cmaj7 higher up the neck.', frets: [-1, 3, 5, 0, 0, 0], fingers: [-1, 1, 3, 0, 0, 0] },
             { name: 'Open Shape (Add B)', desc: 'Open shape with the G string fretted.', frets: [-1, 3, 5, 4, 0, 0], fingers: [-1, 1, 3, 2, 0, 0] },
@@ -175,17 +176,17 @@ window.chordDatabase = {
             { name: 'E Shape maj7 (High Open)', desc: 'E-shape maj7 with the high E string left open.', frets: [8, 10, 9, 9, 8, 0], fingers: [1, 3, 2, 2, 1, 0] },
             { name: 'E Shape maj7 (Open Triad)', desc: 'E-shape maj7 with the top three strings left open.', frets: [8, 10, 9, 0, 0, 0], fingers: [1, 3, 2, 0, 0, 0] },
             { name: 'E Shape maj7 (Doubled Root)', desc: 'E-shape maj7 with the D string voicing the root.', frets: [8, 10, 10, 0, 0, 0], fingers: [1, 3, 4, 0, 0, 0] },
-            { name: 'Cmaj7 (No 5th)', desc: 'Muted 4th string jazzy voicing.', frets: [-1, 3, -1, 4, 5, -1], fingers: [-1, 1, -1, 2, 3, -1] },
-            { name: 'D Shape maj7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, 9, 12, -1], fingers: [-1, -1, 2, 1, 3, -1] },
+            { name: 'Cmaj7 (No 5th)', desc: 'Muted 4th string jazzy voicing.', frets: [-1, 3, 5, -1, 0, 0], fingers: [-1, 1, 2, -1, 0, 0] },
+            { name: 'D Shape maj7 (No 5th)', desc: '4th string root jazz shell voicing.', frets: [8, -1, -1, 0, 0, 0], fingers: [1, -1, -1, 0, 0, 0] },
             { name: 'Shell Shape (10th Fret)', desc: 'High-position shell voicing.', frets: [-1, -1, 10, 0, 0, 0], fingers: [-1, -1, 1, 0, 0, 0] }
         ],
         'm7b5': [
             { name: 'Cm7b5', desc: 'Half-diminished jazz voicing.', frets: [-1, 3, 4, 3, 4, -1], fingers: [-1, 1, 3, 2, 4, -1] },
             { name: 'E Shape m7b5 (No 5th)', desc: '6th string root half-diminished shell.', frets: [8, -1, 8, 8, 7, -1], fingers: [2, -1, 3, 4, 1, -1] },
             { name: 'D Shape m7b5', desc: '4th string root half-diminished shell.', frets: [-1, -1, 10, 11, 11, 11], fingers: [-1, -1, 1, 2, 3, 4] },
-            { name: 'Cluster Shape (1st Fret)', desc: 'Close-position m7b5 voicing.', frets: [-1, 3, 1, 3, 1, 2], fingers: [-1, 3, 1, 3, 1, 2] },
-            { name: 'Full Shape (6th Fret)', desc: '6-string closed m7b5 chord.', frets: [8, 6, 8, 8, 7, 6], fingers: [3, 1, 3, 3, 2, 1] },
-            { name: 'Cluster Shape (3rd Fret)', desc: 'Close-position m7b5 voicing.', frets: [-1, 3, 4, 3, 4, 6], fingers: [-1, 1, 2, 1, 2, 3] },
+            { name: 'Cluster Shape (1st Fret)', desc: 'Close-position m7b5 voicing.', frets: [-1, 3, 1, 3, 1, 2], fingers: [-1, 3, 1, 4, 1, 2] },
+            { name: 'Full Shape (6th Fret)', desc: '6-string closed m7b5 chord.', frets: [8, 6, 8, 8, 7, 6], fingers: [3, 1, 4, 4, 2, 1] },
+            { name: 'Cluster Shape (3rd Fret)', desc: 'Close-position m7b5 voicing.', frets: [-1, 3, 4, 3, 4, 6], fingers: [-1, 1, 2, 1, 3, 4] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed m7b5 chord.', frets: [8, 9, 8, 8, 11, 8], fingers: [1, 2, 1, 1, 3, 1] },
             { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed m7b5 chord.', frets: [8, 9, 10, 8, 11, 8], fingers: [1, 2, 3, 1, 4, 1] },
             { name: 'Full Shape (8th Fret High)', desc: '6-string closed m7b5 chord.', frets: [8, 9, 8, 8, 11, 11], fingers: [1, 2, 1, 1, 3, 3] },
@@ -195,43 +196,43 @@ window.chordDatabase = {
         ],
         '9': [
             { name: 'C9 Shape', desc: 'Jazz 5-string 9th chord.', frets: [-1, 3, 2, 3, 3, 3], fingers: [-1, 2, 1, 3, 3, 3] },
-            { name: 'E Shape 9 (No 5th)', desc: '6th string root jazz 9th shell.', frets: [8, 5, 8, 9, -1, -1], fingers: [2, 1, 3, 4, -1, -1] },
-            { name: 'D Shape 9 (No 5th)', desc: '4th string root jazz 9th shell.', frets: [-1, -1, 10, 9, 11, 10], fingers: [-1, -1, 2, 1, 4, 3] },
+            { name: 'E Shape 9 (No 5th)', desc: '6th string root jazz 9th shell.', frets: [8, 5, -1, 0, 5, 6], fingers: [4, 1, -1, 0, 2, 3] },
+            { name: 'D Shape 9 (No 5th)', desc: '4th string root jazz 9th shell.', frets: [8, 10, 0, -1, 11, 0], fingers: [1, 2, 0, -1, 3, 0] },
             { name: 'Reach Shape (Nut)', desc: 'Open-position 9th voicing.', frets: [-1, 3, 0, 3, 5, 3], fingers: [-1, 1, 0, 1, 3, 1] },
             { name: 'Layer Shape (Nut)', desc: 'Open-position 9th with high open string.', frets: [-1, 3, 5, 3, 3, 0], fingers: [-1, 1, 3, 1, 1, 0] },
             { name: 'Airy Shape (6th Fret)', desc: 'Open-string 9th voicing higher up the neck.', frets: [8, 7, 0, 0, 8, 6], fingers: [3, 1, 0, 0, 3, 2] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed 9th chord.', frets: [8, 7, 8, 7, 8, 0], fingers: [1, 2, 1, 2, 1, 0] },
-            { name: 'E Shape 9 (Full Barre)', desc: 'Full 6-string barre 9th chord.', frets: [8, 10, 8, 9, 8, 10], fingers: [1, 3, 1, 2, 1, 3] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed 9th chord.', frets: [8, 7, 8, 7, 8, 0], fingers: [2, 1, 3, 1, 4, 0] },
+            { name: 'E Shape 9 (Full Barre)', desc: 'Full 6-string barre 9th chord.', frets: [8, 10, 8, 9, 8, 10], fingers: [1, 3, 1, 2, 1, 4] },
             { name: 'Open Shape (3rd Fret)', desc: 'Low-position 9th with open strings.', frets: [-1, 3, 0, 0, 5, 6], fingers: [-1, 1, 0, 0, 3, 4] },
             { name: 'Spread Shape (5th Fret)', desc: 'Wide-interval 9th voicing.', frets: [8, 5, 8, 0, 5, 0], fingers: [3, 1, 3, 0, 1, 0] },
-            { name: 'Spread Shape (Closed)', desc: 'Closed wide-interval 9th voicing.', frets: [8, 5, 8, 5, 8, 0], fingers: [3, 1, 3, 1, 3, 0] },
+            { name: 'Spread Shape (Closed)', desc: 'Closed wide-interval 9th voicing.', frets: [8, 5, 8, 5, 8, 0], fingers: [2, 1, 3, 1, 4, 0] },
             { name: 'Spread Shape (Open G)', desc: 'Wide-interval 9th with open G.', frets: [8, 5, 8, 0, 8, 0], fingers: [3, 1, 3, 0, 3, 0] },
             { name: 'Cluster Shape (5th Fret)', desc: 'Close-position 9th voicing.', frets: [8, 5, 5, 5, 5, 6], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'Airy Shape (Wide)', desc: 'Open-string 9th voicing with wide span.', frets: [8, 7, 0, 0, 5, 6], fingers: [4, 3, 0, 0, 1, 2] },
             { name: 'Cluster Shape (Full G)', desc: 'Close-position 9th chord with full G.', frets: [8, 5, 5, 7, 5, 6], fingers: [4, 1, 1, 3, 1, 2] },
-            { name: 'Spread Shape (High Root)', desc: 'Wide-interval 9th with doubled root.', frets: [8, 5, 8, 0, 5, 8], fingers: [3, 1, 3, 0, 1, 3] },
+            { name: 'Spread Shape (High Root)', desc: 'Wide-interval 9th with doubled root.', frets: [8, 5, 8, 0, -1, 0], fingers: [2, 1, 3, 0, -1, 0] },
             { name: 'Shell Shape (10th Fret)', desc: '4-note jazz 9th shell higher up the neck.', frets: [8, 10, 0, 0, 11, 0], fingers: [2, 3, 0, 0, 4, 0] },
             { name: 'Shell Shape (Full G)', desc: 'Jazz 9th shell with added G.', frets: [8, 10, 0, 9, 11, 0], fingers: [2, 3, 0, 1, 4, 0] }
         ],
         'maj9': [
-            { name: 'Cmaj9 Shape', desc: 'Lush major 9th.', frets: [-1, 3, 2, 4, 3, -1], fingers: [-1, 2, 1, 4, 3, -1] },
-            { name: 'E Shape maj9 (No 5th)', desc: '6th string root jazz maj9 shell.', frets: [8, 5, 9, 9, -1, -1], fingers: [2, 1, 3, 3, -1, -1] },
-            { name: 'D Shape maj9 (No 5th)', desc: '4th string root jazz maj9 shell.', frets: [-1, -1, 10, 9, 12, 10], fingers: [-1, -1, 2, 1, 4, 3] }
+            { name: 'Cmaj9 Shape', desc: 'Lush major 9th.', frets: [-1, 3, 2, 4, 3, 3], fingers: [-1, 3, 2, 4, 1, 1] },
+            { name: 'E Shape maj9 (No 5th)', desc: '6th string root jazz maj9 shell.', frets: [8, 5, -1, 0, 0, 0], fingers: [2, 1, -1, 0, 0, 0] },
+            { name: 'D Shape maj9 (No 5th)', desc: '4th string root jazz maj9 shell.', frets: [8, -1, 0, 0, 0, 0], fingers: [1, -1, 0, 0, 0, 0] }
         ],
         '6': [
-            { name: 'Open C6 Shape', desc: 'Sweet vintage 6th.', frets: [-1, 3, 2, 2, 1, 0], fingers: [-1, 3, 2, 2, 1, 0] },
+            { name: 'Open C6 Shape', desc: 'Sweet vintage 6th.', frets: [-1, 3, 2, 0, -1, 5], fingers: [-1, 2, 1, 0, -1, 3] },
             { name: 'Bright Shape (Nut)', desc: 'Open C6 with the high E string fretted.', frets: [-1, 3, 2, 2, 1, 3], fingers: [-1, 3, 2, 2, 1, 3] },
             { name: 'Drone Shape (3rd Fret)', desc: 'Open G string as the 5th.', frets: [-1, 3, 5, 0, 5, 5], fingers: [-1, 1, 3, 0, 3, 3] },
             { name: 'Airy Shape (8th Fret)', desc: '3-note voicing with open A and B strings.', frets: [8, 0, 7, 0, 8, 0], fingers: [3, 0, 1, 0, 3, 0] },
             { name: 'Airy Shape (Full A)', desc: 'Airy shape with the A string fretted instead of open.', frets: [8, 7, 7, 0, 8, 0], fingers: [4, 1, 1, 0, 4, 0] },
             { name: 'Airy Shape (Closed)', desc: 'Airy shape with the high E string also fretted.', frets: [8, 7, 7, 0, 8, 8], fingers: [3, 1, 1, 0, 3, 3] },
             { name: 'Cluster Shape (8th Fret)', desc: '5-note voicing with the A string left open.', frets: [8, 0, 10, 9, 8, 8], fingers: [1, 0, 3, 2, 1, 1] },
-            { name: 'E Shape 6 (Full Barre)', desc: 'Full 6-string E-shape 6th barre.', frets: [8, 10, 10, 9, 10, 8], fingers: [1, 3, 3, 2, 3, 1] },
+            { name: 'E Shape 6 (Full Barre)', desc: 'Full 6-string E-shape 6th barre.', frets: [8, 10, 10, 9, 10, 8], fingers: [1, 3, 3, 2, 4, 1] },
             { name: 'Open Shape (8th Fret)', desc: 'E-shape 6th with the A and B strings left open.', frets: [8, 0, 10, 0, 8, 0], fingers: [1, 0, 3, 0, 1, 0] },
             { name: 'Open Shape (High E)', desc: 'Open shape with the G string fretted instead of open.', frets: [8, 0, 10, 9, 8, 0], fingers: [1, 0, 3, 2, 1, 0] },
             { name: 'Open Shape (High B)', desc: 'Open shape with the 6th voiced on the B string.', frets: [8, 0, 10, 0, 10, 0], fingers: [1, 0, 3, 0, 3, 0] },
             { name: 'E Shape 6', desc: '6th string root, no barre needed.', frets: [8, 10, 7, 9, -1, -1], fingers: [2, 4, 1, 3, -1, -1] },
-            { name: 'D Shape 6 (No 5th)', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 9, 10, -1], fingers: [-1, -1, 2, 1, 3, -1] },
+            { name: 'D Shape 6 (No 5th)', desc: '4th string root, no barre needed.', frets: [8, 0, -1, -1, 8, 0], fingers: [1, 0, -1, -1, 2, 0] },
             { name: 'Shell Shape (10th Fret)', desc: '3-note high-position shell.', frets: [-1, -1, 10, 0, 10, 0], fingers: [-1, -1, 1, 0, 2, 0] },
             { name: 'Shell Shape (Full G)', desc: 'Shell shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, 10, 0], fingers: [-1, -1, 1, 4, 1, 0] },
             { name: 'Shell Shape (High E)', desc: 'Shell shape with the high E string fretted instead of open.', frets: [-1, -1, 10, 0, 10, 12], fingers: [-1, -1, 1, 0, 1, 3] },
@@ -240,16 +241,16 @@ window.chordDatabase = {
             { name: 'Barre Shape (Full G)', desc: 'Barre shape with the G string fretted instead of open.', frets: [8, 10, 10, 9, 10, 0], fingers: [1, 3, 3, 2, 3, 0] }
         ],
         'm6': [
-            { name: 'Twist Shape (Nut)', desc: 'Open-position minor 6th voicing.', frets: [-1, 3, 1, 2, 1, 3], fingers: [-1, 3, 1, 2, 1, 3] },
+            { name: 'Twist Shape (Nut)', desc: 'Open-position minor 6th voicing.', frets: [-1, 3, 1, 2, 1, 3], fingers: [-1, 3, 1, 2, 1, 4] },
             { name: 'Drone Shape (3rd Fret)', desc: 'Open G string as the 5th.', frets: [-1, 3, 5, 0, 4, 5], fingers: [-1, 1, 3, 0, 2, 3] },
             { name: 'Layer Shape (3rd Fret)', desc: 'Drone shape with the G string fretted instead of open.', frets: [-1, 3, 5, 5, 4, 5], fingers: [-1, 1, 3, 3, 2, 3] },
             { name: 'Airy Shape (8th Fret)', desc: '4-note voicing with the G string left open.', frets: [8, 6, 7, 0, 8, 8], fingers: [3, 1, 2, 0, 3, 3] },
-            { name: 'E Shape m6 (Full Barre)', desc: 'Full 6-string E-shape minor 6th barre.', frets: [8, 10, 10, 8, 10, 8], fingers: [1, 3, 3, 1, 3, 1] },
-            { name: 'E Shape m6 (Wide)', desc: 'E-shape m6 with the 6th voiced up on the high E string.', frets: [8, 10, 10, 8, 10, 11], fingers: [1, 3, 3, 1, 3, 4] },
+            { name: 'E Shape m6 (Full Barre)', desc: 'Full 6-string E-shape minor 6th barre.', frets: [8, 10, 10, 8, 10, 8], fingers: [1, 2, 2, 1, 3, 1] },
+            { name: 'E Shape m6 (Wide)', desc: 'E-shape m6 with the 6th voiced up on the high E string.', frets: [8, 10, 10, 8, 10, 11], fingers: [1, 2, 2, 1, 3, 4] },
             { name: 'E Shape m6 (Open G)', desc: 'E-shape m6 with the open G string as the 5th.', frets: [8, 10, 10, 0, 10, 11], fingers: [1, 3, 3, 0, 3, 4] },
-            { name: 'Cluster Shape (5th Fret)', desc: 'Wide voicing near the 5th fret.', frets: [8, 6, 5, 5, 8, 5], fingers: [3, 2, 1, 1, 3, 1] },
+            { name: 'Cluster Shape (5th Fret)', desc: 'Wide voicing near the 5th fret.', frets: [8, 6, 5, 5, 8, 5], fingers: [3, 2, 1, 1, 4, 1] },
             { name: 'Cluster Shape (Open A)', desc: 'Cluster shape with the A string left open.', frets: [8, 0, 5, 8, 8, 5], fingers: [3, 0, 1, 3, 3, 1] },
-            { name: 'Cluster Shape (Full)', desc: 'Cluster shape with the A string fretted instead of open.', frets: [8, 6, 5, 8, 8, 5], fingers: [3, 2, 1, 3, 3, 1] },
+            { name: 'Cluster Shape (Full)', desc: 'Cluster shape with the A string fretted instead of open.', frets: [8, 6, 5, 8, 8, 5], fingers: [3, 2, 1, 4, 4, 1] },
             { name: 'Cluster Shape (Open A, Full)', desc: 'Cluster shape with the open A string and D string fretted.', frets: [8, 0, 7, 8, 8, 5], fingers: [3, 0, 2, 3, 3, 1] },
             { name: 'Open Shape (8th Fret)', desc: 'E-shape m6 variant with the A string left open.', frets: [8, 0, 10, 8, 8, 11], fingers: [1, 0, 3, 1, 1, 4] },
             { name: 'Open Shape (High B)', desc: 'Open shape with the G string left open too.', frets: [8, 0, 10, 0, 8, 11], fingers: [1, 0, 3, 0, 1, 4] },
@@ -265,9 +266,9 @@ window.chordDatabase = {
             { name: 'Airy Shape (Wide)', desc: 'Open-string minor major 9th voicing with doubled root.', frets: [8, 6, 0, 0, 0, 8], fingers: [2, 1, 0, 0, 0, 2] },
             { name: 'Shell Shape (8th Fret)', desc: '4-note minor major 9th shell.', frets: [8, -1, 0, 8, 8, 7], fingers: [2, -1, 0, 2, 2, 1] },
             { name: 'Spread Shape (8th Fret)', desc: 'Wide-interval minor major 9th voicing.', frets: [8, 10, 0, 8, 0, 8], fingers: [1, 2, 0, 1, 0, 1] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed minor major 9th chord.', frets: [8, 10, 9, 8, 8, 10], fingers: [1, 3, 2, 1, 1, 3] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed minor major 9th chord.', frets: [8, 10, 9, 8, 8, 10], fingers: [1, 3, 2, 1, 1, 4] },
             { name: 'Spread Shape (10th Fret)', desc: 'Wide-interval minor major 9th voicing higher up the neck.', frets: [8, 10, 0, 8, 0, 10], fingers: [1, 2, 0, 1, 0, 2] },
-            { name: 'Spread Shape (Full)', desc: 'Wide-interval minor major 9th chord with added 5th.', frets: [8, 10, 9, 8, 0, 10], fingers: [1, 3, 2, 1, 0, 3] },
+            { name: 'Spread Shape (Full)', desc: 'Wide-interval minor major 9th chord with added 5th.', frets: [8, 10, 9, 8, 0, 10], fingers: [1, 3, 2, 1, 0, 4] },
             { name: 'Cluster Shape (10th Fret)', desc: 'Close-position minor major 9th voicing.', frets: [8, 10, 10, 8, 0, 10], fingers: [1, 2, 2, 1, 0, 2] },
             { name: 'Compact Shape (3rd Fret)', desc: 'Open-position minor major 9th voicing, muted low E.', frets: [-1, 3, 1, 4, 3, 3], fingers: [-1, 2, 1, 3, 2, 2] },
             { name: 'Spread Shape (5th Fret)', desc: 'Wide-interval minor major 9th voicing.', frets: [8, 5, 5, 8, 0, 7], fingers: [3, 1, 1, 3, 0, 2] },
@@ -289,13 +290,13 @@ window.chordDatabase = {
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string m6/9 voicing.', frets: [8, 0, 0, 8, 8, 10], fingers: [1, 0, 0, 1, 1, 2] },
             { name: 'Open Shape (8th Fret)', desc: 'm6/9 with open A string.', frets: [8, 0, 10, 8, 8, 10], fingers: [1, 0, 2, 1, 1, 2] },
             { name: 'Open Shape (10th Fret)', desc: 'm6/9 with open D string.', frets: [8, 10, 0, 8, 10, 10], fingers: [1, 2, 0, 1, 2, 2] },
-            { name: 'Cluster Shape (5th Fret)', desc: 'Close-position m6/9 voicing.', frets: [8, 6, 0, 5, 8, 5], fingers: [3, 2, 0, 1, 3, 1] },
+            { name: 'Cluster Shape (5th Fret)', desc: 'Close-position m6/9 voicing.', frets: [8, 6, 0, 5, 8, 5], fingers: [3, 2, 0, 1, 4, 1] },
             { name: 'Airy Shape (6th Fret)', desc: 'Open-string m6/9 voicing.', frets: [8, 6, 0, 0, 8, 5], fingers: [3, 2, 0, 0, 3, 1] },
             { name: 'Full Shape (5th Fret)', desc: '6-string closed m6/9 chord.', frets: [8, 5, 5, 8, 8, 5], fingers: [2, 1, 1, 2, 2, 1] },
             { name: 'Open Shape (5th Fret)', desc: 'm6/9 with open D string.', frets: [8, 5, 0, 8, 8, 5], fingers: [2, 1, 0, 2, 2, 1] },
             { name: 'Open Shape (6th Fret)', desc: 'm6/9 with open D string.', frets: [8, 6, 0, 8, 8, 5], fingers: [3, 2, 0, 3, 3, 1] },
             { name: 'Airy Shape (Wide)', desc: 'Open-string m6/9 voicing.', frets: [8, 0, 0, 8, 8, 5], fingers: [2, 0, 0, 2, 2, 1] },
-            { name: 'Cluster Shape (Full)', desc: 'Close-position m6/9 voicing.', frets: [8, 5, 7, 8, 8, 5], fingers: [3, 1, 2, 3, 3, 1] },
+            { name: 'Cluster Shape (Full)', desc: 'Close-position m6/9 voicing.', frets: [8, 5, 7, 8, 8, 5], fingers: [3, 1, 2, 4, 4, 1] },
             { name: 'Spread Shape (8th Fret)', desc: 'Wide-interval m6/9 voicing.', frets: [8, 0, 7, 8, 8, 10], fingers: [2, 0, 1, 2, 2, 3] },
             { name: 'Spread Shape (Wide)', desc: 'Wide-interval m6/9 voicing higher up the neck.', frets: [8, 0, 0, 8, 8, 11], fingers: [1, 0, 0, 1, 1, 2] }
         ],
@@ -306,7 +307,7 @@ window.chordDatabase = {
             { name: 'Open Shape (Full)', desc: '7add11 with open D and high E strings.', frets: [8, 8, 8, 0, 6, 0], fingers: [2, 2, 2, 0, 1, 0] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed 7add11 chord.', frets: [8, 8, 8, 9, 8, 0], fingers: [1, 1, 1, 2, 1, 0] },
             { name: 'Full Shape (Wide)', desc: '7add11 voicing with wide top.', frets: [8, 8, 8, 10, 8, 0], fingers: [1, 1, 1, 2, 1, 0] },
-            { name: 'Spread Shape (8th Fret)', desc: 'Wide-interval 7add11 voicing.', frets: [8, 10, 8, 10, 8, 0], fingers: [1, 2, 1, 2, 1, 0] },
+            { name: 'Spread Shape (8th Fret)', desc: 'Wide-interval 7add11 voicing.', frets: [8, 10, 8, 10, 8, 0], fingers: [1, 2, 1, 3, 1, 0] },
             { name: 'Reach Shape (Nut)', desc: 'Open-position 7add11 voicing with wide reach.', frets: [-1, 3, 5, 3, 6, 0], fingers: [-1, 1, 2, 1, 3, 0] },
             { name: 'Echo Shape (Nut)', desc: 'Open-position 7add11 voicing.', frets: [-1, 3, 3, 0, 5, 6], fingers: [-1, 1, 1, 0, 2, 3] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string 7add11 voicing.', frets: [8, 8, 8, 0, 5, 0], fingers: [2, 2, 2, 0, 1, 0] },
@@ -326,7 +327,7 @@ window.chordDatabase = {
             { name: 'Open Shape (8th Fret)', desc: 'maj7add11 with open D string.', frets: [8, 8, 9, 0, 8, 0], fingers: [1, 1, 2, 0, 1, 0] },
             { name: 'Open Shape (Full)', desc: 'maj7add11 with open high E string.', frets: [8, 8, 9, 9, 8, 0], fingers: [1, 1, 2, 2, 1, 0] },
             { name: 'Full Shape (Wide)', desc: 'maj7add11 voicing with wide top.', frets: [8, 8, 9, 10, 8, 0], fingers: [1, 1, 2, 3, 1, 0] },
-            { name: 'Spread Shape (8th Fret)', desc: 'Wide-interval maj7add11 voicing.', frets: [8, 10, 9, 10, 8, 0], fingers: [1, 3, 2, 3, 1, 0] },
+            { name: 'Spread Shape (8th Fret)', desc: 'Wide-interval maj7add11 voicing.', frets: [8, 10, 9, 10, 8, 0], fingers: [1, 3, 2, 4, 1, 0] },
             { name: 'Airy Shape (Wide)', desc: 'Open-string maj7add11 voicing.', frets: [8, 8, 10, 0, 0, 0], fingers: [1, 1, 2, 0, 0, 0] },
             { name: 'Spread Shape (High Root)', desc: 'Wide-interval maj7add11 voicing with doubled root.', frets: [8, 10, 9, 10, 0, 0], fingers: [1, 3, 2, 3, 0, 0] },
             { name: 'Spread Shape (Full)', desc: 'Wide-interval maj7add11 chord.', frets: [8, 10, 10, 10, 0, 0], fingers: [1, 2, 2, 2, 0, 0] },
@@ -351,10 +352,10 @@ window.chordDatabase = {
             { name: 'Open Shape (6th Fret)', desc: '7add13 with open D string.', frets: [8, 7, 7, 0, 8, 6], fingers: [3, 2, 2, 0, 3, 1] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string 7add13 voicing.', frets: [8, 0, 8, 0, 8, 0], fingers: [1, 0, 1, 0, 1, 0] },
             { name: 'Open Shape (8th Fret)', desc: '7add13 with open A and high E strings.', frets: [8, 0, 8, 9, 8, 0], fingers: [1, 0, 1, 2, 1, 0] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed 7add13 chord.', frets: [8, 10, 8, 9, 10, 8], fingers: [1, 3, 1, 2, 3, 1] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed 7add13 chord.', frets: [8, 10, 8, 9, 10, 8], fingers: [1, 3, 1, 2, 4, 1] },
             { name: 'Airy Shape (10th Fret)', desc: 'Open-string 7add13 voicing higher up the neck.', frets: [8, 0, 8, 0, 10, 0], fingers: [1, 0, 1, 0, 2, 0] },
             { name: 'Open Shape (10th Fret)', desc: '7add13 with open D and high E strings.', frets: [8, 10, 8, 0, 10, 0], fingers: [1, 2, 1, 0, 2, 0] },
-            { name: 'Open Shape (Full 10th)', desc: '7add13 with open high E string.', frets: [8, 10, 8, 9, 10, 0], fingers: [1, 3, 1, 2, 3, 0] },
+            { name: 'Open Shape (Full 10th)', desc: '7add13 with open high E string.', frets: [8, 10, 8, 9, 10, 0], fingers: [1, 3, 1, 2, 4, 0] },
             { name: 'Airy Shape (5th Fret)', desc: 'Open-string 7add13 voicing.', frets: [8, 0, 8, 0, 5, 5], fingers: [2, 0, 2, 0, 1, 1] },
             { name: 'Open Shape (5th Fret)', desc: '7add13 with open D string.', frets: [8, 7, 8, 0, 5, 5], fingers: [3, 2, 3, 0, 1, 1] },
             { name: 'Cluster Shape (5th Fret)', desc: 'Close-position 7add13 voicing.', frets: [8, 0, 5, 5, 5, 6], fingers: [3, 0, 1, 1, 1, 2] },
@@ -370,7 +371,7 @@ window.chordDatabase = {
             { name: 'Full Shape (7th Fret)', desc: 'maj7add13 with open G and B strings, high root.', frets: [8, 7, 7, 0, 0, 8], fingers: [2, 1, 1, 0, 0, 2] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string maj7add13 voicing.', frets: [8, 0, 9, 0, 0, 0], fingers: [1, 0, 2, 0, 0, 0] },
             { name: 'Open Shape (8th Fret)', desc: 'maj7add13 with open A and D strings.', frets: [8, 0, 9, 0, 8, 0], fingers: [1, 0, 2, 0, 1, 0] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed maj7add13 chord.', frets: [8, 10, 9, 9, 10, 8], fingers: [1, 3, 2, 2, 3, 1] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed maj7add13 chord.', frets: [8, 10, 9, 9, 10, 8], fingers: [1, 3, 2, 2, 4, 1] },
             { name: 'Airy Shape (10th Fret)', desc: 'Open-string maj7add13 voicing higher up the neck.', frets: [8, 0, 10, 0, 0, 0], fingers: [1, 0, 2, 0, 0, 0] },
             { name: 'Open Shape (10th Fret)', desc: 'maj7add13 with open A and D strings.', frets: [8, 0, 9, 0, 10, 0], fingers: [1, 0, 2, 0, 3, 0] },
             { name: 'Open Shape (10th Fret Wide)', desc: 'maj7add13 with open D string.', frets: [8, 10, 9, 0, 10, 0], fingers: [1, 3, 2, 0, 3, 0] },
@@ -378,15 +379,15 @@ window.chordDatabase = {
             { name: 'Cluster Shape (5th Fret)', desc: 'Close-position maj7add13 voicing.', frets: [8, 7, 5, 5, 0, 5], fingers: [3, 2, 1, 1, 0, 1] }
         ],
         'm7add13': [
-            { name: 'Cluster Shape (3rd Fret)', desc: 'Close-position m7add13 voicing.', frets: [-1, 3, 5, 3, 4, 5], fingers: [-1, 1, 3, 1, 2, 3] },
-            { name: 'Full Shape (6th Fret)', desc: '6-string closed m7add13 chord.', frets: [8, 6, 7, 8, 8, 6], fingers: [3, 1, 2, 3, 3, 1] },
+            { name: 'Cluster Shape (3rd Fret)', desc: 'Close-position m7add13 voicing.', frets: [-1, 3, 5, 3, 4, 5], fingers: [-1, 1, 3, 1, 2, 4] },
+            { name: 'Full Shape (6th Fret)', desc: '6-string closed m7add13 chord.', frets: [8, 6, 7, 8, 8, 6], fingers: [3, 1, 2, 4, 4, 1] },
             { name: 'Open Shape (6th Fret)', desc: 'm7add13 with open A string.', frets: [8, 0, 7, 8, 8, 6], fingers: [3, 0, 2, 3, 3, 1] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed m7add13 chord, high root.', frets: [8, 10, 8, 8, 10, 8], fingers: [1, 2, 1, 1, 2, 1] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed m7add13 chord, high root.', frets: [8, 10, 8, 8, 10, 8], fingers: [1, 2, 1, 1, 3, 1] },
             { name: 'Open Shape (5th Fret)', desc: 'm7add13 with open A string.', frets: [8, 0, 5, 8, 8, 6], fingers: [3, 0, 1, 3, 3, 2] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string m7add13 voicing.', frets: [8, 0, 8, 0, 8, 11], fingers: [1, 0, 1, 0, 1, 2] },
-            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed m7add13 chord, wide voicing.', frets: [8, 10, 8, 8, 10, 11], fingers: [1, 2, 1, 1, 2, 3] },
+            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed m7add13 chord, wide voicing.', frets: [8, 10, 8, 8, 10, 11], fingers: [1, 2, 1, 1, 3, 4] },
             { name: 'Airy Shape (10th Fret)', desc: 'Open-string m7add13 voicing higher up the neck.', frets: [8, 0, 8, 0, 10, 11], fingers: [1, 0, 1, 0, 2, 3] },
-            { name: 'Open Shape (10th Fret)', desc: 'm7add13 with open D string.', frets: [8, 10, 8, 0, 10, 11], fingers: [1, 2, 1, 0, 2, 3] },
+            { name: 'Open Shape (10th Fret)', desc: 'm7add13 with open D string.', frets: [8, 10, 8, 0, 10, 11], fingers: [1, 2, 1, 0, 3, 4] },
             { name: 'Airy Shape (11th Fret)', desc: 'Open-string m7add13 voicing higher up the neck.', frets: [8, 0, 8, 0, 11, 11], fingers: [1, 0, 1, 0, 2, 2] },
             { name: 'Open Shape (11th Fret)', desc: 'm7add13 with open D string.', frets: [8, 0, 10, 0, 11, 11], fingers: [1, 0, 2, 0, 3, 3] }
         ],
@@ -395,13 +396,13 @@ window.chordDatabase = {
             { name: 'Cluster Shape (3rd Fret)', desc: 'Close-position m(maj7)add13 voicing.', frets: [-1, 3, 5, 4, 4, 5], fingers: [-1, 1, 3, 2, 2, 3] },
             { name: 'Open Shape (7th Fret)', desc: 'm(maj7)add13 with open A string.', frets: [8, 0, 7, 8, 8, 7], fingers: [2, 0, 1, 2, 2, 1] },
             { name: 'Airy Shape (6th Fret)', desc: 'Open-string m(maj7)add13 voicing.', frets: [8, 6, 7, 0, 0, 8], fingers: [3, 1, 2, 0, 0, 3] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed m(maj7)add13 chord.', frets: [8, 10, 9, 8, 10, 8], fingers: [1, 3, 2, 1, 3, 1] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed m(maj7)add13 chord.', frets: [8, 10, 9, 8, 10, 8], fingers: [1, 3, 2, 1, 4, 1] },
             { name: 'Airy Shape (5th Fret)', desc: 'Open-string m(maj7)add13 voicing.', frets: [8, 6, 7, 0, 0, 5], fingers: [4, 2, 3, 0, 0, 1] },
             { name: 'Airy Shape (5th Fret Wide)', desc: 'Open-string m(maj7)add13 voicing.', frets: [8, 0, 5, 8, 0, 5], fingers: [2, 0, 1, 2, 0, 1] },
             { name: 'Airy Shape (5th Fret High)', desc: 'Open-string m(maj7)add13 voicing higher up the neck.', frets: [8, 0, 5, 8, 0, 7], fingers: [3, 0, 1, 3, 0, 2] },
             { name: 'Open Shape (5th Fret)', desc: 'm(maj7)add13 with open A string.', frets: [8, 0, 5, 8, 8, 7], fingers: [3, 0, 1, 3, 3, 2] },
             { name: 'Airy Shape (5th Fret Widest)', desc: 'Open-string m(maj7)add13 voicing, wide.', frets: [8, 0, 5, 8, 0, 8], fingers: [2, 0, 1, 2, 0, 2] },
-            { name: 'Full Shape (7th Fret)', desc: '6-string closed m(maj7)add13 chord.', frets: [8, 10, 7, 8, 8, 7], fingers: [2, 3, 1, 2, 2, 1] },
+            { name: 'Full Shape (7th Fret)', desc: '6-string closed m(maj7)add13 chord.', frets: [8, 10, 7, 8, 8, 7], fingers: [2, 4, 1, 3, 3, 1] },
             { name: 'Open Shape (7th Fret High)', desc: 'm(maj7)add13 with open A string, high position.', frets: [8, 0, 10, 8, 8, 7], fingers: [2, 0, 3, 2, 2, 1] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string m(maj7)add13 voicing higher up the neck.', frets: [8, 0, 9, 0, 0, 11], fingers: [1, 0, 2, 0, 0, 3] },
             { name: 'Airy Shape (8th Fret High)', desc: 'Open-string m(maj7)add13 voicing, higher position.', frets: [8, 0, 10, 0, 0, 11], fingers: [1, 0, 2, 0, 0, 3] },
@@ -412,11 +413,11 @@ window.chordDatabase = {
             { name: 'Open Shape (10th Fret)', desc: '7b5 with open high E string.', frets: [-1, -1, 10, 11, 11, 0], fingers: [-1, -1, 1, 2, 2, 0] },
             { name: 'Cluster Shape (10th Fret)', desc: 'Close-position 7b5 voicing.', frets: [-1, -1, 10, 11, 11, 12], fingers: [-1, -1, 1, 2, 2, 3] },
             { name: 'Open Shape (1st Fret)', desc: '7b5 with open high E string.', frets: [-1, 3, 4, 3, 1, 0], fingers: [-1, 2, 3, 2, 1, 0] },
-            { name: 'Cluster Shape (2nd Fret)', desc: 'Close-position 7b5 voicing.', frets: [-1, 3, 2, 3, 5, 2], fingers: [-1, 2, 1, 2, 3, 1] },
+            { name: 'Cluster Shape (2nd Fret)', desc: 'Close-position 7b5 voicing.', frets: [-1, 3, 2, 3, 5, 2], fingers: [-1, 2, 1, 3, 4, 1] },
             { name: 'Cluster Shape (3rd Fret Wide)', desc: 'Close-position 7b5 voicing.', frets: [-1, 3, 4, 3, 5, 6], fingers: [-1, 1, 2, 1, 3, 4] },
             { name: 'Cluster Shape (3rd Fret High)', desc: 'Close-position 7b5 voicing.', frets: [-1, 3, 4, 5, 5, 6], fingers: [-1, 1, 2, 3, 3, 4] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed 7b5 chord.', frets: [8, 9, 8, 9, 11, 8], fingers: [1, 2, 1, 2, 3, 1] },
-            { name: 'Open Shape (8th Fret)', desc: '7b5 with open high E string.', frets: [8, 9, 8, 9, 11, 0], fingers: [1, 2, 1, 2, 3, 0] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed 7b5 chord.', frets: [8, 9, 8, 9, 11, 8], fingers: [1, 2, 1, 3, 4, 1] },
+            { name: 'Open Shape (8th Fret)', desc: '7b5 with open high E string.', frets: [8, 9, 8, 9, 11, 0], fingers: [1, 2, 1, 3, 4, 0] },
             { name: 'Open Shape (8th Fret Wide)', desc: '7b5 with open high E string.', frets: [8, 9, 8, 11, 11, 0], fingers: [1, 2, 1, 3, 3, 0] },
             { name: 'Open Shape (8th Fret High)', desc: '7b5 with open high E string.', frets: [8, 9, 10, 11, 11, 0], fingers: [1, 2, 3, 4, 4, 0] },
             { name: 'Compact Shape (2nd Fret)', desc: '7b5 with muted A and B strings.', frets: [-1, 3, 2, 3, -1, 2], fingers: [-1, 2, 1, 2, -1, 1] },
@@ -426,13 +427,13 @@ window.chordDatabase = {
         'aug7': [
             { name: 'Open Shape (3rd Fret)', desc: 'aug7 with open high E string.', frets: [-1, 3, 6, 3, 5, 0], fingers: [-1, 1, 3, 1, 2, 0] },
             { name: 'Cluster Shape (3rd Fret)', desc: 'Close-position aug7 voicing.', frets: [-1, 3, 6, 3, 5, 4], fingers: [-1, 1, 4, 1, 3, 2] },
-            { name: 'Cluster Shape (3rd Fret Wide)', desc: 'Close-position aug7 voicing.', frets: [-1, 3, 6, 3, 5, 6], fingers: [-1, 1, 3, 1, 2, 3] },
+            { name: 'Cluster Shape (3rd Fret Wide)', desc: 'Close-position aug7 voicing.', frets: [-1, 3, 6, 3, 5, 6], fingers: [-1, 1, 3, 1, 2, 4] },
             { name: 'Cluster Shape (3rd Fret High)', desc: 'Close-position aug7 voicing.', frets: [-1, 3, 6, 5, 5, 6], fingers: [-1, 1, 3, 2, 2, 3] },
             { name: 'Full Shape (6th Fret)', desc: '6-string closed aug7 chord.', frets: [8, 7, 6, 9, 9, 6], fingers: [3, 2, 1, 4, 4, 1] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed aug7 chord.', frets: [8, 11, 8, 9, 9, 8], fingers: [1, 3, 1, 2, 2, 1] },
-            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed aug7 chord.', frets: [8, 11, 8, 9, 11, 8], fingers: [1, 3, 1, 2, 3, 1] },
+            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed aug7 chord.', frets: [8, 11, 8, 9, 11, 8], fingers: [1, 3, 1, 2, 4, 1] },
             { name: 'Open Shape (8th Fret)', desc: 'aug7 with open high E string.', frets: [8, 11, 8, 9, 9, 0], fingers: [1, 3, 1, 2, 2, 0] },
-            { name: 'Open Shape (8th Fret Wide)', desc: 'aug7 with open high E string.', frets: [8, 11, 8, 9, 11, 0], fingers: [1, 3, 1, 2, 3, 0] },
+            { name: 'Open Shape (8th Fret Wide)', desc: 'aug7 with open high E string.', frets: [8, 11, 8, 9, 11, 0], fingers: [1, 3, 1, 2, 4, 0] },
             { name: 'Open Shape (10th Fret)', desc: 'aug7 with open high E string.', frets: [-1, -1, 10, 13, 11, 0], fingers: [-1, -1, 1, 3, 2, 0] },
             { name: 'Cluster Shape (10th Fret)', desc: 'Close-position aug7 voicing.', frets: [-1, -1, 10, 13, 11, 12], fingers: [-1, -1, 1, 4, 2, 3] },
             { name: 'Compact Shape (2nd Fret)', desc: 'aug7 with muted A and B strings.', frets: [-1, 3, 2, 3, -1, 4], fingers: [-1, 2, 1, 2, -1, 3] },
@@ -443,36 +444,36 @@ window.chordDatabase = {
             { name: 'Compact Shape (8th Fret)', desc: 'aug7b9 with muted A string.', frets: [8, -1, 8, 9, 9, 9], fingers: [1, -1, 1, 2, 2, 2] },
             { name: 'Cluster Shape (3rd Fret)', desc: 'Close-position aug7b9 voicing.', frets: [-1, 3, 6, 6, 5, 6], fingers: [-1, 1, 3, 3, 2, 3] },
             { name: 'Full Shape (6th Fret)', desc: '6-string closed aug7b9 chord.', frets: [8, 7, 6, 6, 9, 6], fingers: [3, 2, 1, 1, 4, 1] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed aug7b9 chord.', frets: [8, 11, 11, 9, 11, 8], fingers: [1, 3, 3, 2, 3, 1] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed aug7b9 chord.', frets: [8, 11, 11, 9, 11, 8], fingers: [1, 3, 3, 2, 4, 1] },
             { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed aug7b9 chord.', frets: [8, 11, 8, 9, 9, 9], fingers: [1, 3, 1, 2, 2, 2] },
             { name: 'Open Shape (8th Fret)', desc: 'aug7b9 with open high E string.', frets: [8, 11, 11, 9, 11, 0], fingers: [1, 3, 3, 2, 3, 0] },
             { name: 'Compact Shape (6th Fret)', desc: 'aug7b9 with muted B string.', frets: [8, 7, 6, 6, -1, 6], fingers: [3, 2, 1, 1, -1, 1] }
         ],
         'm7#5': [
-            { name: 'Cluster Shape (1st Fret)', desc: 'Close-position m7#5 voicing.', frets: [-1, 3, 1, 3, 1, 4], fingers: [-1, 2, 1, 2, 1, 3] },
+            { name: 'Cluster Shape (1st Fret)', desc: 'Close-position m7#5 voicing.', frets: [-1, 3, 1, 3, 1, 4], fingers: [-1, 2, 1, 3, 1, 4] },
             { name: 'Cluster Shape (1st Fret Wide)', desc: 'Close-position m7#5 voicing.', frets: [-1, 3, 1, 3, 4, 4], fingers: [-1, 2, 1, 2, 3, 3] },
             { name: 'Cluster Shape (3rd Fret)', desc: 'Close-position m7#5 voicing.', frets: [-1, 3, 6, 3, 4, 4], fingers: [-1, 1, 3, 1, 2, 2] },
-            { name: 'Cluster Shape (3rd Fret Wide)', desc: 'Close-position m7#5 voicing.', frets: [-1, 3, 6, 3, 4, 6], fingers: [-1, 1, 3, 1, 2, 3] },
-            { name: 'Full Shape (6th Fret)', desc: '6-string closed m7#5 chord.', frets: [8, 6, 6, 8, 9, 6], fingers: [2, 1, 1, 2, 3, 1] },
-            { name: 'Full Shape (6th Fret Wide)', desc: '6-string closed m7#5 chord.', frets: [8, 6, 8, 8, 9, 6], fingers: [2, 1, 2, 2, 3, 1] },
+            { name: 'Cluster Shape (3rd Fret Wide)', desc: 'Close-position m7#5 voicing.', frets: [-1, 3, 6, 3, 4, 6], fingers: [-1, 1, 3, 1, 2, 4] },
+            { name: 'Full Shape (6th Fret)', desc: '6-string closed m7#5 chord.', frets: [8, 6, 6, 8, 9, 6], fingers: [2, 1, 1, 3, 4, 1] },
+            { name: 'Full Shape (6th Fret Wide)', desc: '6-string closed m7#5 chord.', frets: [8, 6, 8, 8, 9, 6], fingers: [2, 1, 3, 3, 4, 1] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 8, 8, 9, 8], fingers: [1, 3, 1, 1, 2, 1] },
-            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 8, 8, 11, 8], fingers: [1, 2, 1, 1, 2, 1] },
-            { name: 'Full Shape (8th Fret High)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 10, 8, 11, 8], fingers: [1, 3, 2, 1, 3, 1] },
-            { name: 'Full Shape (9th Fret)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 8, 8, 9, 11], fingers: [1, 3, 1, 1, 2, 3] },
+            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 8, 8, 11, 8], fingers: [1, 2, 1, 1, 3, 1] },
+            { name: 'Full Shape (8th Fret High)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 10, 8, 11, 8], fingers: [1, 3, 2, 1, 4, 1] },
+            { name: 'Full Shape (9th Fret)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 8, 8, 9, 11], fingers: [1, 3, 1, 1, 2, 4] },
             { name: 'Full Shape (9th Fret Wide)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 8, 8, 11, 11], fingers: [1, 2, 1, 1, 2, 2] },
-            { name: 'Full Shape (9th Fret High)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 10, 8, 11, 11], fingers: [1, 3, 2, 1, 3, 3] },
+            { name: 'Full Shape (9th Fret High)', desc: '6-string closed m7#5 chord.', frets: [8, 11, 10, 8, 11, 11], fingers: [1, 3, 2, 1, 4, 4] },
             { name: 'Cluster Shape (10th Fret)', desc: 'Close-position m7#5 voicing.', frets: [-1, -1, 10, 13, 11, 11], fingers: [-1, -1, 1, 3, 2, 2] },
             { name: 'Compact Shape (3rd Fret)', desc: 'm7#5 with muted G string.', frets: [-1, 3, -1, 3, 4, 4], fingers: [-1, 1, -1, 1, 2, 2] },
             { name: 'Compact Shape (6th Fret)', desc: 'm7#5 with muted B string.', frets: [8, 6, 6, 8, -1, 6], fingers: [2, 1, 1, 2, -1, 1] },
             { name: 'Compact Shape (5th Fret)', desc: 'm7#5 with muted B string.', frets: [8, 6, 6, 5, -1, 6], fingers: [3, 2, 2, 1, -1, 2] }
         ],
         'm7b9': [
-            { name: 'Full Shape (6th Fret)', desc: '6-string closed m7b9 chord.', frets: [8, 6, 8, 6, 8, 6], fingers: [2, 1, 2, 1, 2, 1] },
+            { name: 'Full Shape (6th Fret)', desc: '6-string closed m7b9 chord.', frets: [8, 6, 8, 6, 8, 6], fingers: [2, 1, 3, 1, 4, 1] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed m7b9 chord.', frets: [8, 10, 8, 8, 8, 9], fingers: [1, 3, 1, 1, 1, 2] },
-            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed m7b9 chord.', frets: [8, 10, 11, 8, 11, 8], fingers: [1, 2, 3, 1, 3, 1] },
+            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed m7b9 chord.', frets: [8, 10, 11, 8, 11, 8], fingers: [1, 2, 3, 1, 4, 1] },
             { name: 'Full Shape (9th Fret)', desc: '6-string closed m7b9 chord.', frets: [8, 10, 8, 8, 11, 9], fingers: [1, 3, 1, 1, 4, 2] },
             { name: 'Full Shape (9th Fret Wide)', desc: '6-string closed m7b9 chord.', frets: [8, 10, 10, 8, 11, 9], fingers: [1, 3, 3, 1, 4, 2] },
-            { name: 'Full Shape (10th Fret)', desc: '6-string closed m7b9 chord.', frets: [8, 10, 11, 8, 11, 11], fingers: [1, 2, 3, 1, 3, 3] },
+            { name: 'Full Shape (10th Fret)', desc: '6-string closed m7b9 chord.', frets: [8, 10, 11, 8, 11, 11], fingers: [1, 2, 3, 1, 4, 4] },
             { name: 'Open Shape (10th Fret)', desc: 'm7b9 with open D string.', frets: [8, 10, 11, 0, 11, 11], fingers: [1, 2, 3, 0, 3, 3] }
         ],
         '6sus4': [
@@ -508,7 +509,7 @@ window.chordDatabase = {
         'dim': [
             { name: 'Cdim Shape', desc: 'Diminished triad.', frets: [-1, -1, 10, 8, 7, -1], fingers: [-1, -1, 3, 2, 1, -1] },
             { name: 'E Shape dim', desc: '6th string root diminished triad.', frets: [8, -1, -1, 8, 7, -1], fingers: [2, -1, -1, 3, 1, -1] },
-            { name: 'A Shape dim', desc: '5th string root diminished triad.', frets: [2, 3, 1, -1, -1, -1], fingers: [2, 3, 1, -1, -1, -1] },
+            { name: 'A Shape dim', desc: '5th string root diminished triad.', frets: [-1, 3, 1, -1, -1, 2], fingers: [-1, 3, 1, -1, -1, 2] },
             { name: 'Thin Shape (1st Fret)', desc: 'Close-position dim voicing.', frets: [-1, 3, 1, -1, 1, 2], fingers: [-1, 3, 1, -1, 1, 2] },
             { name: 'Cluster Shape (2nd Fret)', desc: 'Close-position dim voicing.', frets: [-1, 3, 4, -1, 4, 2], fingers: [-1, 2, 3, -1, 3, 1] },
             { name: 'Airy Shape (10th Fret)', desc: 'Close-position dim voicing higher up the neck.', frets: [-1, -1, 10, 11, -1, 11], fingers: [-1, -1, 1, 2, -1, 2] },
@@ -519,13 +520,13 @@ window.chordDatabase = {
             { name: 'Cdim7 Shape', desc: 'Symmetrical dim7.', frets: [-1, 3, 4, 2, 4, -1], fingers: [-1, 2, 3, 1, 4, -1] },
             { name: 'E Shape dim7', desc: '6th string root symmetrical dim7.', frets: [8, -1, 7, 8, 7, -1], fingers: [3, -1, 1, 4, 2, -1] },
             { name: 'D Shape dim7', desc: '4th string root symmetrical dim7.', frets: [-1, -1, 10, 11, 10, 11], fingers: [-1, -1, 1, 3, 2, 4] },
-            { name: 'Open Shape (7th Fret)', desc: 'dim7 with open A string.', frets: [8, 0, 7, 8, 7, 8], fingers: [2, 0, 1, 2, 1, 2] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed dim7 chord.', frets: [8, 9, 10, 8, 10, 8], fingers: [1, 2, 3, 1, 3, 1] }
+            { name: 'Open Shape (7th Fret)', desc: 'dim7 with open A string.', frets: [8, 0, 7, 8, 7, 8], fingers: [2, 0, 1, 3, 1, 4] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed dim7 chord.', frets: [8, 9, 10, 8, 10, 8], fingers: [1, 2, 3, 1, 4, 1] }
         ],
         'add9': [
             { name: 'Open Cadd9', desc: 'Standard acoustic Cadd9.', frets: [-1, 3, 2, 0, 3, 0], fingers: [-1, 2, 1, 0, 3, 0] },
-            { name: 'E Shape add9 (No 5th)', desc: '6th string root, no barre needed.', frets: [8, 5, -1, 9, -1, -1], fingers: [2, 1, -1, 3, -1, -1] },
-            { name: 'D Shape add9 (No 5th)', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 9, -1, 10], fingers: [-1, -1, 2, 1, -1, 3] },
+            { name: 'E Shape add9 (No 5th)', desc: '6th string root, no barre needed.', frets: [8, -1, 0, 0, 5, -1], fingers: [2, -1, 0, 0, 1, -1] },
+            { name: 'D Shape add9 (No 5th)', desc: '4th string root, no barre needed.', frets: [8, -1, 0, -1, 8, 0], fingers: [1, -1, 0, -1, 2, 0] },
             { name: 'Compact Shape (Nut)', desc: 'Open-position add9 voicing.', frets: [-1, 3, 0, 0, 1, 0], fingers: [-1, 2, 0, 0, 1, 0] },
             { name: 'Layer Shape (Nut)', desc: 'Open-position add9 voicing.', frets: [-1, 3, 0, 0, 3, 0], fingers: [-1, 1, 0, 0, 1, 0] },
             { name: 'Full Shape (3rd Fret)', desc: 'Add9 with the high E string fretted.', frets: [-1, 3, 2, 0, 3, 3], fingers: [-1, 2, 1, 0, 2, 2] },
@@ -539,7 +540,7 @@ window.chordDatabase = {
             { name: 'Open Shape (8th Fret)', desc: 'Add9 with open D string.', frets: [8, 10, 0, 9, 8, 8], fingers: [1, 3, 0, 2, 1, 1] },
             { name: 'Airy Shape (Wide)', desc: 'Open-string add9 voicing.', frets: [8, 10, 0, 0, 8, 0], fingers: [1, 2, 0, 0, 1, 0] },
             { name: 'Open Shape (Wide)', desc: 'Add9 with open D and high E strings.', frets: [8, 10, 0, 9, 8, 0], fingers: [1, 3, 0, 2, 1, 0] },
-            { name: 'Full Shape (10th Fret)', desc: '6-string closed add9 chord.', frets: [8, 10, 10, 9, 8, 10], fingers: [1, 3, 3, 2, 1, 3] },
+            { name: 'Full Shape (10th Fret)', desc: '6-string closed add9 chord.', frets: [8, 10, 10, 9, 8, 10], fingers: [1, 3, 3, 2, 1, 4] },
             { name: 'Shell Shape (10th Fret)', desc: '4-note add9 shell higher up the neck.', frets: [-1, -1, 10, 9, 8, 10], fingers: [-1, -1, 3, 2, 1, 3] }
         ],
         'aug': [
@@ -564,9 +565,9 @@ window.chordDatabase = {
             { name: 'Compact Shape (3rd Fret)', desc: 'Augmented triad with muted D string.', frets: [-1, 3, -1, 5, 5, 4], fingers: [-1, 1, -1, 3, 3, 2] }
         ],
         'm9': [
-            { name: 'Cm9 Shape', desc: '', frets: [-1, 3, 1, 3, 3, -1], fingers: [-1, 2, 1, 3, 4, -1] },
-            { name: 'E Shape m9 (No 5th)', desc: '6th string root jazz m9 shell.', frets: [8, 5, 8, 8, -1, -1], fingers: [2, 1, 3, 4, -1, -1] },
-            { name: 'D Shape m9 (No 5th)', desc: '4th string root jazz m9 shell.', frets: [-1, -1, 10, 8, 11, 10], fingers: [-1, -1, 2, 1, 4, 3] },
+            { name: 'Cm9 Shape', desc: '', frets: [-1, 3, 1, 3, 3, 3], fingers: [-1, 3, 2, 1, 1, 1] },
+            { name: 'E Shape m9 (No 5th)', desc: '6th string root jazz m9 shell.', frets: [8, 5, 8, 8, 8, -1], fingers: [3, 2, 1, 1, 1, -1] },
+            { name: 'D Shape m9 (No 5th)', desc: '4th string root jazz m9 shell.', frets: [8, 10, 8, 8, -1, 10], fingers: [2, 3, 1, 1, -1, 4] },
             { name: 'Compact Shape (Nut)', desc: 'Open-position m9 voicing.', frets: [-1, 3, 0, 3, 4, 3], fingers: [-1, 1, 0, 2, 3, 2] },
             { name: 'Airy Shape (6th Fret)', desc: 'Open-string m9 voicing higher up the neck.', frets: [8, 6, 0, 0, 8, 6], fingers: [3, 1, 0, 0, 4, 2] },
             { name: 'Open Shape (6th Fret)', desc: 'm9 voicing with open D string.', frets: [8, 6, 0, 8, 8, 6], fingers: [2, 1, 0, 3, 4, 1] },
@@ -574,15 +575,12 @@ window.chordDatabase = {
             { name: 'Airy Shape (Nut)', desc: 'Open-position m9 voicing with muted low E.', frets: [-1, 3, 0, 0, 4, 6], fingers: [-1, 1, 0, 0, 2, 4] },
             { name: 'Spread Shape (5th Fret)', desc: 'Wide-interval m9 voicing.', frets: [8, 5, 5, 8, 8, 6], fingers: [3, 1, 1, 4, 4, 2] },
             { name: 'Spread Shape (Open D)', desc: 'Wide-interval m9 with open D string.', frets: [8, 5, 0, 8, 8, 6], fingers: [3, 1, 0, 4, 4, 2] },
-            { name: 'Full Shape (10th Fret)', desc: '6-string closed m9 chord higher up the neck.', frets: [8, 10, 8, 8, 11, 10], fingers: [1, 3, 1, 1, 4, 2] },
-            { name: 'Cluster Shape (10th Fret)', desc: 'Close-position m9 voicing.', frets: [8, 10, 10, 8, 11, 10], fingers: [1, 3, 3, 1, 4, 2] },
+            { name: 'Full Shape (10th Fret)', desc: '6-string closed m9 chord higher up the neck.', frets: [8, 10, 8, 8, 11, 10], fingers: [1, 2, 1, 1, 4, 3] },
+            { name: 'Cluster Shape (10th Fret)', desc: 'Close-position m9 voicing.', frets: [8, 10, 10, 8, 11, 10], fingers: [1, 2, 2, 1, 4, 3] },
             { name: 'Spread Shape (10th Fret)', desc: 'Wide-interval m9 voicing higher up the neck.', frets: [8, 10, 0, 8, 11, 11], fingers: [1, 2, 0, 1, 3, 3] },
             { name: 'Airy Shape (10th Fret)', desc: 'Open-string m9 voicing higher up the neck.', frets: [8, 10, 0, 0, 11, 11], fingers: [1, 2, 0, 0, 3, 3] }
         ],
         '11': [
-            { name: 'C11 Shape', desc: '', frets: [-1, 3, 3, 3, 3, -1], fingers: [-1, 1, 1, 1, 1, -1] },
-            { name: 'E Shape 11 (No 3rd/5th)', desc: '6th string root quartal 11th shell.', frets: [8, 5, 8, -1, 6, -1], fingers: [3, 1, 4, -1, 2, -1] },
-            { name: 'D Shape 11 (No 3rd/5th)', desc: '4th string root quartal 11th shell.', frets: [-1, -1, 10, 10, 11, 10], fingers: [-1, -1, 1, 2, 4, 3] },
             { name: 'Airy Shape (6th Fret)', desc: 'Open-string 11th voicing.', frets: [8, 7, 0, 0, 6, 6], fingers: [3, 2, 0, 0, 1, 1] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed 11th chord.', frets: [8, 8, 8, 9, 8, 10], fingers: [1, 1, 1, 2, 1, 3] },
             { name: 'Spread Shape (5th Fret)', desc: 'Wide-interval 11th voicing with open strings.', frets: [8, 5, 8, 0, 6, 0], fingers: [3, 1, 3, 0, 2, 0] },
@@ -593,46 +591,44 @@ window.chordDatabase = {
             { name: 'Shell Shape (Full G)', desc: '11th shell with added D string.', frets: [8, 10, 0, 10, 11, 0], fingers: [1, 2, 0, 2, 3, 0] }
         ],
         'm11': [
-            { name: 'Cm11 Shape', desc: '', frets: [8, -1, 8, 8, 6, -1], fingers: [3, -1, 4, 4, 1, -1] },
-            { name: 'A Shape m11 (No 5th/9th)', desc: '5th string root jazz m11 shell.', frets: [1, 3, 1, 3, -1, -1], fingers: [1, 3, 2, 4, -1, -1] },
-            { name: 'D Shape m11 (No 5th/9th)', desc: '4th string root jazz m11 shell.', frets: [-1, -1, 10, 10, 11, 11], fingers: [-1, -1, 1, 2, 3, 4] },
+            { name: 'Cm11 Shape', desc: '', frets: [8, 8, 0, 8, 8, 6], fingers: [1, 1, 0, 3, 4, 2] },
+            { name: 'A Shape m11 (No 5th/9th)', desc: '5th string root jazz m11 shell.', frets: [8, 8, 8, 8, 8, 10], fingers: [1, 1, 1, 1, 1, 2] },
             { name: 'Airy Shape (6th Fret)', desc: 'Open-string m11 voicing.', frets: [8, 6, 0, 0, 6, 6], fingers: [2, 1, 0, 0, 1, 1] },
             { name: 'Cluster Shape (5th Fret)', desc: 'Close-position m11 voicing.', frets: [8, 5, 5, 8, 6, 6], fingers: [3, 1, 1, 3, 2, 2] },
             { name: 'Shell Shape (8th Fret)', desc: '4-note m11 shell higher up the neck.', frets: [8, 8, 0, 0, 11, 11], fingers: [1, 1, 0, 0, 2, 2] },
             { name: 'Shell Shape (Full G)', desc: 'm11 shell with added D string.', frets: [8, 10, 0, 10, 11, 11], fingers: [1, 2, 0, 2, 3, 3] }
         ],
         'maj11': [
-            { name: 'Cmaj11 Shape', desc: '', frets: [-1, 3, 2, 0, 0, 1], fingers: [-1, 3, 2, 0, 0, 1] },
-            { name: 'E Shape maj11 (No 5th/9th)', desc: '6th string root jazz maj11 shell.', frets: [8, -1, 9, 9, 6, -1], fingers: [2, -1, 3, 4, 1, -1] },
-            { name: 'D Shape maj11 (No 3rd/5th)', desc: '4th string root jazz maj11 shell.', frets: [-1, -1, 10, 10, 12, 10], fingers: [-1, -1, 1, 2, 4, 3] },
+            { name: 'Cmaj11 Shape', desc: '', frets: [8, 8, 9, 7, 8, 0], fingers: [1, 1, 4, 2, 3, 0] },
+            { name: 'D Shape maj11 (No 3rd/5th)', desc: '4th string root jazz maj11 shell.', frets: [8, 7, 0, 0, 6, 7], fingers: [4, 2, 0, 0, 1, 3] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string maj11 voicing.', frets: [8, 8, 0, 0, 0, 0], fingers: [1, 1, 0, 0, 0, 0] },
             { name: 'Open Shape (8th Fret)', desc: 'Wide maj11 voicing with open high strings.', frets: [8, 10, 0, 10, 0, 0], fingers: [1, 2, 0, 2, 0, 0] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed maj11 chord.', frets: [8, 8, 9, 9, 8, 10], fingers: [1, 1, 2, 2, 1, 3] },
             { name: 'Open Shape (Wide)', desc: 'Wide maj11 voicing with open high strings.', frets: [8, 8, 5, 7, 0, 0], fingers: [3, 3, 1, 2, 0, 0] },
             { name: 'Airy Shape (Wide)', desc: 'Open-string maj11 voicing.', frets: [8, 8, 0, 0, 5, 7], fingers: [3, 3, 0, 0, 1, 2] },
-            { name: 'Cluster Shape (5th Fret)', desc: 'Close-position maj11 voicing.', frets: [8, 8, 5, 7, 5, 7], fingers: [3, 3, 1, 2, 1, 2] }
+            { name: 'Cluster Shape (5th Fret)', desc: 'Close-position maj11 voicing.', frets: [8, 8, 5, 7, 5, 7], fingers: [4, 4, 1, 2, 1, 3] }
         ],
         '13': [
-            { name: 'C13 Shape', desc: '', frets: [8, -1, 8, 9, 10, -1], fingers: [1, -1, 2, 3, 4, -1] },
-            { name: 'A Shape 13 (No 5th/9th)', desc: '5th string root jazz 13th shell.', frets: [-1, 3, 7, 3, 5, -1], fingers: [-1, 1, 4, 2, 3, -1] },
-            { name: 'D Shape 13 (No 5th/9th)', desc: '4th string root jazz 13th shell.', frets: [-1, -1, 10, 9, 10, 6], fingers: [-1, -1, 3, 2, 4, 1] }
+            { name: 'C13 Shape', desc: '', frets: [8, 0, 0, 0, 11, 0], fingers: [1, 0, 0, 0, 2, 0] },
+            { name: 'A Shape 13 (No 5th/9th)', desc: '5th string root jazz 13th shell.', frets: [8, 0, 0, 0, 5, 6], fingers: [3, 0, 0, 0, 1, 2] },
+            { name: 'D Shape 13 (No 5th/9th)', desc: '4th string root jazz 13th shell.', frets: [8, 7, 7, 7, 8, 6], fingers: [3, 1, 1, 1, 4, 2] }
         ],
         'm13': [
-            { name: 'Cm13 Shape', desc: '', frets: [8, -1, 8, 8, 10, -1], fingers: [1, -1, 2, 2, 4, -1] },
-            { name: 'A Shape m13 (No 5th/9th)', desc: '5th string root jazz m13 shell.', frets: [5, 3, 1, 3, -1, -1], fingers: [4, 2, 1, 3, -1, -1] },
-            { name: 'D Shape m13 (No 5th/9th)', desc: '4th string root jazz m13 shell.', frets: [-1, -1, 10, 8, 10, 6], fingers: [-1, -1, 3, 2, 4, 1] }
+            { name: 'Cm13 Shape', desc: '', frets: [8, 0, 8, 8, 8, 10], fingers: [2, 0, 1, 1, 1, 3] },
+            { name: 'A Shape m13 (No 5th/9th)', desc: '5th string root jazz m13 shell.', frets: [8, 0, 0, 8, 8, 6], fingers: [2, 0, 0, 3, 4, 1] },
+            { name: 'D Shape m13 (No 5th/9th)', desc: '4th string root jazz m13 shell.', frets: [8, 5, 8, 8, 8, 5], fingers: [4, 2, 1, 1, 1, 3] }
         ],
         'maj13': [
-            { name: 'Cmaj13 Shape', desc: '', frets: [-1, 3, 2, 2, 0, 0], fingers: [-1, 3, 2, 1, 0, 0] },
-            { name: 'E Shape maj13 (No 5th/9th)', desc: '6th string root jazz maj13 shell.', frets: [8, -1, 9, 9, 10, -1], fingers: [1, -1, 2, 3, 4, -1] },
-            { name: 'D Shape maj13 (No 5th/9th)', desc: '4th string root jazz maj13 shell.', frets: [-1, -1, 10, 9, 10, 7], fingers: [-1, -1, 3, 2, 4, 1] }
+            { name: 'Cmaj13 Shape', desc: '', frets: [8, 0, 0, 0, 5, 7], fingers: [3, 0, 0, 0, 1, 2] },
+            { name: 'E Shape maj13 (No 5th/9th)', desc: '6th string root jazz maj13 shell.', frets: [8, 0, 0, 0, 0, 0], fingers: [1, 0, 0, 0, 0, 0] },
+            { name: 'D Shape maj13 (No 5th/9th)', desc: '4th string root jazz maj13 shell.', frets: [8, 7, 7, 7, 8, 7], fingers: [3, 1, 1, 1, 4, 2] }
         ],
         '7sus4': [
             { name: 'C7sus4 Shape', desc: '', frets: [-1, 3, 5, 3, 6, -1], fingers: [-1, 1, 3, 1, 4, -1] },
-            { name: 'E Shape 7sus4 (No 5th)', desc: '6th string root jazz 7sus4 shell.', frets: [8, -1, 8, -1, 6, -1], fingers: [2, -1, 3, -1, 1, -1] },
-            { name: 'D Shape 7sus4 (No 5th)', desc: '4th string root jazz 7sus4 shell.', frets: [-1, -1, 10, 10, -1, 6], fingers: [-1, -1, 2, 3, -1, 1] },
+            { name: 'E Shape 7sus4 (No 5th)', desc: '6th string root jazz 7sus4 shell.', frets: [8, 8, 8, -1, 8, 6], fingers: [1, 1, 1, -1, 1, 2] },
+            { name: 'D Shape 7sus4 (No 5th)', desc: '4th string root jazz 7sus4 shell.', frets: [8, -1, -1, 0, 6, 6], fingers: [3, -1, -1, 0, 1, 2] },
             { name: 'Open Shape (6th Fret)', desc: '7sus4 with open D string.', frets: [8, 8, 8, 0, 6, 6], fingers: [2, 2, 2, 0, 1, 1] },
-            { name: 'Full Shape (8th Fret)', desc: '6-string closed 7sus4 chord.', frets: [8, 10, 8, 10, 8, 8], fingers: [1, 2, 1, 2, 1, 1] },
+            { name: 'Full Shape (8th Fret)', desc: '6-string closed 7sus4 chord.', frets: [8, 10, 8, 10, 8, 8], fingers: [1, 2, 1, 3, 1, 1] },
             { name: 'Cluster Shape (3rd Fret)', desc: 'Close-position 7sus4 voicing.', frets: [-1, 3, 3, 3, 6, 3], fingers: [-1, 1, 1, 1, 2, 1] },
             { name: 'Cluster Shape (3rd Fret Wide)', desc: 'Close-position 7sus4 voicing.', frets: [-1, 3, 5, 3, 6, 3], fingers: [-1, 1, 2, 1, 3, 1] },
             { name: 'Cluster Shape (3rd Fret High)', desc: 'Close-position 7sus4 voicing.', frets: [-1, 3, 5, 3, 6, 6], fingers: [-1, 1, 2, 1, 3, 3] },
@@ -644,7 +640,7 @@ window.chordDatabase = {
             { name: 'Full Shape (5th Fret Wide)', desc: '6-string closed 7sus4 chord.', frets: [8, 8, 5, 5, 8, 6], fingers: [3, 3, 1, 1, 3, 2] },
             { name: 'Open Shape (5th Fret Wide)', desc: '7sus4 with open D string.', frets: [8, 8, 5, 0, 8, 6], fingers: [3, 3, 1, 0, 3, 2] },
             { name: 'Open Shape (8th Fret)', desc: '7sus4 with open D string.', frets: [8, 8, 10, 0, 11, 8], fingers: [1, 1, 2, 0, 3, 1] },
-            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed 7sus4 chord.', frets: [8, 10, 8, 10, 11, 8], fingers: [1, 2, 1, 2, 3, 1] },
+            { name: 'Full Shape (8th Fret Wide)', desc: '6-string closed 7sus4 chord.', frets: [8, 10, 8, 10, 11, 8], fingers: [1, 2, 1, 3, 4, 1] },
             { name: 'Full Shape (8th Fret High)', desc: '6-string closed 7sus4 chord.', frets: [8, 10, 10, 10, 11, 8], fingers: [1, 2, 2, 2, 3, 1] },
             { name: 'Open Shape (10th Fret)', desc: '7sus4 with open D string.', frets: [-1, -1, 10, 0, 11, 13], fingers: [-1, -1, 1, 0, 2, 3] }
         ],
@@ -656,7 +652,7 @@ window.chordDatabase = {
             { name: 'Open Shape (7th Fret)', desc: 'maj7sus4 with open G and B strings.', frets: [8, 8, 9, 0, 0, 7], fingers: [2, 2, 3, 0, 0, 1] },
             { name: 'Compact Shape (8th Fret)', desc: 'maj7sus4 with open G and B strings.', frets: [8, 8, 9, 0, 0, 8], fingers: [1, 1, 2, 0, 0, 1] },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed maj7sus4 chord.', frets: [8, 8, 9, 10, 8, 8], fingers: [1, 1, 2, 3, 1, 1] },
-            { name: 'Stretched Shape (8th Fret)', desc: '6-string closed maj7sus4 chord.', frets: [8, 10, 9, 10, 8, 8], fingers: [1, 3, 2, 3, 1, 1] },
+            { name: 'Stretched Shape (8th Fret)', desc: '6-string closed maj7sus4 chord.', frets: [8, 10, 9, 10, 8, 8], fingers: [1, 3, 2, 4, 1, 1] },
             { name: 'Bright Shape (8th Fret)', desc: 'maj7sus4 with open G and B strings.', frets: [8, 8, 10, 0, 0, 8], fingers: [1, 1, 2, 0, 0, 1] },
             { name: 'Barre Shape (8th Fret)', desc: 'maj7sus4 with open B string.', frets: [8, 10, 10, 10, 0, 8], fingers: [1, 2, 2, 2, 0, 1] },
             { name: 'Layered Shape (1st Fret)', desc: 'Close-position maj7sus4 voicing.', frets: [-1, 3, 3, 4, 1, 3], fingers: [-1, 2, 2, 3, 1, 2] },
@@ -681,7 +677,7 @@ window.chordDatabase = {
             { name: 'Open Shape (5th Fret)', desc: '7sus2 with open G string.', frets: [8, 5, 5, 0, 8, 6], fingers: [3, 1, 1, 0, 3, 2] },
             { name: 'Open Shape (5th Fret Wide)', desc: '7sus2 with open D and G strings.', frets: [8, 5, 0, 0, 8, 6], fingers: [3, 1, 0, 0, 3, 2] },
             { name: 'Open Shape (8th Fret)', desc: '7sus2 with open D and G strings.', frets: [8, 10, 0, 0, 11, 8], fingers: [1, 2, 0, 0, 3, 1] },
-            { name: 'Full Shape (8th Fret)', desc: '7sus2 with open G string.', frets: [8, 10, 8, 0, 11, 10], fingers: [1, 2, 1, 0, 3, 2] },
+            { name: 'Full Shape (8th Fret)', desc: '7sus2 with open G string.', frets: [8, 10, 8, 0, 11, 10], fingers: [1, 2, 1, 0, 4, 3] },
             { name: 'Open Shape (8th Fret Wide)', desc: '7sus2 with open D and G strings.', frets: [8, 10, 0, 0, 11, 10], fingers: [1, 2, 0, 0, 3, 2] }
         ],
         'maj7sus2': [
@@ -703,9 +699,9 @@ window.chordDatabase = {
             { name: 'Cluster Shape (10th Fret Wide)', desc: 'maj7sus2 with open G string.', frets: [-1, -1, 10, 0, 12, 10], fingers: [-1, -1, 1, 0, 2, 1] }
         ],
         '6/9': [
-            { name: 'C6/9 Shape', desc: '', frets: [-1, 3, 2, 2, 3, -1], fingers: [-1, 2, 1, 1, 3, -1] },
-            { name: 'E Shape 6/9 (No 5th)', desc: '6th string root, no barre needed.', frets: [8, 5, 7, 9, -1, -1], fingers: [3, 1, 2, 4, -1, -1] },
-            { name: 'D Shape 6/9 (No 5th)', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 9, 10, 10], fingers: [-1, -1, 2, 1, 3, 4] },
+            { name: 'C6/9 Shape', desc: '', frets: [-1, 3, 2, 0, 3, 5], fingers: [-1, 2, 1, 0, 3, 4] },
+            { name: 'E Shape 6/9 (No 5th)', desc: '6th string root, no barre needed.', frets: [8, 0, 0, 0, 5, -1], fingers: [2, 0, 0, 0, 1, -1] },
+            { name: 'D Shape 6/9 (No 5th)', desc: '4th string root, no barre needed.', frets: [8, 0, 0, 0, -1, 0], fingers: [1, 0, 0, 0, -1, 0] },
             { name: 'Full Shape (3rd Fret)', desc: 'Closed 6/9 voicing.', frets: [-1, 3, 2, 2, 3, 3], fingers: [-1, 2, 1, 1, 2, 2] },
             { name: 'Airy Shape (Nut)', desc: 'Open-string 6/9 voicing.', frets: [-1, 3, 0, 0, 5, 5], fingers: [-1, 1, 0, 0, 2, 2] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string 6/9 voicing.', frets: [8, 0, 0, 0, 8, 0], fingers: [1, 0, 0, 0, 1, 0] },
@@ -724,16 +720,16 @@ window.chordDatabase = {
             { name: 'Echo Shape (Nut)', desc: 'Open-position 6/9 voicing.', frets: [-1, 3, 0, 2, 5, 3], fingers: [-1, 2, 0, 1, 3, 2] }
         ],
         '7b9': [
-            { name: 'C7b9 Shape', desc: '', frets: [-1, 3, 2, 3, 2, -1], fingers: [-1, 2, 1, 3, 1, -1] },
-            { name: 'E Shape 7b9 (No 5th)', desc: '6th string root jazz 7b9 shell.', frets: [8, -1, 8, 6, 5, -1], fingers: [3, -1, 4, 2, 1, -1] },
-            { name: 'D Shape 7b9 (No 5th/7th)', desc: '4th string root jazz 7b9 shell.', frets: [-1, -1, 10, 9, -1, 9], fingers: [-1, -1, 3, 1, -1, 2] },
+            { name: 'C7b9 Shape', desc: '', frets: [8, 7, 5, 6, -1, 6], fingers: [4, 3, 2, 1, -1, 1] },
+            { name: 'E Shape 7b9 (No 5th)', desc: '6th string root jazz 7b9 shell.', frets: [8, -1, 8, 6, 8, 0], fingers: [2, -1, 3, 1, 4, 0] },
+            { name: 'D Shape 7b9 (No 5th/7th)', desc: '4th string root jazz 7b9 shell.', frets: [8, -1, 8, 9, 8, 9], fingers: [1, -1, 1, 2, 1, 3] },
             { name: 'Open Shape (2nd Fret)', desc: '7b9 with open high E string.', frets: [-1, 3, 5, 3, 2, 0], fingers: [-1, 2, 3, 2, 1, 0] },
             { name: 'Open Shape (8th Fret)', desc: '7b9 with open D and high E strings.', frets: [8, 10, 11, 0, 11, 0], fingers: [1, 2, 3, 0, 3, 0] }
         ],
         '7#9': [
-            { name: 'C7#9 Shape', desc: '', frets: [-1, 3, 2, 3, 4, -1], fingers: [-1, 2, 1, 3, 4, -1] },
-            { name: 'E Shape 7#9 (No 5th)', desc: '6th string root jazz 7#9 shell (Hendrix chord).', frets: [8, -1, 8, 8, 5, -1], fingers: [2, -1, 3, 4, 1, -1] },
-            { name: 'D Shape 7#9 (No 5th/7th)', desc: '4th string root jazz 7#9 shell (Hendrix chord).', frets: [-1, -1, 10, 8, -1, 12], fingers: [-1, -1, 2, 1, -1, 3] },
+            { name: 'C7#9 Shape', desc: '', frets: [8, 6, -1, 0, 5, 6], fingers: [4, 2, -1, 0, 1, 3] },
+            { name: 'E Shape 7#9 (No 5th)', desc: '6th string root jazz 7#9 shell (Hendrix chord).', frets: [8, 6, 5, -1, 5, 6], fingers: [4, 2, 1, -1, 1, 3] },
+            { name: 'D Shape 7#9 (No 5th/7th)', desc: '4th string root jazz 7#9 shell (Hendrix chord).', frets: [8, -1, 8, 8, 8, 0], fingers: [1, -1, 1, 1, 1, 0] },
             { name: 'Open Shape (3rd Fret)', desc: '7#9 with open high E string.', frets: [-1, 3, 5, 3, 4, 0], fingers: [-1, 1, 3, 1, 2, 0] },
             { name: 'Open Shape (6th Fret)', desc: '7#9 with open G and high E strings.', frets: [8, 6, 8, 0, 8, 0], fingers: [2, 1, 2, 0, 2, 0] },
             { name: 'Open Shape (8th Fret)', desc: '7#9 with open high E string.', frets: [8, 10, 8, 8, 8, 0], fingers: [1, 2, 1, 1, 1, 0] },
@@ -747,7 +743,7 @@ window.chordDatabase = {
         ],
         'm(maj7)': [
             { name: 'Open Shape (Nut)', desc: 'Low-position minor-major 7th voicing.', frets: [-1, 3, 1, 0, 0, 3], fingers: [-1, 3, 1, 0, 0, 3] },
-            { name: 'Reach Shape (Nut)', desc: 'Open-position voicing with a stretch on the G string.', frets: [-1, 3, 1, 4, 1, 3], fingers: [-1, 3, 1, 4, 1, 3] },
+            { name: 'Reach Shape (Nut)', desc: 'Open-position voicing with a stretch on the G string.', frets: [-1, 3, 1, 4, 1, 3], fingers: [-1, 2, 1, 4, 1, 3] },
             { name: 'Reach Shape (Open B)', desc: 'Reach shape with the B string left open.', frets: [-1, 3, 1, 4, 0, 3], fingers: [-1, 3, 1, 4, 0, 3] },
             { name: 'Reach Shape (Doubled Eb)', desc: 'Reach shape with the B string fretted instead of open.', frets: [-1, 3, 1, 4, 4, 3], fingers: [-1, 3, 1, 4, 4, 3] },
             { name: 'Cm(maj7) Shape', desc: '', frets: [-1, 3, 5, 4, 4, 3], fingers: [-1, 1, 4, 2, 3, 1] },
@@ -758,8 +754,8 @@ window.chordDatabase = {
             { name: 'Angular Shape (6th Fret)', desc: 'Wide voicing built on the D string.', frets: [8, 6, 9, 0, 0, 7], fingers: [3, 1, 4, 0, 0, 2] },
             { name: 'Angular Shape (High Root)', desc: 'Angular shape with the root doubled on the high E string.', frets: [8, 6, 9, 0, 0, 8], fingers: [3, 1, 4, 0, 0, 3] },
             { name: 'E Shape mM7 (8th Fret)', desc: 'Full 6-string E-shape minor-major 7th barre.', frets: [8, 10, 9, 8, 8, 8], fingers: [1, 3, 2, 1, 1, 1] },
-            { name: 'E Shape m(maj7) (No 5th)', desc: '6th string root jazz shell voicing.', frets: [8, -1, 9, 8, -1, -1], fingers: [1, -1, 3, 2, -1, -1] },
-            { name: 'D Shape m(maj7) (No 5th)', desc: '4th string root jazz shell voicing.', frets: [-1, -1, 10, -1, 12, 11], fingers: [-1, -1, 1, -1, 3, 2] },
+            { name: 'E Shape m(maj7) (No 5th)', desc: '6th string root jazz shell voicing.', frets: [8, -1, -1, 0, 0, 11], fingers: [1, -1, -1, 0, 0, 2] },
+            { name: 'D Shape m(maj7) (No 5th)', desc: '4th string root jazz shell voicing.', frets: [8, -1, 9, 8, 8, 8], fingers: [2, -1, 3, 1, 1, 1] },
             { name: 'Shell Shape (10th Fret)', desc: '3-note high-position shell.', frets: [-1, -1, 10, 0, 0, 11], fingers: [-1, -1, 1, 0, 0, 2] },
             { name: 'Shell Shape (Full G)', desc: 'Shell shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, 0, 11], fingers: [-1, -1, 1, 4, 0, 2] },
             { name: 'Shell Shape (High B)', desc: 'Shell shape with the B string fretted instead of open.', frets: [-1, -1, 10, 0, 12, 11], fingers: [-1, -1, 1, 0, 4, 2] },
@@ -767,8 +763,8 @@ window.chordDatabase = {
         ],
         'm(add9)': [
             { name: 'Cm(add9) Shape', desc: '', frets: [-1, 3, 1, 0, 3, -1], fingers: [-1, 3, 1, 0, 4, -1] },
-            { name: 'E Shape m(add9) (No 5th)', desc: '6th string root, no barre needed.', frets: [8, 5, -1, 8, -1, -1], fingers: [2, 1, -1, 3, -1, -1] },
-            { name: 'D Shape m(add9) (No 5th)', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 7, -1, 11], fingers: [-1, -1, 2, 1, -1, 3] },
+            { name: 'E Shape m(add9) (No 5th)', desc: '6th string root, no barre needed.', frets: [8, 5, -1, 8, 8, 8], fingers: [3, 2, -1, 1, 1, 1] },
+            { name: 'D Shape m(add9) (No 5th)', desc: '4th string root, no barre needed.', frets: [8, 6, 0, 0, -1, -1], fingers: [2, 1, 0, 0, -1, -1] },
             { name: 'Compact Shape (3rd Fret)', desc: 'Open-position m(add9) voicing.', frets: [-1, 3, 1, 0, 3, 3], fingers: [-1, 2, 1, 0, 2, 2] },
             { name: 'Layer Shape (3rd Fret)', desc: 'Open-position m(add9) voicing.', frets: [-1, 3, 0, 0, 4, 3], fingers: [-1, 1, 0, 0, 2, 1] },
             { name: 'Layer Shape (Full)', desc: 'm(add9) voicing with G string fretted.', frets: [-1, 3, 0, 5, 4, 3], fingers: [-1, 1, 0, 3, 2, 1] },
@@ -826,7 +822,21 @@ window.chordDatabase = {
             { name: 'Open D5', desc: 'Fat sounding open power chord.', frets: [-1, -1, 0, 2, 3, -1], fingers: [-1, -1, 0, 1, 3, -1] }
         ],
         'sus2': [
-            { name: 'Open Dsus2', desc: 'Dreamy open suspended 2.', frets: [-1, -1, 0, 2, 3, 0], fingers: [-1, -1, 0, 1, 3, 0] }
+            { name: 'Open Dsus2', desc: 'Dreamy open suspended 2.', frets: [-1, -1, 0, 2, 3, 0], fingers: [-1, -1, 0, 1, 3, 0] },
+            { name: 'Compact (2nd Fret)', desc: 'A-string root, no 5th.', frets: [-1, 5, 2, 2, 3, 0], fingers: [-1, 3, 1, 1, 2, 0] },
+            { name: 'A-Root (2nd Fret)', desc: 'A-string root with the open shell.', frets: [-1, 5, 0, 2, 3, 0], fingers: [-1, 3, 0, 1, 2, 0] },
+            { name: 'Compact Full (2nd Fret)', desc: 'A-string root, 5th doubled up top.', frets: [-1, 5, 2, 2, 5, 0], fingers: [-1, 2, 1, 1, 3, 0] },
+            { name: 'D-Root (2nd Fret)', desc: 'Open D root, wide voicing.', frets: [-1, -1, 0, 2, 5, 0], fingers: [-1, -1, 0, 1, 2, 0] },
+            { name: 'A-Root Wide (2nd Fret)', desc: 'A-string root, wide voicing.', frets: [-1, 5, 0, 2, 5, 0], fingers: [-1, 2, 0, 1, 3, 0] },
+            { name: 'Compact (2nd, High E)', desc: 'A-string root, high E added.', frets: [-1, 5, 2, 2, 3, 5], fingers: [-1, 3, 1, 1, 2, 4] },
+            { name: 'Compact Full (2nd, High E)', desc: 'A-string root, wide with high E.', frets: [-1, 5, 2, 2, 5, 5], fingers: [-1, 2, 1, 1, 3, 4] },
+            { name: 'A-Root (5th Fret)', desc: 'A-string root, upper structure.', frets: [-1, 5, 0, 7, 5, 5], fingers: [-1, 1, 0, 4, 2, 3] },
+            { name: 'D-Root (5th Fret)', desc: 'Open D root, top voicing.', frets: [-1, -1, 0, 7, 5, 5], fingers: [-1, -1, 0, 2, 1, 1] },
+            { name: 'E Shape (5th Fret)', desc: 'A-string root, full voicing.', frets: [-1, 5, 7, 7, 5, 5], fingers: [-1, 1, 2, 3, 1, 1] },
+            { name: 'E Shape (5th, Open E)', desc: 'A-string root, open high E.', frets: [-1, 5, 7, 7, 5, 0], fingers: [-1, 1, 2, 3, 1, 0] },
+            { name: 'Shell (9th Fret)', desc: 'Top-3 string sus2 shell.', frets: [-1, -1, 0, 9, 10, 0], fingers: [-1, -1, 0, 1, 2, 0] },
+            { name: 'E Shape Open (9th Fret)', desc: '6th-string root, open A/D strings.', frets: [10, 0, 0, 9, 10, 0], fingers: [2, 0, 0, 1, 3, 0] },
+            { name: 'Shell Full (9th Fret)', desc: 'Top-3 string sus2 shell, high E fretted.', frets: [-1, -1, 0, 9, 10, 10], fingers: [-1, -1, 0, 1, 2, 3] }
         ],
         'sus4': [
             { name: 'Open Dsus4', desc: 'Resolved to D major commonly.', frets: [-1, -1, 0, 2, 3, 3], fingers: [-1, -1, 0, 1, 3, 4] },
@@ -881,52 +891,112 @@ window.chordDatabase = {
             { name: 'Shell (9th, Top)', desc: 'Top-3 string shell, D-string root.', frets: [-1, -1, 12, 10, 10, 9], fingers: [-1, -1, 4, 2, 2, 1] },
             { name: 'E Shape (9th, D Root)', desc: '6th-string root with the D string fretted.', frets: [10, 0, 12, 10, 10, 9], fingers: [1, 0, 4, 2, 2, 1] },
             { name: 'E Shape Full (9th, A+D Root)', desc: 'Full 6th-string root, D and A both fretted.', frets: [10, 12, 12, 10, 10, 9], fingers: [2, 4, 4, 1, 1, 3] },
-            { name: 'E Shape (10th Fret)', desc: 'Full 6-string movable barre.', frets: [10, 12, 11, 10, 10, 13], fingers: [2, 4, 3, 1, 1, 4] }
+            { name: 'E Shape (10th Fret)', desc: 'Full 6-string movable barre.', frets: [10, 12, 11, 10, 10, 13], fingers: [1, 3, 2, 1, 1, 4] }
+        ],
+        '6': [
+            { name: 'Open D6 Shape', desc: 'Sweet vintage 6th, open position.', frets: [-1, -1, 0, 2, 0, 2], fingers: [-1, -1, 0, 1, 0, 2] },
+            { name: 'Compact (2nd Fret)', desc: 'A-string root, no 5th.', frets: [-1, 5, 0, 2, 0, 2], fingers: [-1, 3, 0, 1, 0, 2] },
+            { name: 'A-Root (2nd Fret)', desc: 'A-string root, full voicing.', frets: [-1, 5, 4, 2, 0, 2], fingers: [-1, 3, 2, 1, 0, 2] },
+            { name: 'A-Root Wide (2nd Fret)', desc: 'A-string root, wide voicing.', frets: [-1, 5, 4, 2, 0, 5], fingers: [-1, 2, 1, 1, 0, 3] },
+            { name: 'A-Root (3rd Fret)', desc: 'A-string root, closed voicing.', frets: [-1, 5, 4, 4, 3, 5], fingers: [-1, 3, 1, 1, 1, 4] },
+            { name: 'A-Root (4th Fret)', desc: 'A-string root, open B string.', frets: [-1, 5, 4, 4, 0, 5], fingers: [-1, 3, 1, 1, 0, 4] },
+            { name: 'A-Root Full (4th Fret)', desc: 'A-string root, 6th on top.', frets: [-1, 5, 4, 7, 0, 5], fingers: [-1, 2, 1, 4, 0, 3] },
+            { name: 'E Shape (10th Fret)', desc: '6th-string root, open B string.', frets: [10, 0, 0, 11, 0, 10], fingers: [2, 0, 0, 3, 0, 1] },
+            { name: 'E Shape (10th, A Root)', desc: '6th-string root, A string fretted.', frets: [10, 12, 0, 11, 0, 10], fingers: [2, 4, 0, 3, 0, 1] },
+            { name: 'E Shape (10th, D Root)', desc: '6th-string root, D string fretted.', frets: [10, 0, 12, 11, 0, 10], fingers: [2, 0, 4, 3, 0, 1] },
+            { name: 'E Shape (10th, B Root)', desc: '6th-string root, B string fretted.', frets: [10, 0, 0, 11, 12, 10], fingers: [2, 0, 0, 3, 4, 1] },
+            { name: 'E Shape Full (10th Fret)', desc: 'Full 6th-string root voicing.', frets: [10, 12, 12, 11, 12, 10], fingers: [1, 3, 3, 2, 4, 1] },
+            { name: 'Shell (12th Fret)', desc: 'Top-3 string 6th shell.', frets: [-1, -1, 12, 14, 12, 14], fingers: [-1, -1, 1, 3, 1, 4] },
+            { name: 'D-Root Shell (12th Fret)', desc: 'Open D, top-2 string voicing.', frets: [-1, -1, 0, 14, 12, 14], fingers: [-1, -1, 0, 2, 1, 3] },
+            { name: 'Shell Open B (12th Fret)', desc: 'Top-3 string, open B string.', frets: [-1, -1, 12, 14, 0, 14], fingers: [-1, -1, 1, 3, 0, 4] },
+            { name: 'D-Root Shell (14th Fret)', desc: 'Open D and B, top voicing.', frets: [-1, -1, 0, 14, 0, 14], fingers: [-1, -1, 0, 1, 0, 2] }
         ],
         'add9': [
-            { name: 'Open Dadd9', desc: 'Beautiful open ringing strings.', frets: [-1, -1, 4, 2, 3, 0], fingers: [-1, -1, 3, 1, 2, 0] }
+            { name: 'Open Dadd9', desc: 'Beautiful open ringing strings.', frets: [-1, -1, 0, 2, 5, 2], fingers: [-1, -1, 0, 1, 3, 2] },
+            { name: 'A Shape (2nd Fret)', desc: '5th-string root, open D string.', frets: [-1, 5, 0, 2, 5, 2], fingers: [-1, 3, 0, 1, 4, 2] },
+            { name: 'A Shape (5th Fret)', desc: '5th-string root, open high E string.', frets: [-1, 5, 7, 7, 7, 0], fingers: [-1, 1, 2, 3, 4, 0] },
+            { name: 'E Shape (10th, Open A/Top)', desc: '6th-string root, open A and high E strings.', frets: [10, 0, 12, 11, 10, 0], fingers: [1, 0, 4, 3, 2, 0] },
+            { name: 'D Shape (10th, Open Top)', desc: '4th-string root, open high E string.', frets: [-1, -1, 12, 11, 10, 0], fingers: [-1, -1, 3, 2, 1, 0] },
+            { name: 'E Shape (10th Fret)', desc: '6th-string root, full voicing.', frets: [10, 12, 12, 11, 10, 0], fingers: [1, 3, 3, 2, 1, 0] },
+            { name: 'E Shape (10th, Open A/D)', desc: '6th-string root, open A and D strings.', frets: [10, 0, 0, 11, 10, 12], fingers: [1, 0, 0, 3, 2, 4] },
+            { name: 'D Shape (10th, Open D)', desc: '4th-string root, open D string.', frets: [-1, -1, 0, 11, 10, 12], fingers: [-1, -1, 0, 2, 1, 3] },
+            { name: 'E Shape (10th, Full)', desc: '6th-string root, closed 6-string voicing.', frets: [10, 12, 12, 11, 10, 12], fingers: [1, 3, 3, 2, 1, 4] }
         ],
         'aug': [
             { name: 'Daug Shape', desc: 'Tense augmented passing chord.', frets: [-1, -1, 0, 3, 3, 2], fingers: [-1, -1, 0, 2, 3, 1] }
         ],
         'maj7add13': [
-            { name: 'Open Dmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [-1, 0, 0, 4, 2, 2], fingers: [-1, 0, 0, 2, 1, 1] }
+            { name: 'Open Dmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [-1, 5, 4, 6, 0, 5], fingers: [-1, 2, 1, 4, 0, 3] }
         ],
         'm7add13': [
-            { name: 'Open Dm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 0, 0, 5, 0, 1], fingers: [-1, 0, 0, 2, 0, 1] }
+            { name: 'Open Dm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 5, 3, 5, 0, 5], fingers: [-1, 2, 1, 3, 0, 4] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Dm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [-1, 0, 0, 4, 2, 1], fingers: [-1, 0, 0, 3, 2, 1] }
+            { name: 'Open Dm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [-1, 5, 3, 6, 0, 5], fingers: [-1, 2, 1, 4, 0, 3] }
         ],
         '7b5': [
             { name: 'Open D7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, -1, 0, 1, 1, 2], fingers: [-1, -1, 0, 1, 1, 2] }
         ],
         'aug7': [
-            { name: 'Open Daug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, 1, 0, -1, 1, 2], fingers: [-1, 1, 0, -1, 1, 2] }
+            { name: 'Open Daug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, -1, 0, 3, 1, 2], fingers: [-1, -1, 0, 3, 1, 2] }
         ],
         'aug7b9': [
-            { name: 'Open Daug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [-1, 3, 0, 3, 4, 2], fingers: [-1, 2, 0, 2, 3, 1] }
+            { name: 'Open Daug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [-1, 5, 4, 5, 4, 6], fingers: [-1, 2, 1, 3, 1, 4] }
         ],
         'm7#5': [
-            { name: 'Open Dm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 1, 0, -1, 1, 1], fingers: [-1, 1, 0, -1, 1, 1] }
+            { name: 'Open Dm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, -1, 0, 3, 1, 1], fingers: [-1, -1, 0, 2, 1, 1] }
         ],
         'm7b9': [
-            { name: 'Open Dm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [-1, 0, 0, 5, 4, 1], fingers: [-1, 0, 0, 3, 2, 1] }
+            { name: 'Open Dm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [10, 8, -1, 8, 10, 8], fingers: [2, 1, -1, 1, 3, 1] }
         ],
         '6sus4': [
-            { name: 'Open D6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, 0, 0, 0, 0, -1], fingers: [-1, 0, 0, 0, 0, -1] }
+            { name: 'Open D6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, -1, 0, 2, 0, 3], fingers: [-1, -1, 0, 1, 0, 2] }
         ],
         '6sus2': [
-            { name: 'Open D6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [0, 0, 0, -1, 0, 0], fingers: [0, 0, 0, -1, 0, 0] }
+            { name: 'Open D6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, -1, 0, 2, 0, 0], fingers: [-1, -1, 0, 1, 0, 0] }
         ],
         'maj7sus4': [
-            { name: 'Open Dmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, 0, 0, 0, 2, -1], fingers: [-1, 0, 0, 0, 1, -1] }
+            { name: 'Open Dmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, -1, 0, 0, 2, 5], fingers: [-1, -1, 0, 0, 1, 2] }
         ],
         '7sus2': [
-            { name: 'Open D7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [0, 0, 0, -1, 1, 0], fingers: [0, 0, 0, -1, 1, 0] }
+            { name: 'Open D7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, -1, 0, 2, 1, 0], fingers: [-1, -1, 0, 2, 1, 0] }
         ],
         'maj7sus2': [
-            { name: 'Open Dmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [0, 0, 0, -1, 2, 0], fingers: [0, 0, 0, -1, 1, 0] }
+            { name: 'Open Dmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, -1, 0, 2, 2, 0], fingers: [-1, -1, 0, 1, 1, 0] }
+        ],
+        '9': [
+            { name: 'E Shape (9th Fret)', desc: '6th-string root, open high E string.', frets: [10, 9, 10, 9, 10, 0], fingers: [2, 1, 3, 1, 4, 0] },
+            { name: 'E Shape (10th, Open)', desc: '6th-string root, open A/D strings.', frets: [10, 0, 10, 11, 10, 0], fingers: [1, 0, 2, 4, 3, 0] },
+            { name: 'E Shape (10th, A Root)', desc: '6th-string root with the A string fretted.', frets: [10, 12, 10, 11, 10, 0], fingers: [1, 3, 1, 2, 1, 0] },
+            { name: 'E Shape Full (10th Fret)', desc: 'Full 6th-string root voicing.', frets: [10, 12, 10, 11, 10, 12], fingers: [1, 3, 1, 2, 1, 4] },
+            { name: 'E Shape (7th, Open Top)', desc: '6th-string root, open A and high E.', frets: [10, 0, 10, 7, 7, 0], fingers: [2, 0, 3, 1, 1, 0] },
+            { name: 'E Shape (7th, D Root)', desc: '6th-string root with the D string fretted.', frets: [10, 0, 10, 9, 7, 0], fingers: [3, 0, 4, 2, 1, 0] },
+            { name: 'E Shape (7th, Full)', desc: '6th-string root, full voicing.', frets: [10, 0, 7, 9, 7, 8], fingers: [4, 0, 1, 3, 1, 2] },
+            { name: 'E Shape (7th, Open A)', desc: '6th-string root with the A string open.', frets: [10, 0, 0, 9, 7, 8], fingers: [4, 0, 0, 3, 1, 2] }
+        ],
+        'm9': [
+            { name: 'E Shape (10th, Open Top)', desc: '6th-string root, open high E string.', frets: [10, 12, 10, 10, 10, 0], fingers: [1, 2, 1, 1, 1, 0] },
+            { name: 'E Shape (7th, Open D)', desc: '6th-string root, open D string.', frets: [10, 7, 0, 10, 10, 8], fingers: [3, 1, 0, 4, 4, 2] }
+        ],
+        '11': [
+            { name: 'E Shape (9th, Open Top)', desc: '6th-string root, open D and high E strings.', frets: [10, 9, 10, 0, 10, 0], fingers: [2, 1, 3, 0, 4, 0] },
+            { name: 'E Shape (7th Fret)', desc: '6th-string root, full voicing.', frets: [10, 10, 7, 9, 7, 8], fingers: [4, 4, 1, 3, 1, 2] },
+            { name: 'E Shape (8th, Open A)', desc: '6th-string root with the A string open.', frets: [10, 0, 10, 11, 8, 0], fingers: [2, 0, 3, 4, 1, 0] }
+        ],
+        'm11': [
+            { name: 'E Shape (8th, Open G/Top)', desc: '6th-string root, open G and high E strings.', frets: [10, 8, 10, 0, 10, 0], fingers: [2, 1, 3, 0, 4, 0] }
+        ],
+        'maj11': [
+            { name: 'E Shape (10th, Open Top)', desc: '6th-string root, open high E string.', frets: [10, 10, 11, 11, 10, 0], fingers: [1, 1, 3, 4, 2, 0] },
+            { name: 'E Shape (8th, Open A)', desc: '6th-string root with the A string open.', frets: [10, 0, 11, 11, 8, 0], fingers: [2, 0, 3, 4, 1, 0] }
+        ],
+        'm(maj9)': [
+            { name: 'E Shape (10th, Open Top)', desc: '6th-string root, open high E string.', frets: [10, 12, 11, 10, 10, 0], fingers: [1, 3, 2, 1, 1, 0] },
+            { name: 'E Shape (7th, Open D)', desc: '6th-string root, open D string.', frets: [10, 7, 0, 10, 10, 9], fingers: [3, 1, 0, 4, 4, 2] },
+            { name: 'E Shape (10th, Open A)', desc: '6th-string root with the A string open.', frets: [10, 0, 11, 10, 10, 12], fingers: [1, 0, 4, 2, 3, 4] }
+        ],
+        'm(maj11)': [
+            { name: 'E Shape (8th, Open G/Top)', desc: '6th-string root, open G and high E strings.', frets: [10, 8, 11, 0, 10, 0], fingers: [2, 1, 4, 0, 3, 0] }
         ]
     },
     'E': {
@@ -1017,49 +1087,49 @@ window.chordDatabase = {
             { name: 'Open Fmaj7', desc: 'Beautiful acoustic Fmaj7.', frets: [-1, -1, 3, 2, 1, 0], fingers: [-1, -1, 3, 2, 1, 0] }
         ],
         'add9': [
-            { name: 'Fadd9 Barre', desc: 'Standard major with added 9.', frets: [1, 3, 3, 2, 1, 3], fingers: [1, 3, 4, 2, 1, 4] }
+            { name: 'Fadd9 Barre', desc: 'Standard major with added 9.', frets: [1, 3, 3, 2, 1, 3], fingers: [1, 3, 3, 2, 1, 4] }
         ],
         'aug': [
             { name: 'Faug Shape', desc: 'Mid-neck augmented shape.', frets: [-1, -1, 3, 2, 2, 1], fingers: [-1, -1, 4, 2, 3, 1] }
         ],
         'maj7add13': [
-            { name: 'Open Fmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [0, 0, 0, -1, 1, 1], fingers: [0, 0, 0, -1, 1, 1] }
+            { name: 'Open Fmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [1, 0, 0, -1, 1, 0], fingers: [1, 0, 0, -1, 2, 0] }
         ],
         'm7add13': [
-            { name: 'Open Fm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 3, 0, 1, 4, 1], fingers: [-1, 2, 0, 1, 3, 1] }
+            { name: 'Open Fm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [1, 3, 0, -1, 4, 4], fingers: [1, 2, 0, -1, 3, 4] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Fm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [0, -1, 0, 1, 1, 1], fingers: [0, -1, 0, 1, 1, 1] }
+            { name: 'Open Fm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [1, -1, 0, 1, 1, 0], fingers: [1, -1, 0, 2, 3, 0] }
         ],
         '7b5': [
-            { name: 'Open F7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 0, 1, -1, 0, 1], fingers: [-1, 0, 1, -1, 0, 1] }
+            { name: 'Open F7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [1, 0, 1, -1, 0, -1], fingers: [1, 0, 2, -1, 0, -1] }
         ],
         'aug7': [
-            { name: 'Open Faug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, 0, 1, -1, 2, 1], fingers: [-1, 0, 1, -1, 2, 1] }
+            { name: 'Open Faug7 Shape', desc: 'Open-position aug7 voicing.', frets: [1, 0, 1, -1, 2, -1], fingers: [1, 0, 2, -1, 3, -1] }
         ],
         'aug7b9': [
             { name: 'Open Faug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [1, 0, 1, -1, 2, 2], fingers: [1, 0, 1, -1, 2, 2] }
         ],
         'm7#5': [
-            { name: 'Open Fm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, -1, 1, 1, 2, 1], fingers: [-1, -1, 1, 1, 2, 1] }
+            { name: 'Open Fm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [1, -1, 1, 1, 2, -1], fingers: [1, -1, 1, 1, 2, -1] }
         ],
         'm7b9': [
             { name: 'Open Fm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [1, -1, 1, 1, 1, 2], fingers: [1, -1, 1, 1, 1, 2] }
         ],
         '6sus4': [
-            { name: 'Open F6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, 1, 0, -1, 1, 1], fingers: [-1, 1, 0, -1, 1, 1] }
+            { name: 'Open F6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [1, -1, 0, 3, 1, -1], fingers: [1, -1, 0, 3, 2, -1] }
         ],
         '6sus2': [
-            { name: 'Open F6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, -1, 0, 0, 1, 1], fingers: [-1, -1, 0, 0, 1, 1] }
+            { name: 'Open F6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [1, -1, 0, 0, 1, -1], fingers: [1, -1, 0, 0, 2, -1] }
         ],
         'maj7sus4': [
-            { name: 'Open Fmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [0, -1, 3, 3, 1, 0], fingers: [0, -1, 2, 2, 1, 0] }
+            { name: 'Open Fmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [1, 1, -1, -1, 1, 0], fingers: [1, 1, -1, -1, 1, 0] }
         ],
         '7sus2': [
-            { name: 'Open F7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, -1, 1, 0, 1, 1], fingers: [-1, -1, 1, 0, 1, 1] }
+            { name: 'Open F7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [1, 3, 1, 0, -1, -1], fingers: [1, 2, 1, 0, -1, -1] }
         ],
         'maj7sus2': [
-            { name: 'Open Fmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [0, -1, 3, 0, 1, 0], fingers: [0, -1, 2, 0, 1, 0] }
+            { name: 'Open Fmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, -1, 3, 0, 1, 0], fingers: [-1, -1, 2, 0, 1, 0] }
         ]
     },
     'G': {
@@ -1089,43 +1159,43 @@ window.chordDatabase = {
             { name: 'Gaug Shape', desc: 'Standard augmented triad.', frets: [3, 2, 1, 0, 0, -1], fingers: [3, 2, 1, 0, 0, -1] }
         ],
         'maj7add13': [
-            { name: 'Open Gmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [0, -1, 0, 0, 0, 2], fingers: [0, -1, 0, 0, 0, 1] }
+            { name: 'Open Gmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [3, 2, 4, 0, 3, 0], fingers: [2, 1, 4, 0, 3, 0] }
         ],
         'm7add13': [
-            { name: 'Open Gm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [0, 1, 0, 0, -1, 1], fingers: [0, 1, 0, 0, -1, 1] }
+            { name: 'Open Gm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [3, 1, 3, 0, 3, 0], fingers: [2, 1, 3, 0, 4, 0] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Gm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [0, 1, 0, 0, -1, 2], fingers: [0, 1, 0, 0, -1, 2] }
+            { name: 'Open Gm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [3, 1, 4, 0, 3, 0], fingers: [2, 1, 4, 0, 3, 0] }
         ],
         '7b5': [
-            { name: 'Open G7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 4, -1, 0, 0, 1], fingers: [-1, 2, -1, 0, 0, 1] }
+            { name: 'Open G7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [3, 4, -1, 0, 0, 1], fingers: [2, 3, -1, 0, 0, 1] }
         ],
         'aug7': [
-            { name: 'Open Gaug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, -1, 1, 0, 0, 1], fingers: [-1, -1, 1, 0, 0, 1] }
+            { name: 'Open Gaug7 Shape', desc: 'Open-position aug7 voicing.', frets: [3, -1, 1, 0, 0, 1], fingers: [3, -1, 1, 0, 0, 2] }
         ],
         'aug7b9': [
-            { name: 'Open Gaug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [1, -1, 1, 0, 0, 4], fingers: [1, -1, 1, 0, 0, 2] }
+            { name: 'Open Gaug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [3, -1, 1, 1, 0, 1], fingers: [4, -1, 1, 2, 0, 3] }
         ],
         'm7#5': [
-            { name: 'Open Gm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 1, 1, 0, -1, 1], fingers: [-1, 1, 1, 0, -1, 1] }
+            { name: 'Open Gm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [3, 1, 1, 0, -1, 1], fingers: [4, 1, 2, 0, -1, 3] }
         ],
         'm7b9': [
-            { name: 'Open Gm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [1, 1, 0, 0, -1, 4], fingers: [1, 1, 0, 0, -1, 2] }
+            { name: 'Open Gm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [3, 1, 0, 1, -1, 1], fingers: [4, 1, 0, 2, -1, 3] }
         ],
         '6sus4': [
-            { name: 'Open G6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [0, -1, 0, 0, 1, 0], fingers: [0, -1, 0, 0, 1, 0] }
+            { name: 'Open G6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [3, -1, 0, 0, 1, 0], fingers: [2, -1, 0, 0, 1, 0] }
         ],
         '6sus2': [
-            { name: 'Open G6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [0, 0, 0, 0, -1, 0], fingers: [0, 0, 0, 0, -1, 0] }
+            { name: 'Open G6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [3, 0, 0, 2, -1, 0], fingers: [2, 0, 0, 1, -1, 0] }
         ],
         'maj7sus4': [
-            { name: 'Open Gmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, -1, 0, 0, 1, 2], fingers: [-1, -1, 0, 0, 1, 2] }
+            { name: 'Open Gmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [3, -1, 0, 0, 1, 2], fingers: [3, -1, 0, 0, 1, 2] }
         ],
         '7sus2': [
-            { name: 'Open G7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, 0, 0, 0, -1, 1], fingers: [-1, 0, 0, 0, -1, 1] }
+            { name: 'Open G7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [3, 0, 0, 0, -1, 1], fingers: [2, 0, 0, 0, -1, 1] }
         ],
         'maj7sus2': [
-            { name: 'Open Gmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, 0, 0, 0, -1, 2], fingers: [-1, 0, 0, 0, -1, 1] }
+            { name: 'Open Gmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [3, 0, 0, 0, -1, 2], fingers: [2, 0, 0, 0, -1, 1] }
         ]
     },
     'A': {
@@ -1137,7 +1207,7 @@ window.chordDatabase = {
         ],
         'm7': [
             { name: 'Open Am7 Shape', desc: 'Standard minor 7th.', frets: [-1, 0, 2, 0, 1, 0], fingers: [-1, 0, 2, 0, 1, 0] },
-            { name: 'Am7 (No 5th)', desc: 'Popular omitted 5th voicing.', frets: [-1, 0, -1, 0, 1, -1], fingers: [-1, 0, -1, 0, 1, -1] }
+            { name: 'Am7 (No 5th)', desc: 'Popular omitted 5th voicing.', frets: [-1, 0, -1, 0, 1, 0], fingers: [-1, 0, -1, 0, 1, 0] }
         ],
         'sus2': [
             { name: 'Open Asus2', desc: 'Dreamy suspended chord.', frets: [-1, 0, 2, 2, 0, 0], fingers: [-1, 0, 2, 3, 0, 0] }
@@ -1158,13 +1228,13 @@ window.chordDatabase = {
             { name: 'Aaug Shape', desc: 'Open position augmented.', frets: [-1, 0, 3, 2, 2, 1], fingers: [-1, 0, 4, 2, 3, 1] }
         ],
         'maj7add13': [
-            { name: 'Open Amaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [0, 0, 4, 1, 2, 0], fingers: [0, 0, 3, 1, 2, 0] }
+            { name: 'Open Amaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [-1, 0, 4, 1, 2, 0], fingers: [-1, 0, 3, 1, 2, 0] }
         ],
         'm7add13': [
-            { name: 'Open Am7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [0, 0, 4, 0, 1, 0], fingers: [0, 0, 2, 0, 1, 0] }
+            { name: 'Open Am7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 0, 4, 0, 1, 0], fingers: [-1, 0, 2, 0, 1, 0] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Am(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [0, 0, 4, 1, 1, 0], fingers: [0, 0, 2, 1, 1, 0] }
+            { name: 'Open Am(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [-1, 0, 4, 1, 1, 0], fingers: [-1, 0, 2, 1, 1, 0] }
         ],
         '7b5': [
             { name: 'Open A7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 0, 1, 0, 2, -1], fingers: [-1, 0, 1, 0, 2, -1] }
@@ -1179,29 +1249,29 @@ window.chordDatabase = {
             { name: 'Open Am7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 0, -1, 0, 1, 1], fingers: [-1, 0, -1, 0, 1, 1] }
         ],
         'm7b9': [
-            { name: 'Open Am7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [0, 0, 5, 3, 1, 0], fingers: [0, 0, 3, 2, 1, 0] }
+            { name: 'Open Am7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [-1, 0, 2, 3, 1, 3], fingers: [-1, 0, 2, 3, 1, 4] }
         ],
         '6sus4': [
-            { name: 'Open A6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [0, 0, 0, -1, -1, 2], fingers: [0, 0, 0, -1, -1, 1] }
+            { name: 'Open A6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, 0, 0, -1, 5, 2], fingers: [-1, 0, 0, -1, 2, 1] }
         ],
         '6sus2': [
-            { name: 'Open A6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [0, 0, 4, -1, 0, 0], fingers: [0, 0, 1, -1, 0, 0] }
+            { name: 'Open A6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, 0, 4, 2, 0, 0], fingers: [-1, 0, 2, 1, 0, 0] }
         ],
         'maj7sus4': [
-            { name: 'Open Amaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [0, 0, 0, 1, -1, 0], fingers: [0, 0, 0, 1, -1, 0] }
+            { name: 'Open Amaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, 0, 0, 1, -1, 0], fingers: [-1, 0, 0, 1, -1, 0] }
         ],
         '7sus2': [
-            { name: 'Open A7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [0, 0, -1, 0, 0, 0], fingers: [0, 0, -1, 0, 0, 0] }
+            { name: 'Open A7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, 0, -1, 0, 0, 0], fingers: [-1, 0, -1, 0, 0, 0] }
         ],
         'maj7sus2': [
-            { name: 'Open Amaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [0, 0, -1, 1, 0, 0], fingers: [0, 0, -1, 1, 0, 0] }
+            { name: 'Open Amaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, 0, -1, 1, 0, 0], fingers: [-1, 0, -1, 1, 0, 0] }
         ]
     },
     'B': {
         // 🌟 Bm7 등 실전 폼 전면 추가
         'm7': [
             { name: 'Bm7 Shape', desc: 'Standard Bm7 barre chord.', frets: [-1, 2, 4, 2, 3, 2], fingers: [-1, 1, 3, 1, 2, 1] },
-            { name: 'Bm7 (No 5th)', desc: 'Very common acoustic shell voicing (like your screenshot!).', frets: [-1, 2, -1, 2, 3, -1], fingers: [-1, 1, -1, 2, 3, -1] }
+            { name: 'Bm7 (No 5th)', desc: 'Very common acoustic shell voicing (like your screenshot!).', frets: [-1, 2, 0, 2, 0, 2], fingers: [-1, 1, 0, 2, 0, 3] }
         ],
         '7': [
             { name: 'Open B7 Shape', desc: 'Classic blues turnaround chord.', frets: [-1, 2, 1, 2, 0, 2], fingers: [-1, 2, 1, 3, 0, 4] }
@@ -1213,43 +1283,43 @@ window.chordDatabase = {
             { name: 'Baug Shape', desc: 'Tense augmented flavor.', frets: [-1, 2, 1, 0, 0, -1], fingers: [-1, 2, 1, 0, 0, -1] }
         ],
         'maj7add13': [
-            { name: 'Open Bmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [-1, 1, 1, 1, 0, 2], fingers: [-1, 1, 1, 1, 0, 2] }
+            { name: 'Open Bmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [7, 6, 6, -1, 7, 6], fingers: [2, 1, 1, -1, 3, 1] }
         ],
         'm7add13': [
-            { name: 'Open Bm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 0, 0, 1, 0, 2], fingers: [-1, 0, 0, 1, 0, 2] }
+            { name: 'Open Bm7add13 Shape', desc: 'Open-position m7add13 voicing.', frets: [-1, 2, 4, 2, 3, 4], fingers: [-1, 1, 3, 1, 2, 4] }
         ],
         'm(maj7)add13': [
-            { name: 'Open Bm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [-1, 1, 0, 1, 0, 2], fingers: [-1, 1, 0, 1, 0, 2] }
+            { name: 'Open Bm(maj7)add13 Shape', desc: 'Open-position m(maj7)add13 voicing.', frets: [7, 9, 0, -1, 9, 6], fingers: [2, 3, 0, -1, 4, 1] }
         ],
         '7b5': [
-            { name: 'Open B7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 0, 1, -1, 0, 1], fingers: [-1, 0, 1, -1, 0, 1] }
+            { name: 'Open B7b5 Shape', desc: 'Open-position 7b5 voicing.', frets: [-1, 2, 1, 2, 0, 1], fingers: [-1, 3, 1, 4, 0, 2] }
         ],
         'aug7': [
-            { name: 'Open Baug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, 0, 1, 0, 0, -1], fingers: [-1, 0, 1, 0, 0, -1] }
+            { name: 'Open Baug7 Shape', desc: 'Open-position aug7 voicing.', frets: [-1, 2, 1, 2, 0, 3], fingers: [-1, 2, 1, 3, 0, 4] }
         ],
         'aug7b9': [
-            { name: 'Open Baug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [-1, 0, 1, 5, 0, 3], fingers: [-1, 0, 1, 3, 0, 2] }
+            { name: 'Open Baug7b9 Shape', desc: 'Open-position aug7b9 voicing.', frets: [-1, 2, 1, 2, 1, 3], fingers: [-1, 2, 1, 3, 1, 4] }
         ],
         'm7#5': [
-            { name: 'Open Bm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 0, 0, 0, 0, -1], fingers: [-1, 0, 0, 0, 0, -1] }
+            { name: 'Open Bm7#5 Shape', desc: 'Open-position m7#5 voicing.', frets: [-1, 2, 0, 0, 0, 5], fingers: [-1, 1, 0, 0, 0, 2] }
         ],
         'm7b9': [
-            { name: 'Open Bm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [-1, 0, 0, 5, 0, 2], fingers: [-1, 0, 0, 2, 0, 1] }
+            { name: 'Open Bm7b9 Shape', desc: 'Open-position m7b9 voicing.', frets: [-1, 2, 0, 2, 1, 2], fingers: [-1, 2, 0, 3, 1, 4] }
         ],
         '6sus4': [
-            { name: 'Open B6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [0, -1, 4, 1, 0, 0], fingers: [0, -1, 2, 1, 0, 0] }
+            { name: 'Open B6sus4 Shape', desc: 'Open-position 6sus4 voicing.', frets: [-1, 2, 4, 1, 0, 0], fingers: [-1, 2, 3, 1, 0, 0] }
         ],
         '6sus2': [
-            { name: 'Open B6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, 4, -1, 1, 0, 2], fingers: [-1, 3, -1, 1, 0, 2] }
+            { name: 'Open B6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, 2, -1, 1, 2, 2], fingers: [-1, 2, -1, 1, 3, 4] }
         ],
         'maj7sus4': [
-            { name: 'Open Bmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [0, -1, 4, 3, 0, 0], fingers: [0, -1, 2, 1, 0, 0] }
+            { name: 'Open Bmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, 2, 4, 3, 0, 0], fingers: [-1, 1, 3, 2, 0, 0] }
         ],
         '7sus2': [
-            { name: 'Open B7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, 0, -1, 4, 2, 2], fingers: [-1, 0, -1, 2, 1, 1] }
+            { name: 'Open B7sus2 Shape', desc: 'Open-position 7sus2 voicing.', frets: [-1, 2, -1, 2, 2, 2], fingers: [-1, 1, -1, 1, 1, 1] }
         ],
         'maj7sus2': [
-            { name: 'Open Bmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, 4, -1, 3, 0, 2], fingers: [-1, 3, -1, 2, 0, 1] }
+            { name: 'Open Bmaj7sus2 Shape', desc: 'Open-position maj7sus2 voicing.', frets: [-1, 2, -1, 3, 2, 2], fingers: [-1, 1, -1, 2, 1, 1] }
         ]
     }
 };
