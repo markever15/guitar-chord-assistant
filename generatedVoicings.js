@@ -12,7 +12,7 @@ window.generatedVoicings = {
             { name: 'A Shape (15th Fret)', frets: [-1, 15, -1, 0, -1, 15], fingers: [-1, 1, -1, 0, -1, 2] },
         ],
         '6': [
-            { name: 'E Shape (5th Fret) (Barre)', frets: [8, 0, 5, 5, 5, 5], fingers: [2, 0, 1, 1, 1, 1] },
+            { name: 'E Shape (5th Fret) (Barre)', frets: [8, 0, 5, 5, 5, 5], fingers: [4, 0, 1, 1, 1, 1] },
             { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 15, 14, 14, 13, 15], fingers: [-1, 3, 1, 1, 2, 4] },
         ],
         '7': [
@@ -190,19 +190,19 @@ window.generatedVoicings = {
         '6': [
             { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 4, 3, 3, 2, 4], fingers: [-1, 3, 1, 1, 2, 4] },
             { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 4, 6, 6, 6, 6], fingers: [-1, 2, 1, 1, 1, 1] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, -1, 6, 6, 6, 6], fingers: [2, -1, 1, 1, 1, 1] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, -1, 6, 6, 6, 6], fingers: [4, -1, 1, 1, 1, 1] },
             { name: 'E Shape (9th Fret) (Barre)', frets: [9, 11, 11, 10, 11, -1], fingers: [2, 1, 1, 3, 4, -1] },
         ],
         '7': [
             { name: 'A Shape (1st Fret)', frets: [-1, 4, -1, 1, 0, 1], fingers: [-1, 3, -1, 1, 0, 2] },
             { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 4, 6, 6, 6, 7], fingers: [-1, 2, 1, 1, 1, 3] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, -1, 6, 6, 6, 7], fingers: [3, -1, 1, 1, 1, 2] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, -1, 6, 6, 6, 7], fingers: [4, -1, 1, 1, 1, 2] },
             { name: 'E Shape (9th Fret)', frets: [9, 11, -1, 10, 0, -1], fingers: [1, 3, -1, 2, 0, -1] },
         ],
         '9': [
             { name: 'A Shape (1st Fret)', frets: [-1, 4, 1, 1, 0, 1], fingers: [-1, 4, 1, 2, 0, 3] },
             { name: 'A Shape (3rd Fret) (Barre)', frets: [-1, 4, 3, 4, 4, 4], fingers: [-1, 3, 2, 1, 1, 1] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 6, 7], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 6, 7], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (9th Fret) (Barre)', frets: [9, 11, 11, 10, 0, 11], fingers: [2, 1, 1, 3, 0, 4] },
         ],
         '11': [
@@ -242,9 +242,9 @@ window.generatedVoicings = {
             { name: 'D Shape (9th Fret)', frets: [-1, -1, 11, -1, 9, 11], fingers: [-1, -1, 2, -1, 1, 3] },
         ],
         'maj9': [
-            { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 4, 1, 1, 1, 1], fingers: [-1, 2, 1, 1, 1, 1] },
+            { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 4, 1, 1, 1, 1], fingers: [-1, 4, 1, 1, 1, 1] },
             { name: 'A Shape (3rd Fret) (Barre)', frets: [-1, 4, 3, 5, 4, 4], fingers: [-1, 3, 2, 4, 1, 1] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 6, 8], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 6, 8], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (9th Fret) (Barre)', frets: [9, -1, 10, 10, 9, 11], fingers: [2, -1, 1, 1, 3, 4] },
         ],
         'sus4': [
@@ -254,9 +254,9 @@ window.generatedVoicings = {
             { name: 'E Shape (9th Fret) (Barre)', frets: [9, 11, 11, 11, -1, 9], fingers: [2, 1, 1, 1, -1, 3] },
         ],
         'maj7': [
-            { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 4, 3, 1, 1, 1], fingers: [-1, 3, 2, 1, 1, 1] },
+            { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 4, 3, 1, 1, 1], fingers: [-1, 4, 2, 1, 1, 1] },
             { name: 'A Shape (3rd Fret)', frets: [-1, 4, 3, 5, -1, 4], fingers: [-1, 2, 1, 4, -1, 3] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, -1, 6, 6, 6, 8], fingers: [3, -1, 1, 1, 1, 2] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, -1, 6, 6, 6, 8], fingers: [4, -1, 1, 1, 1, 2] },
             { name: 'E Shape (9th Fret) (Barre)', frets: [9, 11, 10, 10, 9, 9], fingers: [3, 4, 2, 2, 1, 1] },
         ],
         'dim': [
@@ -274,7 +274,7 @@ window.generatedVoicings = {
         'add9': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 4, 1, 1, 2, 1], fingers: [-1, 4, 1, 1, 3, 2] },
             { name: 'A Shape (3rd Fret) (Barre)', frets: [-1, 4, 3, 6, 4, 4], fingers: [-1, 3, 2, 4, 1, 1] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 6, -1], fingers: [2, 1, 1, 1, 1, -1] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 6, -1], fingers: [4, 1, 1, 1, 1, -1] },
             { name: 'E Shape (9th Fret) (Barre)', frets: [9, 11, 11, 10, -1, 11], fingers: [2, 1, 1, 3, -1, 4] },
         ],
         'aug': [
@@ -306,13 +306,13 @@ window.generatedVoicings = {
         ],
         '7sus4': [
             { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 4, 4, 4, 2, 4], fingers: [-1, 1, 1, 1, 2, 3] },
-            { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 4, 4, 4, 7, 4], fingers: [-1, 1, 1, 1, 3, 2] },
+            { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 4, 4, 4, 7, 4], fingers: [-1, 1, 1, 1, 4, 2] },
             { name: 'E Shape (7th Fret) (Barre)', frets: [9, 9, 9, -1, 9, 7], fingers: [1, 1, 1, -1, 1, 2] },
             { name: 'E Shape (9th Fret) (Barre)', frets: [9, 9, 9, -1, 9, 9], fingers: [1, 1, 1, -1, 1, 1] },
         ],
         '6/9': [
             { name: 'A Shape (3rd Fret) (Barre)', frets: [-1, 4, 3, 3, 4, 4], fingers: [-1, 2, 1, 1, 3, 4] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 6, 6], fingers: [2, 1, 1, 1, 1, 1] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 6, 6], fingers: [4, 1, 1, 1, 1, 1] },
             { name: 'E Shape (9th Fret) (Barre)', frets: [9, 11, 11, 10, 11, 11], fingers: [3, 1, 1, 4, 2, 2] },
         ],
         '7b9': [
@@ -439,7 +439,7 @@ window.generatedVoicings = {
         '6sus2': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 4, 1, 3, 4, 4], fingers: [-1, 4, 2, 3, 1, 1] },
             { name: 'A Shape (3rd Fret) (Barre)', frets: [-1, 4, 6, 3, 4, 4], fingers: [-1, 3, 4, 2, 1, 1] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, -1, 6], fingers: [2, 1, 1, 1, -1, 1] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, -1, 6], fingers: [4, 1, 1, 1, -1, 1] },
             { name: 'E Shape (9th Fret) (Barre)', frets: [9, 11, 11, -1, 11, 11], fingers: [2, 1, 1, -1, 1, 1] },
         ],
         'maj7sus4': [
@@ -451,13 +451,13 @@ window.generatedVoicings = {
         '7sus2': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 4, 1, 4, 4, 4], fingers: [-1, 3, 2, 1, 1, 1] },
             { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 4, 6, 4, 4, 4], fingers: [-1, 2, 3, 1, 1, 1] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 0, 7], fingers: [3, 1, 1, 1, 0, 2] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, 0, 7], fingers: [4, 1, 1, 1, 0, 2] },
             { name: 'E Shape (9th Fret)', frets: [9, 11, -1, -1, 0, 11], fingers: [1, 2, -1, -1, 0, 3] },
         ],
         'maj7sus2': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 4, 1, 1, 1, 4], fingers: [-1, 2, 1, 1, 1, 3] },
             { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 4, 6, 5, 4, 4], fingers: [-1, 2, 4, 3, 1, 1] },
-            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, -1, 8], fingers: [3, 1, 1, 1, -1, 2] },
+            { name: 'E Shape (6th Fret) (Barre)', frets: [9, 6, 6, 6, -1, 8], fingers: [4, 1, 1, 1, -1, 2] },
             { name: 'E Shape (9th Fret)', frets: [9, -1, 10, -1, 9, 11], fingers: [1, -1, 3, -1, 2, 4] },
         ],
     },
@@ -470,18 +470,18 @@ window.generatedVoicings = {
         ],
         '6': [
             { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 5, 7, 7, 7, 7], fingers: [-1, 2, 1, 1, 1, 1] },
-            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 0, 7, 7, 7, 7], fingers: [2, 0, 1, 1, 1, 1] },
+            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 0, 7, 7, 7, 7], fingers: [4, 0, 1, 1, 1, 1] },
             { name: 'E Shape (10th Fret)', frets: [10, 0, 0, 11, 0, -1], fingers: [1, 0, 0, 2, 0, -1] },
         ],
         '7': [
             { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 5, 7, 7, 7, 8], fingers: [-1, 2, 1, 1, 1, 3] },
-            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 0, 7, 7, 7, 8], fingers: [3, 0, 1, 1, 1, 2] },
+            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 0, 7, 7, 7, 8], fingers: [4, 0, 1, 1, 1, 2] },
             { name: 'E Shape (9th Fret) (Barre)', frets: [10, 9, 10, -1, 10, 10], fingers: [3, 2, 1, -1, 1, 1] },
             { name: 'D Shape (13th Fret)', frets: [-1, -1, 0, 14, 13, 14], fingers: [-1, -1, 0, 2, 1, 3] },
         ],
         '9': [
             { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 5, 4, 5, 5, 5], fingers: [-1, 3, 2, 1, 1, 1] },
-            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, 7, 8], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, 7, 8], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (10th Fret)', frets: [10, 0, 0, 11, 13, 0], fingers: [1, 0, 0, 2, 3, 0] },
         ],
         '11': [
@@ -524,9 +524,9 @@ window.generatedVoicings = {
             { name: 'D Shape (14th Fret)', frets: [-1, -1, 0, 14, -1, 0], fingers: [-1, -1, 0, 1, -1, 0] },
         ],
         'maj9': [
-            { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 5, 2, 2, 2, 2], fingers: [-1, 2, 1, 1, 1, 1] },
+            { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 5, 2, 2, 2, 2], fingers: [-1, 4, 1, 1, 1, 1] },
             { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 5, 4, 6, 5, 5], fingers: [-1, 3, 2, 4, 1, 1] },
-            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, 7, 9], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, 7, 9], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (10th Fret)', frets: [10, 0, 11, 11, -1, 0], fingers: [1, 0, 2, 3, -1, 0] },
         ],
         'sus4': [
@@ -537,7 +537,7 @@ window.generatedVoicings = {
             { name: 'D Shape (14th Fret)', frets: [-1, -1, 0, 14, -1, 15], fingers: [-1, -1, 0, 1, -1, 2] },
         ],
         'maj7': [
-            { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 5, 4, 2, 2, 2], fingers: [-1, 3, 2, 1, 1, 1] },
+            { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 5, 4, 2, 2, 2], fingers: [-1, 4, 2, 1, 1, 1] },
             { name: 'E Shape (9th Fret)', frets: [10, 0, 0, 11, -1, 9], fingers: [2, 0, 0, 3, -1, 1] },
             { name: 'D Shape (14th Fret)', frets: [-1, -1, 0, 14, 14, 14], fingers: [-1, -1, 0, 1, 2, 3] },
         ],
@@ -557,7 +557,7 @@ window.generatedVoicings = {
         ],
         'add9': [
             { name: 'A Shape (5th Fret)', frets: [-1, 5, 7, -1, 7, 0], fingers: [-1, 1, 2, -1, 3, 0] },
-            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, 7, 0], fingers: [2, 1, 1, 1, 1, 0] },
+            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, 7, 0], fingers: [4, 1, 1, 1, 1, 0] },
             { name: 'E Shape (10th Fret)', frets: [10, 0, 0, 11, -1, 0], fingers: [1, 0, 0, 2, -1, 0] },
         ],
         'aug': [
@@ -598,7 +598,7 @@ window.generatedVoicings = {
         '6/9': [
             { name: 'A Shape (2nd Fret)', frets: [-1, 5, 4, 2, 0, 0], fingers: [-1, 3, 2, 1, 0, 0] },
             { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 5, 4, 4, 5, 5], fingers: [-1, 2, 1, 1, 3, 4] },
-            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, 7, 7], fingers: [2, 1, 1, 1, 1, 1] },
+            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, 7, 7], fingers: [4, 1, 1, 1, 1, 1] },
             { name: 'E Shape (10th Fret)', frets: [10, 0, 0, 11, 0, 0], fingers: [1, 0, 0, 2, 0, 0] },
         ],
         '7b9': [
@@ -729,7 +729,7 @@ window.generatedVoicings = {
         ],
         'maj7sus2': [
             { name: 'D Shape (5th Fret)', frets: [-1, -1, 0, 6, 5, 5], fingers: [-1, -1, 0, 3, 1, 2] },
-            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, -1, 9], fingers: [3, 1, 1, 1, -1, 2] },
+            { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, -1, 9], fingers: [4, 1, 1, 1, -1, 2] },
             { name: 'E Shape (10th Fret)', frets: [10, 0, 11, -1, -1, 0], fingers: [1, 0, 2, -1, -1, 0] },
             { name: 'D Shape (14th Fret)', frets: [-1, -1, 0, 14, 14, 0], fingers: [-1, -1, 0, 1, 2, 0] },
         ],
@@ -757,7 +757,7 @@ window.generatedVoicings = {
         ],
         '9': [
             { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 6, 5, 6, 6, 6], fingers: [-1, 3, 2, 1, 1, 1] },
-            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, 8, 9], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, 8, 9], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (11th Fret) (Barre)', frets: [11, 13, 13, 0, 14, 13], fingers: [2, 1, 1, 0, 4, 3] },
         ],
         '11': [
@@ -803,8 +803,8 @@ window.generatedVoicings = {
             { name: 'D Shape (13th Fret)', frets: [-1, -1, 13, 15, -1, 13], fingers: [-1, -1, 1, 3, -1, 2] },
         ],
         'maj9': [
-            { name: 'A Shape (3rd Fret) (Barre)', frets: [-1, 6, 3, 3, 3, 3], fingers: [-1, 2, 1, 1, 1, 1] },
-            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, 8, 10], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'A Shape (3rd Fret) (Barre)', frets: [-1, 6, 3, 3, 3, 3], fingers: [-1, 4, 1, 1, 1, 1] },
+            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, 8, 10], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (11th Fret)', frets: [11, -1, 0, 0, 11, 13], fingers: [1, -1, 0, 0, 2, 3] },
         ],
         'sus4': [
@@ -836,7 +836,7 @@ window.generatedVoicings = {
         ],
         'add9': [
             { name: 'A Shape (3rd Fret)', frets: [-1, 6, 3, 0, -1, 6], fingers: [-1, 2, 1, 0, -1, 3] },
-            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, 8, -1], fingers: [2, 1, 1, 1, 1, -1] },
+            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, 8, -1], fingers: [4, 1, 1, 1, 1, -1] },
             { name: 'D Shape (11th Fret)', frets: [-1, -1, 13, 0, 11, 13], fingers: [-1, -1, 2, 0, 1, 3] },
         ],
         'aug': [
@@ -870,12 +870,12 @@ window.generatedVoicings = {
         '7sus4': [
             { name: 'D Shape (1st Fret)', frets: [-1, -1, 1, 3, 2, 4], fingers: [-1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (4th Fret) (Barre)', frets: [-1, 6, 6, 6, 4, 6], fingers: [-1, 1, 1, 1, 2, 3] },
-            { name: 'A Shape (6th Fret) (Barre)', frets: [-1, 6, 6, 6, 9, 6], fingers: [-1, 1, 1, 1, 3, 2] },
+            { name: 'A Shape (6th Fret) (Barre)', frets: [-1, 6, 6, 6, 9, 6], fingers: [-1, 1, 1, 1, 4, 2] },
             { name: 'E Shape (11th Fret) (Barre)', frets: [11, 11, 11, -1, 11, 11], fingers: [1, 1, 1, -1, 1, 1] },
         ],
         '6/9': [
             { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 6, 5, 5, 6, 6], fingers: [-1, 2, 1, 1, 3, 4] },
-            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, 8, 8], fingers: [2, 1, 1, 1, 1, 1] },
+            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, 8, 8], fingers: [4, 1, 1, 1, 1, 1] },
             { name: 'E Shape (10th Fret) (Barre)', frets: [11, 10, 10, 10, 11, -1], fingers: [2, 1, 1, 1, 3, -1] },
         ],
         '7b9': [
@@ -901,7 +901,7 @@ window.generatedVoicings = {
         'm6': [
             { name: 'D Shape (1st Fret)', frets: [-1, -1, 1, 3, 1, 2], fingers: [-1, -1, 1, 4, 2, 3] },
             { name: 'A Shape (4th Fret)', frets: [-1, 6, 4, 5, -1, 6], fingers: [-1, 3, 1, 2, -1, 4] },
-            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 9, 8, 8, -1, 8], fingers: [3, 2, 1, 1, -1, 1] },
+            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 9, 8, 8, -1, 8], fingers: [4, 2, 1, 1, -1, 1] },
             { name: 'E Shape (10th Fret) (Barre)', frets: [11, -1, 10, 11, 11, 11], fingers: [3, -1, 2, 1, 1, 1] },
             { name: 'D Shape (13th Fret)', frets: [-1, -1, 13, 15, 13, 14], fingers: [-1, -1, 1, 4, 2, 3] },
         ],
@@ -987,7 +987,7 @@ window.generatedVoicings = {
         '6sus2': [
             { name: 'D Shape (1st Fret)', frets: [-1, -1, 1, 3, 1, 1], fingers: [-1, -1, 1, 4, 2, 3] },
             { name: 'A Shape (3rd Fret) (Barre)', frets: [-1, 6, 3, 5, 6, 6], fingers: [-1, 4, 2, 3, 1, 1] },
-            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, -1, 8], fingers: [2, 1, 1, 1, -1, 1] },
+            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, -1, 8], fingers: [4, 1, 1, 1, -1, 1] },
             { name: 'E Shape (11th Fret) (Barre)', frets: [11, 13, 13, -1, 13, 13], fingers: [2, 1, 1, -1, 1, 1] },
             { name: 'D Shape (13th Fret)', frets: [-1, -1, 13, 15, 13, 13], fingers: [-1, -1, 1, 4, 2, 3] },
         ],
@@ -1007,7 +1007,7 @@ window.generatedVoicings = {
         'maj7sus2': [
             { name: 'D Shape (1st Fret)', frets: [-1, -1, 1, 3, 3, 1], fingers: [-1, -1, 1, 3, 4, 2] },
             { name: 'A Shape (3rd Fret) (Barre)', frets: [-1, 6, 3, 3, 3, 6], fingers: [-1, 2, 1, 1, 1, 3] },
-            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, -1, 10], fingers: [3, 1, 1, 1, -1, 2] },
+            { name: 'E Shape (8th Fret) (Barre)', frets: [11, 8, 8, 8, -1, 10], fingers: [4, 1, 1, 1, -1, 2] },
             { name: 'E Shape (10th Fret)', frets: [11, -1, 0, 10, 11, -1], fingers: [2, -1, 0, 1, 3, -1] },
             { name: 'D Shape (13th Fret)', frets: [-1, -1, 13, 15, 15, 13], fingers: [-1, -1, 1, 3, 4, 2] },
         ],
@@ -1133,7 +1133,7 @@ window.generatedVoicings = {
             { name: 'E Shape (1st Fret)', frets: [0, -1, 4, 1, 0, 0], fingers: [0, -1, 2, 1, 0, 0] },
             { name: 'E Shape (4th Fret)', frets: [0, -1, 4, -1, 0, 4], fingers: [0, -1, 1, -1, 0, 2] },
             { name: 'E Shape (7th Fret) (Barre)', frets: [0, 9, 9, 9, 9, 7], fingers: [0, 1, 1, 1, 1, 2] },
-            { name: 'E Shape (9th Fret) (Barre)', frets: [0, 9, 9, 9, 9, 12], fingers: [0, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (9th Fret) (Barre)', frets: [0, 9, 9, 9, 9, 12], fingers: [0, 1, 1, 1, 1, 4] },
             { name: 'E Shape (13th Fret)', frets: [0, -1, -1, 13, 0, 14], fingers: [0, -1, -1, 1, 0, 2] },
         ],
         'aug': [
@@ -1326,7 +1326,7 @@ window.generatedVoicings = {
             { name: 'E Shape (13th Fret)', frets: [0, -1, 0, 0, 0, 13], fingers: [0, -1, 0, 0, 0, 1] },
         ],
         '6sus4': [
-            { name: 'E Shape (2nd Fret) (Barre)', frets: [0, 2, 2, 2, 2, 5], fingers: [0, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (2nd Fret) (Barre)', frets: [0, 2, 2, 2, 2, 5], fingers: [0, 1, 1, 1, 1, 4] },
             { name: 'E Shape (5th Fret)', frets: [0, 0, -1, 6, 0, 5], fingers: [0, 0, -1, 2, 0, 1] },
             { name: 'E Shape (6th Fret)', frets: [0, 0, -1, 6, 0, 0], fingers: [0, 0, -1, 1, 0, 0] },
             { name: 'E Shape (11th Fret)', frets: [0, 0, 11, -1, 0, 0], fingers: [0, 0, 1, -1, 0, 0] },
@@ -1369,19 +1369,19 @@ window.generatedVoicings = {
             { name: 'E Shape (1st Fret)', frets: [1, 0, 0, -1, 1, -1], fingers: [1, 0, 0, -1, 2, -1] },
             { name: 'A Shape (5th Fret)', frets: [-1, 8, 0, 5, -1, 5], fingers: [-1, 3, 0, 1, -1, 2] },
             { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 8, 10, 10, 10, 10], fingers: [-1, 2, 1, 1, 1, 1] },
-            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 0, 10, 10, 10, 10], fingers: [2, 0, 1, 1, 1, 1] },
+            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 0, 10, 10, 10, 10], fingers: [4, 0, 1, 1, 1, 1] },
             { name: 'E Shape (13th Fret)', frets: [13, 0, 0, -1, 13, -1], fingers: [1, 0, 0, -1, 2, -1] },
         ],
         '7': [
             { name: 'D Shape (3rd Fret)', frets: [-1, -1, 3, 5, 4, 5], fingers: [-1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 8, 10, 10, 10, 11], fingers: [-1, 2, 1, 1, 1, 3] },
-            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 0, 10, 10, 10, 11], fingers: [3, 0, 1, 1, 1, 2] },
+            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 0, 10, 10, 10, 11], fingers: [4, 0, 1, 1, 1, 2] },
             { name: 'E Shape (12th Fret) (Barre)', frets: [13, 12, 13, -1, 13, 13], fingers: [3, 2, 1, -1, 1, 1] },
         ],
         '9': [
             { name: 'E Shape (1st Fret)', frets: [1, 0, 1, 0, 1, -1], fingers: [1, 0, 2, 0, 3, -1] },
             { name: 'A Shape (7th Fret) (Barre)', frets: [-1, 8, 7, 8, 8, 8], fingers: [-1, 3, 2, 1, 1, 1] },
-            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, 10, 11], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, 10, 11], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (13th Fret)', frets: [13, 0, 13, 0, 13, -1], fingers: [1, 0, 2, 0, 3, -1] },
         ],
         '11': [
@@ -1429,9 +1429,9 @@ window.generatedVoicings = {
         ],
         'maj9': [
             { name: 'E Shape (1st Fret)', frets: [1, 0, -1, 0, 1, 0], fingers: [1, 0, -1, 0, 2, 0] },
-            { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 8, 5, 5, 5, 5], fingers: [-1, 2, 1, 1, 1, 1] },
+            { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 8, 5, 5, 5, 5], fingers: [-1, 4, 1, 1, 1, 1] },
             { name: 'A Shape (8th Fret)', frets: [-1, 8, 10, 0, 10, 0], fingers: [-1, 1, 2, 0, 3, 0] },
-            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, 10, 0], fingers: [2, 1, 1, 1, 1, 0] },
+            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, 10, 0], fingers: [4, 1, 1, 1, 1, 0] },
             { name: 'E Shape (13th Fret)', frets: [13, 0, -1, 0, 13, 0], fingers: [1, 0, -1, 0, 2, 0] },
         ],
         'sus4': [
@@ -1443,7 +1443,7 @@ window.generatedVoicings = {
         ],
         'maj7': [
             { name: 'E Shape (1st Fret)', frets: [1, 0, -1, -1, 1, 0], fingers: [1, 0, -1, -1, 2, 0] },
-            { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 8, 7, 5, 5, 5], fingers: [-1, 3, 2, 1, 1, 1] },
+            { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 8, 7, 5, 5, 5], fingers: [-1, 4, 2, 1, 1, 1] },
             { name: 'A Shape (8th Fret)', frets: [-1, 8, 10, -1, 10, 0], fingers: [-1, 1, 2, -1, 3, 0] },
             { name: 'E Shape (10th Fret)', frets: [13, 0, 10, -1, -1, 0], fingers: [2, 0, 1, -1, -1, 0] },
             { name: 'E Shape (13th Fret)', frets: [13, 0, -1, -1, 13, 0], fingers: [1, 0, -1, -1, 2, 0] },
@@ -1465,7 +1465,7 @@ window.generatedVoicings = {
         'add9': [
             { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 8, 5, 5, 6, 5], fingers: [-1, 4, 1, 1, 3, 2] },
             { name: 'A Shape (7th Fret)', frets: [-1, 8, 7, 0, -1, 8], fingers: [-1, 2, 1, 0, -1, 3] },
-            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, 10, -1], fingers: [2, 1, 1, 1, 1, -1] },
+            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, 10, -1], fingers: [4, 1, 1, 1, 1, -1] },
             { name: 'E Shape (13th Fret)', frets: [13, 0, -1, 0, 13, -1], fingers: [1, 0, -1, 0, 2, -1] },
         ],
         'aug': [
@@ -1511,7 +1511,7 @@ window.generatedVoicings = {
             { name: 'E Shape (1st Fret)', frets: [1, 0, 0, 0, 1, -1], fingers: [1, 0, 0, 0, 2, -1] },
             { name: 'A Shape (5th Fret)', frets: [-1, 8, 0, 5, 8, 5], fingers: [-1, 3, 0, 1, 4, 2] },
             { name: 'A Shape (8th Fret)', frets: [-1, 8, 0, 0, 10, 8], fingers: [-1, 1, 0, 0, 3, 2] },
-            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, 10, 10], fingers: [2, 1, 1, 1, 1, 1] },
+            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, 10, 10], fingers: [4, 1, 1, 1, 1, 1] },
             { name: 'E Shape (13th Fret)', frets: [13, 0, 0, 0, 13, -1], fingers: [1, 0, 0, 0, 2, -1] },
         ],
         '7b9': [
@@ -1645,7 +1645,7 @@ window.generatedVoicings = {
             { name: 'E Shape (1st Fret) (Barre)', frets: [1, 3, 3, -1, 3, 3], fingers: [2, 1, 1, -1, 1, 1] },
             { name: 'A Shape (5th Fret)', frets: [-1, 8, 0, 5, 8, -1], fingers: [-1, 2, 0, 1, 3, -1] },
             { name: 'A Shape (8th Fret)', frets: [-1, 8, 0, 0, -1, 8], fingers: [-1, 1, 0, 0, -1, 2] },
-            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, -1, 10], fingers: [2, 1, 1, 1, -1, 1] },
+            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, -1, 10], fingers: [4, 1, 1, 1, -1, 1] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [13, 15, 15, -1, 15, 15], fingers: [2, 1, 1, -1, 1, 1] },
         ],
         'maj7sus4': [
@@ -1659,7 +1659,7 @@ window.generatedVoicings = {
             { name: 'E Shape (1st Fret)', frets: [1, -1, 1, 0, 1, -1], fingers: [1, -1, 2, 0, 3, -1] },
             { name: 'A Shape (5th Fret) (Barre)', frets: [-1, 8, 5, 8, 8, 8], fingers: [-1, 3, 2, 1, 1, 1] },
             { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 8, 10, 8, 8, 8], fingers: [-1, 2, 3, 1, 1, 1] },
-            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, -1, 11], fingers: [3, 1, 1, 1, -1, 2] },
+            { name: 'E Shape (10th Fret) (Barre)', frets: [13, 10, 10, 10, -1, 11], fingers: [4, 1, 1, 1, -1, 2] },
             { name: 'E Shape (13th Fret)', frets: [13, -1, 13, 0, 13, -1], fingers: [1, -1, 2, 0, 3, -1] },
         ],
         'maj7sus2': [
@@ -1688,13 +1688,13 @@ window.generatedVoicings = {
             { name: 'E Shape (1st Fret) (Barre)', frets: [2, 1, 2, -1, 2, 2], fingers: [3, 2, 1, -1, 1, 1] },
             { name: 'D Shape (4th Fret)', frets: [-1, -1, 4, 6, 5, 6], fingers: [-1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (6th Fret)', frets: [-1, 9, 8, 6, -1, 0], fingers: [-1, 3, 2, 1, -1, 0] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 13, 11, 11, 11, 0], fingers: [3, 2, 1, 1, 1, 0] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 13, 11, 11, 11, 0], fingers: [4, 2, 1, 1, 1, 0] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [14, 13, 14, -1, 14, 14], fingers: [3, 2, 1, -1, 1, 1] },
         ],
         '9': [
             { name: 'E Shape (1st Fret)', frets: [2, 1, -1, 1, 2, 0], fingers: [3, 1, -1, 2, 4, 0] },
             { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 9, 8, 9, 9, 9], fingers: [-1, 3, 2, 1, 1, 1] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, 11, 0], fingers: [2, 1, 1, 1, 1, 0] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, 11, 0], fingers: [4, 1, 1, 1, 1, 0] },
             { name: 'E Shape (13th Fret)', frets: [14, 13, -1, 13, 14, 0], fingers: [3, 1, -1, 2, 4, 0] },
         ],
         '11': [
@@ -1742,8 +1742,8 @@ window.generatedVoicings = {
         ],
         'maj9': [
             { name: 'E Shape (1st Fret) (Barre)', frets: [2, 1, -1, 1, 2, 1], fingers: [3, 1, -1, 1, 4, 2] },
-            { name: 'A Shape (6th Fret) (Barre)', frets: [-1, 9, 6, 6, 6, 6], fingers: [-1, 2, 1, 1, 1, 1] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, 11, 13], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'A Shape (6th Fret) (Barre)', frets: [-1, 9, 6, 6, 6, 6], fingers: [-1, 4, 1, 1, 1, 1] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, 11, 13], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [14, 13, -1, 13, 14, 13], fingers: [3, 1, -1, 1, 4, 2] },
         ],
         'sus4': [
@@ -1756,8 +1756,8 @@ window.generatedVoicings = {
         'maj7': [
             { name: 'E Shape (1st Fret) (Barre)', frets: [2, 1, 3, 3, 2, 2], fingers: [4, 3, 2, 2, 1, 1] },
             { name: 'D Shape (4th Fret)', frets: [-1, -1, 4, 6, 6, 6], fingers: [-1, -1, 1, 2, 3, 4] },
-            { name: 'A Shape (6th Fret) (Barre)', frets: [-1, 9, 8, 6, 6, 6], fingers: [-1, 3, 2, 1, 1, 1] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, -1, 11, 11, 11, 13], fingers: [3, -1, 1, 1, 1, 2] },
+            { name: 'A Shape (6th Fret) (Barre)', frets: [-1, 9, 8, 6, 6, 6], fingers: [-1, 4, 2, 1, 1, 1] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, -1, 11, 11, 11, 13], fingers: [4, -1, 1, 1, 1, 2] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [14, 13, 15, 15, 14, 14], fingers: [4, 3, 2, 2, 1, 1] },
         ],
         'dim': [
@@ -1777,7 +1777,7 @@ window.generatedVoicings = {
         'add9': [
             { name: 'E Shape (1st Fret) (Barre)', frets: [2, 1, -1, 1, 2, 2], fingers: [2, 1, -1, 1, 3, 4] },
             { name: 'A Shape (6th Fret) (Barre)', frets: [-1, 9, 6, 6, 7, 6], fingers: [-1, 4, 1, 1, 3, 2] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, 11, -1], fingers: [2, 1, 1, 1, 1, -1] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, 11, -1], fingers: [4, 1, 1, 1, 1, -1] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [14, 13, -1, 13, 14, 14], fingers: [2, 1, -1, 1, 3, 4] },
         ],
         'aug': [
@@ -1819,7 +1819,7 @@ window.generatedVoicings = {
         '6/9': [
             { name: 'E Shape (1st Fret) (Barre)', frets: [2, 1, 1, 1, 2, -1], fingers: [2, 1, 1, 1, 3, -1] },
             { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 9, 8, 8, 9, 9], fingers: [-1, 2, 1, 1, 3, 4] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, 11, 11], fingers: [2, 1, 1, 1, 1, 1] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, 11, 11], fingers: [4, 1, 1, 1, 1, 1] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [14, 13, 13, 13, 14, -1], fingers: [2, 1, 1, 1, 3, -1] },
         ],
         '7b9': [
@@ -1830,7 +1830,7 @@ window.generatedVoicings = {
         ],
         '7#9': [
             { name: 'E Shape (1st Fret) (Barre)', frets: [2, 1, 2, 2, 2, 0], fingers: [3, 2, 1, 1, 1, 0] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 0, 11, 11, 11, 12], fingers: [3, 0, 1, 1, 1, 2] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 0, 11, 11, 11, 12], fingers: [4, 0, 1, 1, 1, 2] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [14, 13, 14, 14, 14, 0], fingers: [3, 2, 1, 1, 1, 0] },
         ],
         'm(maj7)': [
@@ -1850,7 +1850,7 @@ window.generatedVoicings = {
             { name: 'E Shape (1st Fret) (Barre)', frets: [2, 0, 1, 2, 2, 2], fingers: [3, 0, 2, 1, 1, 1] },
             { name: 'D Shape (4th Fret)', frets: [-1, -1, 4, 6, 4, 5], fingers: [-1, -1, 1, 4, 2, 3] },
             { name: 'A Shape (7th Fret)', frets: [-1, 9, 7, 8, -1, 9], fingers: [-1, 3, 1, 2, -1, 4] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 12, 11, 11, -1, 11], fingers: [3, 2, 1, 1, -1, 1] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 12, 11, 11, -1, 11], fingers: [4, 2, 1, 1, -1, 1] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [14, 0, 13, 14, 14, 14], fingers: [3, 0, 2, 1, 1, 1] },
         ],
         'm(maj9)': [
@@ -1954,7 +1954,7 @@ window.generatedVoicings = {
             { name: 'E Shape (2nd Fret) (Barre)', frets: [2, 4, 4, -1, 4, 4], fingers: [2, 1, 1, -1, 1, 1] },
             { name: 'D Shape (4th Fret)', frets: [-1, -1, 4, 6, 4, 4], fingers: [-1, -1, 1, 4, 2, 3] },
             { name: 'A Shape (6th Fret) (Barre)', frets: [-1, 9, 6, 8, 9, 9], fingers: [-1, 4, 2, 3, 1, 1] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, -1, 11], fingers: [2, 1, 1, 1, -1, 1] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, -1, 11], fingers: [4, 1, 1, 1, -1, 1] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [14, -1, 13, 13, 14, 14], fingers: [2, -1, 1, 1, 3, 4] },
         ],
         'maj7sus4': [
@@ -1975,7 +1975,7 @@ window.generatedVoicings = {
             { name: 'E Shape (1st Fret) (Barre)', frets: [2, -1, 3, 1, 2, 2], fingers: [3, -1, 4, 2, 1, 1] },
             { name: 'D Shape (4th Fret)', frets: [-1, -1, 4, 6, 6, 4], fingers: [-1, -1, 1, 3, 4, 2] },
             { name: 'A Shape (6th Fret) (Barre)', frets: [-1, 9, 6, 6, 6, 9], fingers: [-1, 2, 1, 1, 1, 3] },
-            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, -1, 13], fingers: [3, 1, 1, 1, -1, 2] },
+            { name: 'E Shape (11th Fret) (Barre)', frets: [14, 11, 11, 11, -1, 13], fingers: [4, 1, 1, 1, -1, 2] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [14, -1, 15, 13, 14, 14], fingers: [3, -1, 4, 2, 1, 1] },
         ],
     },
@@ -2060,7 +2060,7 @@ window.generatedVoicings = {
         'maj9': [
             { name: 'E Shape (2nd Fret)', frets: [3, 0, 0, 0, 0, 2], fingers: [2, 0, 0, 0, 0, 1] },
             { name: 'E Shape (3rd Fret) (Barre)', frets: [3, 0, 4, 4, 3, 3], fingers: [2, 0, 3, 4, 1, 1] },
-            { name: 'A Shape (7th Fret) (Barre)', frets: [-1, 10, 7, 7, 7, 7], fingers: [-1, 2, 1, 1, 1, 1] },
+            { name: 'A Shape (7th Fret) (Barre)', frets: [-1, 10, 7, 7, 7, 7], fingers: [-1, 4, 1, 1, 1, 1] },
             { name: 'A Shape (9th Fret) (Barre)', frets: [-1, 10, 9, 11, 10, 10], fingers: [-1, 3, 2, 4, 1, 1] },
             { name: 'E Shape (14th Fret)', frets: [15, 0, 0, 0, 0, 14], fingers: [2, 0, 0, 0, 0, 1] },
         ],
@@ -2323,19 +2323,19 @@ window.generatedVoicings = {
             { name: 'A Shape (9th Fret)', frets: [-1, 11, -1, -1, 9, 11], fingers: [-1, 2, -1, -1, 1, 3] },
         ],
         '6': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, -1, 1, 1, 1, 1], fingers: [2, -1, 1, 1, 1, 1] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, -1, 1, 1, 1, 1], fingers: [4, -1, 1, 1, 1, 1] },
             { name: 'E Shape (3rd Fret) (Barre)', frets: [4, 3, 3, 5, 4, 4], fingers: [3, 1, 1, 4, 2, 2] },
             { name: 'D Shape (6th Fret)', frets: [-1, -1, 6, 8, 6, 8], fingers: [-1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 11, 13, 13, 13, 13], fingers: [-1, 2, 1, 1, 1, 1] },
         ],
         '7': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, -1, 1, 1, 1, 2], fingers: [3, -1, 1, 1, 1, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, -1, 1, 1, 1, 2], fingers: [4, -1, 1, 1, 1, 2] },
             { name: 'E Shape (3rd Fret) (Barre)', frets: [4, 3, 4, -1, 4, 4], fingers: [3, 2, 1, -1, 1, 1] },
             { name: 'D Shape (6th Fret)', frets: [-1, -1, 6, 8, 7, 8], fingers: [-1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 11, 13, 13, 13, 14], fingers: [-1, 2, 1, 1, 1, 3] },
         ],
         '9': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 1, 2], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 1, 2], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (4th Fret) (Barre)', frets: [4, -1, 4, 5, 4, 6], fingers: [1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 11, 10, 11, 11, 11], fingers: [-1, 3, 2, 1, 1, 1] },
         ],
@@ -2376,9 +2376,9 @@ window.generatedVoicings = {
             { name: 'A Shape (11th Fret)', frets: [-1, 11, -1, -1, 11, 11], fingers: [-1, 1, -1, -1, 2, 3] },
         ],
         'maj9': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 1, 3], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 1, 3], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (3rd Fret) (Barre)', frets: [4, 3, -1, 3, 4, 3], fingers: [3, 1, -1, 1, 4, 2] },
-            { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 11, 8, 8, 8, 8], fingers: [-1, 2, 1, 1, 1, 1] },
+            { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 11, 8, 8, 8, 8], fingers: [-1, 4, 1, 1, 1, 1] },
             { name: 'A Shape (10th Fret)', frets: [-1, 11, 10, 0, 11, 11], fingers: [-1, 2, 1, 0, 3, 4] },
         ],
         'sus4': [
@@ -2388,9 +2388,9 @@ window.generatedVoicings = {
             { name: 'A Shape (11th Fret)', frets: [-1, 11, 11, -1, -1, 11], fingers: [-1, 1, 2, -1, -1, 3] },
         ],
         'maj7': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, -1, 1, 1, 1, 3], fingers: [3, -1, 1, 1, 1, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, -1, 1, 1, 1, 3], fingers: [4, -1, 1, 1, 1, 2] },
             { name: 'E Shape (3rd Fret)', frets: [4, 3, -1, 0, 4, -1], fingers: [2, 1, -1, 0, 3, -1] },
-            { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 11, 10, 8, 8, 8], fingers: [-1, 3, 2, 1, 1, 1] },
+            { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 11, 10, 8, 8, 8], fingers: [-1, 4, 2, 1, 1, 1] },
             { name: 'A Shape (10th Fret)', frets: [-1, 11, 10, 0, -1, 11], fingers: [-1, 2, 1, 0, -1, 3] },
         ],
         'dim': [
@@ -2406,7 +2406,7 @@ window.generatedVoicings = {
             { name: 'A Shape (10th Fret)', frets: [-1, 11, 0, 10, 0, -1], fingers: [-1, 2, 0, 1, 0, -1] },
         ],
         'add9': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 1, -1], fingers: [2, 1, 1, 1, 1, -1] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 1, -1], fingers: [4, 1, 1, 1, 1, -1] },
             { name: 'E Shape (3rd Fret) (Barre)', frets: [4, 3, -1, 3, 4, 4], fingers: [2, 1, -1, 1, 3, 4] },
             { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 11, 8, 8, 9, 8], fingers: [-1, 4, 1, 1, 3, 2] },
             { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 11, 10, 13, 11, 11], fingers: [-1, 3, 2, 4, 1, 1] },
@@ -2419,7 +2419,7 @@ window.generatedVoicings = {
             { name: 'Shell (13th Fret)', frets: [-1, -1, -1, 13, 13, 0], fingers: [-1, -1, -1, 1, 2, 0] },
         ],
         'm9': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 0, 2], fingers: [3, 1, 1, 1, 0, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 0, 2], fingers: [4, 1, 1, 1, 0, 2] },
             { name: 'E Shape (4th Fret) (Barre)', frets: [4, -1, 4, 4, 4, 6], fingers: [1, -1, 1, 1, 1, 2] },
             { name: 'A Shape (8th Fret)', frets: [-1, 11, 8, 11, 0, 11], fingers: [-1, 2, 1, 3, 0, 4] },
             { name: 'A Shape (9th Fret) (Barre)', frets: [-1, 11, 9, 11, 11, 11], fingers: [-1, 3, 2, 1, 1, 1] },
@@ -2446,12 +2446,12 @@ window.generatedVoicings = {
             { name: 'A Shape (9th Fret) (Barre)', frets: [-1, 11, 11, 11, 9, 11], fingers: [-1, 1, 1, 1, 2, 3] },
         ],
         '6/9': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 1, 1], fingers: [2, 1, 1, 1, 1, 1] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 1, 1], fingers: [4, 1, 1, 1, 1, 1] },
             { name: 'E Shape (3rd Fret) (Barre)', frets: [4, 3, 3, 3, 4, -1], fingers: [2, 1, 1, 1, 3, -1] },
             { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 11, 10, 10, 11, 11], fingers: [-1, 2, 1, 1, 3, 4] },
         ],
         '7b9': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 0, 1, 1, 1, 2], fingers: [3, 0, 1, 1, 1, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 0, 1, 1, 1, 2], fingers: [4, 0, 1, 1, 1, 2] },
             { name: 'E Shape (4th Fret) (Barre)', frets: [4, 0, 4, 5, 4, 4], fingers: [2, 0, 3, 4, 1, 1] },
         ],
         '7#9': [
@@ -2472,13 +2472,13 @@ window.generatedVoicings = {
             { name: 'A Shape (9th Fret)', frets: [-1, 11, 9, -1, 11, 11], fingers: [-1, 2, 1, -1, 3, 4] },
         ],
         'm6': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 2, 1, 1, -1, 1], fingers: [3, 2, 1, 1, -1, 1] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 2, 1, 1, -1, 1], fingers: [4, 2, 1, 1, -1, 1] },
             { name: 'E Shape (3rd Fret) (Barre)', frets: [4, -1, 3, 4, 4, 4], fingers: [3, -1, 2, 1, 1, 1] },
             { name: 'D Shape (6th Fret)', frets: [-1, -1, 6, 8, 6, 7], fingers: [-1, -1, 1, 4, 2, 3] },
             { name: 'A Shape (10th Fret)', frets: [-1, 11, -1, 10, 0, 11], fingers: [-1, 2, -1, 1, 0, 3] },
         ],
         'm(maj9)': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 0, 3], fingers: [3, 1, 1, 1, 0, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 0, 3], fingers: [4, 1, 1, 1, 0, 2] },
             { name: 'E Shape (4th Fret)', frets: [4, 6, -1, 0, 0, 6], fingers: [1, 2, -1, 0, 0, 3] },
             { name: 'A Shape (8th Fret)', frets: [-1, 11, 8, 0, 0, 11], fingers: [-1, 2, 1, 0, 0, 3] },
             { name: 'A Shape (9th Fret)', frets: [-1, 11, 9, 0, 11, 11], fingers: [-1, 2, 1, 0, 3, 4] },
@@ -2488,7 +2488,7 @@ window.generatedVoicings = {
             { name: 'E Shape (4th Fret) (Barre)', frets: [4, 4, 5, 4, 4, 6], fingers: [1, 1, 3, 2, 2, 4] },
         ],
         'm6/9': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 0, 1], fingers: [3, 1, 1, 1, 0, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, 0, 1], fingers: [4, 1, 1, 1, 0, 2] },
             { name: 'E Shape (3rd Fret) (Barre)', frets: [4, 6, 3, 3, 0, 4], fingers: [2, 4, 1, 1, 0, 3] },
             { name: 'A Shape (8th Fret)', frets: [-1, 11, 8, 10, 0, 11], fingers: [-1, 3, 1, 2, 0, 4] },
             { name: 'A Shape (9th Fret) (Barre)', frets: [-1, 11, 9, 10, 11, 11], fingers: [-1, 4, 2, 3, 1, 1] },
@@ -2565,7 +2565,7 @@ window.generatedVoicings = {
             { name: 'A Shape (9th Fret) (Barre)', frets: [-1, 11, 11, 10, 9, 11], fingers: [-1, 1, 1, 3, 2, 4] },
         ],
         '6sus2': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, -1, 1], fingers: [2, 1, 1, 1, -1, 1] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, -1, 1], fingers: [4, 1, 1, 1, -1, 1] },
             { name: 'E Shape (4th Fret) (Barre)', frets: [4, 6, 6, -1, 6, 6], fingers: [2, 1, 1, -1, 1, 1] },
             { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 11, 8, 10, 11, 11], fingers: [-1, 4, 2, 3, 1, 1] },
             { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 11, 13, 10, 11, 11], fingers: [-1, 3, 4, 2, 1, 1] },
@@ -2577,13 +2577,13 @@ window.generatedVoicings = {
             { name: 'A Shape (11th Fret)', frets: [-1, 11, 11, 0, -1, 11], fingers: [-1, 1, 2, 0, -1, 3] },
         ],
         '7sus2': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, -1, 2], fingers: [3, 1, 1, 1, -1, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, -1, 2], fingers: [4, 1, 1, 1, -1, 2] },
             { name: 'E Shape (3rd Fret) (Barre)', frets: [4, -1, 4, 3, 4, 4], fingers: [1, -1, 1, 2, 3, 4] },
             { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 11, 8, 11, 11, 11], fingers: [-1, 3, 2, 1, 1, 1] },
             { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 11, 13, 11, 11, 11], fingers: [-1, 2, 3, 1, 1, 1] },
         ],
         'maj7sus2': [
-            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, -1, 3], fingers: [3, 1, 1, 1, -1, 2] },
+            { name: 'E Shape (1st Fret) (Barre)', frets: [4, 1, 1, 1, -1, 3], fingers: [4, 1, 1, 1, -1, 2] },
             { name: 'D Shape (4th Fret)', frets: [-1, -1, 6, 0, 4, 6], fingers: [-1, -1, 2, 0, 1, 3] },
             { name: 'A Shape (8th Fret) (Barre)', frets: [-1, 11, 8, 8, 8, 11], fingers: [-1, 2, 1, 1, 1, 3] },
             { name: 'A Shape (11th Fret)', frets: [-1, 11, -1, 0, 11, 11], fingers: [-1, 1, -1, 0, 2, 3] },
@@ -2598,7 +2598,7 @@ window.generatedVoicings = {
             { name: 'A Shape (14th Fret)', frets: [-1, 0, -1, 14, -1, 0], fingers: [-1, 0, -1, 1, -1, 0] },
         ],
         '6': [
-            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 0, 2, 2, 2, 2], fingers: [2, 0, 1, 1, 1, 1] },
+            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 0, 2, 2, 2, 2], fingers: [4, 0, 1, 1, 1, 1] },
             { name: 'A Shape (4th Fret)', frets: [-1, 0, 4, 6, -1, 0], fingers: [-1, 0, 1, 2, -1, 0] },
             { name: 'A Shape (6th Fret)', frets: [-1, 0, -1, 6, 7, 0], fingers: [-1, 0, -1, 1, 2, 0] },
             { name: 'A Shape (11th Fret)', frets: [-1, 0, 11, 11, -1, 0], fingers: [-1, 0, 1, 2, -1, 0] },
@@ -2612,7 +2612,7 @@ window.generatedVoicings = {
             { name: 'A Shape (14th Fret)', frets: [-1, 0, -1, 0, 14, 0], fingers: [-1, 0, -1, 0, 1, 0] },
         ],
         '9': [
-            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 2, 2, 2, 2, 3], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 2, 2, 2, 2, 3], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (4th Fret)', frets: [5, 4, -1, 0, 0, 0], fingers: [2, 1, -1, 0, 0, 0] },
             { name: 'A Shape (6th Fret)', frets: [-1, 0, 9, 6, 8, 0], fingers: [-1, 0, 3, 1, 2, 0] },
             { name: 'A Shape (11th Fret)', frets: [-1, 0, 11, 0, 0, 0], fingers: [-1, 0, 1, 0, 0, 0] },
@@ -2660,10 +2660,10 @@ window.generatedVoicings = {
             { name: 'A Shape (14th Fret)', frets: [-1, 0, -1, 14, 0, 0], fingers: [-1, 0, -1, 1, 0, 0] },
         ],
         'maj9': [
-            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 2, 2, 2, 2, 4], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 2, 2, 2, 2, 4], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (5th Fret)', frets: [5, 0, 6, 6, 0, 0], fingers: [1, 0, 2, 3, 0, 0] },
             { name: 'A Shape (6th Fret)', frets: [-1, 0, 6, 6, 0, 0], fingers: [-1, 0, 1, 2, 0, 0] },
-            { name: 'A Shape (9th Fret) (Barre)', frets: [-1, 12, 9, 9, 9, 9], fingers: [-1, 2, 1, 1, 1, 1] },
+            { name: 'A Shape (9th Fret) (Barre)', frets: [-1, 12, 9, 9, 9, 9], fingers: [-1, 4, 1, 1, 1, 1] },
         ],
         'sus4': [
             { name: 'Open Position', frets: [-1, 0, 0, -1, -1, 0], fingers: [-1, 0, 0, -1, -1, 0] },
@@ -2695,7 +2695,7 @@ window.generatedVoicings = {
             { name: 'A Shape (13th Fret)', frets: [-1, 0, 13, -1, 13, 14], fingers: [-1, 0, 1, -1, 2, 3] },
         ],
         'add9': [
-            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 2, 2, 2, 2, 0], fingers: [2, 1, 1, 1, 1, 0] },
+            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 2, 2, 2, 2, 0], fingers: [4, 1, 1, 1, 1, 0] },
             { name: 'E Shape (5th Fret)', frets: [5, 0, -1, 6, 0, 0], fingers: [1, 0, -1, 2, 0, 0] },
             { name: 'A Shape (6th Fret)', frets: [-1, 0, -1, 6, 0, 0], fingers: [-1, 0, -1, 1, 0, 0] },
             { name: 'A Shape (11th Fret)', frets: [-1, 0, 11, -1, 0, 0], fingers: [-1, 0, 1, -1, 0, 0] },
@@ -2736,7 +2736,7 @@ window.generatedVoicings = {
             { name: 'A Shape (15th Fret)', frets: [-1, 0, 0, 0, 15, 0], fingers: [-1, 0, 0, 0, 1, 0] },
         ],
         '6/9': [
-            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 2, 2, 2, 2, 2], fingers: [2, 1, 1, 1, 1, 1] },
+            { name: 'E Shape (2nd Fret) (Barre)', frets: [5, 2, 2, 2, 2, 2], fingers: [4, 1, 1, 1, 1, 1] },
             { name: 'A Shape (4th Fret)', frets: [-1, 0, 4, 6, 0, 0], fingers: [-1, 0, 1, 2, 0, 0] },
             { name: 'A Shape (6th Fret)', frets: [-1, 0, 9, 6, 7, 0], fingers: [-1, 0, 3, 1, 2, 0] },
             { name: 'A Shape (11th Fret)', frets: [-1, 0, 11, 11, 0, 0], fingers: [-1, 0, 1, 2, 0, 0] },
@@ -2905,21 +2905,21 @@ window.generatedVoicings = {
         ],
         '6': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 1, 3, 3, 3, 3], fingers: [-1, 2, 1, 1, 1, 1] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, -1, 3, 3, 3, 3], fingers: [2, -1, 1, 1, 1, 1] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, -1, 3, 3, 3, 3], fingers: [4, -1, 1, 1, 1, 1] },
             { name: 'E Shape (6th Fret)', frets: [6, -1, 0, 0, 6, -1], fingers: [1, -1, 0, 0, 2, -1] },
             { name: 'A Shape (11th Fret)', frets: [-1, 13, 0, 0, 11, 13], fingers: [-1, 2, 0, 0, 1, 3] },
             { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 13, 15, 15, 15, 15], fingers: [-1, 2, 1, 1, 1, 1] },
         ],
         '7': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 1, 3, 3, 3, 4], fingers: [-1, 2, 1, 1, 1, 3] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, -1, 3, 3, 3, 4], fingers: [3, -1, 1, 1, 1, 2] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, -1, 3, 3, 3, 4], fingers: [4, -1, 1, 1, 1, 2] },
             { name: 'E Shape (6th Fret)', frets: [6, 8, 0, -1, 9, -1], fingers: [1, 2, 0, -1, 3, -1] },
             { name: 'A Shape (11th Fret)', frets: [-1, 13, 0, 13, 11, 13], fingers: [-1, 2, 0, 3, 1, 4] },
             { name: 'A Shape (13th Fret)', frets: [-1, 13, 0, 13, -1, 13], fingers: [-1, 1, 0, 2, -1, 3] },
         ],
         '9': [
             { name: 'A Shape (1st Fret)', frets: [-1, 1, 0, 1, 1, 1], fingers: [-1, 1, 0, 2, 3, 4] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, 3, 4], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, 3, 4], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [6, -1, 6, 7, 6, 8], fingers: [1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (12th Fret) (Barre)', frets: [-1, 13, 12, 13, 13, 13], fingers: [-1, 3, 2, 1, 1, 1] },
         ],
@@ -2968,9 +2968,9 @@ window.generatedVoicings = {
         ],
         'maj9': [
             { name: 'A Shape (1st Fret)', frets: [-1, 1, 0, 2, 1, 1], fingers: [-1, 1, 0, 4, 2, 3] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, 3, 5], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, 3, 5], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (6th Fret)', frets: [6, 0, 0, -1, 6, 8], fingers: [1, 0, 0, -1, 2, 3] },
-            { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 13, 10, 10, 10, 10], fingers: [-1, 2, 1, 1, 1, 1] },
+            { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 13, 10, 10, 10, 10], fingers: [-1, 4, 1, 1, 1, 1] },
             { name: 'A Shape (13th Fret)', frets: [-1, 13, 0, 14, 13, 13], fingers: [-1, 1, 0, 4, 2, 3] },
         ],
         'sus4': [
@@ -2982,9 +2982,9 @@ window.generatedVoicings = {
         ],
         'maj7': [
             { name: 'A Shape (1st Fret)', frets: [-1, 1, 0, 2, -1, 1], fingers: [-1, 1, 0, 3, -1, 2] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 0, 3, 3, 3, 5], fingers: [3, 0, 1, 1, 1, 2] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 0, 3, 3, 3, 5], fingers: [4, 0, 1, 1, 1, 2] },
             { name: 'E Shape (6th Fret)', frets: [6, 0, 0, -1, 6, -1], fingers: [1, 0, 0, -1, 2, -1] },
-            { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 13, 12, 10, 10, 10], fingers: [-1, 3, 2, 1, 1, 1] },
+            { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 13, 12, 10, 10, 10], fingers: [-1, 4, 2, 1, 1, 1] },
             { name: 'A Shape (13th Fret)', frets: [-1, 13, 0, 14, -1, 13], fingers: [-1, 1, 0, 3, -1, 2] },
         ],
         'dim': [
@@ -3003,7 +3003,7 @@ window.generatedVoicings = {
         ],
         'add9': [
             { name: 'A Shape (1st Fret)', frets: [-1, 1, 0, -1, 1, 1], fingers: [-1, 1, 0, -1, 2, 3] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, 3, -1], fingers: [2, 1, 1, 1, 1, -1] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, 3, -1], fingers: [4, 1, 1, 1, 1, -1] },
             { name: 'E Shape (6th Fret)', frets: [6, -1, 0, -1, 6, 8], fingers: [1, -1, 0, -1, 2, 3] },
             { name: 'A Shape (10th Fret)', frets: [-1, 13, 0, 10, 13, -1], fingers: [-1, 2, 0, 1, 3, -1] },
             { name: 'A Shape (13th Fret)', frets: [-1, 13, 0, -1, 13, 13], fingers: [-1, 1, 0, -1, 2, 3] },
@@ -3037,7 +3037,7 @@ window.generatedVoicings = {
             { name: 'E Shape (6th Fret)', frets: [6, 0, 0, 0, 6, 8], fingers: [1, 0, 0, 0, 2, 3] },
         ],
         '7sus4': [
-            { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 1, 1, 1, 4, 1], fingers: [-1, 1, 1, 1, 3, 2] },
+            { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 1, 1, 1, 4, 1], fingers: [-1, 1, 1, 1, 4, 2] },
             { name: 'E Shape (4th Fret) (Barre)', frets: [6, 6, 6, -1, 6, 4], fingers: [1, 1, 1, -1, 1, 2] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [6, 6, 6, -1, 6, 6], fingers: [1, 1, 1, -1, 1, 1] },
             { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 13, 13, 13, 11, 13], fingers: [-1, 1, 1, 1, 2, 3] },
@@ -3045,7 +3045,7 @@ window.generatedVoicings = {
         ],
         '6/9': [
             { name: 'A Shape (1st Fret)', frets: [-1, 1, 0, 0, 1, 1], fingers: [-1, 1, 0, 0, 2, 3] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, 3, 3], fingers: [2, 1, 1, 1, 1, 1] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, 3, 3], fingers: [4, 1, 1, 1, 1, 1] },
             { name: 'E Shape (6th Fret)', frets: [6, -1, 0, 0, 6, 8], fingers: [1, -1, 0, 0, 2, 3] },
             { name: 'A Shape (13th Fret)', frets: [-1, 13, 0, 0, 13, 13], fingers: [-1, 1, 0, 0, 2, 3] },
         ],
@@ -3121,7 +3121,7 @@ window.generatedVoicings = {
         ],
         'maj7add13': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 1, 3, 2, 3, 3], fingers: [-1, 2, 4, 3, 1, 1] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 0, 3, 3, 3, 3], fingers: [2, 0, 1, 1, 1, 1] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 0, 3, 3, 3, 3], fingers: [4, 0, 1, 1, 1, 1] },
             { name: 'E Shape (6th Fret)', frets: [6, 0, 0, 0, 6, -1], fingers: [1, 0, 0, 0, 2, -1] },
             { name: 'A Shape (10th Fret)', frets: [-1, 13, 0, 0, 10, 13], fingers: [-1, 2, 0, 0, 1, 3] },
             { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 13, 15, 14, 15, 15], fingers: [-1, 2, 4, 3, 1, 1] },
@@ -3179,7 +3179,7 @@ window.generatedVoicings = {
         ],
         '6sus2': [
             { name: 'A Shape (1st Fret)', frets: [-1, 1, -1, 0, 1, 1], fingers: [-1, 1, -1, 0, 2, 3] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, -1, 3], fingers: [2, 1, 1, 1, -1, 1] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, -1, 3], fingers: [4, 1, 1, 1, -1, 1] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [6, 8, 8, -1, 8, 8], fingers: [2, 1, 1, -1, 1, 1] },
             { name: 'A Shape (10th Fret)', frets: [-1, 13, 10, 0, -1, 13], fingers: [-1, 2, 1, 0, -1, 3] },
             { name: 'A Shape (13th Fret)', frets: [-1, 13, -1, 0, 13, 13], fingers: [-1, 1, -1, 0, 2, 3] },
@@ -3193,14 +3193,14 @@ window.generatedVoicings = {
         ],
         '7sus2': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 1, 3, 1, 1, 1], fingers: [-1, 2, 3, 1, 1, 1] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, -1, 4], fingers: [3, 1, 1, 1, -1, 2] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, -1, 4], fingers: [4, 1, 1, 1, -1, 2] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [6, 8, 6, -1, 6, 8], fingers: [2, 3, 1, -1, 1, 4] },
             { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 13, 10, 13, 13, 13], fingers: [-1, 3, 2, 1, 1, 1] },
             { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 13, 15, 13, 13, 13], fingers: [-1, 2, 3, 1, 1, 1] },
         ],
         'maj7sus2': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 1, 3, 2, 1, 1], fingers: [-1, 2, 4, 3, 1, 1] },
-            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, -1, 5], fingers: [3, 1, 1, 1, -1, 2] },
+            { name: 'E Shape (3rd Fret) (Barre)', frets: [6, 3, 3, 3, -1, 5], fingers: [4, 1, 1, 1, -1, 2] },
             { name: 'E Shape (6th Fret)', frets: [6, 0, -1, -1, 6, 8], fingers: [1, 0, -1, -1, 2, 3] },
             { name: 'A Shape (10th Fret) (Barre)', frets: [-1, 13, 10, 10, 10, 13], fingers: [-1, 2, 1, 1, 1, 3] },
             { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 13, 15, 14, 13, 13], fingers: [-1, 2, 4, 3, 1, 1] },
@@ -3216,21 +3216,21 @@ window.generatedVoicings = {
         ],
         '6': [
             { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 2, 4, 4, 4, 4], fingers: [-1, 2, 1, 1, 1, 1] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, -1, 4, 4, 4, 4], fingers: [2, -1, 1, 1, 1, 1] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, -1, 4, 4, 4, 4], fingers: [4, -1, 1, 1, 1, 1] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [7, 6, 6, 8, 7, 7], fingers: [3, 1, 1, 4, 2, 2] },
             { name: 'D Shape (9th Fret)', frets: [-1, -1, 9, 11, 9, 11], fingers: [-1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (13th Fret)', frets: [-1, 14, 13, 13, 0, 14], fingers: [-1, 3, 1, 2, 0, 4] },
         ],
         '7': [
             { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 2, 4, 4, 4, 5], fingers: [-1, 2, 1, 1, 1, 3] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 0, 4, 4, 4, 5], fingers: [3, 0, 1, 1, 1, 2] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 0, 4, 4, 4, 5], fingers: [4, 0, 1, 1, 1, 2] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [7, 6, 7, -1, 7, 7], fingers: [3, 2, 1, -1, 1, 1] },
             { name: 'D Shape (9th Fret)', frets: [-1, -1, 9, 11, 10, 11], fingers: [-1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (13th Fret)', frets: [-1, 14, 13, 14, 0, 14], fingers: [-1, 2, 1, 3, 0, 4] },
         ],
         '9': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 2, 1, 2, 2, 2], fingers: [-1, 3, 2, 1, 1, 1] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 4, 5], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 4, 5], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (7th Fret) (Barre)', frets: [7, -1, 7, 8, 7, 9], fingers: [1, -1, 1, 3, 2, 4] },
             { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 14, 13, 14, 14, 14], fingers: [-1, 3, 2, 1, 1, 1] },
         ],
@@ -3277,9 +3277,9 @@ window.generatedVoicings = {
         ],
         'maj9': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 2, 1, 3, 2, 2], fingers: [-1, 3, 2, 4, 1, 1] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 4, 6], fingers: [3, 1, 1, 1, 1, 2] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 4, 6], fingers: [4, 1, 1, 1, 1, 2] },
             { name: 'E Shape (7th Fret) (Barre)', frets: [7, 9, 8, 8, 0, 9], fingers: [2, 3, 1, 1, 0, 4] },
-            { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 14, 11, 11, 11, 11], fingers: [-1, 2, 1, 1, 1, 1] },
+            { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 14, 11, 11, 11, 11], fingers: [-1, 4, 1, 1, 1, 1] },
             { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 14, 13, 15, 14, 14], fingers: [-1, 3, 2, 4, 1, 1] },
         ],
         'sus4': [
@@ -3291,9 +3291,9 @@ window.generatedVoicings = {
         ],
         'maj7': [
             { name: 'A Shape (1st Fret)', frets: [-1, 2, 1, 3, 0, 2], fingers: [-1, 2, 1, 4, 0, 3] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, -1, 4, 4, 4, 6], fingers: [3, -1, 1, 1, 1, 2] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, -1, 4, 4, 4, 6], fingers: [4, -1, 1, 1, 1, 2] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [7, 6, 8, 8, 7, 7], fingers: [4, 3, 2, 2, 1, 1] },
-            { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 14, 13, 11, 11, 11], fingers: [-1, 3, 2, 1, 1, 1] },
+            { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 14, 13, 11, 11, 11], fingers: [-1, 4, 2, 1, 1, 1] },
             { name: 'A Shape (13th Fret)', frets: [-1, 14, 13, 15, 0, 14], fingers: [-1, 2, 1, 4, 0, 3] },
         ],
         'dim': [
@@ -3312,7 +3312,7 @@ window.generatedVoicings = {
         ],
         'add9': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 2, 1, 4, 2, 2], fingers: [-1, 3, 2, 4, 1, 1] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 4, -1], fingers: [2, 1, 1, 1, 1, -1] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 4, -1], fingers: [4, 1, 1, 1, 1, -1] },
             { name: 'E Shape (7th Fret) (Barre)', frets: [7, 9, 9, 8, 0, 9], fingers: [2, 1, 1, 3, 0, 4] },
             { name: 'A Shape (11th Fret)', frets: [-1, 14, 11, 11, 0, 11], fingers: [-1, 4, 1, 2, 0, 3] },
             { name: 'A Shape (13th Fret)', frets: [-1, 14, 13, -1, 14, 14], fingers: [-1, 2, 1, -1, 3, 4] },
@@ -3352,7 +3352,7 @@ window.generatedVoicings = {
         ],
         '6/9': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 2, 1, 1, 2, 2], fingers: [-1, 2, 1, 1, 3, 4] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 4, 4], fingers: [2, 1, 1, 1, 1, 1] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 4, 4], fingers: [4, 1, 1, 1, 1, 1] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [7, 6, 6, 6, 7, -1], fingers: [2, 1, 1, 1, 3, -1] },
             { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 14, 13, 13, 14, 14], fingers: [-1, 2, 1, 1, 3, 4] },
         ],
@@ -3381,7 +3381,7 @@ window.generatedVoicings = {
         ],
         'm6': [
             { name: 'A Shape (1st Fret)', frets: [-1, 2, 0, 1, 0, 2], fingers: [-1, 2, 0, 1, 0, 3] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 5, 4, 4, -1, 4], fingers: [3, 2, 1, 1, -1, 1] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 5, 4, 4, -1, 4], fingers: [4, 2, 1, 1, -1, 1] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [7, -1, 6, 7, 7, 7], fingers: [3, -1, 2, 1, 1, 1] },
             { name: 'D Shape (9th Fret)', frets: [-1, -1, 9, 11, 9, 10], fingers: [-1, -1, 1, 4, 2, 3] },
             { name: 'A Shape (13th Fret)', frets: [-1, 14, 0, 13, 0, 14], fingers: [-1, 2, 0, 1, 0, 3] },
@@ -3421,7 +3421,7 @@ window.generatedVoicings = {
         ],
         '7add13': [
             { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 2, 4, 2, 4, 4], fingers: [-1, 2, 4, 3, 1, 1] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 0, 4, 4, 4, 4], fingers: [2, 0, 1, 1, 1, 1] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 0, 4, 4, 4, 4], fingers: [4, 0, 1, 1, 1, 1] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [7, 0, 6, 8, 7, 7], fingers: [3, 0, 2, 4, 1, 1] },
         ],
         'maj7add13': [
@@ -3472,7 +3472,7 @@ window.generatedVoicings = {
         ],
         '6sus2': [
             { name: 'A Shape (1st Fret) (Barre)', frets: [-1, 2, 4, 1, 2, 2], fingers: [-1, 3, 4, 2, 1, 1] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, -1, 4], fingers: [2, 1, 1, 1, -1, 1] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, -1, 4], fingers: [4, 1, 1, 1, -1, 1] },
             { name: 'E Shape (7th Fret) (Barre)', frets: [7, 9, 9, -1, 9, 9], fingers: [2, 1, 1, -1, 1, 1] },
             { name: 'A Shape (11th Fret)', frets: [-1, 14, 11, 13, 0, 14], fingers: [-1, 3, 1, 2, 0, 4] },
             { name: 'A Shape (13th Fret)', frets: [-1, 14, -1, 13, 14, 14], fingers: [-1, 2, -1, 1, 3, 4] },
@@ -3485,14 +3485,14 @@ window.generatedVoicings = {
         ],
         '7sus2': [
             { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 2, 4, 2, 2, 2], fingers: [-1, 2, 3, 1, 1, 1] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 0, 5], fingers: [3, 1, 1, 1, 0, 2] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 0, 5], fingers: [4, 1, 1, 1, 0, 2] },
             { name: 'E Shape (6th Fret)', frets: [7, 0, -1, 6, 7, -1], fingers: [2, 0, -1, 1, 3, -1] },
             { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 14, 11, 14, 14, 14], fingers: [-1, 3, 2, 1, 1, 1] },
             { name: 'A Shape (14th Fret)', frets: [-1, 14, -1, 14, 14, 14], fingers: [-1, 1, -1, 2, 3, 4] },
         ],
         'maj7sus2': [
             { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 2, 4, 3, 2, 2], fingers: [-1, 2, 4, 3, 1, 1] },
-            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 0, 6], fingers: [3, 1, 1, 1, 0, 2] },
+            { name: 'E Shape (4th Fret) (Barre)', frets: [7, 4, 4, 4, 0, 6], fingers: [4, 1, 1, 1, 0, 2] },
             { name: 'E Shape (6th Fret) (Barre)', frets: [7, 9, 9, 6, 0, 6], fingers: [4, 1, 1, 2, 0, 3] },
             { name: 'A Shape (11th Fret) (Barre)', frets: [-1, 14, 11, 11, 11, 14], fingers: [-1, 2, 1, 1, 1, 3] },
             { name: 'A Shape (14th Fret)', frets: [-1, 14, -1, 15, 14, 14], fingers: [-1, 1, -1, 4, 2, 3] },

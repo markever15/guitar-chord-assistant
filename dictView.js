@@ -113,12 +113,22 @@ function computeFingers(frets) {
     }
 
     // fingerNum번 손가락부터 remaining을 4번 손가락 이내로 다 배정할 수 있으면 {줄:손가락번호} 반환
-    function assign(remaining, fingerNum) {
+    // refFret: 바레(검지)를 짚은 프렛 - 여기서 3프렛 이상 떨어진 음은 옆 손가락으로 이어 뻗기엔
+    // 너무 머니까 새끼손가락(4번)으로 따로 보냄
+    function assign(remaining, fingerNum, refFret) {
         if (fingerNum > 4) return remaining.length === 0 ? {} : null;
         const budget = 4 - fingerNum + 1;
         if (remaining.length <= budget) {
             const result = {};
-            [...remaining].sort((a, b) => a.f - b.f || a.s - b.s).forEach((x, i) => { result[x.s] = fingerNum + i; });
+            const sorted = [...remaining].sort((a, b) => a.f - b.f || a.s - b.s);
+            const farOnes = refFret !== undefined ? sorted.filter(x => x.f - refFret >= 3) : [];
+            if (farOnes.length === 1 && fingerNum < 4) {
+                const near = sorted.filter(x => x !== farOnes[0]);
+                near.forEach((x, i) => { result[x.s] = fingerNum + i; });
+                result[farOnes[0].s] = 4;
+            } else {
+                sorted.forEach((x, i) => { result[x.s] = fingerNum + i; });
+            }
             return result;
         }
         const groups = barreGroups(remaining);
@@ -127,13 +137,13 @@ function computeFingers(frets) {
         groups.sort((a, b) => b.group.length - a.group.length || a.fret - b.fret);
         for (const g of groups) {
             const rest = remaining.filter(x => !g.group.includes(x.s));
-            const sub = assign(rest, fingerNum + 1);
+            const sub = assign(rest, fingerNum + 1, refFret !== undefined ? refFret : g.fret);
             if (sub) { g.group.forEach(s => { sub[s] = fingerNum; }); return sub; }
         }
         return null;
     }
 
-    const assignment = assign(fretted, 1);
+    const assignment = assign(fretted, 1, undefined);
     if (!assignment) return null;
     const result = frets.map(f => (f === -1 ? -1 : 0));
     Object.keys(assignment).forEach(s => { result[s] = assignment[s]; });
@@ -224,18 +234,6 @@ window.dictView = {
                 if (nf < 0) invalidShift = true;
                 return nf;
             });
-            const wasOpenShape = v.frets.includes(0);
-
-            const shiftedFingers = v.fingers.map((fing, idx) => {
-                if (off === 0) return fing === 0 ? -1 : fing; // 원본 폼에서도 0번 손가락은 강제 삭제
-
-                if (wasOpenShape) {
-                    if (v.frets[idx] === 0) return 1; // 개방현이었던 줄은 1번(바레)으로
-                    if (fing > 0) return Math.min(4, fing + 1); // 나머지는 손가락 번호 +1
-                }
-                return fing === 0 ? -1 : fing;
-            });
-
             // 1. 렌더링 범위 이탈 필터링
             if (invalidShift) return null;
             if (shiftedFrets.some(f => f !== -1 && f > window.totalFrets)) return null;
@@ -245,23 +243,11 @@ window.dictView = {
             const fretSpan = activeFrets.length > 0 ? Math.max(...activeFrets) - Math.min(...activeFrets) : 0;
             if (fretSpan > 4) return null;
 
-            // 3. 중복 손가락 사용 방지 (검지(1)는 바레로 여러 줄 커버 가능. 2, 3, 4번 손가락도
-            //    "같은 프렛"이면 미니 바레로 동시에 여러 줄을 누를 수 있으므로 허용하고,
-            //    "서로 다른 프렛"을 동시에 요구할 때만 물리적으로 불가능하므로 걸러낸다.)
-            if (off !== 0) {
-                const fretByFinger = {};
-                let fingerConflict = false;
-                shiftedFingers.forEach((fing, idx) => {
-                    if (fing >= 2 && fing <= 4) {
-                        const fret = shiftedFrets[idx];
-                        if (fretByFinger[fing] !== undefined && fretByFinger[fing] !== fret) {
-                            fingerConflict = true;
-                        }
-                        fretByFinger[fing] = fret;
-                    }
-                });
-                if (fingerConflict) return null;
-            }
+            // 3. 실제 손가락 배치 알고리즘(computeFingers)으로 4손가락 이내에 진짜 잡을 수 있는지 검증
+            //    (렌더링 시점에도 항상 이 알고리즘으로 다시 계산하므로, 필터링도 같은 기준을 써야
+            //    "필터는 통과했는데 화면엔 이상한 손가락 번호로 뜨는" 불일치가 안 생김)
+            const shiftedFingers = computeFingers(shiftedFrets);
+            if (!shiftedFingers) return null;
 
             // 4. 베이스(가장 낮게 울리는 줄)가 루트음이 아니면 버림 (확장음이 베이스면 어느 코드인지 헷갈림)
             if (requireRootBass) {

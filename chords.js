@@ -912,7 +912,14 @@ window.chordDatabase = {
             { name: 'D-Root Shell (14th Fret)', desc: 'Open D and B, top voicing.', frets: [-1, -1, 0, 14, 0, 14], fingers: [-1, -1, 0, 1, 0, 2] }
         ],
         'add9': [
-            { name: 'Open Dadd9', desc: 'Beautiful open ringing strings.', frets: [-1, -1, 0, 2, 5, 2], fingers: [-1, -1, 0, 1, 2, 1] }
+            { name: 'Open Dadd9', desc: 'Beautiful open ringing strings.', frets: [-1, -1, 0, 2, 5, 2], fingers: [-1, -1, 0, 1, 2, 1] },
+            { name: 'A Shape (2nd Fret)', desc: '5th-string root, open D string.', frets: [-1, 5, 0, 2, 5, 2], fingers: [-1, 3, 0, 1, 4, 2] },
+            { name: 'A Shape (5th Fret)', desc: '5th-string root, open high E string.', frets: [-1, 5, 7, 7, 7, 0], fingers: [-1, 1, 2, 3, 4, 0] },
+            { name: 'E Shape (10th, Open A/Top)', desc: '6th-string root, open A and high E strings.', frets: [10, 0, 12, 11, 10, 0], fingers: [1, 0, 4, 3, 2, 0] },
+            { name: 'D Shape (10th, Open Top)', desc: '4th-string root, open high E string.', frets: [-1, -1, 12, 11, 10, 0], fingers: [-1, -1, 3, 2, 1, 0] },
+            { name: 'E Shape (10th Fret)', desc: '6th-string root, full voicing.', frets: [10, 12, 12, 11, 10, 0], fingers: [2, 1, 1, 4, 3, 0] },
+            { name: 'E Shape (10th, Open A/D)', desc: '6th-string root, open A and D strings.', frets: [10, 0, 0, 11, 10, 12], fingers: [1, 0, 0, 3, 2, 4] },
+            { name: 'D Shape (10th, Open D)', desc: '4th-string root, open D string.', frets: [-1, -1, 0, 11, 10, 12], fingers: [-1, -1, 0, 2, 1, 3] }
         ],
         'aug': [
             { name: 'Daug Shape', desc: 'Tense augmented passing chord.', frets: [-1, -1, 0, 3, 3, 2], fingers: [-1, -1, 0, 2, 3, 1] }
