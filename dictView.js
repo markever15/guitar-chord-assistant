@@ -393,6 +393,17 @@ window.dictView = {
         return Math.max(0, ...Object.values(counts)) >= 3;
     },
 
+    // 🌟 "잡기 쉬운 정도"를 대충 점수로 매김 - 작을수록 쉬움. 바레면 확 어려워지고, 누르는 프렛
+    //    종류가 여러 개(줄마다 프렛이 다 다름)일수록, 손을 벌리는 폭(최저~최고 프렛 차이)이
+    //    클수록 어려움. 완벽한 난이도 모델은 아니지만 "같은 포지션 안에서 뭐가 더 편한가" 정도는
+    //    충분히 가려냄.
+    easeRank: function(v) {
+        const activeFrets = v.frets.filter(f => f > 0);
+        const distinctFrets = new Set(activeFrets).size;
+        const span = activeFrets.length ? Math.max(...activeFrets) - Math.min(...activeFrets) : 0;
+        return [this.isBarre(v) ? 1 : 0, distinctFrets, span];
+    },
+
     // 🌟 넥을 3프렛 단위 구간(Open, 3-5, 6-8, 9-11, 12-14)으로 나누고, 구간마다 "가장 잡기 편한"
     //    폼 하나만 대표로 뽑음. 예전엔 "폼의 종류"(오픈/A/E/D Shape)로 나눴었는데, 바레 여부만 보고
     //    같은 바레끼리는 무조건 낮은 포지션을 우선시하다 보니 - 실제로는 손 스트레치가 더 좁고 편한
@@ -547,6 +558,18 @@ window.dictView = {
             const bucket = this.bucketOf(minFret);
             if (!buckets.has(bucket)) buckets.set(bucket, []);
             buckets.get(bucket).push(idx);
+        });
+
+        // 🌟 각 프렛 구간 안에서는 잡기 쉬운 폼이 맨 앞(대표 자리)에 오도록 정렬
+        buckets.forEach(idxList => {
+            idxList.sort((a, b) => {
+                const rankA = this.easeRank(voicings[a]);
+                const rankB = this.easeRank(voicings[b]);
+                for (let i = 0; i < rankA.length; i++) {
+                    if (rankA[i] !== rankB[i]) return rankA[i] - rankB[i];
+                }
+                return a - b;
+            });
         });
 
         [...buckets.keys()].sort((a, b) => a - b).forEach(bucket => {
