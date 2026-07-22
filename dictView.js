@@ -395,23 +395,41 @@ window.dictView = {
 
     // 🌟 넥 포지션(3프렛 단위)이 아니라 "폼의 종류" 기준으로 대표를 뽑음 - 연주자가 실제로 구분하는
     //    개방현 폼 / 5번줄(A) 근음 하이코드 / 6번줄(E) 근음 하이코드 / 4번줄(D) 근음 하이코드, 최대 4개.
-    //    - open: 개방현이 최소 하나 울리면서 넥 아래쪽(0번 포지션 구간)에 있는 폼. 여러 개면 더 낮은
-    //      포지션, 그다음 원래 생성 순서(_srcOrder) 순으로 고름 - "Open D Shape"처럼 사람이 직접
-    //      맨 앞에 적어둔 정통 개방현 폼을 우선 신뢰. 지정 파지법(_tier 0/1)에서만 뽑음 - 자동 생성
-    //      폼 중에 개방현 하나가 우연히 낀 얇은 파편(예: F메이저의 "1프렛, 개방 A줄만 우연히 낀 3음
-    //      폼")이 "오픈 코드"로 둔갑하는 문제가 있었음. 이 데이터셋은 지금까지 실제 오픈 코드는 항상
-    //      사람이 직접 "Open X Shape"로 큐레이션해왔으므로, 지정 파지법에 없으면 그 루트/품질엔
-    //      원래 오픈 폼이 없다고 보는 게 맞음.
-    //    - aShape/eShape/dShape: 바레가 있으면서 베이스가 각각 5번줄(A)/6번줄(E)/4번줄(D)인 폼
-    //      (지정+자동생성 모두 허용, 큐레이션이 안 된 조합도 흔해서 자동 생성분까지 봐야 함).
-    //      울리는 줄 4개 미만인 얇은 폼은 제외. 여러 개면 넥 아래쪽, 그다음 원래 순서로 고름.
-    //    해당 종류가 아예 없는 코드는 그 항목을 건너뜀(예: 오픈코드가 없는 F#/C# 등은 open이 없음).
+    //    - open: 개방현이 최소 하나 울리면서 넥 아래쪽(0번 포지션 구간)에 있는 폼. 지정 파지법
+    //      (_tier 0/1)에서만 뽑음 - 자동 생성 폼 중에 개방현 하나가 우연히 낀 얇은 파편이 "오픈
+    //      코드"로 둔갑하는 문제가 있었음. 이 데이터셋은 실제 오픈 코드를 항상 사람이 직접
+    //      "Open X Shape"로 큐레이션해왔으므로, 지정 파지법에 없으면 그 루트/품질엔 오픈 폼이
+    //      없다고 보는 게 맞음.
+    //    - aShape/eShape/dShape: 베이스가 각각 5번줄(A)/6번줄(E)/4번줄(D)인 폼 중에서, 바레가
+    //      있으면 우선하되(있으면 CAGED식 이동 코드라 가장 흔히 씀) 없으면 최선의 비-바레 폼으로
+    //      대체함 - m7b5/dim7/확장 코드처럼 애초에 통짜 바레가 잘 안 나오는 코드가 많아서, 바레를
+    //      필수로 요구하면 대표가 통째로 비는 조합이 절반 넘게 나왔음. 그다음 우선순위는 지정
+    //      파지법(큐레이션) > 넥 아래쪽 > 원래 생성 순서.
+    //    울리는 줄이 4개 미만인 얇은 폼은 전부 제외. 해당 종류가 아예 없으면 그 항목만 건너뜀
+    //    (예: 오픈코드가 없는 F#/C# 등은 open이 없음).
     getShapeRepresentatives: function(voicings) {
         const result = { open: null, aShape: null, eShape: null, dShape: null };
-        const better = (a, b) => {
-            if (a.minFret !== b.minFret) return a.minFret < b.minFret;
-            return a.srcOrder < b.srcOrder;
+        // rank 배열은 앞자리일수록 중요 - 작을수록 우선
+        const rankOf = (v, candidate, useBarre) => [
+            useBarre ? (this.isBarre(v) ? 0 : 1) : 0,
+            (v._tier === 0 || v._tier === 1) ? 0 : 1,
+            candidate.minFret,
+            candidate.srcOrder
+        ];
+        const better = (rankA, rankB) => {
+            for (let i = 0; i < rankA.length; i++) {
+                if (rankA[i] !== rankB[i]) return rankA[i] < rankB[i];
+            }
+            return false;
         };
+        const consider = (key, v, candidate, useBarre) => {
+            const rank = rankOf(v, candidate, useBarre);
+            const current = result[key];
+            if (!current || better(rank, current.rank)) {
+                result[key] = { ...candidate, rank };
+            }
+        };
+        // 🌟 1단계: 오픈 폼 먼저 확정
         voicings.forEach((v, i) => {
             const activeFrets = v.frets.filter(f => f > 0);
             const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
@@ -422,19 +440,27 @@ window.dictView = {
 
             const isCurated = v._tier === 0 || v._tier === 1;
             if (isCurated && v.frets.includes(0) && Math.floor(minFret / 3) === 0) {
-                if (!result.open || better(candidate, result.open)) result.open = candidate;
+                consider('open', v, candidate, false);
             }
-            if (this.isBarre(v)) {
-                let bassString = 6;
-                for (let s = 0; s < 6; s++) { if (v.frets[s] !== -1) { bassString = s; break; } }
-                if (bassString === 1) {
-                    if (!result.aShape || better(candidate, result.aShape)) result.aShape = candidate;
-                } else if (bassString === 0) {
-                    if (!result.eShape || better(candidate, result.eShape)) result.eShape = candidate;
-                } else if (bassString === 2) {
-                    if (!result.dShape || better(candidate, result.dShape)) result.dShape = candidate;
-                }
-            }
+        });
+
+        // 🌟 2단계: 5/6/4번줄 근음 하이코드 - 오픈으로 이미 뽑힌 바로 그 폼은 건너뜀
+        //    (예: D메이저의 "Open D Shape"는 베이스가 D줄이라 4번줄 근음 조건도 만족하는데,
+        //    같은 카드가 라벨만 다르게 두 번 뜨는 걸 막음)
+        voicings.forEach((v, i) => {
+            if (result.open && i === result.open.idx) return;
+            const activeFrets = v.frets.filter(f => f > 0);
+            const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
+            const srcOrder = v._srcOrder !== undefined ? v._srcOrder : i;
+            const candidate = { idx: i, minFret, srcOrder };
+            const soundingCount = v.frets.filter(f => f >= 0).length;
+            if (soundingCount < 4) return;
+
+            let bassString = 6;
+            for (let s = 0; s < 6; s++) { if (v.frets[s] !== -1) { bassString = s; break; } }
+            if (bassString === 1) consider('aShape', v, candidate, true);
+            else if (bassString === 0) consider('eShape', v, candidate, true);
+            else if (bassString === 2) consider('dShape', v, candidate, true);
         });
         return result;
     },
@@ -504,6 +530,13 @@ window.dictView = {
             { key: 'eShape', label: '6th-String Root (E Shape)' },
             { key: 'dShape', label: '4th-String Root (D Shape)' }
         ];
+
+        // 🌟 항상 넥 아래쪽(낮은 프렛)부터 나열 - 카테고리 종류 순서가 아니라 실제 대표 폼의 최저 프렛 기준
+        groups.sort((a, b) => {
+            const fa = categories[a.key] ? categories[a.key].minFret : Infinity;
+            const fb = categories[b.key] ? categories[b.key].minFret : Infinity;
+            return fa - fb;
+        });
 
         let any = false;
         groups.forEach(g => {
