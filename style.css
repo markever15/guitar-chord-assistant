@@ -107,6 +107,15 @@ button.active { background-color: var(--accent-color); color: white; }
 .vertical-voicing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
 .v-grid-empty { grid-column: 1 / -1; color: #828997; font-size: 0.9rem; padding: 24px; text-align: center; background: #1b1d23; border: 1px dashed #3e4452; border-radius: 8px; }
 
+/* 🌟 대표 폼을 "개방현 / 5번줄 근음 / 6번줄 근음" 종류별로 나눠 보여주는 레이아웃 - 그리드 대신 라벨+카드 묶음을 가로로 나열 */
+#voicing-list.v-shape-group-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.v-shape-group { display: flex; flex-direction: column; width: 150px; }
+.v-shape-group .v-chord-card { width: 100%; }
+
+/* 🌟 "All" 펼침 보기 - 넥 포지션(3프렛 단위) 구간별로 세로로 묶어서, 코드 많은 품질도 훑어보기 쉽게 함 */
+#voicing-list.v-position-group-col { display: flex; flex-direction: column; gap: 18px; }
+.v-position-section .group-title { margin-bottom: 8px; }
+
 .v-chord-card { background: #1b1d23; border: 1px solid #2d313f; border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
 .v-chord-card:hover { border-color: var(--selected-card-border); }
 .v-chord-card.active { border-color: var(--selected-card-border); background: #1e2530; box-shadow: 0 0 0 1px var(--selected-card-border); }

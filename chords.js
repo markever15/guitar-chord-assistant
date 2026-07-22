@@ -973,6 +973,21 @@ window.chordDatabase = {
         '6sus2': [
             { name: 'Open D6sus2 Shape', desc: 'Open-position 6sus2 voicing.', frets: [-1, -1, 0, 2, 0, 0], fingers: [-1, -1, 0, 1, 0, 0] }
         ],
+        '6/9': [
+            { name: 'E Shape (9th Fret)', desc: '6th-string root, only the high E string open.', frets: [10, 9, 9, 9, 10, 0], fingers: [2, 1, 1, 1, 3, 0] },
+            { name: 'E Shape (9th, Open A/B/Top)', desc: '6th-string root, open A, B, and high E strings.', frets: [10, 0, 9, 11, 0, 0], fingers: [2, 0, 1, 3, 0, 0] },
+            { name: 'E Shape (10th, Open D/B/Top)', desc: '6th-string root, open D, B, and high E strings.', frets: [10, 12, 0, 11, 0, 0], fingers: [1, 3, 0, 2, 0, 0] },
+            { name: 'E Shape (10th, Open A/B/Top)', desc: '6th-string root, open A, B, and high E strings.', frets: [10, 0, 12, 11, 0, 0], fingers: [1, 0, 3, 2, 0, 0] },
+            { name: 'E Shape (10th, Open B/Top)', desc: '6th-string root, open B and high E strings.', frets: [10, 12, 12, 11, 0, 0], fingers: [1, 3, 4, 2, 0, 0] },
+            { name: 'E Shape (10th, Open A/D/Top)', desc: '6th-string root, open A, D, and high E strings.', frets: [10, 0, 0, 11, 12, 0], fingers: [1, 0, 0, 2, 3, 0] },
+            { name: 'E Shape (10th, Open D/Top)', desc: '6th-string root, open D and high E strings.', frets: [10, 12, 0, 11, 12, 0], fingers: [1, 3, 0, 2, 4, 0] },
+            { name: 'E Shape (10th, Open A/Top)', desc: '6th-string root, open A and high E strings.', frets: [10, 0, 12, 11, 12, 0], fingers: [1, 0, 3, 2, 4, 0] },
+            { name: 'E Shape (10th, Open Top)', desc: '6th-string root, only the high E string open.', frets: [10, 12, 12, 11, 12, 0], fingers: [1, 3, 3, 2, 4, 0] },
+            { name: 'E Shape (10th, Open A/D/B)', desc: '6th-string root, open A, D, and B strings.', frets: [10, 0, 0, 11, 0, 12], fingers: [1, 0, 0, 2, 0, 3] },
+            { name: 'E Shape (10th, Open D/B)', desc: '6th-string root, open D and B strings.', frets: [10, 12, 0, 11, 0, 12], fingers: [1, 3, 0, 2, 0, 4] },
+            { name: 'E Shape (10th, Open A/B)', desc: '6th-string root, open A and B strings.', frets: [10, 0, 12, 11, 0, 12], fingers: [1, 0, 3, 2, 0, 4] },
+            { name: 'E Shape (10th, Open B)', desc: '6th-string root, only the B string open.', frets: [10, 12, 12, 11, 0, 12], fingers: [1, 3, 3, 2, 0, 4] }
+        ],
         'maj7sus4': [
             { name: 'Open Dmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, -1, 0, 0, 2, 5], fingers: [-1, -1, 0, 0, 1, 2] }
         ],
