@@ -372,12 +372,22 @@ window.dictView = {
         });
     },
 
+    // 🌟 한 폼이 통짜 바레인지 확인: 울리는 가장 낮은 줄과 가장 높은 줄을 같은 손가락이 짚고 있으면
+    //    (예: A Shape 바레의 검지가 A줄~high E줄을 다 덮는 경우) CAGED식으로 흔히 쓰는 이동 코드 폼임
+    isFullBarre: function(v) {
+        const soundingIdx = v.frets.map((f, i) => f >= 0 ? i : -1).filter(i => i >= 0);
+        if (soundingIdx.length < 3) return false;
+        const lo = soundingIdx[0], hi = soundingIdx[soundingIdx.length - 1];
+        return v.fingers[lo] > 0 && v.fingers[lo] === v.fingers[hi];
+    },
+
     // 🌟 넥을 3프렛 단위 포지션 구간(제너레이터의 버킷 로직과 동일)으로 나눠서 구간당 대표 1개만 뽑음.
-    //    대표는 "가장 먼저 정렬된 폼"이 아니라 "원래 생성 순서(_srcOrder)가 가장 앞선 폼" - 즉 지정
-    //    파지법(chordDatabase)에 사람이 직접 맨 앞에 적어둔 정통적인 폼을 우선함. 지오메트리 기반 휴리스틱
-    //    (개방현 유무, 베이스 줄 위치 등)은 정통적인 폼과 변형 폼을 정확히 못 가려내는 경우가 있었음
-    //    (예: D메이저에서 A-String Root가 Open D Shape보다 앞에 뽑히던 문제, F메이저의 Easy F가
-    //    Standard F Barre보다 앞에 뽑히던 문제) - 저장된 순서 자체가 더 신뢰할 수 있는 신호.
+    //    0번 구간(오픈 포지션)은 원래 생성 순서(_srcOrder, 지정 파지법을 사람이 맨 앞에 적어둔 순서)를
+    //    그대로 신뢰함 - "Open D Shape"/"Standard F Barre"처럼 오픈 포지션의 정통 폼은 항상 먼저 있었음.
+    //    그 외 구간(5프렛, 7프렛...)은 그 규칙만으론 부족했음 - 예를 들어 D메이저 5프렛대에서 흔한
+    //    "A Shape (5th Fret)" 바레 폼이 먼저 적힌 다른 변형 폼에 밀려 대표에서 빠지는 문제가 있었음.
+    //    그래서 오픈 포지션이 아닌 구간에서는 통짜 바레 폼(연주자들이 실제로 가장 많이 쓰는 이동 코드
+    //    폼)을 우선하고, 그 안에서만 원래 순서로 타이브레이크함.
     getPositionRepresentativeIndices: function(voicings) {
         const bucketBest = new Map();
         voicings.forEach((v, i) => {
@@ -385,12 +395,21 @@ window.dictView = {
             const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
             const bucket = Math.floor(minFret / 3);
             const srcOrder = v._srcOrder !== undefined ? v._srcOrder : i;
+            const rank = bucket === 0 ? [srcOrder] : [this.isFullBarre(v) ? 0 : 1, srcOrder];
             const current = bucketBest.get(bucket);
-            if (!current || srcOrder < current.srcOrder) {
-                bucketBest.set(bucket, { idx: i, srcOrder });
+            if (!current || this.rankLess(rank, current.rank)) {
+                bucketBest.set(bucket, { idx: i, rank });
             }
         });
         return [...bucketBest.entries()].sort((a, b) => a[0] - b[0]).map(([, x]) => x.idx);
+    },
+
+    // 🌟 배열로 표현한 우선순위(rank)를 앞자리부터 비교 - 작을수록 우선
+    rankLess: function(a, b) {
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) return a[i] < b[i];
+        }
+        return false;
     },
 
     // 현재 재생/하이라이트의 기준이 되는 보이싱: 슬래시 코드가 선택돼 있으면 그게 우선, 아니면 메인 리스트의 선택된 인덱스
