@@ -354,6 +354,11 @@ window.dictView = {
             return activeFrets.length === 0 || Math.max(...activeFrets) < 15;
         });
 
+        // 🌟 프렛을 하나도 안 짚는(개방현+뮤트만으로 이루어진) "파지법"은 실제로 손가락으로 잡는 게
+        //    없어서 코드 폼으로서 의미가 없음 - 예: E5의 "Open Position"(그냥 저음 E/고음 E 개방현만
+        //    울리고 나머지 뮤트, 손가락 0개). 목록에서 통째로 제외함.
+        allVoicings = allVoicings.filter(v => v.frets.some(f => f > 0));
+
         // 🌟 대표 폼 선정에 쓸 원래 생성 순서를 기록해둠 (지정 파지법 원본 → 지정 파지법 옥타브 이동분 →
         //    자동 생성 → C코드 변환분 순으로 쌓았으므로, 이 순서 자체가 "더 정통적인/의도된" 폼일수록 앞에 옴)
         allVoicings.forEach((v, i) => { v._srcOrder = i; });
