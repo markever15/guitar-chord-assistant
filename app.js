@@ -4,6 +4,7 @@ window.currentRoot = null;
 window.currentQuality = null;
 window.currentVoicingIndex = 0;
 window.showAllNotesState = false;
+window.showAllVoicings = false;
 
 window.totalFrets = 15; 
 window.stringCount = 6; 

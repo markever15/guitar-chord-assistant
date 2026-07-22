@@ -218,6 +218,7 @@ window.dictView = {
             window.currentRoot = null;
             window.currentQuality = null;
             window.currentVoicingIndex = 0;
+            window.showAllVoicings = false;
             this.updateButtons();
             this.renderAll();
             return;
@@ -234,6 +235,7 @@ window.dictView = {
         window.currentRoot = result.root;
         window.currentQuality = result.quality;
         window.currentVoicingIndex = 0;
+        window.showAllVoicings = false;
         this.updateButtons();
         this.renderAll();
     },
@@ -366,6 +368,22 @@ window.dictView = {
         });
     },
 
+    // 🌟 넥을 3프렛 단위 포지션 구간(제너레이터의 버킷 로직과 동일)으로 나눠서 구간당 대표 1개(이미 정렬상 가장 쉬운 폼)의 인덱스만 뽑음
+    getPositionRepresentativeIndices: function(voicings) {
+        const seen = new Set();
+        const indices = [];
+        voicings.forEach((v, i) => {
+            const activeFrets = v.frets.filter(f => f > 0);
+            const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
+            const bucket = Math.floor(minFret / 3);
+            if (!seen.has(bucket)) {
+                seen.add(bucket);
+                indices.push(i);
+            }
+        });
+        return indices;
+    },
+
     // 현재 재생/하이라이트의 기준이 되는 보이싱: 슬래시 코드가 선택돼 있으면 그게 우선, 아니면 메인 리스트의 선택된 인덱스
     getActiveVoicing: function() {
         if (window.selectedSlashVoicing) return window.selectedSlashVoicing;
@@ -394,7 +412,20 @@ window.dictView = {
         }
 
         this.renderChordFormula();
-        this.renderVerticalVoicingGrid('voicing-list', voicings, 'No practical voicing found for this chord within 15 frets.');
+
+        const repIndices = this.getPositionRepresentativeIndices(voicings);
+        const allBtn = document.getElementById('voicing-all-btn');
+        if (allBtn) {
+            if (repIndices.length < voicings.length) {
+                allBtn.style.display = '';
+                allBtn.classList.toggle('active', !!window.showAllVoicings);
+                allBtn.textContent = window.showAllVoicings ? 'Less' : `All (${voicings.length})`;
+            } else {
+                allBtn.style.display = 'none';
+            }
+        }
+        const displayIndices = window.showAllVoicings ? voicings.map((_, i) => i) : repIndices;
+        this.renderVerticalVoicingGrid('voicing-list', voicings, 'No practical voicing found for this chord within 15 frets.', displayIndices);
         this.renderSlashChordShelf(window.currentRoot, window.currentQuality);
     },
 
@@ -547,7 +578,7 @@ window.dictView = {
         return card;
     },
 
-    renderVerticalVoicingGrid: function(containerId, voicings, emptyMessage) {
+    renderVerticalVoicingGrid: function(containerId, voicings, emptyMessage, indices) {
         const list = document.getElementById(containerId);
         if (!list) return;
         list.innerHTML = '';
@@ -560,7 +591,9 @@ window.dictView = {
             return;
         }
 
-        voicings.forEach((v, idx) => {
+        const displayIndices = indices || voicings.map((_, i) => i);
+        displayIndices.forEach(idx => {
+            const v = voicings[idx];
             const isActive = containerId === 'voicing-list'
                 ? (!window.selectedSlashVoicing && idx === window.currentVoicingIndex)
                 : (window.selectedSlashVoicing === v);
@@ -622,6 +655,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 if (window.currentRoot === item.note) { window.currentRoot = null; }
                 else { window.currentRoot = item.note; }
                 window.currentVoicingIndex = 0;
+                window.showAllVoicings = false;
                 window.selectedSlashVoicing = null;
                 window.dictView.updateButtons();
                 window.dictView.renderAll();
@@ -684,6 +718,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     if (window.currentQuality === q) { window.currentQuality = null; }
                     else { window.currentQuality = q; }
                     window.currentVoicingIndex = 0;
+                    window.showAllVoicings = false;
                     window.selectedSlashVoicing = null;
                     window.dictView.updateButtons();
                     window.dictView.renderAll();
@@ -717,6 +752,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const showBtn = document.getElementById('show-all-btn');
     if (showBtn) showBtn.onclick = () => { window.showAllNotesState = !window.showAllNotesState; showBtn.classList.toggle('active', window.showAllNotesState); showBtn.innerText = window.showAllNotesState ? "Hide Notes" : "Show Notes"; window.dictView.renderAll(); };
+
+    const voicingAllBtn = document.getElementById('voicing-all-btn');
+    if (voicingAllBtn) voicingAllBtn.onclick = () => { window.showAllVoicings = !window.showAllVoicings; window.dictView.renderAll(); };
 
     const playChordBtn = document.getElementById('play-chord-btn');
     if (playChordBtn) {
