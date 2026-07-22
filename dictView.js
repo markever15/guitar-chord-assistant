@@ -556,14 +556,67 @@ window.dictView = {
                 allBtn.style.display = 'none';
             }
         }
-        const voicingList = document.getElementById('voicing-list');
         if (window.showAllVoicings) {
-            if (voicingList) voicingList.classList.remove('v-shape-group-row');
-            this.renderVerticalVoicingGrid('voicing-list', voicings, 'No practical voicing found for this chord within 14 frets.', voicings.map((_, i) => i));
+            this.renderVoicingPositionGroups('voicing-list', voicings, 'No practical voicing found for this chord within 14 frets.');
         } else {
             this.renderVoicingCategoryGroups('voicing-list', voicings, categories, 'No practical voicing found for this chord within 14 frets.');
         }
         this.renderSlashChordShelf(window.currentRoot, window.currentQuality);
+    },
+
+    // 🌟 "All"로 펼쳤을 때 전체를 한 줄로 쭉 나열하면 코드가 많은 품질(예: D6/9 22개)은 훑어보기
+    //    힘들어짐 - 그래서 넥 포지션 3프렛 단위 구간으로 나눠서, 구간마다 작은 제목을 붙여 세로로
+    //    쌓아줌. 각 구간 안에서는 기존 카드 그리드 그대로 씀.
+    renderVoicingPositionGroups: function(containerId, voicings, emptyMessage) {
+        const list = document.getElementById(containerId);
+        if (!list) return;
+        list.innerHTML = '';
+        list.classList.remove('v-shape-group-row');
+        list.classList.add('v-position-group-col');
+
+        if (!voicings || voicings.length === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'v-grid-empty';
+            empty.textContent = emptyMessage || 'No voicings to show.';
+            list.appendChild(empty);
+            return;
+        }
+
+        const buckets = new Map();
+        voicings.forEach((v, idx) => {
+            const activeFrets = v.frets.filter(f => f > 0);
+            const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
+            const bucket = Math.floor(minFret / 3);
+            if (!buckets.has(bucket)) buckets.set(bucket, []);
+            buckets.get(bucket).push(idx);
+        });
+
+        const bucketLabel = (bucket) => bucket === 0 ? 'Open Position' : `Frets ${bucket * 3}-${bucket * 3 + 2}`;
+
+        [...buckets.keys()].sort((a, b) => a - b).forEach(bucket => {
+            const section = document.createElement('div');
+            section.className = 'v-position-section';
+
+            const label = document.createElement('div');
+            label.className = 'group-title';
+            label.textContent = bucketLabel(bucket);
+            section.appendChild(label);
+
+            const grid = document.createElement('div');
+            grid.className = 'vertical-voicing-grid';
+            buckets.get(bucket).forEach(idx => {
+                const v = voicings[idx];
+                const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
+                const card = this.renderVerticalDiagram(v, isActive, () => {
+                    window.currentVoicingIndex = idx;
+                    window.selectedSlashVoicing = null;
+                    this.renderAll();
+                });
+                grid.appendChild(card);
+            });
+            section.appendChild(grid);
+            list.appendChild(section);
+        });
     },
 
     // 🌟 대표 폼을 넥 포지션이 아니라 "개방현 폼 / 5번줄 근음 하이코드 / 6번줄 근음 하이코드" 세 종류로
@@ -572,6 +625,7 @@ window.dictView = {
         const list = document.getElementById(containerId);
         if (!list) return;
         list.innerHTML = '';
+        list.classList.remove('v-position-group-col');
         list.classList.add('v-shape-group-row');
 
         const groups = [
