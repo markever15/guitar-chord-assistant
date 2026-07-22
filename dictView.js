@@ -393,6 +393,16 @@ window.dictView = {
         return Math.max(0, ...Object.values(counts)) >= 3;
     },
 
+    // 🌟 이름 자체가 "A Shape"/"E Shape"/"D Shape"(또는 열린 폼이 없는 루트의 "Standard ... Barre")로
+    //    큐레이션돼 있으면 그게 그 CAGED 폼이라는 가장 확실한 신호임 - 사람이 직접 그렇게 이름
+    //    붙였기 때문. 기하학적 추정(바레 여부, 넥 위치 등)보다 훨씬 신뢰도가 높음.
+    namedShapeMatch: function(name, key) {
+        if (key === 'aShape') return /\bA Shape\b/.test(name);
+        if (key === 'eShape') return /\bE Shape\b/.test(name) || /^Standard .*Barre/.test(name);
+        if (key === 'dShape') return /\bD Shape\b/.test(name);
+        return false;
+    },
+
     // 🌟 넥 포지션(3프렛 단위)이 아니라 "폼의 종류" 기준으로 대표를 뽑음 - 연주자가 실제로 구분하는
     //    개방현 폼 / 5번줄(A) 근음 하이코드 / 6번줄(E) 근음 하이코드 / 4번줄(D) 근음 하이코드, 최대 4개.
     //    - open: 개방현이 최소 하나 울리면서 넥 아래쪽(0번 포지션 구간)에 있는 폼. 지정 파지법
@@ -400,30 +410,44 @@ window.dictView = {
     //      코드"로 둔갑하는 문제가 있었음. 이 데이터셋은 실제 오픈 코드를 항상 사람이 직접
     //      "Open X Shape"로 큐레이션해왔으므로, 지정 파지법에 없으면 그 루트/품질엔 오픈 폼이
     //      없다고 보는 게 맞음.
-    //    - aShape/eShape/dShape: 베이스가 각각 5번줄(A)/6번줄(E)/4번줄(D)인 폼 중에서, 바레가
-    //      있으면 우선하되(있으면 CAGED식 이동 코드라 가장 흔히 씀) 없으면 최선의 비-바레 폼으로
-    //      대체함 - m7b5/dim7/확장 코드처럼 애초에 통짜 바레가 잘 안 나오는 코드가 많아서, 바레를
-    //      필수로 요구하면 대표가 통째로 비는 조합이 절반 넘게 나왔음. 그다음 우선순위는 지정
-    //      파지법(큐레이션) > 넥 아래쪽 > 원래 생성 순서.
+    //    - aShape/eShape/dShape: 베이스가 각각 5번줄(A)/6번줄(E)/4번줄(D)인 폼 중에서 고름.
+    //      기하학적 규칙(바레 여부, 넥 위치)만으로는 안정적으로 못 가려냈음 - 어떤 코드는 더 낮은
+    //      프렛의 진짜 CAGED 바레가 우선순위여야 하고(D메이저의 5프렛 "A Shape"가 2프렛의 혼합형
+    //      "A-String Root"에 밀리면 안 됨), 어떤 코드는 반대로 로우 포지션의 재즈/루트리스 보이싱이
+    //      우선순위여야 함(Cm7의 1프렛 "Rootless Shape"가 3프렛의 일반 바레 코드에 밀리면 안 됨) -
+    //      두 상황을 프렛/바레 숫자만으로 구분할 방법이 없었음. 그래서 가장 확실한 신호부터 봄:
+    //      1) 이름 자체가 "A/E/D Shape"로 큐레이션된 폼 2) 바레가 있는 폼(CAGED 이동 코드) 3) 그
+    //      다음은 넥 아래쪽부터. 바레도 이름 매치도 없는 코드(m7b5/dim7/확장 코드처럼 애초에 통짜
+    //      바레가 잘 안 나오는 경우)는 최선의 비-바레 폼으로 대체함 - 바레를 필수로 요구하면 대표가
+    //      통째로 비는 조합이 절반 넘게 나왔음.
     //    울리는 줄이 4개 미만인 얇은 폼은 전부 제외. 해당 종류가 아예 없으면 그 항목만 건너뜀
     //    (예: 오픈코드가 없는 F#/C# 등은 open이 없음).
     getShapeRepresentatives: function(voicings) {
         const result = { open: null, aShape: null, eShape: null, dShape: null };
-        // rank 배열은 앞자리일수록 중요 - 작을수록 우선
-        const rankOf = (v, candidate, useBarre) => [
-            useBarre ? (this.isBarre(v) ? 0 : 1) : 0,
-            (v._tier === 0 || v._tier === 1) ? 0 : 1,
-            candidate.minFret,
-            candidate.srcOrder
-        ];
+        // rank 배열은 앞자리일수록 중요 - 작을수록 우선.
+        const rankOf = (v, candidate, key) => {
+            const isCurated = v._tier === 0 || v._tier === 1;
+            // 🌟 이름 매치는 "지정 파지법"에서만 의미 있는 신호임 - 자동 생성 폼은 베이스 줄만 보고
+            //    기계적으로 "A Shape (Nth Fret)"처럼 이름 붙이므로, 큐레이션 여부 안 가리면 이 신호가
+            //    자동 생성 폼에도 걸려서 무의미해짐(Cm7의 진짜 재즈 폼이 그냥 "A Shape"라고 이름
+            //    붙은 자동 생성 폼에 밀리는 문제가 있었음).
+            return [
+                (isCurated && this.namedShapeMatch(v.name, key)) ? 0 : 1,
+                this.isBarre(v) ? 0 : 1,
+                Math.floor(candidate.minFret / 3),
+                isCurated ? 0 : 1,
+                candidate.minFret,
+                candidate.srcOrder
+            ];
+        };
         const better = (rankA, rankB) => {
             for (let i = 0; i < rankA.length; i++) {
                 if (rankA[i] !== rankB[i]) return rankA[i] < rankB[i];
             }
             return false;
         };
-        const consider = (key, v, candidate, useBarre) => {
-            const rank = rankOf(v, candidate, useBarre);
+        const consider = (key, v, candidate) => {
+            const rank = rankOf(v, candidate, key);
             const current = result[key];
             if (!current || better(rank, current.rank)) {
                 result[key] = { ...candidate, rank };
@@ -440,7 +464,9 @@ window.dictView = {
 
             const isCurated = v._tier === 0 || v._tier === 1;
             if (isCurated && v.frets.includes(0) && Math.floor(minFret / 3) === 0) {
-                consider('open', v, candidate, false);
+                result.open = (!result.open || minFret < result.open.minFret ||
+                    (minFret === result.open.minFret && srcOrder < result.open.srcOrder))
+                    ? candidate : result.open;
             }
         });
 
@@ -458,9 +484,9 @@ window.dictView = {
 
             let bassString = 6;
             for (let s = 0; s < 6; s++) { if (v.frets[s] !== -1) { bassString = s; break; } }
-            if (bassString === 1) consider('aShape', v, candidate, true);
-            else if (bassString === 0) consider('eShape', v, candidate, true);
-            else if (bassString === 2) consider('dShape', v, candidate, true);
+            if (bassString === 1) consider('aShape', v, candidate);
+            else if (bassString === 0) consider('eShape', v, candidate);
+            else if (bassString === 2) consider('dShape', v, candidate);
         });
         return result;
     },
