@@ -436,7 +436,15 @@ window.dictView = {
             return false;
         };
 
-        // 🌟 1단계: 구간별 대표 - 손 스트레치가 좁을수록, 바레일수록, 큐레이션된 폼일수록 우선
+        // 🌟 1단계: 구간별 대표 - 손 스트레치가 좁을수록, 바레일수록, 큐레이션된 폼일수록 우선.
+        //    단, 0구간(넥 맨 아래)에서는 두 가지가 다름:
+        //    1) 사람이 직접 큐레이션한 진짜 "Open X Shape"(실제 개방현이 울리는 폼)가 있으면 그게
+        //       항상 이김 - 안 그러면 우연히 1~2프렛에 걸리는 바레 변형이 바레라는 이유만으로 훨씬
+        //       더 표준적인 오픈 코드(예: "Open C Shape")를 밀어내는 문제가 있었음.
+        //    2) 그 안에서는 바레 우선순위를 뒤집음 - 높은 포지션에서는 바레가 "그 폼의 표준 방식"
+        //       이라 우선하는 게 맞지만, 진짜 오픈 코드끼리 비교할 땐 반대로 바레 없이 손가락을
+        //       하나씩 쓰는 표준 운지법(예: "Open Dmaj7 Shape")이 항상 더 쉬움 - 안 그러면 같은
+        //       오픈 코드 묶음 안에서도 우연히 바레로 짚은 변형이 표준 운지법을 밀어내는 문제가 있었음.
         const buckets = new Map();
         voicings.forEach((v, i) => {
             const soundingCount = v.frets.filter(f => f >= 0).length;
@@ -446,7 +454,9 @@ window.dictView = {
             const srcOrder = v._srcOrder !== undefined ? v._srcOrder : i;
             const isCurated = v._tier === 0 || v._tier === 1;
             const bucket = this.bucketOf(minFret);
-            const rank = [this.isBarre(v) ? 0 : 1, this.fretSpan(v), isCurated ? 0 : 1, minFret, srcOrder];
+            const isGenuineOpen = bucket === 0 && isCurated && v.frets.includes(0);
+            const barreRank = bucket === 0 ? (this.isBarre(v) ? 1 : 0) : (this.isBarre(v) ? 0 : 1);
+            const rank = [isGenuineOpen ? 0 : 1, barreRank, this.fretSpan(v), isCurated ? 0 : 1, minFret, srcOrder];
             const current = buckets.get(bucket);
             if (!current || better(rank, current.rank)) {
                 buckets.set(bucket, { idx: i, minFret, srcOrder, rank });
