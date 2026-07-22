@@ -393,6 +393,17 @@ window.dictView = {
         return Math.max(0, ...Object.values(counts)) >= 3;
     },
 
+    // 🌟 "잡기 쉬운 정도"를 대충 점수로 매김 - 작을수록 쉬움. 바레면 확 어려워지고, 누르는 프렛
+    //    종류가 여러 개(줄마다 프렛이 다 다름)일수록, 손을 벌리는 폭(최저~최고 프렛 차이)이
+    //    클수록 어려움. 완벽한 난이도 모델은 아니지만 "같은 포지션 안에서 뭐가 더 편한가" 정도는
+    //    충분히 가려냄.
+    easeRank: function(v) {
+        const activeFrets = v.frets.filter(f => f > 0);
+        const distinctFrets = new Set(activeFrets).size;
+        const span = activeFrets.length ? Math.max(...activeFrets) - Math.min(...activeFrets) : 0;
+        return [this.isBarre(v) ? 1 : 0, distinctFrets, span];
+    },
+
     // 🌟 이름 자체가 "A Shape"/"E Shape"/"D Shape"(또는 열린 폼이 없는 루트의 "Standard ... Barre")로
     //    큐레이션돼 있으면 그게 그 CAGED 폼이라는 가장 확실한 신호임 - 사람이 직접 그렇게 이름
     //    붙였기 때문. 기하학적 추정(바레 여부, 넥 위치 등)보다 훨씬 신뢰도가 높음.
@@ -592,6 +603,18 @@ window.dictView = {
         });
 
         const bucketLabel = (bucket) => bucket === 0 ? 'Open Position' : `Frets ${bucket * 3}-${bucket * 3 + 2}`;
+
+        // 🌟 각 프렛 구간 안에서는 잡기 쉬운 폼이 맨 앞(대표 자리)에 오도록 정렬
+        buckets.forEach(idxList => {
+            idxList.sort((a, b) => {
+                const rankA = this.easeRank(voicings[a]);
+                const rankB = this.easeRank(voicings[b]);
+                for (let i = 0; i < rankA.length; i++) {
+                    if (rankA[i] !== rankB[i]) return rankA[i] - rankB[i];
+                }
+                return a - b;
+            });
+        });
 
         [...buckets.keys()].sort((a, b) => a - b).forEach(bucket => {
             const section = document.createElement('div');
