@@ -344,6 +344,10 @@ window.dictView = {
             allVoicings = allVoicings.filter(v => !exSet.has(v.frets.join(',')));
         }
 
+        // 🌟 대표 폼 선정에 쓸 원래 생성 순서를 기록해둠 (지정 파지법 원본 → 지정 파지법 옥타브 이동분 →
+        //    자동 생성 → C코드 변환분 순으로 쌓았으므로, 이 순서 자체가 "더 정통적인/의도된" 폼일수록 앞에 옴)
+        allVoicings.forEach((v, i) => { v._srcOrder = i; });
+
         // 🌟 정렬 로직: 넥 위치(최저 프렛) 순으로 1프렛 → 12프렛 나열.
         //    같은 포지션이면 (1) 개방현 있는 쉬운 폼 먼저 (2) 저음줄부터 울리는 폼 먼저
         return allVoicings.sort((a, b) => {
@@ -368,20 +372,25 @@ window.dictView = {
         });
     },
 
-    // 🌟 넥을 3프렛 단위 포지션 구간(제너레이터의 버킷 로직과 동일)으로 나눠서 구간당 대표 1개(이미 정렬상 가장 쉬운 폼)의 인덱스만 뽑음
+    // 🌟 넥을 3프렛 단위 포지션 구간(제너레이터의 버킷 로직과 동일)으로 나눠서 구간당 대표 1개만 뽑음.
+    //    대표는 "가장 먼저 정렬된 폼"이 아니라 "원래 생성 순서(_srcOrder)가 가장 앞선 폼" - 즉 지정
+    //    파지법(chordDatabase)에 사람이 직접 맨 앞에 적어둔 정통적인 폼을 우선함. 지오메트리 기반 휴리스틱
+    //    (개방현 유무, 베이스 줄 위치 등)은 정통적인 폼과 변형 폼을 정확히 못 가려내는 경우가 있었음
+    //    (예: D메이저에서 A-String Root가 Open D Shape보다 앞에 뽑히던 문제, F메이저의 Easy F가
+    //    Standard F Barre보다 앞에 뽑히던 문제) - 저장된 순서 자체가 더 신뢰할 수 있는 신호.
     getPositionRepresentativeIndices: function(voicings) {
-        const seen = new Set();
-        const indices = [];
+        const bucketBest = new Map();
         voicings.forEach((v, i) => {
             const activeFrets = v.frets.filter(f => f > 0);
             const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
             const bucket = Math.floor(minFret / 3);
-            if (!seen.has(bucket)) {
-                seen.add(bucket);
-                indices.push(i);
+            const srcOrder = v._srcOrder !== undefined ? v._srcOrder : i;
+            const current = bucketBest.get(bucket);
+            if (!current || srcOrder < current.srcOrder) {
+                bucketBest.set(bucket, { idx: i, srcOrder });
             }
         });
-        return indices;
+        return [...bucketBest.entries()].sort((a, b) => a[0] - b[0]).map(([, x]) => x.idx);
     },
 
     // 현재 재생/하이라이트의 기준이 되는 보이싱: 슬래시 코드가 선택돼 있으면 그게 우선, 아니면 메인 리스트의 선택된 인덱스
