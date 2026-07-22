@@ -598,38 +598,31 @@ window.dictView = {
         });
     },
 
-    // 🌟 넥 구간별 대표 폼(getPositionRepresentatives 결과)을 구간 라벨 + 카드로 가로 나열
+    // 🌟 넥 구간별 대표 폼(getPositionRepresentatives 결과)을 카드로 나열 - "All" 보기와 같은
+    //    균일한 그리드를 씀. 예전엔 카드마다 구간 라벨을 따로 얹었는데, "Compact / Jazz Shape"처럼
+    //    긴 라벨이 두 줄로 줄바꿈되면 그 카드만 아래로 밀려서 줄이 안 맞고 지저분해 보였음. 각
+    //    카드 안에 이미 폼 이름(예: "E Shape (1st Fret)")이 있어서 구간 라벨 없이도 구분되므로
+    //    그냥 뺌.
     renderVoicingCategoryGroups: function(containerId, voicings, entries, emptyMessage) {
         const list = document.getElementById(containerId);
         if (!list) return;
         list.innerHTML = '';
-        list.classList.remove('v-position-group-col');
-        list.classList.add('v-shape-group-row');
+        list.classList.remove('v-position-group-col', 'v-shape-group-row');
+        list.classList.add('vertical-voicing-grid');
 
         entries.forEach(entry => {
             const idx = entry.idx;
             const v = voicings[idx];
-
-            const group = document.createElement('div');
-            group.className = 'v-shape-group';
-
-            const label = document.createElement('div');
-            label.className = 'group-title';
-            label.textContent = entry.label;
-            group.appendChild(label);
-
             const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
             const card = this.renderVerticalDiagram(v, isActive, () => {
                 window.currentVoicingIndex = idx;
                 window.selectedSlashVoicing = null;
                 this.renderAll();
             });
-            group.appendChild(card);
-            list.appendChild(group);
+            list.appendChild(card);
         });
 
         if (entries.length === 0) {
-            list.classList.remove('v-shape-group-row');
             const empty = document.createElement('div');
             empty.className = 'v-grid-empty';
             empty.textContent = voicings.length > 0
