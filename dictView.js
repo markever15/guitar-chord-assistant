@@ -496,7 +496,14 @@ window.dictView = {
                 return { label, minFret: candidate.minFret, idx: candidate.idx };
             });
         if (compact) entries.push({ label: 'Compact / Jazz Shape', minFret: compact.minFret, idx: compact.idx });
-        entries.sort((a, b) => a.minFret - b.minFret);
+        // 🌟 프렛 오름차순이 기본이지만, "Open Position"은 항상 맨 앞 - 컴팩트/재즈 폼이 어쩌다
+        //    개방현을 포함해 프렛순으로는 오픈보다 앞에 올 수도 있는데, 그래도 오픈 코드가 가장
+        //    기본적인 폼이므로 항상 첫 카드여야 함.
+        entries.sort((a, b) => {
+            if (a.label === 'Open Position' && b.label !== 'Open Position') return -1;
+            if (b.label === 'Open Position' && a.label !== 'Open Position') return 1;
+            return a.minFret - b.minFret;
+        });
         return entries;
     },
 
