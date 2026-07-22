@@ -309,11 +309,13 @@ window.dictView = {
         specificVoicings.forEach(sv => {
             const result0 = processVoicing(sv, 0, sv.name);
             if (result0 && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result0.frets))) {
+                result0._tier = 0;
                 allVoicings.push(result0);
             }
 
             const result12 = processVoicing(sv, 12, `${sv.name} (High)`);
             if (result12 && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result12.frets))) {
+                result12._tier = 1;
                 allVoicings.push(result12);
             }
         });
@@ -323,7 +325,7 @@ window.dictView = {
         const generated = (window.generatedVoicings && window.generatedVoicings[root] && window.generatedVoicings[root][quality]) || [];
         generated.forEach(gv => {
             if (!allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(gv.frets))) {
-                allVoicings.push({ name: gv.name, frets: gv.frets, fingers: gv.fingers });
+                allVoicings.push({ name: gv.name, frets: gv.frets, fingers: gv.fingers, _tier: 2 });
             }
         });
 
@@ -332,6 +334,7 @@ window.dictView = {
             offsetsToTry.forEach(off => {
                 const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`, true);
                 if (result && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result.frets))) {
+                    result._tier = 3;
                     allVoicings.push(result);
                 }
             });
@@ -343,6 +346,13 @@ window.dictView = {
             const exSet = new Set(excluded.map(f => f.join(',')));
             allVoicings = allVoicings.filter(v => !exSet.has(v.frets.join(',')));
         }
+
+        // 🌟 15프렛 이상은 실제로 잘 안 쓰이는 구간이라 통째로 제외 (거의 항상 더 낮은 프렛에 같은
+        //    폼의 옥타브 반복이 이미 있음 - 예: "Open D Shape (High)")
+        allVoicings = allVoicings.filter(v => {
+            const activeFrets = v.frets.filter(f => f > 0);
+            return activeFrets.length === 0 || Math.max(...activeFrets) < 15;
+        });
 
         // 🌟 대표 폼 선정에 쓸 원래 생성 순서를 기록해둠 (지정 파지법 원본 → 지정 파지법 옥타브 이동분 →
         //    자동 생성 → C코드 변환분 순으로 쌓았으므로, 이 순서 자체가 "더 정통적인/의도된" 폼일수록 앞에 옴)
@@ -372,44 +382,59 @@ window.dictView = {
         });
     },
 
-    // 🌟 한 폼이 통짜 바레인지 확인: 울리는 가장 낮은 줄과 가장 높은 줄을 같은 손가락이 짚고 있으면
-    //    (예: A Shape 바레의 검지가 A줄~high E줄을 다 덮는 경우) CAGED식으로 흔히 쓰는 이동 코드 폼임
-    isFullBarre: function(v) {
+    // 🌟 한 폼에 통짜 바레가 있는지 확인: 같은 손가락 번호가 울리는 줄 3개 이상을 덮고 있으면 바레로 봄.
+    //    "맨 아래줄~맨 위줄이 같은 손가락"만 보면 E Shape처럼 근음을 바레와 다른 손가락으로 따로 짚는
+    //    흔한 폼(예: D6/9의 "E Shape (7th Fret)" - 저음 E줄만 새끼손가락, 나머지 5줄은 검지 바레)을
+    //    놓침 - 그래서 "어떤 손가락이든 3줄 이상 덮으면 바레"로 더 느슨하게 판단함.
+    isBarre: function(v) {
         const soundingIdx = v.frets.map((f, i) => f >= 0 ? i : -1).filter(i => i >= 0);
-        if (soundingIdx.length < 3) return false;
-        const lo = soundingIdx[0], hi = soundingIdx[soundingIdx.length - 1];
-        return v.fingers[lo] > 0 && v.fingers[lo] === v.fingers[hi];
+        const counts = {};
+        soundingIdx.forEach(i => { const f = v.fingers[i]; if (f > 0) counts[f] = (counts[f] || 0) + 1; });
+        return Math.max(0, ...Object.values(counts)) >= 3;
     },
 
-    // 🌟 넥을 3프렛 단위 포지션 구간(제너레이터의 버킷 로직과 동일)으로 나눠서 구간당 대표 1개만 뽑음.
-    //    0번 구간(오픈 포지션)은 원래 생성 순서(_srcOrder, 지정 파지법을 사람이 맨 앞에 적어둔 순서)를
-    //    그대로 신뢰함 - "Open D Shape"/"Standard F Barre"처럼 오픈 포지션의 정통 폼은 항상 먼저 있었음.
-    //    그 외 구간(5프렛, 7프렛...)은 그 규칙만으론 부족했음 - 예를 들어 D메이저 5프렛대에서 흔한
-    //    "A Shape (5th Fret)" 바레 폼이 먼저 적힌 다른 변형 폼에 밀려 대표에서 빠지는 문제가 있었음.
-    //    그래서 오픈 포지션이 아닌 구간에서는 통짜 바레 폼(연주자들이 실제로 가장 많이 쓰는 이동 코드
-    //    폼)을 우선하고, 그 안에서만 원래 순서로 타이브레이크함.
-    getPositionRepresentativeIndices: function(voicings) {
-        const bucketBest = new Map();
+    // 🌟 넥 포지션(3프렛 단위)이 아니라 "폼의 종류" 기준으로 대표를 뽑음 - 연주자가 실제로 구분하는
+    //    개방현 폼 / 5번줄(A) 근음 하이코드 / 6번줄(E) 근음 하이코드, 최대 3개만.
+    //    - open: 개방현이 최소 하나 울리면서 넥 아래쪽(0번 포지션 구간)에 있는 폼. 여러 개면 더 낮은
+    //      포지션, 그다음 원래 생성 순서(_srcOrder) 순으로 고름 - "Open D Shape"처럼 사람이 직접
+    //      맨 앞에 적어둔 정통 개방현 폼을 우선 신뢰. 지정 파지법(_tier 0/1)에서만 뽑음 - 자동 생성
+    //      폼 중에 개방현 하나가 우연히 낀 얇은 파편(예: F메이저의 "1프렛, 개방 A줄만 우연히 낀 3음
+    //      폼")이 "오픈 코드"로 둔갑하는 문제가 있었음. 이 데이터셋은 지금까지 실제 오픈 코드는 항상
+    //      사람이 직접 "Open X Shape"로 큐레이션해왔으므로, 지정 파지법에 없으면 그 루트/품질엔
+    //      원래 오픈 폼이 없다고 보는 게 맞음.
+    //    - aShape/eShape: 바레가 있으면서 베이스가 각각 5번줄(A)/6번줄(E)인 폼(지정+자동생성 모두 허용,
+    //      큐레이션이 안 된 조합도 흔해서 자동 생성분까지 봐야 함). 울리는 줄 4개 미만인 얇은 폼은 제외.
+    //      여러 개면 넥 아래쪽, 그다음 원래 순서로 고름.
+    //    해당 종류가 아예 없는 코드는 그 항목을 건너뜀(예: 오픈코드가 없는 F#/C# 등은 open이 없음).
+    getShapeRepresentatives: function(voicings) {
+        const result = { open: null, aShape: null, eShape: null };
+        const better = (a, b) => {
+            if (a.minFret !== b.minFret) return a.minFret < b.minFret;
+            return a.srcOrder < b.srcOrder;
+        };
         voicings.forEach((v, i) => {
             const activeFrets = v.frets.filter(f => f > 0);
             const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
-            const bucket = Math.floor(minFret / 3);
             const srcOrder = v._srcOrder !== undefined ? v._srcOrder : i;
-            const rank = bucket === 0 ? [srcOrder] : [this.isFullBarre(v) ? 0 : 1, srcOrder];
-            const current = bucketBest.get(bucket);
-            if (!current || this.rankLess(rank, current.rank)) {
-                bucketBest.set(bucket, { idx: i, rank });
+            const candidate = { idx: i, minFret, srcOrder };
+            const soundingCount = v.frets.filter(f => f >= 0).length;
+            if (soundingCount < 4) return;
+
+            const isCurated = v._tier === 0 || v._tier === 1;
+            if (isCurated && v.frets.includes(0) && Math.floor(minFret / 3) === 0) {
+                if (!result.open || better(candidate, result.open)) result.open = candidate;
+            }
+            if (this.isBarre(v)) {
+                let bassString = 6;
+                for (let s = 0; s < 6; s++) { if (v.frets[s] !== -1) { bassString = s; break; } }
+                if (bassString === 1) {
+                    if (!result.aShape || better(candidate, result.aShape)) result.aShape = candidate;
+                } else if (bassString === 0) {
+                    if (!result.eShape || better(candidate, result.eShape)) result.eShape = candidate;
+                }
             }
         });
-        return [...bucketBest.entries()].sort((a, b) => a[0] - b[0]).map(([, x]) => x.idx);
-    },
-
-    // 🌟 배열로 표현한 우선순위(rank)를 앞자리부터 비교 - 작을수록 우선
-    rankLess: function(a, b) {
-        for (let i = 0; i < a.length; i++) {
-            if (a[i] !== b[i]) return a[i] < b[i];
-        }
-        return false;
+        return result;
     },
 
     // 현재 재생/하이라이트의 기준이 되는 보이싱: 슬래시 코드가 선택돼 있으면 그게 우선, 아니면 메인 리스트의 선택된 인덱스
@@ -441,7 +466,8 @@ window.dictView = {
 
         this.renderChordFormula();
 
-        const repIndices = this.getPositionRepresentativeIndices(voicings);
+        const categories = this.getShapeRepresentatives(voicings);
+        const repIndices = [categories.open, categories.aShape, categories.eShape].filter(Boolean).map(c => c.idx);
         const allBtn = document.getElementById('voicing-all-btn');
         if (allBtn) {
             if (repIndices.length < voicings.length) {
@@ -452,9 +478,65 @@ window.dictView = {
                 allBtn.style.display = 'none';
             }
         }
-        const displayIndices = window.showAllVoicings ? voicings.map((_, i) => i) : repIndices;
-        this.renderVerticalVoicingGrid('voicing-list', voicings, 'No practical voicing found for this chord within 15 frets.', displayIndices);
+        const voicingList = document.getElementById('voicing-list');
+        if (window.showAllVoicings) {
+            if (voicingList) voicingList.classList.remove('v-shape-group-row');
+            this.renderVerticalVoicingGrid('voicing-list', voicings, 'No practical voicing found for this chord within 14 frets.', voicings.map((_, i) => i));
+        } else {
+            this.renderVoicingCategoryGroups('voicing-list', voicings, categories, 'No practical voicing found for this chord within 14 frets.');
+        }
         this.renderSlashChordShelf(window.currentRoot, window.currentQuality);
+    },
+
+    // 🌟 대표 폼을 넥 포지션이 아니라 "개방현 폼 / 5번줄 근음 하이코드 / 6번줄 근음 하이코드" 세 종류로
+    //    나눠서, 종류별로 작은 라벨을 붙여 보여줌 (해당 종류가 없는 코드는 그 칸을 건너뜀)
+    renderVoicingCategoryGroups: function(containerId, voicings, categories, emptyMessage) {
+        const list = document.getElementById(containerId);
+        if (!list) return;
+        list.innerHTML = '';
+        list.classList.add('v-shape-group-row');
+
+        const groups = [
+            { key: 'open', label: 'Open Position' },
+            { key: 'aShape', label: '5th-String Root (A Shape)' },
+            { key: 'eShape', label: '6th-String Root (E Shape)' }
+        ];
+
+        let any = false;
+        groups.forEach(g => {
+            const candidate = categories[g.key];
+            if (!candidate) return;
+            any = true;
+            const idx = candidate.idx;
+            const v = voicings[idx];
+
+            const group = document.createElement('div');
+            group.className = 'v-shape-group';
+
+            const label = document.createElement('div');
+            label.className = 'group-title';
+            label.textContent = g.label;
+            group.appendChild(label);
+
+            const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
+            const card = this.renderVerticalDiagram(v, isActive, () => {
+                window.currentVoicingIndex = idx;
+                window.selectedSlashVoicing = null;
+                this.renderAll();
+            });
+            group.appendChild(card);
+            list.appendChild(group);
+        });
+
+        if (!any) {
+            list.classList.remove('v-shape-group-row');
+            const empty = document.createElement('div');
+            empty.className = 'v-grid-empty';
+            empty.textContent = voicings.length > 0
+                ? `No open-position or barre-shape form for this chord - click "All" above to see all ${voicings.length} voicings.`
+                : (emptyMessage || 'No voicings to show.');
+            list.appendChild(empty);
+        }
     },
 
     renderChordFormula: function() {
