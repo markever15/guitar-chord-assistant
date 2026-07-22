@@ -393,110 +393,58 @@ window.dictView = {
         return Math.max(0, ...Object.values(counts)) >= 3;
     },
 
-    // 🌟 이름 자체가 "A Shape"/"E Shape"/"D Shape"(또는 열린 폼이 없는 루트의 "Standard ... Barre")로
-    //    큐레이션돼 있으면 그게 그 CAGED 폼이라는 가장 확실한 신호임 - 사람이 직접 그렇게 이름
-    //    붙였기 때문. 기하학적 추정(바레 여부, 넥 위치 등)보다 훨씬 신뢰도가 높음.
-    namedShapeMatch: function(name, key) {
-        if (key === 'aShape') return /\bA Shape\b/.test(name);
-        if (key === 'eShape') return /\bE Shape\b/.test(name) || /^Standard .*Barre/.test(name);
-        if (key === 'dShape') return /\bD Shape\b/.test(name);
-        return false;
+    // 🌟 넥을 3프렛 단위 구간(Open, 3-5, 6-8, 9-11, 12-14)으로 나누고, 구간마다 "가장 잡기 편한"
+    //    폼 하나만 대표로 뽑음. 예전엔 "폼의 종류"(오픈/A/E/D Shape)로 나눴었는데, 바레 여부만 보고
+    //    같은 바레끼리는 무조건 낮은 포지션을 우선시하다 보니 - 실제로는 손 스트레치가 더 좁고 편한
+    //    높은 포지션 바레(예: D류 코드의 5프렛 A Shape 바레)가, 스트레치가 더 넓은 낮은 포지션
+    //    변형에 밀려나는 문제가 있었음. 그래서 "포지션 우선"이 아니라 "스트레치(최고-최저 프렛
+    //    간격) 우선"으로 바꿈 - 같은 바레 여부라면 손가락을 덜 벌리는 폼이 이김.
+    //    구간에 마땅한 폼이 없으면(예: 코드가 아예 그 위치에 없음) 그 구간은 건너뜀.
+    //    이와 별도로, 3~4줄만 울리는 재즈 스타일 컴팩트 폼(예: Cm7의 "Rootless Shape")도 항상
+    //    하나 더 끼워줌 - 구간별 대표 규칙은 항상 통짜 바레를 우선하므로 이런 얇은 폼은 자기 구간
+    //    안에서도 절대 못 이기기 때문. Shell/Jazz/Rootless로 큐레이션된 폼을 최우선하고, 없으면
+    //    가장 낮은 포지션의 3~4줄짜리 폼으로 대체함.
+    bucketOf: function(minFret) {
+        return Math.floor(minFret / 3);
     },
 
-    // 🌟 넥 포지션(3프렛 단위)이 아니라 "폼의 종류" 기준으로 대표를 뽑음 - 연주자가 실제로 구분하는
-    //    개방현 폼 / 5번줄(A) 근음 하이코드 / 6번줄(E) 근음 하이코드 / 4번줄(D) 근음 하이코드 / 재즈
-    //    컴팩트 폼, 최대 5개.
-    //    - open: 개방현이 최소 하나 울리면서 넥 아래쪽(0번 포지션 구간)에 있는 폼. 지정 파지법
-    //      (_tier 0/1)에서만 뽑음 - 자동 생성 폼 중에 개방현 하나가 우연히 낀 얇은 파편이 "오픈
-    //      코드"로 둔갑하는 문제가 있었음. 이 데이터셋은 실제 오픈 코드를 항상 사람이 직접
-    //      "Open X Shape"로 큐레이션해왔으므로, 지정 파지법에 없으면 그 루트/품질엔 오픈 폼이
-    //      없다고 보는 게 맞음.
-    //    - aShape/eShape/dShape: 베이스가 각각 5번줄(A)/6번줄(E)/4번줄(D)인 폼 중에서 고름.
-    //      기하학적 규칙(바레 여부, 넥 위치)만으로는 안정적으로 못 가려냈음 - 어떤 코드는 더 낮은
-    //      프렛의 진짜 CAGED 바레가 우선순위여야 하고(D메이저의 5프렛 "A Shape"가 2프렛의 혼합형
-    //      "A-String Root"에 밀리면 안 됨), 어떤 코드는 반대로 로우 포지션의 재즈/루트리스 보이싱이
-    //      우선순위여야 함(Cm7의 1프렛 "Rootless Shape"가 3프렛의 일반 바레 코드에 밀리면 안 됨) -
-    //      두 상황을 프렛/바레 숫자만으로 구분할 방법이 없었음. 그래서 가장 확실한 신호부터 봄:
-    //      1) 이름 자체가 "A/E/D Shape"로 큐레이션된 폼 2) 바레가 있는 폼(CAGED 이동 코드) 3) 그
-    //      다음은 넥 아래쪽부터. 바레도 이름 매치도 없는 코드(m7b5/dim7/확장 코드처럼 애초에 통짜
-    //      바레가 잘 안 나오는 경우)는 최선의 비-바레 폼으로 대체함 - 바레를 필수로 요구하면 대표가
-    //      통째로 비는 조합이 절반 넘게 나왔음.
-    //    - compact: 위 네 자리와는 별도로, 3~4줄만 울리는 재즈 스타일 컴팩트 폼(예: G#m7의 "4x444x")도
-    //      항상 대표에 하나 끼워줌 - 바레 위주 규칙 때문에 이런 폼이 아예 안 보이면 재즈 보이싱을
-    //      찾는 사람에게 불편하다는 피드백이 있었음. Shell/Jazz/Rootless로 큐레이션된 폼을 최우선하고,
-    //      없으면 그냥 가장 낮은 포지션의 3~4줄짜리 폼으로 대체함.
-    //    울리는 줄이 4개 미만인 얇은 폼은 open/A/E/D 넷에서는 전부 제외. 해당 종류가 아예 없으면 그
-    //    항목만 건너뜀(예: 오픈코드가 없는 F#/C# 등은 open이 없음).
-    getShapeRepresentatives: function(voicings) {
-        const result = { open: null, aShape: null, eShape: null, dShape: null, compact: null };
-        // rank 배열은 앞자리일수록 중요 - 작을수록 우선.
-        const rankOf = (v, candidate, key) => {
-            const isCurated = v._tier === 0 || v._tier === 1;
-            // 🌟 이름 매치는 "지정 파지법"에서만 의미 있는 신호임 - 자동 생성 폼은 베이스 줄만 보고
-            //    기계적으로 "A Shape (Nth Fret)"처럼 이름 붙이므로, 큐레이션 여부 안 가리면 이 신호가
-            //    자동 생성 폼에도 걸려서 무의미해짐(Cm7의 진짜 재즈 폼이 그냥 "A Shape"라고 이름
-            //    붙은 자동 생성 폼에 밀리는 문제가 있었음).
-            return [
-                (isCurated && this.namedShapeMatch(v.name, key)) ? 0 : 1,
-                this.isBarre(v) ? 0 : 1,
-                Math.floor(candidate.minFret / 3),
-                isCurated ? 0 : 1,
-                candidate.minFret,
-                candidate.srcOrder
-            ];
-        };
+    bucketLabel: function(bucket) {
+        return bucket === 0 ? 'Open Position' : `Frets ${bucket * 3}-${bucket * 3 + 2}`;
+    },
+
+    fretSpan: function(v) {
+        const activeFrets = v.frets.filter(f => f > 0);
+        return activeFrets.length ? Math.max(...activeFrets) - Math.min(...activeFrets) : 0;
+    },
+
+    getPositionRepresentatives: function(voicings) {
         const better = (rankA, rankB) => {
             for (let i = 0; i < rankA.length; i++) {
                 if (rankA[i] !== rankB[i]) return rankA[i] < rankB[i];
             }
             return false;
         };
-        const consider = (key, v, candidate) => {
-            const rank = rankOf(v, candidate, key);
-            const current = result[key];
-            if (!current || better(rank, current.rank)) {
-                result[key] = { ...candidate, rank };
-            }
-        };
-        // 🌟 1단계: 오픈 폼 먼저 확정
+
+        // 🌟 1단계: 구간별 대표 - 손 스트레치가 좁을수록, 바레일수록, 큐레이션된 폼일수록 우선
+        const buckets = new Map();
         voicings.forEach((v, i) => {
+            const soundingCount = v.frets.filter(f => f >= 0).length;
+            if (soundingCount < 4) return;
             const activeFrets = v.frets.filter(f => f > 0);
             const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
             const srcOrder = v._srcOrder !== undefined ? v._srcOrder : i;
-            const candidate = { idx: i, minFret, srcOrder };
-            const soundingCount = v.frets.filter(f => f >= 0).length;
-            if (soundingCount < 4) return;
-
             const isCurated = v._tier === 0 || v._tier === 1;
-            if (isCurated && v.frets.includes(0) && Math.floor(minFret / 3) === 0) {
-                result.open = (!result.open || minFret < result.open.minFret ||
-                    (minFret === result.open.minFret && srcOrder < result.open.srcOrder))
-                    ? candidate : result.open;
+            const bucket = this.bucketOf(minFret);
+            const rank = [this.isBarre(v) ? 0 : 1, this.fretSpan(v), isCurated ? 0 : 1, minFret, srcOrder];
+            const current = buckets.get(bucket);
+            if (!current || better(rank, current.rank)) {
+                buckets.set(bucket, { idx: i, minFret, srcOrder, rank });
             }
         });
 
-        // 🌟 2단계: 5/6/4번줄 근음 하이코드 - 오픈으로 이미 뽑힌 바로 그 폼은 건너뜀
-        //    (예: D메이저의 "Open D Shape"는 베이스가 D줄이라 4번줄 근음 조건도 만족하는데,
-        //    같은 카드가 라벨만 다르게 두 번 뜨는 걸 막음)
-        voicings.forEach((v, i) => {
-            if (result.open && i === result.open.idx) return;
-            const activeFrets = v.frets.filter(f => f > 0);
-            const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
-            const srcOrder = v._srcOrder !== undefined ? v._srcOrder : i;
-            const candidate = { idx: i, minFret, srcOrder };
-            const soundingCount = v.frets.filter(f => f >= 0).length;
-            if (soundingCount < 4) return;
-
-            let bassString = 6;
-            for (let s = 0; s < 6; s++) { if (v.frets[s] !== -1) { bassString = s; break; } }
-            if (bassString === 1) consider('aShape', v, candidate);
-            else if (bassString === 0) consider('eShape', v, candidate);
-            else if (bassString === 2) consider('dShape', v, candidate);
-        });
-
-        // 🌟 3단계: 재즈 컴팩트 폼 - 3~4줄만 울리는 폼 중에서, 위 네 자리에 이미 뽑힌 폼은 제외하고 고름
-        const usedIdx = new Set([result.open, result.aShape, result.eShape, result.dShape]
-            .filter(Boolean).map(c => c.idx));
+        // 🌟 2단계: 재즈 컴팩트 폼 - 위에서 이미 뽑힌 폼은 제외
+        const usedIdx = new Set([...buckets.values()].map(c => c.idx));
+        let compact = null;
         voicings.forEach((v, i) => {
             if (usedIdx.has(i)) return;
             const soundingCount = v.frets.filter(f => f >= 0).length;
@@ -507,12 +455,23 @@ window.dictView = {
             const isCurated = v._tier === 0 || v._tier === 1;
             const isNamedJazz = isCurated && /shell|jazz|rootless/i.test(v.name);
             const rank = [isNamedJazz ? 0 : 1, isCurated ? 0 : 1, minFret, srcOrder];
-            const current = result.compact;
-            if (!current || better(rank, current.rank)) {
-                result.compact = { idx: i, minFret, srcOrder, rank };
+            if (!compact || better(rank, compact.rank)) {
+                compact = { idx: i, minFret, srcOrder, rank };
             }
         });
-        return result;
+
+        // 🌟 0구간이어도 실제로 개방현이 안 울리는 폼(예: 2프렛 바레)까지 "Open Position"이라고
+        //    부르면 오해의 소지가 있음 - 그 대표가 진짜 개방현을 쓸 때만 그 라벨을 붙임.
+        const entries = [...buckets.entries()]
+            .sort((a, b) => a[0] - b[0])
+            .map(([bucket, candidate]) => {
+                const hasOpenString = voicings[candidate.idx].frets.includes(0);
+                const label = (bucket === 0 && hasOpenString) ? 'Open Position' : `Frets ${bucket * 3 || 1}-${bucket * 3 + 2}`;
+                return { label, minFret: candidate.minFret, idx: candidate.idx };
+            });
+        if (compact) entries.push({ label: 'Compact / Jazz Shape', minFret: compact.minFret, idx: compact.idx });
+        entries.sort((a, b) => a.minFret - b.minFret);
+        return entries;
     },
 
     // 현재 재생/하이라이트의 기준이 되는 보이싱: 슬래시 코드가 선택돼 있으면 그게 우선, 아니면 메인 리스트의 선택된 인덱스
@@ -544,11 +503,10 @@ window.dictView = {
 
         this.renderChordFormula();
 
-        const categories = this.getShapeRepresentatives(voicings);
-        const repIndices = [categories.open, categories.aShape, categories.eShape, categories.dShape, categories.compact].filter(Boolean).map(c => c.idx);
+        const repEntries = this.getPositionRepresentatives(voicings);
         const allBtn = document.getElementById('voicing-all-btn');
         if (allBtn) {
-            if (repIndices.length < voicings.length) {
+            if (repEntries.length < voicings.length) {
                 allBtn.style.display = '';
                 allBtn.classList.toggle('active', !!window.showAllVoicings);
                 allBtn.textContent = window.showAllVoicings ? 'Less' : `All (${voicings.length})`;
@@ -559,7 +517,7 @@ window.dictView = {
         if (window.showAllVoicings) {
             this.renderVoicingPositionGroups('voicing-list', voicings, 'No practical voicing found for this chord within 14 frets.');
         } else {
-            this.renderVoicingCategoryGroups('voicing-list', voicings, categories, 'No practical voicing found for this chord within 14 frets.');
+            this.renderVoicingCategoryGroups('voicing-list', voicings, repEntries, 'No practical voicing found for this chord within 14 frets.');
         }
         this.renderSlashChordShelf(window.currentRoot, window.currentQuality);
     },
@@ -586,12 +544,10 @@ window.dictView = {
         voicings.forEach((v, idx) => {
             const activeFrets = v.frets.filter(f => f > 0);
             const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
-            const bucket = Math.floor(minFret / 3);
+            const bucket = this.bucketOf(minFret);
             if (!buckets.has(bucket)) buckets.set(bucket, []);
             buckets.get(bucket).push(idx);
         });
-
-        const bucketLabel = (bucket) => bucket === 0 ? 'Open Position' : `Frets ${bucket * 3}-${bucket * 3 + 2}`;
 
         [...buckets.keys()].sort((a, b) => a - b).forEach(bucket => {
             const section = document.createElement('div');
@@ -599,7 +555,7 @@ window.dictView = {
 
             const label = document.createElement('div');
             label.className = 'group-title';
-            label.textContent = bucketLabel(bucket);
+            label.textContent = this.bucketLabel(bucket);
             section.appendChild(label);
 
             const grid = document.createElement('div');
@@ -619,36 +575,16 @@ window.dictView = {
         });
     },
 
-    // 🌟 대표 폼을 넥 포지션이 아니라 "개방현 폼 / 5번줄 근음 하이코드 / 6번줄 근음 하이코드" 세 종류로
-    //    나눠서, 종류별로 작은 라벨을 붙여 보여줌 (해당 종류가 없는 코드는 그 칸을 건너뜀)
-    renderVoicingCategoryGroups: function(containerId, voicings, categories, emptyMessage) {
+    // 🌟 넥 구간별 대표 폼(getPositionRepresentatives 결과)을 구간 라벨 + 카드로 가로 나열
+    renderVoicingCategoryGroups: function(containerId, voicings, entries, emptyMessage) {
         const list = document.getElementById(containerId);
         if (!list) return;
         list.innerHTML = '';
         list.classList.remove('v-position-group-col');
         list.classList.add('v-shape-group-row');
 
-        const groups = [
-            { key: 'open', label: 'Open Position' },
-            { key: 'aShape', label: '5th-String Root (A Shape)' },
-            { key: 'eShape', label: '6th-String Root (E Shape)' },
-            { key: 'dShape', label: '4th-String Root (D Shape)' },
-            { key: 'compact', label: 'Compact / Jazz Shape' }
-        ];
-
-        // 🌟 항상 넥 아래쪽(낮은 프렛)부터 나열 - 카테고리 종류 순서가 아니라 실제 대표 폼의 최저 프렛 기준
-        groups.sort((a, b) => {
-            const fa = categories[a.key] ? categories[a.key].minFret : Infinity;
-            const fb = categories[b.key] ? categories[b.key].minFret : Infinity;
-            return fa - fb;
-        });
-
-        let any = false;
-        groups.forEach(g => {
-            const candidate = categories[g.key];
-            if (!candidate) return;
-            any = true;
-            const idx = candidate.idx;
+        entries.forEach(entry => {
+            const idx = entry.idx;
             const v = voicings[idx];
 
             const group = document.createElement('div');
@@ -656,7 +592,7 @@ window.dictView = {
 
             const label = document.createElement('div');
             label.className = 'group-title';
-            label.textContent = g.label;
+            label.textContent = entry.label;
             group.appendChild(label);
 
             const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
@@ -669,7 +605,7 @@ window.dictView = {
             list.appendChild(group);
         });
 
-        if (!any) {
+        if (entries.length === 0) {
             list.classList.remove('v-shape-group-row');
             const empty = document.createElement('div');
             empty.className = 'v-grid-empty';
