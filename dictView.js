@@ -394,7 +394,7 @@ window.dictView = {
     },
 
     // 🌟 넥 포지션(3프렛 단위)이 아니라 "폼의 종류" 기준으로 대표를 뽑음 - 연주자가 실제로 구분하는
-    //    개방현 폼 / 5번줄(A) 근음 하이코드 / 6번줄(E) 근음 하이코드, 최대 3개만.
+    //    개방현 폼 / 5번줄(A) 근음 하이코드 / 6번줄(E) 근음 하이코드 / 4번줄(D) 근음 하이코드, 최대 4개.
     //    - open: 개방현이 최소 하나 울리면서 넥 아래쪽(0번 포지션 구간)에 있는 폼. 여러 개면 더 낮은
     //      포지션, 그다음 원래 생성 순서(_srcOrder) 순으로 고름 - "Open D Shape"처럼 사람이 직접
     //      맨 앞에 적어둔 정통 개방현 폼을 우선 신뢰. 지정 파지법(_tier 0/1)에서만 뽑음 - 자동 생성
@@ -402,12 +402,12 @@ window.dictView = {
     //      폼")이 "오픈 코드"로 둔갑하는 문제가 있었음. 이 데이터셋은 지금까지 실제 오픈 코드는 항상
     //      사람이 직접 "Open X Shape"로 큐레이션해왔으므로, 지정 파지법에 없으면 그 루트/품질엔
     //      원래 오픈 폼이 없다고 보는 게 맞음.
-    //    - aShape/eShape: 바레가 있으면서 베이스가 각각 5번줄(A)/6번줄(E)인 폼(지정+자동생성 모두 허용,
-    //      큐레이션이 안 된 조합도 흔해서 자동 생성분까지 봐야 함). 울리는 줄 4개 미만인 얇은 폼은 제외.
-    //      여러 개면 넥 아래쪽, 그다음 원래 순서로 고름.
+    //    - aShape/eShape/dShape: 바레가 있으면서 베이스가 각각 5번줄(A)/6번줄(E)/4번줄(D)인 폼
+    //      (지정+자동생성 모두 허용, 큐레이션이 안 된 조합도 흔해서 자동 생성분까지 봐야 함).
+    //      울리는 줄 4개 미만인 얇은 폼은 제외. 여러 개면 넥 아래쪽, 그다음 원래 순서로 고름.
     //    해당 종류가 아예 없는 코드는 그 항목을 건너뜀(예: 오픈코드가 없는 F#/C# 등은 open이 없음).
     getShapeRepresentatives: function(voicings) {
-        const result = { open: null, aShape: null, eShape: null };
+        const result = { open: null, aShape: null, eShape: null, dShape: null };
         const better = (a, b) => {
             if (a.minFret !== b.minFret) return a.minFret < b.minFret;
             return a.srcOrder < b.srcOrder;
@@ -431,6 +431,8 @@ window.dictView = {
                     if (!result.aShape || better(candidate, result.aShape)) result.aShape = candidate;
                 } else if (bassString === 0) {
                     if (!result.eShape || better(candidate, result.eShape)) result.eShape = candidate;
+                } else if (bassString === 2) {
+                    if (!result.dShape || better(candidate, result.dShape)) result.dShape = candidate;
                 }
             }
         });
@@ -467,7 +469,7 @@ window.dictView = {
         this.renderChordFormula();
 
         const categories = this.getShapeRepresentatives(voicings);
-        const repIndices = [categories.open, categories.aShape, categories.eShape].filter(Boolean).map(c => c.idx);
+        const repIndices = [categories.open, categories.aShape, categories.eShape, categories.dShape].filter(Boolean).map(c => c.idx);
         const allBtn = document.getElementById('voicing-all-btn');
         if (allBtn) {
             if (repIndices.length < voicings.length) {
@@ -499,7 +501,8 @@ window.dictView = {
         const groups = [
             { key: 'open', label: 'Open Position' },
             { key: 'aShape', label: '5th-String Root (A Shape)' },
-            { key: 'eShape', label: '6th-String Root (E Shape)' }
+            { key: 'eShape', label: '6th-String Root (E Shape)' },
+            { key: 'dShape', label: '4th-String Root (D Shape)' }
         ];
 
         let any = false;
