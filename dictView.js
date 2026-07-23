@@ -325,7 +325,7 @@ window.dictView = {
         const generated = (window.generatedVoicings && window.generatedVoicings[root] && window.generatedVoicings[root][quality]) || [];
         generated.forEach(gv => {
             if (!allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(gv.frets))) {
-                allVoicings.push({ name: gv.name, frets: gv.frets, fingers: gv.fingers, _tier: 2 });
+                allVoicings.push({ name: gv.name, frets: gv.frets, fingers: gv.fingers, manualFingers: !!gv.manualFingers, _tier: 2 });
             }
         });
 
@@ -593,9 +593,15 @@ window.dictView = {
             buckets.get(bucket).push(idx);
         });
 
-        // 🌟 각 프렛 구간 안에서는 잡기 쉬운 폼이 맨 앞(대표 자리)에 오도록 정렬
+        // 🌟 구간 안에서도 무조건 낮은 프렛 순으로 나열 - 같은 최저 프렛이면 그중 잡기 쉬운 폼이 앞으로
+        const minFretOf = v => {
+            const activeFrets = v.frets.filter(f => f > 0);
+            return activeFrets.length ? Math.min(...activeFrets) : 0;
+        };
         buckets.forEach(idxList => {
             idxList.sort((a, b) => {
+                const minFretDiff = minFretOf(voicings[a]) - minFretOf(voicings[b]);
+                if (minFretDiff !== 0) return minFretDiff;
                 const rankA = this.easeRank(voicings[a]);
                 const rankB = this.easeRank(voicings[b]);
                 for (let i = 0; i < rankA.length; i++) {
@@ -690,7 +696,11 @@ window.dictView = {
         const frets = voicing.frets;
         // 🌟 저장된 fingers 대신 항상 규칙 기반으로 계산 → 전체 코드 손가락 번호 일관성 보장
         // (바레로도 4손가락 안에 못 들어가는 예외적인 기존 데이터가 있을 경우를 대비한 안전장치)
-        const fingers = computeFingers(frets) || frets.map(f => (f === -1 ? -1 : (f > 0 ? Math.min(frets.filter(x => x > 0 && x <= f).length, 4) : 0)));
+        // 단, manualFingers로 표시된 파지법은 자동 규칙이 실제 운지와 안 맞는 예외 케이스라 손으로
+        // 지정한 fingers를 그대로 씀.
+        const fingers = voicing.manualFingers
+            ? voicing.fingers
+            : (computeFingers(frets) || frets.map(f => (f === -1 ? -1 : (f > 0 ? Math.min(frets.filter(x => x > 0 && x <= f).length, 4) : 0))));
         const activeFrets = frets.filter(f => f > 0);
         const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
         const maxFret = activeFrets.length ? Math.max(...activeFrets) : 0;
