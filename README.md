@@ -11,7 +11,7 @@ As a guitar player, I kept running into the same problem: the same chord can be 
 ## Features
 
 ### 📖 Chord Dictionary
-- Look up any of **12 roots × 29 chord qualities** (major, minor, 7th, 9th, 11th, 13th, sus, dim, aug, altered dominants, and more) — 348 combinations total.
+- Look up any of **12 roots × 50 chord qualities** (major, minor, 7th, 9th, 11th, 13th, sus, dim, aug, altered dominants, and more) — 600 combinations total.
 - Every chord comes with **multiple verified fingerings**: an open/CAGED-style shape plus movable 6th-string (E shape), 5th-string (A shape), and 4th-string (D shape) voicings, so there's almost always a comfortable low-fret option.
 - Search by name (e.g. `G#m7`, `Bb13`, `F#7#9`) or browse by root/quality buttons.
 - Real fretboard inlay dots (3/5/7/9/12/15 frets) and finger-number markers, just like a real guitar neck.

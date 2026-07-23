@@ -515,6 +515,17 @@ window.dictView = {
         return voicings[window.currentVoicingIndex] || voicings[0] || null;
     },
 
+    // 🌟 대표 보기/All 보기 둘 다 "메인 리스트 카드" 생성 로직이 똑같아서(클릭하면 현재 선택
+    //    보이싱으로 지정) 공용 헬퍼로 뺌.
+    makeMainCard: function(voicings, idx) {
+        const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
+        return this.renderVerticalDiagram(voicings[idx], isActive, () => {
+            window.currentVoicingIndex = idx;
+            window.selectedSlashVoicing = null;
+            this.renderAll();
+        });
+    },
+
     renderAll: function() {
         const formulaTitle = document.getElementById('formula-title');
 
@@ -605,16 +616,7 @@ window.dictView = {
 
             const grid = document.createElement('div');
             grid.className = 'vertical-voicing-grid';
-            buckets.get(bucket).forEach(idx => {
-                const v = voicings[idx];
-                const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
-                const card = this.renderVerticalDiagram(v, isActive, () => {
-                    window.currentVoicingIndex = idx;
-                    window.selectedSlashVoicing = null;
-                    this.renderAll();
-                });
-                grid.appendChild(card);
-            });
+            buckets.get(bucket).forEach(idx => grid.appendChild(this.makeMainCard(voicings, idx)));
             section.appendChild(grid);
             list.appendChild(section);
         });
@@ -632,17 +634,7 @@ window.dictView = {
         list.classList.remove('v-position-group-col', 'v-shape-group-row');
         list.classList.add('vertical-voicing-grid');
 
-        entries.forEach(entry => {
-            const idx = entry.idx;
-            const v = voicings[idx];
-            const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
-            const card = this.renderVerticalDiagram(v, isActive, () => {
-                window.currentVoicingIndex = idx;
-                window.selectedSlashVoicing = null;
-                this.renderAll();
-            });
-            list.appendChild(card);
-        });
+        entries.forEach(entry => list.appendChild(this.makeMainCard(voicings, entry.idx)));
 
         if (entries.length === 0) {
             const empty = document.createElement('div');
@@ -803,7 +795,8 @@ window.dictView = {
         return card;
     },
 
-    renderVerticalVoicingGrid: function(containerId, voicings, emptyMessage, indices) {
+    // 🌟 슬래시 코드 선반(및 빈 상태 메시지) 전용 - 메인 리스트는 makeMainCard를 쓰는 다른 렌더 함수들이 처리함
+    renderVerticalVoicingGrid: function(containerId, voicings, emptyMessage) {
         const list = document.getElementById(containerId);
         if (!list) return;
         list.innerHTML = '';
@@ -816,19 +809,10 @@ window.dictView = {
             return;
         }
 
-        const displayIndices = indices || voicings.map((_, i) => i);
-        displayIndices.forEach(idx => {
-            const v = voicings[idx];
-            const isActive = containerId === 'voicing-list'
-                ? (!window.selectedSlashVoicing && idx === window.currentVoicingIndex)
-                : (window.selectedSlashVoicing === v);
+        voicings.forEach(v => {
+            const isActive = window.selectedSlashVoicing === v;
             const card = this.renderVerticalDiagram(v, isActive, () => {
-                if (containerId === 'voicing-list') {
-                    window.currentVoicingIndex = idx;
-                    window.selectedSlashVoicing = null;
-                } else {
-                    window.selectedSlashVoicing = v;
-                }
+                window.selectedSlashVoicing = v;
                 this.renderAll();
             });
             list.appendChild(card);
