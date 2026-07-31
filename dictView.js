@@ -347,11 +347,16 @@ window.dictView = {
             allVoicings = allVoicings.filter(v => !exSet.has(v.frets.join(',')));
         }
 
-        // 🌟 15프렛 이상은 실제로 잘 안 쓰이는 구간이라 통째로 제외 (거의 항상 더 낮은 프렛에 같은
-        //    폼의 옥타브 반복이 이미 있음 - 예: "Open D Shape (High)")
+        // 🌟 15프렛 이상은 실제로 잘 안 쓰이는 구간이라, 더 낮은 프렛에 같은 폼의 옥타브 반복이
+        //    이미 있으면(예: "Open D Shape (High)") 그 중복분만 제외함. 옥타브 반복이 아니라
+        //    그 위치에만 있는 파지법이면(더 낮은 프렛으로 못 옮기는 폼) 코드 사전에는 남겨둠.
+        const fretsKey = frets => frets.join(',');
+        const allFretsKeys = new Set(allVoicings.map(v => fretsKey(v.frets)));
         allVoicings = allVoicings.filter(v => {
             const activeFrets = v.frets.filter(f => f > 0);
-            return activeFrets.length === 0 || Math.max(...activeFrets) < 15;
+            if (activeFrets.length === 0 || Math.max(...activeFrets) < 15) return true;
+            const shiftedDown = v.frets.map(f => (f > 0 ? f - 12 : f));
+            return !allFretsKeys.has(fretsKey(shiftedDown));
         });
 
         // 🌟 프렛을 하나도 안 짚는(개방현+뮤트만으로 이루어진) "파지법"은 실제로 손가락으로 잡는 게
