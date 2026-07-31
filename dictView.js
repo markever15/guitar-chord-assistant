@@ -245,11 +245,6 @@ window.dictView = {
 
         const db = window.chordDatabase || {};
         const specificVoicings = (db[root] && db[root][quality]) ? db[root][quality] : [];
-        const offset = (window.rootOffset[root] - window.rootOffset['C'] + 12) % 12;
-
-        const baseVoicings = (db['C'] && db['C'][quality]) ? db['C'][quality] : (db['C'] && db['C']['Major'] ? db['C']['Major'] : []);
-
-        const offsetsToTry = [offset - 12, offset, offset + 12];
         let allVoicings = [];
 
         // 🌟 핵심: 코드를 이동시키고 인체공학적(물리적)으로 잡을 수 있는지 검증하는 통합 헬퍼 함수
@@ -330,15 +325,58 @@ window.dictView = {
             }
         });
 
-        // 3. C 코드 기준 변환 폼 대량 생성 - 위에서 이미 추가된 파지법과 겹치는 프렛은 건너뜀
-        baseVoicings.forEach(v => {
-            offsetsToTry.forEach(off => {
-                const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`, true);
-                if (result && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result.frets))) {
-                    result._tier = 3;
-                    allVoicings.push(result);
-                }
+        // 3. 다른 루트의 같은 품질 폼을 옮겨와 빈 자리를 채움 - 위에서 추가된 파지법과 겹치면 건너뜀.
+        //
+        //    예전엔 C의 '수록' 파지법만 도너로 썼는데, 두 가지 문제가 있었음:
+        //      - 자동 생성 데이터(generatedVoicings)는 도너로 안 써서, C에 수록 폼이 없는 품질은
+        //        (예: m7add11) 다른 11개 루트가 통째로 빈칸이 됨.
+        //      - 도너가 C 하나뿐이라 먼 루트는 폼이 넥 위쪽으로만 밀려, 저프렛 파지법이 아예 없는
+        //        조합이 생김(예: D 7#9가 7프렛부터 시작).
+        //    그래서 모든 루트 × (수록 + 생성)을 도너 후보로 삼되, 아래 우선순위로 골라 담음.
+        const donorCandidates = [];
+        Object.keys(window.rootOffset).forEach(donorRoot => {
+            const donorPool = [
+                ...((db[donorRoot] && db[donorRoot][quality]) || []),
+                ...((window.generatedVoicings && window.generatedVoicings[donorRoot] && window.generatedVoicings[donorRoot][quality]) || []),
+            ];
+            if (!donorPool.length) return;
+            // 손으로 검증한 수록 폼에서 파생된 쪽을 자동 생성분 파생보다 먼저 쓰기 위해 개수를 기억
+            const curatedCount = (db[donorRoot] && db[donorRoot][quality] || []).length;
+            const baseShift = (window.rootOffset[root] - window.rootOffset[donorRoot] + 12) % 12;
+            [baseShift - 12, baseShift, baseShift + 12].forEach(off => {
+                donorPool.forEach((v, idx) => {
+                    donorCandidates.push({ v, off, donorRoot, fromCurated: idx < curatedCount });
+                });
             });
+        });
+
+        //    이동 거리가 짧을수록 원래 폼의 운지 성격이 그대로 남으므로 |off|가 작은 쪽을 먼저 채택.
+        //    (같은 거리면 수록 폼 파생 우선)
+        donorCandidates.sort((a, b) =>
+            Math.abs(a.off) - Math.abs(b.off) || (a.fromCurated === b.fromCurated ? 0 : (a.fromCurated ? -1 : 1)));
+
+        //    도너 후보가 수천 개까지 나오므로 전부 담으면 목록이 넘침. 3프렛 단위 포지션 구간마다
+        //    상한을 둬서, 비어 있는 구간은 메우되 이미 파지법이 충분한 구간은 더 늘리지 않음.
+        const AUTO_PER_BUCKET = 4;
+        const autoCountByBucket = {};
+        allVoicings.forEach(v => {
+            const active = v.frets.filter(f => f > 0);
+            if (!active.length) return;
+            const b = this.bucketOf(Math.min(...active));
+            autoCountByBucket[b] = (autoCountByBucket[b] || 0) + 1;
+        });
+
+        donorCandidates.forEach(({ v, off, donorRoot }) => {
+            const result = processVoicing(v, off, `${root}${quality === 'Major' ? '' : quality} (${v.name.split(' ')[0]} Shape)`, true);
+            if (!result) return;
+            if (allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result.frets))) return;
+            const active = result.frets.filter(f => f > 0);
+            const bucket = this.bucketOf(Math.min(...active));
+            if ((autoCountByBucket[bucket] || 0) >= AUTO_PER_BUCKET) return;
+            autoCountByBucket[bucket] = (autoCountByBucket[bucket] || 0) + 1;
+            result._tier = 3;
+            result._donorRoot = donorRoot;
+            allVoicings.push(result);
         });
 
         // 🌟 특정 코드에서 못 잡는(비현실적인) 파지법을 프렛 배열로 지정해 제외
