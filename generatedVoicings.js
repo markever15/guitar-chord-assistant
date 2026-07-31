@@ -4301,6 +4301,7 @@ window.generatedVoicings = {
             { name: 'D Shape (5th Fret)', frets: [-1, -1, 5, 7, 0, 7], fingers: [-1, -1, 1, 2, 0, 3] },
             { name: 'A Shape (7th Fret)', frets: [-1, 10, 0, 0, 0, 7], fingers: [-1, 2, 0, 0, 0, 1] },
             { name: 'A Shape (7th Fret) #2', frets: [-1, 10, 0, -1, 0, 7], fingers: [-1, 2, 0, -1, 0, 1] },
+            { name: 'A Shape (8th Fret)', frets: [-1, 10, 9, 0, 8, 10], fingers: [-1, 3, 2, 0, 1, 4] },
             { name: 'A Shape (9th Fret)', frets: [-1, 10, 9, 0, 0, 10], fingers: [-1, 2, 1, 0, 0, 3] },
             { name: 'A Shape (10th Fret)', frets: [-1, 10, 0, 0, 0, -1], fingers: [-1, 1, 0, 0, 0, -1] },
             { name: 'A Shape (10th Fret) #2', frets: [-1, 10, 0, 0, 0, 10], fingers: [-1, 1, 0, 0, 0, 2] },
