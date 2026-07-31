@@ -994,19 +994,24 @@ window.chordDatabase = {
             { name: 'E Shape (10th, Open A/D/B)', desc: '6th-string root, open A, D, and B strings.', frets: [10, 0, 0, 11, 0, 12], fingers: [1, 0, 0, 2, 0, 3] },
             { name: 'E Shape (10th, Open D/B)', desc: '6th-string root, open D and B strings.', frets: [10, 12, 0, 11, 0, 12], fingers: [1, 3, 0, 2, 0, 4] },
             { name: 'E Shape (10th, Open A/B)', desc: '6th-string root, open A and B strings.', frets: [10, 0, 12, 11, 0, 12], fingers: [1, 0, 3, 2, 0, 4] },
-            { name: 'E Shape (10th, Open B)', desc: '6th-string root, only the B string open.', frets: [10, 12, 12, 11, 0, 12], fingers: [1, 3, 3, 2, 0, 4] },
-            { name: 'E Shape (8th Fret, Chromatic)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string.', frets: [10, 8, 9, 9, 10, 0], fingers: [3, 1, 2, 2, 4, 0] },
-            { name: 'E Shape (8th Fret, Chromatic) #2', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string.', frets: [10, 8, 9, 10, 10, 0], fingers: [3, 1, 2, 4, 4, 0] },
-            { name: 'E Shape (9th, Chromatic, Open A/B/Top)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string, open A, B, and high E strings.', frets: [10, 0, 9, 10, 0, 0], fingers: [2, 0, 1, 3, 0, 0] },
-            { name: 'E Shape (9th, Chromatic, Open A/Top)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string, open A and high E strings.', frets: [10, 0, 9, 10, 10, 0], fingers: [2, 0, 1, 3, 4, 0] },
-            { name: 'E Shape (10th, Chromatic, Open D/B/Top)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string, open D, B, and high E strings.', frets: [10, 12, 0, 10, 0, 0], fingers: [1, 3, 0, 2, 0, 0] },
-            { name: 'E Shape (10th, Chromatic, Open A/B/Top)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string, open A, B, and high E strings.', frets: [10, 0, 12, 10, 0, 0], fingers: [1, 0, 3, 2, 0, 0] },
-            { name: 'E Shape (10th, Chromatic, Open A/D/Top)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string, open A, D, and high E strings.', frets: [10, 0, 0, 10, 12, 0], fingers: [1, 0, 0, 2, 3, 0] },
-            { name: 'E Shape (10th, Chromatic, Open D/Top)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string, open D and high E strings.', frets: [10, 12, 0, 10, 12, 0], fingers: [1, 3, 0, 2, 4, 0] },
-            { name: 'E Shape (10th, Chromatic, Open A/Top)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string, open A and high E strings.', frets: [10, 0, 12, 10, 12, 0], fingers: [1, 0, 3, 2, 4, 0] },
-            { name: 'E Shape (10th Fret, Chromatic)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string.', frets: [10, 12, 12, 10, 12, 0], fingers: [1, 2, 2, 1, 3, 0] },
-            { name: 'E Shape (10th, Chromatic, Open A/D/B)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string, open A, D, and B strings.', frets: [10, 0, 0, 10, 0, 12], fingers: [1, 0, 0, 2, 0, 3] },
-            { name: 'E Shape (10th, Chromatic, Open D/B)', desc: '6th-string root 6/9 voicing with a chromatic color tone on the G string, open D and B strings.', frets: [10, 12, 0, 10, 0, 12], fingers: [1, 3, 0, 2, 0, 4] }
+            { name: 'E Shape (10th, Open B)', desc: '6th-string root, only the B string open.', frets: [10, 12, 12, 11, 0, 12], fingers: [1, 3, 3, 2, 0, 4] }
+        ],
+        // 아래 폼들은 원래 '6/9'에 "Chromatic"이라는 이름으로 들어 있었으나, 반음 내린 자리가
+        // 장3도(F#)를 단3도(F)로 바꿔버려 실제로 울리는 음이 D, F, A, B, E - 즉 Dm6/9였음.
+        // 6/9 쪽에는 같은 폼의 F# 버전이 그대로 남아 있다.
+        'm6/9': [
+            { name: 'E Shape (8th Fret)', desc: '6th-string root, only the high E string open.', frets: [10, 8, 9, 9, 10, 0], fingers: [3, 1, 2, 2, 4, 0] },
+            { name: 'E Shape (8th Fret) #2', desc: '6th-string root, only the high E string open.', frets: [10, 8, 9, 10, 10, 0], fingers: [3, 1, 2, 4, 4, 0] },
+            { name: 'E Shape (9th, Open A/B/Top)', desc: '6th-string root, open A, B, and high E strings.', frets: [10, 0, 9, 10, 0, 0], fingers: [2, 0, 1, 3, 0, 0] },
+            { name: 'E Shape (9th, Open A/Top)', desc: '6th-string root, open A and high E strings.', frets: [10, 0, 9, 10, 10, 0], fingers: [2, 0, 1, 3, 4, 0] },
+            { name: 'E Shape (10th, Open D/B/Top)', desc: '6th-string root, open D, B, and high E strings.', frets: [10, 12, 0, 10, 0, 0], fingers: [1, 3, 0, 2, 0, 0] },
+            { name: 'E Shape (10th, Open A/B/Top)', desc: '6th-string root, open A, B, and high E strings.', frets: [10, 0, 12, 10, 0, 0], fingers: [1, 0, 3, 2, 0, 0] },
+            { name: 'E Shape (10th, Open A/D/Top)', desc: '6th-string root, open A, D, and high E strings.', frets: [10, 0, 0, 10, 12, 0], fingers: [1, 0, 0, 2, 3, 0] },
+            { name: 'E Shape (10th, Open D/Top)', desc: '6th-string root, open D and high E strings.', frets: [10, 12, 0, 10, 12, 0], fingers: [1, 3, 0, 2, 4, 0] },
+            { name: 'E Shape (10th, Open A/Top)', desc: '6th-string root, open A and high E strings.', frets: [10, 0, 12, 10, 12, 0], fingers: [1, 0, 3, 2, 4, 0] },
+            { name: 'E Shape (10th Fret)', desc: '6th-string root, only the high E string open.', frets: [10, 12, 12, 10, 12, 0], fingers: [1, 2, 2, 1, 3, 0] },
+            { name: 'E Shape (10th, Open A/D/B)', desc: '6th-string root, open A, D, and B strings.', frets: [10, 0, 0, 10, 0, 12], fingers: [1, 0, 0, 2, 0, 3] },
+            { name: 'E Shape (10th, Open D/B)', desc: '6th-string root, open D and B strings.', frets: [10, 12, 0, 10, 0, 12], fingers: [1, 3, 0, 2, 0, 4] }
         ],
         'maj7sus4': [
             { name: 'Open Dmaj7sus4 Shape', desc: 'Open-position maj7sus4 voicing.', frets: [-1, -1, 0, 0, 2, 5], fingers: [-1, -1, 0, 0, 1, 2] }
