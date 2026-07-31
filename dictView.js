@@ -425,12 +425,18 @@ window.dictView = {
     //    하나 더 끼워줌 - 구간별 대표 규칙은 항상 통짜 바레를 우선하므로 이런 얇은 폼은 자기 구간
     //    안에서도 절대 못 이기기 때문. Shell/Jazz/Rootless로 큐레이션된 폼을 최우선하고, 없으면
     //    가장 낮은 포지션의 3~4줄짜리 폼으로 대체함.
+    // 🌟 12프렛부터는 옥타브 위 구간이라(개방현 모양이 그대로 반복되는 지점) 3프렛 단위로 계속
+    //    쪼개지 않고 "옥타브 이상"으로 통째로 묶음 - 12-14, 15-17... 처럼 자잘하게 나뉘는 걸 방지.
+    OCTAVE_BUCKET: 4,
     bucketOf: function(minFret) {
+        if (minFret >= 12) return this.OCTAVE_BUCKET;
         return Math.floor(minFret / 3);
     },
 
     bucketLabel: function(bucket) {
-        return bucket === 0 ? 'Open Position' : `Frets ${bucket * 3}-${bucket * 3 + 2}`;
+        if (bucket === 0) return 'Open Position';
+        if (bucket === this.OCTAVE_BUCKET) return 'Octave Position (12th Fret+)';
+        return `Frets ${bucket * 3}-${bucket * 3 + 2}`;
     },
 
     fretSpan: function(v) {
@@ -497,7 +503,10 @@ window.dictView = {
             .sort((a, b) => a[0] - b[0])
             .map(([bucket, candidate]) => {
                 const hasOpenString = voicings[candidate.idx].frets.includes(0);
-                const label = (bucket === 0 && hasOpenString) ? 'Open Position' : `Frets ${bucket * 3 || 1}-${bucket * 3 + 2}`;
+                let label;
+                if (bucket === 0 && hasOpenString) label = 'Open Position';
+                else if (bucket === 0) label = 'Frets 1-2';
+                else label = this.bucketLabel(bucket);
                 return { label, minFret: candidate.minFret, idx: candidate.idx };
             });
         if (compact) entries.push({ label: 'Compact / Jazz Shape', minFret: compact.minFret, idx: compact.idx });
