@@ -3293,6 +3293,7 @@ window.generatedVoicings = {
             { name: 'E Shape (1st Fret) (Barre) #2', frets: [1, 3, 1, 2, -1, 2], fingers: [1, 3, 1, 2, -1, 2] },
             { name: 'A Shape (7th Fret) (Barre)', frets: [-1, 8, 7, 8, 7, 8], fingers: [-1, 2, 1, 3, 1, 4] },
             { name: 'E Shape (10th Fret)', frets: [13, 0, 10, 11, -1, 11], fingers: [3, 0, 1, 2, -1, 2] },
+            { name: 'E Shape (10th Fret) #2', frets: [13, 0, 10, 11, 10, 11], fingers: [4, 0, 1, 2, 1, 3] },
             { name: 'E Shape (11th Fret) (Barre)', frets: [13, 0, -1, 11, 13, 11], fingers: [2, 0, -1, 1, 3, 1] },
             { name: 'E Shape (13th Fret) (Barre)', frets: [13, -1, 13, 14, 13, 14], fingers: [1, -1, 1, 2, 1, 3] },
             { name: 'E Shape (13th Fret) (Barre) #2', frets: [13, 15, 13, 14, -1, 14], fingers: [1, 3, 1, 2, -1, 2] },
