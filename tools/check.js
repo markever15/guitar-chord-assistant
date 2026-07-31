@@ -149,9 +149,11 @@ function cmdDecode(win, root, quality, codesArg) {
     let ok = 0, bad = 0, dup = 0;
 
     for (const tok of codesArg.split(/\s+/).filter(Boolean)) {
+        // "0fret"과 "기본"은 접두사 없음(숫자=프렛)과 같은 뜻이므로 먼저 걸러낸다.
+        // 그러지 않으면 아래 숫자 패턴이 0을 잡아 base=0으로 오해한다.
+        if (/^0fret$/i.test(tok) || tok === '기본') { base = null; continue; }
         const m = /^(\d+)fret$/i.exec(tok);
         if (m) { base = Number(m[1]); continue; }
-        if (/^0fret$/i.test(tok) || /^기본$/.test(tok)) { base = null; continue; }
 
         const frets = decode(tok, base);
         if (!frets || frets.length !== 6 || frets.some(f => f === null)) {
