@@ -58,6 +58,26 @@ function sameNoteSet(notes, target) {
     return target.every(n => notes.includes(n)) && notes.every(n => target.includes(n));
 }
 
+// 기타는 줄이 여섯 개뿐이라 음을 생략하는 게 흔하다(특히 5음). 그래서 "구성음과
+// 정확히 일치"만 통과시키면 실제로 쓰는 폼을 놓친다. 대신 두 가지만 본다:
+//   1. 코드에 없는 음이 섞이면 무조건 탈락 - 이건 생략이 아니라 틀린 음이다.
+//   2. 생략한 결과가 같은 루트의 '다른 quality'와 정확히 같아지면 탈락 -
+//      예를 들어 11코드에서 11음을 빼면 그냥 9코드라 이름이 달라진다.
+// 둘 다 아니면 "부분(생략) 폼"으로 인정한다.
+//
+// 반환: 'exact' | 'partial' | { becomes: '다른 quality 이름' } | 'foreign'
+function classify(win, notes, root, quality) {
+    const target = win.chordNotesTable[root][quality];
+    if (notes.some(n => !target.includes(n))) return 'foreign';
+    if (sameNoteSet(notes, target)) return 'exact';
+    const table = win.chordNotesTable[root] || {};
+    for (const q of Object.keys(table)) {
+        if (q === quality) continue;
+        if (sameNoteSet(notes, table[q])) return { becomes: q };
+    }
+    return 'partial';
+}
+
 // 숫자 코드 해독.
 //   프렛 접두사 없음 → 숫자가 곧 프렛
 //   "Nfret" 접두사   → fret = N + (숫자 - 1), 단 0은 개방현
@@ -77,6 +97,7 @@ function cmdValidate(win) {
     const table = win.chordNotesTable || {};
     let checked = 0;
     const badNotes = [];
+    const partials = [];
     const dups = [];
     const noFormula = [];
 
@@ -89,8 +110,15 @@ function cmdValidate(win) {
             for (const v of gen[root][quality]) {
                 checked++;
                 const notes = notesOf(win, v.frets);
-                if (!sameNoteSet(notes, target)) {
-                    badNotes.push({ root, quality, name: v.name, frets: v.frets.join(','), notes, target });
+                const verdict = classify(win, notes, root, quality);
+                if (verdict === 'partial') {
+                    partials.push({ root, quality, name: v.name, frets: v.frets.join(','),
+                                    missing: target.filter(n => !notes.includes(n)) });
+                } else if (verdict !== 'exact') {
+                    badNotes.push({ root, quality, name: v.name, frets: v.frets.join(','), notes, target,
+                                    why: verdict === 'foreign'
+                                        ? `코드에 없는 음: ${notes.filter(n => !target.includes(n)).join(', ')}`
+                                        : `${root}${verdict.becomes}와 같아짐` });
                 }
                 const key = v.frets.join(',');
                 if (seen.has(key)) {
@@ -113,7 +141,12 @@ function cmdValidate(win) {
         badNotes.forEach(b => console.log(
             `    ${b.root} ${b.quality} "${b.name}" [${b.frets}]\n` +
             `        나온 음: ${b.notes.join(', ')}\n` +
-            `        맞는 음: ${b.target.join(', ')}`));
+            `        맞는 음: ${b.target.join(', ')}\n` +
+            `        사유: ${b.why}`));
+    }
+    if (partials.length) {
+        console.log(`\n~ 음을 생략한 폼 (${partials.length}) - 다른 코드와 겹치지 않아 허용:`);
+        partials.forEach(p => console.log(`    ${p.root} ${p.quality} "${p.name}" [${p.frets}]  ${p.missing.join(', ')} 생략`));
     }
     if (dups.length) {
         console.log(`\n✗ 같은 프렛 중복 (${dups.length}):`);
@@ -121,7 +154,7 @@ function cmdValidate(win) {
     }
 
     if (!badNotes.length && !dups.length) {
-        console.log('\n✓ 문법 정상. 구성음 불일치·중복 없음.');
+        console.log(`\n✓ 문법 정상. 구성음 불일치·중복 없음.${partials.length ? ` (생략형 ${partials.length}개 포함)` : ''}`);
         return 0;
     }
     return 1;
@@ -146,7 +179,7 @@ function cmdDecode(win, root, quality, codesArg) {
     console.log(`기존 보이싱: ${existing.size}개\n`);
 
     let base = null; // null이면 프렛 접두사 없음(숫자=프렛)
-    let ok = 0, bad = 0, dup = 0;
+    let ok = 0, bad = 0, dup = 0, partial = 0;
 
     for (const tok of codesArg.split(/\s+/).filter(Boolean)) {
         // "0fret"과 "기본"은 접두사 없음(숫자=프렛)과 같은 뜻이므로 먼저 걸러낸다.
@@ -165,19 +198,29 @@ function cmdDecode(win, root, quality, codesArg) {
         const label = `${base === null ? '기본' : base + 'fret'} ${tok}`;
         const key = frets.join(',');
 
-        if (!sameNoteSet(notes, target)) {
-            console.log(`✗ ${label.padEnd(16)} [${key}]  음: ${notes.join(', ')}  ← 불일치`);
+        const verdict = classify(win, notes, root, quality);
+
+        if (verdict === 'foreign') {
+            const extra = notes.filter(n => !target.includes(n));
+            console.log(`✗ ${label.padEnd(16)} [${key}]  음: ${notes.join(', ')}  ← 코드에 없는 음: ${extra.join(', ')}`);
+            bad++;
+        } else if (typeof verdict === 'object') {
+            console.log(`✗ ${label.padEnd(16)} [${key}]  음: ${notes.join(', ')}  ← 생략하면 ${root}${verdict.becomes}가 됨`);
             bad++;
         } else if (existing.has(key)) {
             console.log(`= ${label.padEnd(16)} [${key}]  중복 → "${existing.get(key)}"`);
             dup++;
+        } else if (verdict === 'partial') {
+            const missing = target.filter(n => !notes.includes(n));
+            console.log(`~ ${label.padEnd(16)} [${key}]  음: ${notes.join(', ')}  ← 추가 가능 (${missing.join(', ')} 생략)`);
+            partial++;
         } else {
             console.log(`+ ${label.padEnd(16)} [${key}]  음: ${notes.join(', ')}  ← 추가 가능`);
             ok++;
         }
     }
 
-    console.log(`\n추가 가능 ${ok} / 중복 ${dup} / 불일치·해독불가 ${bad}`);
+    console.log(`\n추가 가능 ${ok + partial}개 (완전 ${ok} / 생략형 ${partial}) / 중복 ${dup} / 탈락 ${bad}`);
     return 0;
 }
 
