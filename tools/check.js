@@ -107,6 +107,9 @@ function cmdValidate(win) {
     const partials = [];
     const dups = [];
     const noFormula = [];
+    // auto: true 는 사용자가 보낸 코드가 아니라 지판 탐색으로 만들어 넣은 폼.
+    // 데이터에는 두되 어느 것이 그런지는 구분되게 세어둔다.
+    const autos = [];
 
     for (const root of Object.keys(gen)) {
         for (const quality of Object.keys(gen[root])) {
@@ -127,6 +130,7 @@ function cmdValidate(win) {
                                         ? `코드에 없는 음: ${notes.filter(n => !target.includes(n)).join(', ')}`
                                         : `${verdict.becomes}와 같아짐` });
                 }
+                if (v.auto) autos.push(`${root} ${quality} "${v.name}" [${v.frets.join(',')}]`);
                 const key = v.frets.join(',');
                 if (seen.has(key)) {
                     dups.push({ root, quality, frets: key, a: seen.get(key), b: v.name });
@@ -154,6 +158,10 @@ function cmdValidate(win) {
     if (partials.length) {
         console.log(`\n~ 음을 생략한 폼 (${partials.length}) - 다른 코드와 겹치지 않아 허용:`);
         partials.forEach(p => console.log(`    ${p.root} ${p.quality} "${p.name}" [${p.frets}]  ${p.missing.join(', ')} 생략`));
+    }
+    if (autos.length) {
+        console.log(`\n· 탐색으로 만든 폼 (${autos.length}) - 사용자 제출분이 아님:`);
+        autos.forEach(s => console.log(`    ${s}`));
     }
     if (dups.length) {
         console.log(`\n✗ 같은 프렛 중복 (${dups.length}):`);
