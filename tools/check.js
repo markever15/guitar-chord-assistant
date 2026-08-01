@@ -61,19 +61,26 @@ function sameNoteSet(notes, target) {
 // 기타는 줄이 여섯 개뿐이라 음을 생략하는 게 흔하다(특히 5음). 그래서 "구성음과
 // 정확히 일치"만 통과시키면 실제로 쓰는 폼을 놓친다. 대신 두 가지만 본다:
 //   1. 코드에 없는 음이 섞이면 무조건 탈락 - 이건 생략이 아니라 틀린 음이다.
-//   2. 생략한 결과가 같은 루트의 '다른 quality'와 정확히 같아지면 탈락 -
-//      예를 들어 11코드에서 11음을 빼면 그냥 9코드라 이름이 달라진다.
+//   2. 생략한 결과가 '다른 코드'와 정확히 같아지면 탈락. 같은 루트의 다른
+//      quality만이 아니라 12개 루트를 전부 본다. 예를 들어 Gm(maj7)add11에서
+//      G와 C를 빼면 F#, Bb, C#, D만 남는데 그건 Daug7이라 다른 코드가 된다.
+//      (베이스음이 무엇이냐는 이름을 정하지 않는다 - 베이스가 F#이어도 나머지
+//       음이 G코드를 이루면 그건 G코드의 전위형이지 F#코드가 아니다.)
 // 둘 다 아니면 "부분(생략) 폼"으로 인정한다.
 //
-// 반환: 'exact' | 'partial' | { becomes: '다른 quality 이름' } | 'foreign'
+// 반환: 'exact' | 'partial' | { becomes: '다른 코드 이름' } | 'foreign'
 function classify(win, notes, root, quality) {
     const target = win.chordNotesTable[root][quality];
     if (notes.some(n => !target.includes(n))) return 'foreign';
     if (sameNoteSet(notes, target)) return 'exact';
-    const table = win.chordNotesTable[root] || {};
-    for (const q of Object.keys(table)) {
-        if (q === quality) continue;
-        if (sameNoteSet(notes, table[q])) return { becomes: q };
+    for (const r of Object.keys(win.rootOffset)) {
+        for (const q of win.qualities) {
+            if (r === root && q === quality) continue;
+            const other = (win.chordNotesTable[r] || {})[q];
+            if (other && sameNoteSet(notes, other)) {
+                return { becomes: `${r}${q === 'Major' ? '' : q}` };
+            }
+        }
     }
     return 'partial';
 }
@@ -118,7 +125,7 @@ function cmdValidate(win) {
                     badNotes.push({ root, quality, name: v.name, frets: v.frets.join(','), notes, target,
                                     why: verdict === 'foreign'
                                         ? `코드에 없는 음: ${notes.filter(n => !target.includes(n)).join(', ')}`
-                                        : `${root}${verdict.becomes}와 같아짐` });
+                                        : `${verdict.becomes}와 같아짐` });
                 }
                 const key = v.frets.join(',');
                 if (seen.has(key)) {
@@ -205,7 +212,7 @@ function cmdDecode(win, root, quality, codesArg) {
             console.log(`✗ ${label.padEnd(16)} [${key}]  음: ${notes.join(', ')}  ← 코드에 없는 음: ${extra.join(', ')}`);
             bad++;
         } else if (typeof verdict === 'object') {
-            console.log(`✗ ${label.padEnd(16)} [${key}]  음: ${notes.join(', ')}  ← 생략하면 ${root}${verdict.becomes}가 됨`);
+            console.log(`✗ ${label.padEnd(16)} [${key}]  음: ${notes.join(', ')}  ← 생략하면 ${verdict.becomes}가 됨`);
             bad++;
         } else if (existing.has(key)) {
             console.log(`= ${label.padEnd(16)} [${key}]  중복 → "${existing.get(key)}"`);
