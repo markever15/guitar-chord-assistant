@@ -4852,6 +4852,10 @@ window.generatedVoicings = {
             { name: 'E Shape (13th Fret) #4', frets: [15, 14, 0, 16, 13, 13], fingers: [3, 2, 0, 4, 1, 1] },
             { name: 'E Shape (13th Fret) #5', frets: [15, 15, 0, 16, 13, 13], fingers: [3, 3, 0, 4, 1, 1] },
             { name: 'E Shape (13th Fret) #6', frets: [15, 15, 0, 16, 15, 13], fingers: [2, 2, 0, 4, 3, 1] },
+            { name: 'E Shape (13th Fret) #7', frets: [15, -1, 0, 16, 13, 13], fingers: [3, -1, 0, 4, 1, 2], auto: true },
+            { name: 'E Shape (13th Fret) #8', frets: [15, 15, 0, 16, 0, 13], fingers: [2, 3, 0, 4, 0, 1], auto: true },
+            { name: 'E Shape (13th Fret) #9', frets: [15, 15, 0, 16, -1, 13], fingers: [2, 3, 0, 4, -1, 1], auto: true },
+            { name: 'E Shape (13th Fret) #10', frets: [15, -1, 0, 0, 15, 13], fingers: [2, -1, 0, 0, 3, 1], auto: true },
         ],
         'maj7add11': [
             { name: 'E Shape (2nd Fret)', frets: [3, 3, 0, 0, 0, 2], fingers: [2, 3, 0, 0, 0, 1] },
