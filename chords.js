@@ -1409,6 +1409,9 @@ window.slashChordDatabase = {
         ],
         'm': [
             { name: 'Em/G', desc: 'Em chord with G bass on the 6th string 3rd fret.', frets: [3, 2, 2, 0, 0, 0], fingers: [3, 1, 2, 0, 0, 0] }
+        ],
+        'sus2': [
+            { name: 'E/B', desc: 'Esus2 with B in the bass - the 5th on the bottom keeps it open sounding.', frets: [7, 9, 9, 9, 0, 7], fingers: [1, 2, 2, 2, 0, 1] }
         ]
     },
     'F': {
@@ -1418,6 +1421,17 @@ window.slashChordDatabase = {
         ],
         'm': [
             { name: 'Fm/G#', desc: 'Fm triad with G# bass on the 4th string.', frets: [-1, -1, 6, 5, 6, 4], fingers: [-1, -1, 3, 2, 4, 1] }
+        ],
+        '7add13': [
+            { name: 'F7add13/D', desc: 'The 13th (D) sits in the bass, giving it an F7/D colour.', frets: [10, 0, 10, 10, 13, 11], fingers: [1, 0, 2, 2, 4, 3] }
+        ],
+        'maj7add13': [
+            { name: 'Fmaj7add13/D', desc: '13th in the bass; the top string is left open.', frets: [10, 0, 10, 10, 13, 0], fingers: [1, 0, 2, 2, 3, 0] },
+            { name: 'Fmaj7add13/D #2', desc: '13th in the bass with the 3rd doubled on top.', frets: [10, 0, 10, 10, 13, 12], fingers: [1, 0, 2, 2, 4, 3] },
+            { name: 'Fmaj7add13/D #3', desc: '13th in the bass, 5th string fretted for a fuller low end.', frets: [10, 12, 10, 10, 13, 0], fingers: [1, 3, 1, 1, 4, 0] }
+        ],
+        'm(maj7)add13': [
+            { name: 'Fm(maj7)add13/D', desc: '13th in the bass under the minor-major 7th.', frets: [10, 11, 10, 10, 13, 0], fingers: [1, 2, 1, 1, 4, 0] }
         ]
     },
     'G': {
@@ -1427,6 +1441,9 @@ window.slashChordDatabase = {
         ],
         'm': [
             { name: 'Gm/Bb', desc: 'Gm chord with Bb bass on the 5th string.', frets: [-1, 1, 0, 0, 3, 3], fingers: [-1, 1, 0, 0, 3, 4] }
+        ],
+        '7b5': [
+            { name: 'G7b5/C#', desc: 'The flatted 5th (C#) in the bass - a tritone away from the root.', frets: [-1, -1, 11, 12, 12, 13], fingers: [-1, -1, 1, 2, 3, 4] }
         ]
     },
     'A': {
@@ -1445,6 +1462,15 @@ window.slashChordDatabase = {
         ],
         'm': [
             { name: 'Bm/A', desc: 'Bm barre chord with open A bass string.', frets: [-1, 0, 4, 4, 3, 2], fingers: [-1, 0, 3, 4, 2, 1] }
+        ],
+        'm7b5': [
+            { name: 'Bm7b5/A', desc: 'Half-diminished with the open A in the bass; the 5th (F) is dropped.', frets: [-1, 0, 9, -1, 10, 10], fingers: [-1, 0, 1, -1, 2, 3] }
+        ],
+        'aug': [
+            { name: 'Baug/G', desc: 'Augmented chord voiced from its own augmented 5th.', frets: [-1, 10, 9, 0, 0, 11], fingers: [-1, 2, 1, 0, 0, 3] }
+        ],
+        '7b5': [
+            { name: 'B7b5/F', desc: 'Flatted 5th in the bass, a tritone below the root.', frets: [-1, -1, 3, 4, 4, 5], fingers: [-1, -1, 1, 2, 3, 4] }
         ]
     }
 };

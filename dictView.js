@@ -892,7 +892,12 @@ window.dictView = {
 
         const sDb = window.slashChordDatabase || {};
         const rootGroup = sDb[root] || {};
-        let targetQuality = (quality === 'm' || quality === 'dim' || quality === 'dim7') ? 'm' : (quality === 'Major' ? 'Major' : 'None');
+        // 그 quality에 슬래시 코드가 등록돼 있으면 그걸 쓴다. 없으면 예전처럼
+        // dim/dim7은 마이너 쪽 폼을 빌려 보여준다(3음이 같아서 대체로 통한다).
+        let targetQuality = quality;
+        if (!rootGroup[targetQuality] && (quality === 'dim' || quality === 'dim7')) {
+            targetQuality = 'm';
+        }
 
         const items = rootGroup[targetQuality] || [];
         if (compSection) compSection.style.display = items.length === 0 ? 'none' : 'block';
