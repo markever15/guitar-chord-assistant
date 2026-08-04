@@ -921,7 +921,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const qualityGroups = {
             'Common': ['Major', 'm', '5', 'aug', 'dim'],
             'Major': ['maj7', 'add9', '6', 'maj9', 'maj11', 'maj13', '6/9', 'maj7add11', 'maj7add13'],
-            'Minor': ['m7', 'm6', 'm6/9', 'm(maj7)', 'm(maj7)add11', 'm7add13', 'm(maj7)add13', 'm(add9)', 'm9', 'm(maj9)', 'm11', 'm(maj11)', 'm13'],
+            'Minor': ['m7', 'm6', 'm6/9', 'm(maj7)', 'm7add11', 'm(maj7)add11', 'm7add13', 'm(maj7)add13', 'm(add9)', 'm9', 'm(maj9)', 'm11', 'm(maj11)', 'm13'],
             'Dominant': ['7', '9', '11', '13', '7add11', '7add13'],
             'Sus & Altered': ['sus2', 'sus4', '7sus4', 'maj7sus4', '7sus2', 'maj7sus2', '6sus4', '6sus2', 'm7b5', 'm7#5', 'dim7', '7b9', '7#9', '7b5', 'aug7', 'aug7b9', 'm7b9']
         };

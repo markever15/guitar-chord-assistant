@@ -6,7 +6,7 @@ window.currentVoicingIndex = 0;
 window.showAllNotesState = false;
 window.showAllVoicings = false;
 
-window.totalFrets = 15; 
+window.totalFrets = 19; 
 window.stringCount = 6; 
 window.openStringNotes = ['E', 'B', 'G', 'D', 'A', 'E']; 
 
@@ -29,7 +29,7 @@ window.rootLayout = [
 
 window.qualities = [
     'Major', 'm', 'm7', '7', 'maj7', 'sus2', 'sus4', '5', 'm7b5', '9', 'maj9', '6', 'm6', 'dim', 'dim7', 'add9', 'aug',
-    'm9', '11', 'm11', 'maj11', '13', 'm13', 'maj13', '7sus4', '6/9', '7b9', '7#9', 'm(maj7)', 'm(add9)', 'm(maj9)', 'm(maj11)', 'm6/9', '7add11', 'maj7add11', 'm(maj7)add11', '7add13', 'maj7add13', 'm7add13', 'm(maj7)add13', '7b5', 'aug7', 'aug7b9', 'm7#5', 'm7b9', '6sus4', '6sus2', 'maj7sus4', '7sus2', 'maj7sus2'
+    'm9', '11', 'm11', 'maj11', '13', 'm13', 'maj13', '7sus4', '6/9', '7b9', '7#9', 'm(maj7)', 'm(add9)', 'm(maj9)', 'm(maj11)', 'm6/9', '7add11', 'maj7add11', 'm7add11', 'm(maj7)add11', '7add13', 'maj7add13', 'm7add13', 'm(maj7)add13', '7b5', 'aug7', 'aug7b9', 'm7#5', 'm7b9', '6sus4', '6sus2', 'maj7sus4', '7sus2', 'maj7sus2'
 ];
 
 window.getNoteName = function(stringIdx, fret) {
@@ -39,7 +39,15 @@ window.getNoteName = function(stringIdx, fret) {
 };
 
 // 🌟 실제 기타 넥에 있는 포지션 마커(점) — 3,5,7,9,15,17,19,21프렛은 점 하나, 12,24프렛(옥타브)은 점 두 개
-window.renderFretInlays = function(fb, fWidth, totalFrets, boardHeight) {
+// 🌟 실제 기타처럼 프렛 간격이 넉넉한 저프렛 → 촘촘한 고프렛으로 좁아지게 위치를 계산한다.
+//    현악기 표준인 "rule of 18"(각 프렛이 남은 현 길이를 2^(1/12)씩 나눔)을 지판 폭에 정규화한 것.
+//    n=0이 너트, n=totalFrets가 지판 오른쪽 끝.
+window.makeFretX = function(width, totalFrets) {
+    const span = 1 - Math.pow(2, -totalFrets / 12);
+    return n => width * (1 - Math.pow(2, -n / 12)) / span;
+};
+
+window.renderFretInlays = function(fb, fretX, totalFrets, boardHeight) {
     const singleDotFrets = [3, 5, 7, 9, 15, 17, 19, 21];
     const doubleDotFrets = [12, 24];
     const center = boardHeight / 2;
@@ -47,7 +55,7 @@ window.renderFretInlays = function(fb, fWidth, totalFrets, boardHeight) {
     const addDot = (fret, top) => {
         const dot = document.createElement('div');
         dot.className = 'fret-inlay-dot';
-        dot.style.left = `${(fret - 0.5) * fWidth}px`;
+        dot.style.left = `${(fretX(fret - 1) + fretX(fret)) / 2}px`;
         dot.style.top = `${top}px`;
         fb.appendChild(dot);
     };

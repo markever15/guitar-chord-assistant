@@ -20,11 +20,13 @@ window.recogView = {
         
         // 🌟 모바일이나 특정 브라우저에서 너비를 0으로 계산하여 렌더링이 증발하는 버그 차단
         const safeWidth = fb.clientWidth > 50 ? fb.clientWidth : 540;
-        const fWidth = safeWidth / totalFrets;
+        const fretX = window.makeFretX(safeWidth, totalFrets);
+        // 프렛 n의 칸(=n-1프렛과 n프렛 사이) 중앙 x좌표 - 마커/음이름을 여기에 놓는다
+        const cellCenter = n => (fretX(n - 1) + fretX(n)) / 2;
 
         // 1. 프렛 세로선 그리기
         for (let i = 0; i <= totalFrets; i++) {
-            const left = i * fWidth;
+            const left = fretX(i);
             const line = document.createElement('div'); 
             line.className = 'fret-line'; 
             line.style.left = `${left}px`; 
@@ -33,12 +35,19 @@ window.recogView = {
             
             const num = document.createElement('div'); 
             num.className = 'fret-number'; 
-            num.style.left = `${left - (fWidth/2)}px`; 
+            if (i === 0) {
+                // 너트 라벨은 지판 왼쪽 끝에 붙어 있어 중앙 정렬하면 잘리므로 왼쪽 기준으로 놓는다
+                num.style.left = '0px';
+                num.style.marginLeft = '0';
+                num.style.textAlign = 'left';
+            } else {
+                num.style.left = `${cellCenter(i)}px`;
+            }
             num.textContent = i === 0 ? 'Nut' : i;
             fn.appendChild(num);
         }
 
-        window.renderFretInlays(fb, fWidth, totalFrets, 180);
+        window.renderFretInlays(fb, fretX, totalFrets, 180);
 
         // 🌟 "Show Notes"가 켜지면 선택 여부와 상관없이 지판 전체(1프렛~마지막 프렛)의
         // 음이름을 다 보여줌 (개방현 fret 0은 별도 O/X 인디케이터가 이미 담당하므로 겹치지 않게 1프렛부터만 표시)
@@ -75,6 +84,9 @@ window.recogView = {
                 const cell = document.createElement('div'); 
                 cell.className = 'fret-cell'; 
                 cell.style.height = '30px';
+                // 실제 프렛 간격과 클릭 영역을 맞춤 (flex 균등 분배 대신 실제 폭을 지정)
+                cell.style.flex = 'none';
+                cell.style.width = `${fretX(f) - fretX(f - 1)}px`;
                 
                 // 터치 및 클릭 이벤트 할당
                 cell.onclick = () => {
@@ -94,7 +106,7 @@ window.recogView = {
                 
                 m.style.position = 'absolute';
                 m.style.transform = 'translate(-50%, -50%)';
-                m.style.left = `${window.finderUserFrets[s] * fWidth - (fWidth / 2)}px`; 
+                m.style.left = `${cellCenter(window.finderUserFrets[s])}px`; 
                 m.style.top = `${s * 30 + 15}px`;
                 m.style.cursor = 'pointer'; 
                 
@@ -117,7 +129,7 @@ window.recogView = {
                     ghost.textContent = note;
                     ghost.style.position = 'absolute';
                     ghost.style.transform = 'translate(-50%, -50%)';
-                    ghost.style.left = `${f * fWidth - (fWidth / 2)}px`;
+                    ghost.style.left = `${cellCenter(f)}px`;
                     ghost.style.top = `${s * 30 + 15}px`;
                     fb.appendChild(ghost);
                 }
