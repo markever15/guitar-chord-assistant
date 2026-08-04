@@ -52,7 +52,8 @@ const CHORD_SEARCH_QUALITY_ALIASES = {
     'm(maj11)': 'm(maj11)', 'mmaj11': 'm(maj11)', 'minmaj11': 'm(maj11)', 'm/maj11': 'm(maj11)',
     'm6/9': 'm6/9', 'm69': 'm6/9', 'min6/9': 'm6/9', 'm6add9': 'm6/9',
     '7add11': '7add11', '7(add11)': '7add11', 'dom7add11': '7add11',
-    'maj7add11': 'maj7add11', 'maj7(add11)': 'maj7add11', 'm7add11': 'maj7add11', 'm7(add11)': 'maj7add11',
+    'maj7add11': 'maj7add11', 'maj7(add11)': 'maj7add11',
+    'm7add11': 'm7add11', 'm7(add11)': 'm7add11', 'min7add11': 'm7add11', 'min7(add11)': 'm7add11',
     'm(maj7)add11': 'm(maj7)add11', 'mmaj7add11': 'm(maj7)add11', 'minmaj7add11': 'm(maj7)add11', 'm/maj7add11': 'm(maj7)add11',
     'mm7add11': 'm(maj7)add11', 'mm7(add11)': 'm(maj7)add11',
     '7add13': '7add13', '7(add13)': '7add13', 'dom7add13': '7add13',
@@ -325,7 +326,7 @@ window.dictView = {
         const generated = (window.generatedVoicings && window.generatedVoicings[root] && window.generatedVoicings[root][quality]) || [];
         generated.forEach(gv => {
             if (!allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(gv.frets))) {
-                allVoicings.push({ name: gv.name, frets: gv.frets, fingers: gv.fingers, _tier: 2 });
+                allVoicings.push({ name: gv.name, frets: gv.frets, fingers: gv.fingers, manualFingers: !!gv.manualFingers, _tier: 2 });
             }
         });
 
@@ -346,13 +347,6 @@ window.dictView = {
             const exSet = new Set(excluded.map(f => f.join(',')));
             allVoicings = allVoicings.filter(v => !exSet.has(v.frets.join(',')));
         }
-
-        // 🌟 15프렛 이상은 실제로 잘 안 쓰이는 구간이라 통째로 제외 (거의 항상 더 낮은 프렛에 같은
-        //    폼의 옥타브 반복이 이미 있음 - 예: "Open D Shape (High)")
-        allVoicings = allVoicings.filter(v => {
-            const activeFrets = v.frets.filter(f => f > 0);
-            return activeFrets.length === 0 || Math.max(...activeFrets) < 15;
-        });
 
         // 🌟 대표 폼 선정에 쓸 원래 생성 순서를 기록해둠 (지정 파지법 원본 → 지정 파지법 옥타브 이동분 →
         //    자동 생성 → C코드 변환분 순으로 쌓았으므로, 이 순서 자체가 "더 정통적인/의도된" 폼일수록 앞에 옴)
@@ -724,7 +718,11 @@ window.dictView = {
         const frets = voicing.frets;
         // 🌟 저장된 fingers 대신 항상 규칙 기반으로 계산 → 전체 코드 손가락 번호 일관성 보장
         // (바레로도 4손가락 안에 못 들어가는 예외적인 기존 데이터가 있을 경우를 대비한 안전장치)
-        const fingers = computeFingers(frets) || frets.map(f => (f === -1 ? -1 : (f > 0 ? Math.min(frets.filter(x => x > 0 && x <= f).length, 4) : 0)));
+        // 단, manualFingers로 표시된 파지법은 자동 규칙이 실제 운지와 안 맞는 예외 케이스라 손으로
+        // 지정한 fingers를 그대로 씀.
+        const fingers = voicing.manualFingers
+            ? voicing.fingers
+            : (computeFingers(frets) || frets.map(f => (f === -1 ? -1 : (f > 0 ? Math.min(frets.filter(x => x > 0 && x <= f).length, 4) : 0))));
         const activeFrets = frets.filter(f => f > 0);
         const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
         const maxFret = activeFrets.length ? Math.max(...activeFrets) : 0;
