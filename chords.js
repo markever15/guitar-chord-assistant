@@ -3,7 +3,13 @@
 // 🌟 특정 코드에서 물리적으로 못 잡는 자동 생성 파지법을 프렛 배열로 지정해 목록에서 제외
 window.excludedVoicings = {
     'C': {
-        'maj7': [ [-1, 3, 2, 0, 0, -1] ]
+        'maj7': [ [-1, 3, 2, 0, 0, -1] ],
+        'add9': [
+            [8, 10, 10, 9, 8, 10],      // Full Shape (10th Fret)
+            [-1, 15, 14, 12, 15, 12],   // Open Cadd9 (High)
+            [-1, 15, 12, 12, 13, 12],   // Compact Shape (Nut) (High)
+            [-1, 15, 14, 12, 15, 15]    // Full Shape (High)
+        ]
     },
     'D': {
         'm': [ [-1, 5, 3, 2, 3, 5] ],
@@ -30,6 +36,16 @@ window.pinnedRepresentatives = {
             [8, 10, 9, 9, 8, 8],    // E Shape maj7 (8th Fret)
             [-1, -1, 10, 0, 0, 12], // D Shape (10th Fret)
             [-1, 15, -1, 0, 0, 12]  // A Shape (12th Fret)
+        ],
+        'add9': [
+            [-1, 3, 0, 0, 1, 0],   // Compact Shape (Nut)
+            [-1, 3, 2, 0, 3, 0],   // Open Cadd9
+            [-1, 3, 2, 0, 3, 3],   // Full Shape (3rd Fret)
+            [8, -1, 0, 0, 5, -1],  // E Shape add9 (No 5th)
+            [8, 5, 5, 5, 5, 0],    // E Shape (5th Fret) (Barre)
+            [8, 7, 0, 0, 8, 0],    // Airy Shape (8th Fret)
+            [8, 7, 0, 0, 8, 8],    // Full Shape (8th Fret)
+            [-1, 15, 0, 0, 13, 0]  // A Shape (13th Fret)
         ]
     }
 };
@@ -562,9 +578,9 @@ window.chordDatabase = {
             { name: 'Open Shape (Nut)', desc: 'Open-position add9 voicing.', frets: [-1, 3, 0, 0, 5, 0], fingers: [-1, 1, 0, 0, 2, 0] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string add9 voicing.', frets: [8, 7, 0, 0, 8, 0], fingers: [2, 1, 0, 0, 3, 0] },
             { name: 'Full Shape (8th Fret)', desc: 'Add9 voicing with doubled root.', frets: [8, 7, 0, 0, 8, 8], fingers: [2, 1, 0, 0, 3, 4] },
-            { name: 'Open Shape (8th Fret)', desc: 'Add9 with open D string.', frets: [8, 10, 0, 9, 8, 8], fingers: [1, 4, 0, 3, 2, 2] },
-            { name: 'Airy Shape (Wide)', desc: 'Open-string add9 voicing.', frets: [8, 10, 0, 0, 8, 0], fingers: [1, 3, 0, 0, 2, 0] },
-            { name: 'Open Shape (Wide)', desc: 'Add9 with open D and high E strings.', frets: [8, 10, 0, 9, 8, 0], fingers: [1, 4, 0, 3, 2, 0] },
+            { name: 'Open Shape (8th Fret)', desc: 'Add9 with open D string.', frets: [8, 10, 0, 9, 8, 8], fingers: ['T', 3, 0, 2, 1, 1], manualFingers: true },
+            { name: 'Airy Shape (Wide)', desc: 'Open-string add9 voicing.', frets: [8, 10, 0, 0, 8, 0], fingers: ['T', 3, 0, 0, 1, 0], manualFingers: true },
+            { name: 'Open Shape (Wide)', desc: 'Add9 with open D and high E strings.', frets: [8, 10, 0, 9, 8, 0], fingers: ['T', 3, 0, 2, 1, 0], manualFingers: true },
             { name: 'Full Shape (10th Fret)', desc: '6-string closed add9 chord.', frets: [8, 10, 10, 9, 8, 10], fingers: [1, 3, 3, 2, 1, 4] },
             { name: 'Shell Shape (10th Fret)', desc: '4-note add9 shell higher up the neck.', frets: [-1, -1, 10, 9, 8, 10], fingers: [-1, -1, 3, 2, 1, 4] }
         ],
