@@ -130,7 +130,12 @@ function computeFingers(frets) {
         if (refFret !== undefined) {
             const desired = items.map(item => {
                 const gap = item.fret - refFret;
-                return Math.min(4, Math.max(startFinger, gap <= 1 ? 2 : gap === 2 ? 3 : 4));
+                // gap 0 = 기준 프렛 자체(검지 자리). 그 위로는 벌어진 만큼 뻗기 좋은 손가락을 씀.
+                let want = gap === 0 ? startFinger : gap === 1 ? 2 : gap === 2 ? 3 : 4;
+                // 두 줄 이상을 한 손가락으로 눌러야 하는 자리는 새끼손가락으로 안 보냄 - 멀리
+                // 뻗는 건 새끼가 낫지만, 여러 줄을 눕혀 누르는 건 약지가 훨씬 안정적임
+                if (want === 4 && item.strings.length > 1) want = 3;
+                return Math.min(4, Math.max(startFinger, want));
             });
             for (let i = desired.length - 2; i >= 0; i--) { desired[i] = Math.min(desired[i], desired[i + 1] - 1); }
             let prev = startFinger - 1;
@@ -167,8 +172,11 @@ function computeFingers(frets) {
         }
     }
 
-    // 2) 확장 바레가 안 되거나 부족하면, 전체를 같은 프렛끼리만 묶어서 프렛 오름차순으로 배정
-    const assigned2 = assignSequential(findGroups(fretted), 1, undefined);
+    // 2) 확장 바레가 안 되거나 부족하면, 전체를 같은 프렛끼리만 묶어서 배정.
+    //    🌟 여기서도 최저 프렛을 기준으로 삼아 간격에 맞는 손가락을 고른다. 예전엔 기준 없이 프렛
+    //    순서대로 1,2,3을 붙여서, 10·11·13프렛처럼 벌어진 폼이 새끼손가락을 놀리고 약지로 3프렛을
+    //    벌리는(1,2,3) 운지로 나왔다. 기준을 주면 1,2,4가 되어 실제로 짚는 방식과 맞는다.
+    const assigned2 = assignSequential(findGroups(fretted), 1, F);
     if (assigned2) {
         const result = frets.map(f => (f === -1 ? -1 : 0));
         Object.keys(assigned2).forEach(s => { result[s] = assigned2[s]; });
