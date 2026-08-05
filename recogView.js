@@ -21,6 +21,17 @@ window.recogView = {
         // 🌟 모바일이나 특정 브라우저에서 너비를 0으로 계산하여 렌더링이 증발하는 버그 차단
         const safeWidth = fb.clientWidth > 50 ? fb.clientWidth : 540;
         const fretX = window.makeFretX(safeWidth, totalFrets);
+        // 🌟 지판(.fretboard)은 왼쪽에 너트 역할의 border가 있어 내용 영역이 그만큼 오른쪽에서 시작한다.
+        //    클릭 판정용 .hover-detector와 프렛 번호줄은 형제 요소라 그 border 폭을 모르는 채로
+        //    0부터 깔려서, 프렛이 좁아질수록 클릭 위치가 눈에 띄게 어긋났다. 여기서 맞춰준다.
+        const nutWidth = parseFloat(getComputedStyle(fb).borderLeftWidth) || 0;
+        hd.style.left = `${nutWidth}px`;
+        hd.style.width = `${safeWidth}px`;
+        hd.style.minWidth = '0';
+        // 프렛 번호줄은 position:relative라 left 대신 왼쪽 여백으로 같은 만큼 민다
+        fn.style.marginLeft = `${nutWidth}px`;
+        fn.style.width = `${safeWidth}px`;
+        fn.style.minWidth = '0';
         // 프렛 n의 칸(=n-1프렛과 n프렛 사이) 중앙 x좌표 - 마커/음이름을 여기에 놓는다
         const cellCenter = n => (fretX(n - 1) + fretX(n)) / 2;
 

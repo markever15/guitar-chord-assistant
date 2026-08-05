@@ -42,9 +42,16 @@ window.getNoteName = function(stringIdx, fret) {
 // 🌟 실제 기타처럼 프렛 간격이 넉넉한 저프렛 → 촘촘한 고프렛으로 좁아지게 위치를 계산한다.
 //    현악기 표준인 "rule of 18"(각 프렛이 남은 현 길이를 2^(1/12)씩 나눔)을 지판 폭에 정규화한 것.
 //    n=0이 너트, n=totalFrets가 지판 오른쪽 끝.
-window.makeFretX = function(width, totalFrets) {
+//    다만 19프렛까지 그리면 실제 비율 그대로는 고프렛이 20px 남짓까지 좁아져 누르기 어렵다.
+//    그래서 실제 비율과 균등 분할을 taper 비율로 섞어 위쪽이 과하게 뭉치지 않게 완화한다.
+window.makeFretX = function(width, totalFrets, taper) {
+    const t = taper === undefined ? 0.55 : taper;
     const span = 1 - Math.pow(2, -totalFrets / 12);
-    return n => width * (1 - Math.pow(2, -n / 12)) / span;
+    return n => {
+        const real = (1 - Math.pow(2, -n / 12)) / span;
+        const even = n / totalFrets;
+        return width * (real * t + even * (1 - t));
+    };
 };
 
 window.renderFretInlays = function(fb, fretX, totalFrets, boardHeight) {
