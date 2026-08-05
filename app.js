@@ -6,7 +6,7 @@ window.currentVoicingIndex = 0;
 window.showAllNotesState = false;
 window.showAllVoicings = false;
 
-window.totalFrets = 19; 
+window.totalFrets = 17; 
 window.stringCount = 6; 
 window.openStringNotes = ['E', 'B', 'G', 'D', 'A', 'E']; 
 
