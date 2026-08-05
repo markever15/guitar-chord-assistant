@@ -2,6 +2,9 @@
 
 // 🌟 특정 코드에서 물리적으로 못 잡는 자동 생성 파지법을 프렛 배열로 지정해 목록에서 제외
 window.excludedVoicings = {
+    'C': {
+        'maj7': [ [-1, 3, 2, 0, 0, -1] ]
+    },
     'D': {
         'm': [ [-1, 5, 3, 2, 3, 5] ],
         '7': [ [-1, 5, 4, 5, 3, 2] ],
@@ -18,6 +21,14 @@ window.pinnedRepresentatives = {
             [-1, 3, 4, 5, 4, -1],    // A Shape (3~5프렛)
             [-1, -1, 10, 8, 7, -1],  // Cdim Shape
             [-1, -1, 10, 11, -1, 11] // Airy Shape (10프렛)
+        ],
+        'maj7': [
+            [-1, 3, 2, 0, 0, 0],    // Open Cmaj7 Shape
+            [-1, 3, 5, 5, 0, 0],    // Open Shape (Doubled Root)
+            [-1, 3, 5, 4, 5, 3],    // Jazz Shape (3rd Fret)
+            [8, 10, 10, 0, 0, 0],   // E Shape maj7 (Doubled Root)
+            [-1, -1, 10, 0, 0, 12], // D Shape (10th Fret)
+            [-1, 15, -1, 0, 0, 12]  // A Shape (12th Fret)
         ]
     }
 };
