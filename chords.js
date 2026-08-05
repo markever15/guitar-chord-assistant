@@ -9,6 +9,14 @@ window.excludedVoicings = {
             [-1, 15, 14, 12, 15, 12],   // Open Cadd9 (High)
             [-1, 15, 12, 12, 13, 12],   // Compact Shape (Nut) (High)
             [-1, 15, 14, 12, 15, 15]    // Full Shape (High)
+        ],
+        '6': [
+            [8, 7, 7, 0, 8, 0],  // Airy Shape (Full A)
+            [8, 7, 7, 0, 8, 8],  // Airy Shape (Closed)
+            [8, 10, 10, 9, 10, 0], // Barre Shape (Full G)
+            [8, 10, 10, 9, 10, 8],  // E Shape 6 (Full Barre)
+            [-1, 15, 14, 14, 13, 15], // A Shape (13th Fret) = Bright Shape (Nut) (High)
+            [-1, 15, 14, 14, -1, 15]  // A Shape (14th Fret)
         ]
     },
     'D': {
@@ -46,6 +54,14 @@ window.pinnedRepresentatives = {
             [8, 7, 0, 0, 8, 0],    // Airy Shape (8th Fret)
             [8, 7, 0, 0, 8, 8],    // Full Shape (8th Fret)
             [-1, 15, 0, 0, 13, 0]  // A Shape (13th Fret)
+        ],
+        '6': [
+            [-1, 3, 2, 2, 1, 0],     // Bright Shape (No 5th)
+            [-1, 3, 5, 0, 5, 5],     // Drone Shape (3rd Fret)
+            [8, 0, 5, 5, 5, 5],      // E Shape (5th Fret) (Barre) #2
+            [8, 10, 7, 9, -1, -1],   // E Shape 6
+            [-1, -1, 10, 12, 10, 0], // Shell Shape (Full G)
+            [-1, -1, 10, 12, 10, 12] // Shell Shape (Wide)
         ]
     }
 };
@@ -263,14 +279,15 @@ window.chordDatabase = {
         '6': [
             { name: 'Open C6 Shape', desc: 'Sweet vintage 6th.', frets: [-1, 3, 2, 0, -1, 5], fingers: [-1, 2, 1, 0, -1, 3] },
             { name: 'Bright Shape (Nut)', desc: 'Open C6 with the high E string fretted.', frets: [-1, 3, 2, 2, 1, 3], fingers: [-1, 3, 2, 2, 1, 4] },
-            { name: 'Drone Shape (3rd Fret)', desc: 'Open G string as the 5th.', frets: [-1, 3, 5, 0, 5, 5], fingers: [-1, 1, 2, 0, 3, 3] },
+            { name: 'Bright Shape (No 5th)', desc: 'Same shape with the high E string open; the 5th is left out.', frets: [-1, 3, 2, 2, 1, 0], fingers: [-1, 4, 2, 3, 1, 0], manualFingers: true },
+            { name: 'Drone Shape (3rd Fret)', desc: 'Open G string as the 5th.', frets: [-1, 3, 5, 0, 5, 5], fingers: [-1, 1, 2, 0, 3, 4], manualFingers: true },
             { name: 'Airy Shape (8th Fret)', desc: '3-note voicing with open A and B strings.', frets: [8, 0, 7, 0, 8, 0], fingers: [2, 0, 1, 0, 3, 0] },
             { name: 'Airy Shape (Full A)', desc: 'Airy shape with the A string fretted instead of open.', frets: [8, 7, 7, 0, 8, 0], fingers: [3, 1, 2, 0, 4, 0] },
             { name: 'Airy Shape (Closed)', desc: 'Airy shape with the high E string also fretted.', frets: [8, 7, 7, 0, 8, 8], fingers: [2, 1, 1, 0, 3, 3] },
-            { name: 'Cluster Shape (8th Fret)', desc: '5-note voicing with the A string left open.', frets: [8, 0, 10, 9, 8, 8], fingers: [1, 0, 4, 3, 2, 2] },
+            { name: 'Cluster Shape (8th Fret)', desc: '5-note voicing with the A string left open.', frets: [8, 0, 10, 9, 8, 8], fingers: ['T', 0, 3, 2, 1, 1], manualFingers: true },
             { name: 'E Shape 6 (Full Barre)', desc: 'Full 6-string E-shape 6th barre.', frets: [8, 10, 10, 9, 10, 8], fingers: [1, 3, 3, 2, 4, 1] },
             { name: 'Open Shape (8th Fret)', desc: 'E-shape 6th with the A and B strings left open.', frets: [8, 0, 10, 0, 8, 0], fingers: [1, 0, 3, 0, 2, 0] },
-            { name: 'Open Shape (High E)', desc: 'Open shape with the G string fretted instead of open.', frets: [8, 0, 10, 9, 8, 0], fingers: [1, 0, 4, 3, 2, 0] },
+            { name: 'Open Shape (High E)', desc: 'Open shape with the G string fretted instead of open.', frets: [8, 0, 10, 9, 8, 0], fingers: ['T', 0, 3, 2, 1, 0], manualFingers: true },
             { name: 'Open Shape (High B)', desc: 'Open shape with the 6th voiced on the B string.', frets: [8, 0, 10, 0, 10, 0], fingers: [1, 0, 2, 0, 3, 0] },
             { name: 'E Shape 6', desc: '6th string root, no barre needed.', frets: [8, 10, 7, 9, -1, -1], fingers: [2, 4, 1, 3, -1, -1] },
             { name: 'D Shape 6 (No 5th)', desc: '4th string root, no barre needed.', frets: [8, 0, -1, -1, 8, 0], fingers: [1, 0, -1, -1, 2, 0] },
@@ -278,7 +295,7 @@ window.chordDatabase = {
             { name: 'Shell Shape (Full G)', desc: 'Shell shape with the G string fretted instead of open.', frets: [-1, -1, 10, 12, 10, 0], fingers: [-1, -1, 1, 3, 1, 0] },
             { name: 'Shell Shape (High E)', desc: 'Shell shape with the high E string fretted instead of open.', frets: [-1, -1, 10, 0, 10, 12], fingers: [-1, -1, 1, 0, 2, 3] },
             { name: 'Shell Shape (Wide)', desc: 'Shell shape with the G and high E strings both fretted.', frets: [-1, -1, 10, 12, 10, 12], fingers: [-1, -1, 1, 2, 1, 3] },
-            { name: 'Barre Shape (10th Fret)', desc: 'A/D-string barre with the 6th voiced on the B string.', frets: [8, 10, 10, 0, 10, 0], fingers: [1, 2, 2, 0, 3, 0] },
+            { name: 'Barre Shape (10th Fret)', desc: 'A/D-string barre with the 6th voiced on the B string.', frets: [8, 10, 10, 0, 10, 0], fingers: [1, 2, 3, 0, 4, 0], manualFingers: true },
             { name: 'Barre Shape (Full G)', desc: 'Barre shape with the G string fretted instead of open.', frets: [8, 10, 10, 9, 10, 0], fingers: [1, 3, 3, 2, 4, 0] }
         ],
         'm6': [
