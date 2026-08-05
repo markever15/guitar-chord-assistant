@@ -27,6 +27,7 @@ window.pinnedRepresentatives = {
             [-1, 3, 5, 5, 0, 0],    // Open Shape (Doubled Root)
             [-1, 3, 5, 4, 5, 3],    // Jazz Shape (3rd Fret)
             [8, 10, 10, 0, 0, 0],   // E Shape maj7 (Doubled Root)
+            [8, 10, 9, 9, 8, 8],    // E Shape maj7 (8th Fret)
             [-1, -1, 10, 0, 0, 12], // D Shape (10th Fret)
             [-1, 15, -1, 0, 0, 12]  // A Shape (12th Fret)
         ]
@@ -195,7 +196,7 @@ window.chordDatabase = {
             { name: 'Open Shape (Doubled Root)', desc: 'Open shape with the G string voicing the root.', frets: [-1, 3, 5, 5, 0, 0], fingers: [-1, 1, 2, 2, 0, 0] },
             { name: 'Spread Shape (7th Fret)', desc: 'Wide dominant-position maj7 voicing.', frets: [8, 7, 9, 0, 0, 7], fingers: [3, 1, 4, 0, 0, 2] },
             { name: 'Spread Shape (Open Top)', desc: 'Spread shape with the high E string left open.', frets: [8, 7, 9, 0, 0, 0], fingers: [2, 1, 3, 0, 0, 0] },
-            { name: 'E Shape maj7 (8th Fret)', desc: 'Full 6-string E-shape maj7 barre.', frets: [8, 10, 9, 9, 8, 8], fingers: [1, 3, 2, 2, 1, 1] },
+            { name: 'E Shape maj7 (8th Fret)', desc: 'Full 6-string E-shape maj7 barre.', frets: [8, 10, 9, 9, 8, 8], fingers: [1, 4, 2, 3, 1, 1], manualFingers: true },
             { name: 'E Shape maj7 (Open Top)', desc: 'E-shape maj7 with the G and high E strings left open.', frets: [8, 10, 9, 0, 8, 0], fingers: [1, 4, 3, 0, 2, 0] },
             { name: 'E Shape maj7 (High Open)', desc: 'E-shape maj7 with the high E string left open.', frets: [8, 10, 9, 9, 8, 0], fingers: [1, 3, 2, 2, 1, 0] },
             { name: 'E Shape maj7 (Open Triad)', desc: 'E-shape maj7 with the top three strings left open.', frets: [8, 10, 9, 0, 0, 0], fingers: [1, 3, 2, 0, 0, 0] },
