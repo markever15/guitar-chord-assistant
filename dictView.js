@@ -397,14 +397,16 @@ window.dictView = {
             });
         });
 
-        // 🌟 울리는 줄 사이에 뮤트가 낀 폼은 제외한다. 그 줄만 죽이면서 양옆을 짚는 게
-        //    사실상 불가능해서, 바레로 그리면 없는 음이 울리게 된다. (1번줄 뮤트 등 바깥쪽은 그대로 둔다)
+        // 🌟 중간 뮤트 자체는 dim·aug 같은 3화음에선 정상이라 남긴다. 다만 손가락을 나눠 짚는
+        //    규칙 배정이 실패하는 폼은 뮤트를 넘는 바레로만 그려지는데, 그러면 없는 음이 울린다.
         allVoicings = allVoicings.filter(v => {
             const first = v.frets.findIndex(f => f !== -1);
             if (first === -1) return false;
             const last = 5 - [...v.frets].reverse().findIndex(f => f !== -1);
-            for (let s = first + 1; s < last; s++) if (v.frets[s] === -1) return false;
-            return true;
+            let interiorMute = false;
+            for (let s = first + 1; s < last; s++) if (v.frets[s] === -1) { interiorMute = true; break; }
+            if (!interiorMute) return true;
+            return v.manualFingers || !!ruleBasedFingers(v.frets);
         });
 
         // 🌟 특정 코드에서 못 잡는(비현실적인) 파지법을 프렛 배열로 지정해 제외
