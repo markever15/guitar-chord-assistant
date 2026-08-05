@@ -498,6 +498,102 @@ window.dictView = {
     //      없으면 그냥 가장 낮은 포지션의 3~4줄짜리 폼으로 대체함.
     //    울리는 줄이 4개 미만인 얇은 폼은 open/A/E/D 넷에서는 전부 제외. 해당 종류가 아예 없으면 그
     //    항목만 건너뜀(예: 오픈코드가 없는 F#/C# 등은 open이 없음).
+    // 🌟 넥을 구간으로 나눠 구간마다 가장 좋은 폼을 하나씩 뽑는다. "좋다"의 기준은 두 가지 -
+    //    잡기 쉬울 것(손가락 배정이 되고, 벌림이 좁고, 중간 뮤트가 없을 것)과 소리가 풍부할 것
+    //    (울리는 줄이 많고, 구성음이 다 들어가고, 근음이 최저음일 것). 점수가 낮을수록 좋다.
+    POSITION_BANDS: [[0, 2], [3, 5], [6, 8], [9, 11], [12, 15]],
+
+    voicingScore: function(v, root, quality) {
+        const frets = v.frets;
+        const sounding = frets.filter(f => f >= 0);
+        const fretted = frets.filter(f => f > 0);
+        let score = 0;
+
+        // --- 소리의 풍부함 ---
+        score += (6 - sounding.length) * 12;   // 울리는 줄이 적을수록 손해
+
+        const wanted = (window.chordNotesTable[root] || {})[quality] || [];
+        if (wanted.length) {
+            const got = new Set();
+            frets.forEach((f, s) => {
+                if (f < 0) return;
+                const open = window.rootOffset[window.openStringNotes[5 - s]];
+                got.add(window.chromScale[(open + f) % 12]);
+            });
+            wanted.forEach(n => { if (!got.has(n)) score += 14; });   // 빠진 구성음마다 감점
+            const bassIdx = frets.findIndex(f => f >= 0);
+            if (bassIdx !== -1) {
+                const open = window.rootOffset[window.openStringNotes[5 - bassIdx]];
+                if (window.chromScale[(open + frets[bassIdx]) % 12] !== wanted[0]) score += 8;
+            }
+        }
+
+        // --- 잡기 쉬움 ---
+        if (fretted.length) {
+            const span = Math.max(...fretted) - Math.min(...fretted);
+            score += span <= 1 ? 0 : span === 2 ? 4 : span === 3 ? 16 : 36;
+        }
+        const first = frets.findIndex(f => f !== -1);
+        const last = 5 - [...frets].reverse().findIndex(f => f !== -1);
+        for (let s = first + 1; s < last; s++) if (frets[s] === -1) { score += 10; break; }
+        // 화면에 실제로 그려질 운지가 무리한지 본다 - 손가락이 모자라거나, 검지 아닌 손가락이
+        // 두 줄을 겹쳐 눌러야 하거나, 바레가 울리면 안 되는 줄을 지나가는 경우
+        const fingers = v.fingers || [];
+        const used = {};
+        let hard = false;
+        fingers.forEach((f, s) => {
+            if (frets[s] <= 0) return;
+            if (f === 'T') { if (frets[s] > 10) hard = true; return; }   // 엄지는 로우 포지션에서만
+            if (f > 4) hard = true;
+            used[f] = (used[f] || 0) + 1;
+        });
+        Object.keys(used).forEach(f => { if (f !== '1' && used[f] > 1) hard = true; });
+        const barred = [];
+        fingers.forEach((f, s) => { if (f === 1 && frets[s] > 0) barred.push(s); });
+        for (let s = barred[0] + 1; s < barred[barred.length - 1]; s++) {
+            if (frets[s] === -1 || frets[s] === 0) { hard = true; break; }
+        }
+        if (hard) score += 25;
+        if (fretted.length < 2) score += 20;   // 짚는 음이 하나뿐이면 포지션 폼이 아니다
+        if (frets.includes(0)) score -= 4;                 // 개방현은 잡기 쉽고 울림도 좋다
+        if (v._tier === 0 || v._tier === 1) score -= 6;    // 사람이 큐레이션한 폼 우대
+        return score;
+    },
+
+    getBalancedRepresentatives: function(voicings, root, quality) {
+        const picked = [];
+        this.POSITION_BANDS.forEach(([lo, hi]) => {
+            let best = null;
+            voicings.forEach((v, idx) => {
+                const activeFrets = v.frets.filter(f => f > 0);
+                const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
+                if (minFret < lo || minFret > hi) return;
+                if (v.frets.filter(f => f >= 0).length < 3) return;
+                const score = this.voicingScore(v, root, quality);
+                if (!best || score < best.score) best = { idx, minFret, score };
+            });
+            // 🌟 그 구간에 쓸 만한 폼이 없으면 억지로 채우지 않고 건너뛴다
+            if (best && best.score <= 32) picked.push(best);
+        });
+
+        // 🌟 구간 기준만으로 3개가 안 되면(확장 코드처럼 폼 자체가 적은 경우) 구간을 무시하고
+        //    점수순으로 채운다 - 대표 칸이 비어 보이는 것보다는 낫다
+        if (picked.length < 3) {
+            const taken = new Set(picked.map(c => c.idx));
+            voicings.map((v, idx) => {
+                const activeFrets = v.frets.filter(f => f > 0);
+                return { idx, minFret: activeFrets.length ? Math.min(...activeFrets) : 0,
+                    score: this.voicingScore(v, root, quality), sounding: v.frets.filter(f => f >= 0).length };
+            })
+                .filter(c => !taken.has(c.idx) && c.sounding >= 3)
+                .sort((a, b) => a.score - b.score)
+                .slice(0, 3 - picked.length)
+                .forEach(c => picked.push(c));
+            picked.sort((a, b) => a.minFret - b.minFret);
+        }
+        return picked;
+    },
+
     getShapeRepresentatives: function(voicings, root, quality) {
         // 🌟 직접 지정한 대표가 있으면 자동 선정을 건너뛴다
         const pinned = (window.pinnedRepresentatives && window.pinnedRepresentatives[root]
@@ -513,6 +609,9 @@ window.dictView = {
             });
             if (list.length) return { pinned: list };
         }
+
+        const balanced = this.getBalancedRepresentatives(voicings, root, quality);
+        if (balanced.length) return { pinned: balanced };
 
         const result = { open: null, aShape: null, eShape: null, dShape: null, compact: null };
         // rank 배열은 앞자리일수록 중요 - 작을수록 우선.
@@ -601,6 +700,15 @@ window.dictView = {
         return result;
     },
 
+    // 🌟 좁은 화면에서 "고르는 화면 / 코드 보는 화면"을 전환한다. 넓은 화면에선 클래스가 붙어도
+    //    CSS가 무시하므로 둘 다 그대로 보인다.
+    syncMobilePane: function() {
+        const layout = document.querySelector('.dict-layout');
+        if (!layout) return;
+        const picked = !!(window.currentRoot && window.currentQuality);
+        layout.classList.toggle('mobile-results', picked && !window.dictShowPicker);
+    },
+
     // 현재 재생/하이라이트의 기준이 되는 보이싱: 슬래시 코드가 선택돼 있으면 그게 우선, 아니면 메인 리스트의 선택된 인덱스
     getActiveVoicing: function() {
         if (window.selectedSlashVoicing) return window.selectedSlashVoicing;
@@ -611,6 +719,7 @@ window.dictView = {
 
     renderAll: function() {
         const formulaTitle = document.getElementById('formula-title');
+        this.syncMobilePane();
 
         if (!window.currentRoot || !window.currentQuality) {
             if (formulaTitle) formulaTitle.textContent = "Select a Chord";
@@ -719,7 +828,12 @@ window.dictView = {
 
         // 🌟 직접 지정한 대표는 지정한 순서 그대로, 라벨도 폼 이름을 쓴다
         const groups = categories.pinned
-            ? categories.pinned.map((c, i) => ({ key: 'pinned' + i, label: this.displayName(voicings[c.idx].name), pin: c }))
+            ? categories.pinned.map((c, i) => ({
+                key: 'pinned' + i,
+                // 같은 폼 이름이 여러 포지션에서 나오므로 프렛을 붙여 구분한다
+                label: this.displayName(voicings[c.idx].name) + (c.minFret > 0 ? ` · ${c.minFret}fr` : ''),
+                pin: c
+            }))
             : [
             { key: 'open', label: 'Open Position' },
             { key: 'aShape', label: '5th-String Root (A Shape)' },
@@ -1041,6 +1155,7 @@ window.addEventListener('DOMContentLoaded', () => {
             b.onclick = () => {
                 if (window.currentRoot === item.note) { window.currentRoot = null; }
                 else { window.currentRoot = item.note; }
+                window.dictShowPicker = false;
                 window.currentVoicingIndex = 0;
                 window.showAllVoicings = false;
                 window.selectedSlashVoicing = null;
@@ -1104,6 +1219,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 b.onclick = () => {
                     if (window.currentQuality === q) { window.currentQuality = null; }
                     else { window.currentQuality = q; }
+                    window.dictShowPicker = false;
                     window.currentVoicingIndex = 0;
                     window.showAllVoicings = false;
                     window.selectedSlashVoicing = null;
@@ -1138,6 +1254,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     const showBtn = document.getElementById('show-all-btn');
+    const backBtn = document.getElementById('dict-back-btn');
+    if (backBtn) backBtn.onclick = () => {
+        window.dictShowPicker = true;
+        window.dictView.syncMobilePane();
+        window.scrollTo({ top: 0 });
+    };
+
     if (showBtn) showBtn.onclick = () => { window.showAllNotesState = !window.showAllNotesState; showBtn.classList.toggle('active', window.showAllNotesState); showBtn.innerText = window.showAllNotesState ? "Hide Notes" : "Show Notes"; window.dictView.renderAll(); };
 
     const voicingAllBtn = document.getElementById('voicing-all-btn');

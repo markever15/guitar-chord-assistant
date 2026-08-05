@@ -177,14 +177,44 @@ button.active { background-color: var(--accent-color); color: white; }
 
 /* 🌟 모바일/좁은 화면: 좌우로 나란히 있던 패널을 세로로 쌓고, 프렛보드는 폭을 줄이는 대신
    .fretboard-scroll 안에서 가로 스크롤되게 해서 프렛 하나하나는 계속 탭하기 편한 크기를 유지함 */
+.rotate-hint { display: none; }
+.dict-back-btn { display: none; }
+
 @media (max-width: 900px) {
     body { padding: 10px; }
     .container { padding: 16px; }
 
     .dict-layout { flex-direction: column; }
-    .left-panel { min-width: 0; width: 100%; }
+    /* 🌟 sticky를 풀어주지 않으면 세로로 쌓인 뒤에도 선택 패널이 화면에 붙어 따라다니면서
+       아래 코드 카드를 가린다 */
+    .left-panel { min-width: 0; width: 100%; position: static; }
     .right-panel { min-width: 0; width: 100%; position: static; }
+
+    /* 🌟 좁은 화면에선 "고르는 화면"과 "코드 보는 화면"을 한 번에 하나씩만 보여준다 */
+    .dict-layout:not(.mobile-results) .right-panel { display: none; }
+    .dict-layout.mobile-results .left-panel { display: none; }
+    .dict-layout.mobile-results .dict-back-btn {
+        display: block; width: 100%; margin-bottom: 14px; padding: 10px;
+        background: #2d313f; color: var(--text-light); border: 1px solid #3e4452;
+        border-radius: 6px; font-size: 0.9rem; font-weight: bold; cursor: pointer;
+    }
 
     .finder-layout { flex-direction: column; }
     .finder-board-col, .finder-result-col { min-width: 0; width: 100%; }
+}
+
+/* 🌟 세로로 들고 있으면 프렛 하나가 손가락보다 좁아진다 - 가로로 돌리라고 알려줌 */
+@media (max-width: 900px) and (orientation: portrait) {
+    .rotate-hint {
+        display: block; margin: 0 0 14px 0; padding: 10px 12px;
+        background: #2d313f; border: 1px solid #3e4452; border-radius: 6px;
+        font-size: 0.85rem; color: #abb2bf;
+    }
+}
+
+/* 가로로 돌렸을 때는 지판이 화면 폭을 최대한 쓰게 한다 */
+@media (max-width: 900px) and (orientation: landscape) {
+    body { padding: 6px; }
+    .container { padding: 10px; }
+    .fretboard, .fret-numbers { min-width: 0; }
 }
