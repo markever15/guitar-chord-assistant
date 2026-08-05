@@ -91,16 +91,27 @@ function ruleBasedFingers(frets) {
     const levels = [...new Set(fretted.map(x => x.f))].sort((a, b) => a - b);
     const out = frets.map(f => (f === -1 ? -1 : 0));
     let prev = 0;
+    let firstRun = true;
     for (const level of levels) {
         const strings = fretted.filter(x => x.f === level).map(x => x.s).sort((a, b) => a - b);
-        if (level === lowest) { strings.forEach(s => { out[s] = 1; }); prev = 1; continue; }
-        const gap = level - lowest;
-        const wanted = gap === 1 ? 2 : gap === 2 ? 3 : 4;
-        // 같은 프렛의 줄 수만큼 연달아 써야 하므로 시작 손가락을 그만큼 앞당긴다
-        let base = Math.max(Math.min(wanted, 4 - (strings.length - 1)), prev + 1);
-        if (base + strings.length - 1 > 4) return null;
-        strings.forEach((s, i) => { out[s] = base + i; });
-        prev = base + strings.length - 1;
+        // 한 손가락으로 묶으려면 줄이 실제로 붙어 있어야 한다. 사이에 뮤트/개방현이 끼면
+        // 바레했을 때 그 줄까지 눌려버리므로 따로 짚는다.
+        const runs = [];
+        strings.forEach(s => {
+            const last = runs[runs.length - 1];
+            if (last && last[last.length - 1] === s - 1) last.push(s);
+            else runs.push([s]);
+        });
+        for (const run of runs) {
+            if (firstRun) { run.forEach(s => { out[s] = 1; }); prev = 1; firstRun = false; continue; }
+            const gap = level - lowest;
+            const wanted = level === lowest ? prev + 1 : (gap === 1 ? 2 : gap === 2 ? 3 : 4);
+            // 같은 프렛의 줄 수만큼 연달아 써야 하므로 시작 손가락을 그만큼 앞당긴다
+            const base = Math.max(Math.min(wanted, 4 - (run.length - 1)), prev + 1);
+            if (base + run.length - 1 > 4) return null;
+            run.forEach((s, i) => { out[s] = base + i; });
+            prev = base + run.length - 1;
+        }
     }
     return out;
 }
@@ -384,6 +395,16 @@ window.dictView = {
                     allVoicings.push(result);
                 }
             });
+        });
+
+        // 🌟 울리는 줄 사이에 뮤트가 낀 폼은 제외한다. 그 줄만 죽이면서 양옆을 짚는 게
+        //    사실상 불가능해서, 바레로 그리면 없는 음이 울리게 된다. (1번줄 뮤트 등 바깥쪽은 그대로 둔다)
+        allVoicings = allVoicings.filter(v => {
+            const first = v.frets.findIndex(f => f !== -1);
+            if (first === -1) return false;
+            const last = 5 - [...v.frets].reverse().findIndex(f => f !== -1);
+            for (let s = first + 1; s < last; s++) if (v.frets[s] === -1) return false;
+            return true;
         });
 
         // 🌟 특정 코드에서 못 잡는(비현실적인) 파지법을 프렛 배열로 지정해 제외
