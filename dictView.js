@@ -77,6 +77,36 @@ const CHORD_SEARCH_QUALITY_ALIASES = {
 //   - 규칙: 프렛이 낮고 6번줄(인덱스 0)에 가까울수록 낮은 번호
 //   - 최저 프렛의 줄들은 검지(1) 바레. 단, 바레 양 끝 사이에 '개방현'이 있으면 바레 불가 → 각자 다른 손가락
 //   - 나머지 눌러야 할 줄은 프렛 오름차순, 같은 프렛이면 6번줄 우선으로 2·3·4 배정 (같은 프렛이어도 다른 손가락)
+// 🌟 손가락을 "검지에서 몇 프렛 떨어졌나"로 고르는 배치. computeFingers보다 규칙이 단순한 대신,
+//    사람이 실제로 잡는 방식에 더 가깝게 나온다 - 같은 프렛에 여러 줄이 있어도 한 손가락으로
+//    뭉개지 않고 3,4처럼 나눠 쓰고, 3프렛 이상 떨어진 음은 약지 대신 새끼로 간다.
+//    손가락이 모자라면 null을 돌려주고, 그런 폼은 computeFingers 결과를 그대로 쓴다(엄지가 필요한
+//    자리들이 여기 걸린다).
+//    C의 Major/m/5/aug는 사람이 하나씩 확인해 손으로 지정해둔 구간이라 이 배치를 적용하지 않는다.
+function ruleBasedFingers(frets) {
+    const fretted = [];
+    frets.forEach((f, s) => { if (f > 0) fretted.push({ s, f }); });
+    if (!fretted.length) return null;
+    const lowest = Math.min(...fretted.map(x => x.f));
+    const levels = [...new Set(fretted.map(x => x.f))].sort((a, b) => a - b);
+    const out = frets.map(f => (f === -1 ? -1 : 0));
+    let prev = 0;
+    for (const level of levels) {
+        const strings = fretted.filter(x => x.f === level).map(x => x.s).sort((a, b) => a - b);
+        if (level === lowest) { strings.forEach(s => { out[s] = 1; }); prev = 1; continue; }
+        const gap = level - lowest;
+        const wanted = gap === 1 ? 2 : gap === 2 ? 3 : 4;
+        // 같은 프렛의 줄 수만큼 연달아 써야 하므로 시작 손가락을 그만큼 앞당긴다
+        let base = Math.max(Math.min(wanted, 4 - (strings.length - 1)), prev + 1);
+        if (base + strings.length - 1 > 4) return null;
+        strings.forEach((s, i) => { out[s] = base + i; });
+        prev = base + strings.length - 1;
+    }
+    return out;
+}
+
+const HAND_CHECKED_QUALITIES = new Set(['Major', 'm', '5', 'aug']);
+
 function computeFingers(frets) {
     const fretted = [];
     frets.forEach((f, s) => { if (f > 0) fretted.push({ s, f }); });
@@ -361,6 +391,15 @@ window.dictView = {
         if (excluded.length) {
             const exSet = new Set(excluded.map(f => f.join(',')));
             allVoicings = allVoicings.filter(v => !exSet.has(v.frets.join(',')));
+        }
+
+        // 🌟 손으로 확인한 구간을 뺀 나머지는 규칙 기반 배치로 손가락을 다시 매긴다
+        if (!HAND_CHECKED_QUALITIES.has(quality)) {
+            allVoicings.forEach(v => {
+                if (v.manualFingers) return;
+                const rf = ruleBasedFingers(v.frets);
+                if (rf) { v.fingers = rf; v.manualFingers = true; }
+            });
         }
 
         // 🌟 대표 폼 선정에 쓸 원래 생성 순서를 기록해둠 (지정 파지법 원본 → 지정 파지법 옥타브 이동분 →
