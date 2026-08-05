@@ -862,7 +862,12 @@ window.dictView = {
                 dot.style.left = `${(s / 5) * 100}%`;
                 dot.style.top = `${((rowIdx + 0.5) / numRows) * 100}%`;
                 const fingerVal = fingers[s];
-                dot.textContent = window.showAllNotesState ? noteName : (fingerVal > 0 ? fingerVal : '');
+                // 🌟 fingerVal이 'T'면 엄지로 감아 잡는 자리. 6번줄을 엄지로 눌러 검지를 비워야만
+                //    잡히는 폼이 있어서(예: C5 [8,10,10,0,8,8] - 3번줄 개방을 살리려면 6번줄 8프렛을
+                //    바레에 넣을 수 없음) 손가락 번호와 함께 표기한다.
+                dot.textContent = window.showAllNotesState ? noteName
+                    : (fingerVal === 'T' ? 'T' : (fingerVal > 0 ? fingerVal : ''));
+                if (fingerVal === 'T') dot.classList.add('thumb');
                 grid.appendChild(dot);
             }
         }

@@ -139,6 +139,7 @@ button.active { background-color: var(--accent-color); color: white; }
 .v-barre-bar { position: absolute; height: 18px; margin-top: -9px; background: var(--highlight-color); opacity: 0.4; border-radius: 8px; z-index: 1; }
 .v-dot { position: absolute; width: 18px; height: 18px; margin-left: -9px; margin-top: -9px; border-radius: 50%; background: var(--highlight-color); color: #1a1c23; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.65rem; z-index: 2; }
 .v-dot.root { background: var(--accent-color); color: #fff; }
+.v-dot.thumb { background: #61afef; color: #12141a; }
 .v-dot.highlighted-marker { box-shadow: 0 0 0 3px rgba(255,255,255,0.6); }
 
 /* 슬래시 코드 / 진행 패널 */
