@@ -55,6 +55,23 @@ window.pinnedRepresentatives = {
             [8, 7, 0, 0, 8, 8],    // Full Shape (8th Fret)
             [-1, 15, 0, 0, 13, 0]  // A Shape (13th Fret)
         ],
+        'm': [
+            [-1, 3, 1, 0, -1, -1],   // A Shape (1st Fret)
+            [-1, 3, 5, 5, 4, -1],    // Cm (Muted)
+            [-1, 3, 5, 5, 4, 3],     // A Shape m (3rd Fret)
+            [8, 10, 10, 8, 8, 8],    // E Shape m (8th Fret)
+            [-1, -1, 10, 8, 8, -1],  // D Shape m
+            [-1, -1, 10, 12, -1, 11],// High Shape (10th Fret)
+            [-1, 15, 13, 0, -1, -1]  // A Shape (13th Fret)
+        ],
+        '5': [
+            [-1, 3, -1, 0, 1, -1],   // A Shape (1st Fret)
+            [-1, 3, 5, 5, -1, -1],   // A5 Shape (3rd Fret)
+            [-1, 3, 5, 5, -1, 3],    // Layered Shape (3rd Fret)
+            [-1, -1, 10, -1, 8, -1], // D Shape 5
+            [-1, -1, 10, 12, 13, -1],// D Shape (10th Fret) #2
+            [-1, 15, -1, 0, 13, -1]  // A Shape (13th Fret)
+        ],
         '6': [
             [-1, 3, 2, 2, 1, 0],     // Bright Shape (No 5th)
             [-1, 3, 5, 0, 5, 5],     // Drone Shape (3rd Fret)

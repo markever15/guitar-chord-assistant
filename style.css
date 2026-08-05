@@ -132,6 +132,7 @@ button.active { background-color: var(--accent-color); color: white; }
 .v-top-border { width: 116px; height: 1px; background: var(--fret-color); margin-bottom: 1px; }
 
 .v-grid-wrap { position: relative; display: flex; align-items: flex-start; }
+.v-grid-stack { display: flex; flex-direction: column; }
 .v-position-label { font-size: 0.75rem; color: #828997; font-weight: bold; margin-right: 4px; }
 .v-grid { position: relative; width: 116px; }
 .v-string-line { position: absolute; top: 0; bottom: 0; width: 1px; background: #4b5263; }

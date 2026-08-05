@@ -999,12 +999,15 @@ window.dictView = {
             else if (frets[s] === 0) { cell.textContent = 'O'; cell.classList.add('open'); cell.dataset.note = window.getNoteName(5 - s, 0); }
             legend.appendChild(cell);
         }
-        diagram.appendChild(legend);
-
-        diagram.appendChild(document.createElement('div')).className = isNut ? 'v-nut-bar' : 'v-top-border';
-
         const gridWrap = document.createElement('div');
         gridWrap.className = 'v-grid-wrap';
+
+        // 🌟 X/O 줄과 너트 바는 반드시 그리드와 같은 열에 있어야 한다. 예전엔 diagram 바로 밑에
+        //    붙어 있어서, 프렛 번호 라벨이 그리드만 오른쪽으로 밀 때 줄 위치가 어긋났다.
+        const stack = document.createElement('div');
+        stack.className = 'v-grid-stack';
+        stack.appendChild(legend);
+        stack.appendChild(document.createElement('div')).className = isNut ? 'v-nut-bar' : 'v-top-border';
 
         if (!isNut) {
             const posLabel = document.createElement('div');
@@ -1071,7 +1074,8 @@ window.dictView = {
             }
         }
 
-        gridWrap.appendChild(grid);
+        stack.appendChild(grid);
+        gridWrap.appendChild(stack);
         diagram.appendChild(gridWrap);
         card.appendChild(diagram);
 
