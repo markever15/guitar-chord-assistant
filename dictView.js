@@ -498,7 +498,22 @@ window.dictView = {
     //      없으면 그냥 가장 낮은 포지션의 3~4줄짜리 폼으로 대체함.
     //    울리는 줄이 4개 미만인 얇은 폼은 open/A/E/D 넷에서는 전부 제외. 해당 종류가 아예 없으면 그
     //    항목만 건너뜀(예: 오픈코드가 없는 F#/C# 등은 open이 없음).
-    getShapeRepresentatives: function(voicings) {
+    getShapeRepresentatives: function(voicings, root, quality) {
+        // 🌟 직접 지정한 대표가 있으면 자동 선정을 건너뛴다
+        const pinned = (window.pinnedRepresentatives && window.pinnedRepresentatives[root]
+            && window.pinnedRepresentatives[root][quality]) || null;
+        if (pinned) {
+            const list = [];
+            pinned.forEach(frets => {
+                const key = frets.join(',');
+                const idx = voicings.findIndex(v => v.frets.join(',') === key);
+                if (idx === -1) return;
+                const activeFrets = voicings[idx].frets.filter(f => f > 0);
+                list.push({ idx, minFret: activeFrets.length ? Math.min(...activeFrets) : 0 });
+            });
+            if (list.length) return { pinned: list };
+        }
+
         const result = { open: null, aShape: null, eShape: null, dShape: null, compact: null };
         // rank 배열은 앞자리일수록 중요 - 작을수록 우선.
         const rankOf = (v, candidate, key) => {
@@ -615,8 +630,11 @@ window.dictView = {
 
         this.renderChordFormula();
 
-        const categories = this.getShapeRepresentatives(voicings);
-        const repIndices = [categories.open, categories.aShape, categories.eShape, categories.dShape, categories.compact].filter(Boolean).map(c => c.idx);
+        const categories = this.getShapeRepresentatives(voicings, window.currentRoot, window.currentQuality);
+        const repIndices = (categories.pinned
+            ? categories.pinned
+            : [categories.open, categories.aShape, categories.eShape, categories.dShape, categories.compact]
+        ).filter(Boolean).map(c => c.idx);
         const allBtn = document.getElementById('voicing-all-btn');
         if (allBtn) {
             if (repIndices.length < voicings.length) {
@@ -699,7 +717,10 @@ window.dictView = {
         list.classList.remove('v-position-group-col');
         list.classList.add('v-shape-group-row');
 
-        const groups = [
+        // 🌟 직접 지정한 대표는 지정한 순서 그대로, 라벨도 폼 이름을 쓴다
+        const groups = categories.pinned
+            ? categories.pinned.map((c, i) => ({ key: 'pinned' + i, label: this.displayName(voicings[c.idx].name), pin: c }))
+            : [
             { key: 'open', label: 'Open Position' },
             { key: 'aShape', label: '5th-String Root (A Shape)' },
             { key: 'eShape', label: '6th-String Root (E Shape)' },
@@ -708,15 +729,17 @@ window.dictView = {
         ];
 
         // 🌟 항상 넥 아래쪽(낮은 프렛)부터 나열 - 카테고리 종류 순서가 아니라 실제 대표 폼의 최저 프렛 기준
-        groups.sort((a, b) => {
-            const fa = categories[a.key] ? categories[a.key].minFret : Infinity;
-            const fb = categories[b.key] ? categories[b.key].minFret : Infinity;
-            return fa - fb;
-        });
+        if (!categories.pinned) {
+            groups.sort((a, b) => {
+                const fa = categories[a.key] ? categories[a.key].minFret : Infinity;
+                const fb = categories[b.key] ? categories[b.key].minFret : Infinity;
+                return fa - fb;
+            });
+        }
 
         let any = false;
         groups.forEach(g => {
-            const candidate = categories[g.key];
+            const candidate = g.pin || categories[g.key];
             if (!candidate) return;
             any = true;
             const idx = candidate.idx;
