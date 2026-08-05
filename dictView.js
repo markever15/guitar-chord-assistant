@@ -176,7 +176,11 @@ function computeFingers(frets) {
     //    🌟 여기서도 최저 프렛을 기준으로 삼아 간격에 맞는 손가락을 고른다. 예전엔 기준 없이 프렛
     //    순서대로 1,2,3을 붙여서, 10·11·13프렛처럼 벌어진 폼이 새끼손가락을 놀리고 약지로 3프렛을
     //    벌리는(1,2,3) 운지로 나왔다. 기준을 주면 1,2,4가 되어 실제로 짚는 방식과 맞는다.
-    const assigned2 = assignSequential(findGroups(fretted), 1, F);
+    //    단 프렛 단계가 둘뿐이면 이 표를 쓰면 안 된다. 표는 손가락을 일부러 건너뛰어(3번을 비우고
+    //    먼 음에 4번을 보내는 식) 중간 음 자리를 만들어주려는 것인데, 자리가 둘뿐이면 비워둘 이유가
+    //    없다. Bm7의 [7,x,7,7,7,5]가 그랬다 - 7프렛 네 줄이 기준(5프렛)에서 2프렛 떨어졌다고
+    //    약지를 배정받아, 중지를 놀리고 약지를 눕혀 네 줄을 누르는 모양이 됐다.
+    const assigned2 = assignSequential(findGroups(fretted), 1, distinctFrets.length >= 3 ? F : undefined);
     if (assigned2) {
         const result = frets.map(f => (f === -1 ? -1 : 0));
         Object.keys(assigned2).forEach(s => { result[s] = assigned2[s]; });
