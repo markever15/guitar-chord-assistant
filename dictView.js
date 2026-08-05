@@ -310,10 +310,13 @@ window.dictView = {
                 }
             }
 
+            // 🌟 손으로 지정한 운지(manualFingers)는 옮겨도 모양이 그대로라 손가락도 그대로 쓴다.
+            //    이걸 안 넘기면 수록 파지법에 박아둔 운지가 여기서 자동 계산으로 덮여버린다.
             return {
                 name: nameSuffix,
                 frets: shiftedFrets,
-                fingers: shiftedFingers
+                fingers: v.manualFingers ? v.fingers.slice() : shiftedFingers,
+                manualFingers: !!v.manualFingers
             };
         };
 
