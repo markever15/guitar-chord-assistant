@@ -658,7 +658,7 @@ window.dictView = {
                 window.currentVoicingIndex = idx;
                 window.selectedSlashVoicing = null;
                 this.renderAll();
-            });
+            }, this.shapeGroupLabel(v.name));
             group.appendChild(card);
             list.appendChild(group);
         });
@@ -713,8 +713,39 @@ window.dictView = {
         document.querySelectorAll('#tab-dictionary .v-legend-cell.highlighted-open').forEach(cell => cell.classList.remove('highlighted-open'));
     },
 
+    // 🌟 카드에 찍을 이름은 저장된 이름에서 군더더기를 걷어낸 것. 프렛 위치는 다이어그램의 포지션
+    //    라벨과 목록의 "FRETS N-M" 헤더에 이미 있어서 이름에 또 넣으면 중복이고, "#3"이나 "(Auto)"는
+    //    같은 폼끼리 구분하려고 붙인 내부 표시라 화면에서는 의미가 없다.
+    //    저장된 이름 자체는 그대로 둔다 - 대표 폼 선정(namedShapeMatch)과 중복 판정이 쓰고 있음.
+    displayName: function(name) {
+        const cleaned = name
+            .replace(/\s*\(\d+(?:st|nd|rd|th) Fret\)/g, '')
+            .replace(/\s*\(Auto\)/g, '')
+            .replace(/\s*#\d+/g, '')
+            .replace(/\s*\(Barre\)/g, ' \u00b7 Barre')
+            .replace(/\s+/g, ' ')
+            .trim();
+        return cleaned || name;
+    },
+
+    // 🌟 대표 폼 화면은 카드마다 "5TH-STRING ROOT (A SHAPE)" 같은 카테고리 헤더가 이미 붙는다.
+    //    거기서 카드 이름까지 "A Shape"라고 쓰면 같은 말을 두 번 하는 셈이고, 컴팩트 자리에 A 폼이
+    //    뽑히기라도 하면 헤더와 카드가 서로 다른 말을 하는 것처럼 보인다. 그래서 이 화면에서는
+    //    헤더가 못 담는 것(바레 여부, 사람이 붙인 고유 이름)만 남기고 폼 종류는 지운다.
+    //    전체 목록은 헤더가 "FRETS 3-5"라 폼 종류를 알려주지 않으므로 displayName을 그대로 쓴다.
+    shapeGroupLabel: function(name) {
+        const shown = this.displayName(name);
+        if (/^(?:[A-G]#?b?) Shape(?: \u00b7 Barre)?$/.test(shown)) {
+            return /\u00b7 Barre$/.test(shown) ? 'Barre' : '';
+        }
+        if (/^(?:Shell|Open Position)$/.test(shown)) return '';
+        // "F#m7b5 (E Shape)"처럼 자동 생성 이름은 코드명 + 폼 종류라 헤더와 겹친다
+        if (/^\S+ \((?:[A-G]#?b?\d*) Shape\)$/.test(shown)) return '';
+        return shown;
+    },
+
     // 표준 세로형 코드 다이어그램(줄=세로, 프렛=가로) 카드 하나를 만들어 반환
-    renderVerticalDiagram: function(voicing, isActive, onSelect) {
+    renderVerticalDiagram: function(voicing, isActive, onSelect, nameOverride) {
         const frets = voicing.frets;
         // 🌟 저장된 fingers 대신 항상 규칙 기반으로 계산 → 전체 코드 손가락 번호 일관성 보장
         // (바레로도 4손가락 안에 못 들어가는 예외적인 기존 데이터가 있을 경우를 대비한 안전장치)
@@ -736,7 +767,9 @@ window.dictView = {
 
         const nameEl = document.createElement('div');
         nameEl.className = 'v-chord-name';
-        nameEl.textContent = voicing.name;
+        nameEl.textContent = nameOverride !== undefined ? nameOverride : this.displayName(voicing.name);
+        // 줄인 이름만으론 어떤 폼인지 못 좁힐 때가 있어 원본은 툴팁으로 남겨둠
+        if (nameEl.textContent !== voicing.name) nameEl.title = voicing.name;
         card.appendChild(nameEl);
 
         const diagram = document.createElement('div');
