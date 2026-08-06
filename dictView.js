@@ -353,11 +353,15 @@ window.dictView = {
 
             // 🌟 손으로 지정한 운지(manualFingers)는 옮겨도 모양이 그대로라 손가락도 그대로 쓴다.
             //    이걸 안 넘기면 수록 파지법에 박아둔 운지가 여기서 자동 계산으로 덮여버린다.
+            //    단 옥타브로 올리면 개방현이 짚는 음으로 바뀌는데, 그 자리 손가락 번호는 0(개방)인
+            //    채로 남아 번호 없는 점이 그려졌다. 짚고/안 짚고가 달라지면 자동 계산으로 넘긴다.
+            const shapeKept = v.manualFingers &&
+                v.frets.every((f, s) => (f > 0) === (shiftedFrets[s] > 0));
             return {
                 name: nameSuffix,
                 frets: shiftedFrets,
-                fingers: v.manualFingers ? v.fingers.slice() : shiftedFingers,
-                manualFingers: !!v.manualFingers
+                fingers: shapeKept ? v.fingers.slice() : shiftedFingers,
+                manualFingers: !!shapeKept
             };
         };
 
