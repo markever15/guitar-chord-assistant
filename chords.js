@@ -124,6 +124,13 @@ window.pinnedRepresentatives = {
         ]
     },
     'D': {
+        'dim': [
+            [-1, -1, 0, 1, 3, 1],     // D Shape (1st Fret) (Barre)
+            [-1, 5, 3, -1, 6, 4],     // A Shape (3rd Fret) #2
+            [10, 8, -1, -1, 9, -1],   // E Shape (8th Fret) #2
+            [-1, -1, 12, 10, 9, -1],  // Ddim (Cdim Shape)
+            [-1, -1, 12, 13, -1, 13]  // D Shape (12th Fret)
+        ],
         'aug': [
             [-1, -1, 0, 3, 3, 2],     // Daug Shape
             [-1, 5, 4, 3, 3, -1],     // A Shape (3rd Fret) #3
