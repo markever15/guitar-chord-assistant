@@ -167,13 +167,22 @@ window.recogView = {
 
         const uniqueUserNotes = [...new Set(detectedNotes)].sort();
         if (uniqueUserNotes.length === 0) {
-            document.getElementById('recog-detected-name').textContent = "Unknown";
+            const nameEl = document.getElementById('recog-detected-name');
+            nameEl.textContent = "Unknown";
+            nameEl.translate = true;
             document.getElementById('recog-detected-notes').textContent = "Notes: None";
             document.getElementById('analysis-status').textContent = "Click frets to begin detection.";
             return;
         }
 
-        document.getElementById('recog-detected-notes').textContent = `Notes: ${uniqueUserNotes.join(', ')}`;
+        // 🌟 "Notes:"는 번역돼도 되지만 음 이름은 기보라 그대로 둬야 한다
+        const notesEl = document.getElementById('recog-detected-notes');
+        notesEl.textContent = 'Notes: ';
+        const notesVal = document.createElement('span');
+        notesVal.className = 'notranslate';
+        notesVal.translate = false;
+        notesVal.textContent = uniqueUserNotes.join(', ');
+        notesEl.appendChild(notesVal);
         const table = window.chordNotesTable || {};
         let matchedChordName = "Unknown";
         
@@ -214,7 +223,9 @@ window.recogView = {
             document.getElementById('analysis-status').textContent = "🤔 Notes don't match any standard chord perfectly.";
         }
 
-        document.getElementById('recog-detected-name').textContent = matchedChordName;
+        const detectedEl = document.getElementById('recog-detected-name');
+        detectedEl.translate = false;   // 코드 이름은 번역 대상이 아니다
+        detectedEl.textContent = matchedChordName;
     }
 };
 

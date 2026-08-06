@@ -722,7 +722,7 @@ window.dictView = {
         this.syncMobilePane();
 
         if (!window.currentRoot || !window.currentQuality) {
-            if (formulaTitle) formulaTitle.textContent = "Select a Chord";
+            if (formulaTitle) { formulaTitle.textContent = "Select a Chord"; formulaTitle.translate = true; }
             document.getElementById('notes-badges').innerHTML = '';
             this.renderVerticalVoicingGrid('voicing-list', [], 'Pick a root note and chord quality to see every practical voicing.');
             this.renderSlashChordShelf(null, null);
@@ -732,6 +732,7 @@ window.dictView = {
         const voicings = this.getChordVoicings(window.currentRoot, window.currentQuality);
 
         if (formulaTitle) {
+            formulaTitle.translate = false;   // 여기부턴 코드 이름이라 번역되면 안 된다
             formulaTitle.textContent = window.selectedSlashVoicing
                 ? `${window.selectedSlashVoicing.name}`
                 : `${window.currentRoot}${window.currentQuality === 'Major' ? '' : window.currentQuality}`;
@@ -897,7 +898,8 @@ window.dictView = {
 
         notes.forEach((note, idx) => {
             const badge = document.createElement('div');
-            badge.className = `note-badge ${idx === 0 ? 'is-root' : ''}`;
+            badge.className = `note-badge notranslate ${idx === 0 ? 'is-root' : ''}`;
+        badge.translate = false;
             badge.textContent = note;
             badge.onmouseenter = () => this.highlightSoundingNotes(note);
             badge.onmouseleave = () => this.clearHighlights();
@@ -980,7 +982,8 @@ window.dictView = {
         card.className = `v-chord-card ${isActive ? 'active' : ''}`;
 
         const nameEl = document.createElement('div');
-        nameEl.className = 'v-chord-name';
+        nameEl.className = 'v-chord-name notranslate';
+        nameEl.translate = false;
         nameEl.textContent = nameOverride !== undefined ? nameOverride : this.displayName(voicing.name);
         // 줄인 이름만으론 어떤 폼인지 못 좁힐 때가 있어 원본은 툴팁으로 남겨둠
         if (nameEl.textContent !== voicing.name) nameEl.title = voicing.name;
@@ -1062,7 +1065,8 @@ window.dictView = {
                 if (rowIdx < 0 || rowIdx >= numRows) continue;
                 const noteName = window.getNoteName(5 - s, fret);
                 const dot = document.createElement('div');
-                dot.className = `v-dot ${noteName === window.currentRoot ? 'root' : ''}`;
+                dot.className = `v-dot notranslate ${noteName === window.currentRoot ? 'root' : ''}`;
+                dot.translate = false;
                 dot.dataset.note = noteName;
                 dot.style.left = `${(s / 5) * 100}%`;
                 dot.style.top = `${((rowIdx + 0.5) / numRows) * 100}%`;
@@ -1157,6 +1161,7 @@ window.addEventListener('DOMContentLoaded', () => {
         window.rootLayout.forEach(item => {
             const b = document.createElement('button');
             b.textContent = item.note;
+            b.translate = false;
             b.style.gridColumn = item.col;
             b.style.gridRow = item.row;
             b.onclick = () => {
@@ -1223,6 +1228,7 @@ window.addEventListener('DOMContentLoaded', () => {
             qualities.forEach(q => {
                 const b = document.createElement('button');
                 b.textContent = q;
+                b.translate = false;
                 b.onclick = () => {
                     if (window.currentQuality === q) { window.currentQuality = null; }
                     else { window.currentQuality = q; }
