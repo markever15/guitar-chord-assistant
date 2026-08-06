@@ -25,7 +25,18 @@ window.excludedVoicings = {
         ]
     },
     'D': {
-        'm': [ [-1, 5, 3, 2, 3, 5] ],
+        'Major': [ [-1, 5, 4, 7, 7, 5] ],   // Spread Shape (4th Fret)
+        'm': [
+            [-1, 5, 3, 2, 3, 5],
+            [10, 8, 0, 7, 10, 10],    // Octave Shape (7th Fret)
+            [10, 8, 7, 7, 10, 10],    // Dm (Cluster Shape)
+            [10, 0, 0, 10, 10, 13],   // E Shape (10th, Open)
+            [10, 12, 0, 10, 10, 13],  // E Shape (10th, A Root)
+            [10, 0, 12, 10, 10, 13],  // E Shape (10th, D Root)
+            [-1, -1, 0, 10, 10, 13],  // Reach Shape (10th Fret)
+            [10, 12, 12, 10, 10, 13], // E Shape (10th Fret)
+            [-1, -1, 12, 10, 10, 13]  // Dm (Reach Shape)
+        ],
         '7': [ [-1, 5, 4, 5, 3, 2] ],
         'm9': [ [10, 12, 12, 10, 13, 12] ]
     }
@@ -102,6 +113,25 @@ window.pinnedRepresentatives = {
             [8, 10, 7, 9, -1, -1],   // E Shape 6
             [-1, -1, 10, 12, 10, 0], // Shell Shape (Full G)
             [-1, -1, 10, 12, 10, 12] // Shell Shape (Wide)
+        ]
+    },
+    'D': {
+        'm': [
+            [-1, -1, 0, 2, 3, 1],     // Open Dm Shape
+            [-1, 5, 7, 7, 6, 5],      // A Shape (5th Fret) (Barre)
+            [-1, 5, 0, 7, 6, 5],      // A Shape (5th Fret, Open D)
+            [-1, 5, 7, 7, 6, -1],     // Dm (Cm Shape)
+            [10, 8, 0, 10, 10, 10],   // E Shape (8th Fret)
+            [10, 12, 12, 10, 10, 10], // E Shape (10th Fret) (Barre)
+            [-1, -1, 12, 10, 10, 10]  // Dm (Shell Shape)
+        ],
+        'Major': [
+            [-1, -1, 0, 2, 3, 2],     // Open D Shape
+            [-1, 5, 7, 7, 7, 5],      // A Shape (5th Fret)
+            [10, 0, 7, 7, 7, -1],     // E Shape (7th Fret) (Barre) #2
+            [10, 12, 12, 11, 10, 10], // E Shape (10th Fret)
+            [-1, -1, 12, 11, 10, -1], // D (D Shape)
+            [-1, -1, 12, 14, -1, 14]  // D Shape (12th Fret)
         ]
     }
 };
@@ -889,14 +919,14 @@ window.chordDatabase = {
             { name: 'Octave Shape (Open Top)', desc: '6th-string root, open A and D strings.', frets: [10, 0, 0, 7, 7, 10], fingers: [3, 0, 0, 1, 1, 4] },
             { name: 'Wide Shape (7th Fret)', desc: 'Spread voicing with the open D string.', frets: [10, 9, 0, 7, 10, 10], fingers: [3, 2, 0, 1, 4, 4] },
             { name: 'Wide Shape (Full)', desc: 'Full 7th-position spread voicing.', frets: [10, 9, 7, 7, 10, 10], fingers: [3, 2, 1, 1, 4, 4] },
-            { name: 'E Shape (10th, Open)', desc: 'E-shape barre with open A and D strings.', frets: [10, 0, 0, 11, 10, 10], fingers: [1, 0, 0, 4, 2, 3] },
-            { name: 'E Shape (10th, A Root)', desc: 'E-shape with the A string doubling the 5th.', frets: [10, 12, 0, 11, 10, 10], fingers: [1, 4, 0, 3, 2, 2] },
-            { name: 'E Shape (10th, D Root)', desc: 'E-shape with the D string fretted, A open.', frets: [10, 0, 12, 11, 10, 10], fingers: [1, 0, 4, 3, 2, 2] },
+            { name: 'E Shape (10th, Open)', desc: 'E-shape barre with open A and D strings.', frets: [10, 0, 0, 11, 10, 10], fingers: ['T', 0, 0, 2, 1, 1], manualFingers: true },
+            { name: 'E Shape (10th, A Root)', desc: 'E-shape with the A string doubling the 5th.', frets: [10, 12, 0, 11, 10, 10], fingers: ['T', 3, 0, 2, 1, 1], manualFingers: true },
+            { name: 'E Shape (10th, D Root)', desc: 'E-shape with the D string fretted, A open.', frets: [10, 0, 12, 11, 10, 10], fingers: ['T', 0, 3, 2, 1, 1], manualFingers: true },
             { name: 'E Shape (10th Fret)', desc: 'Full 6-string E-shape barre.', frets: [10, 12, 12, 11, 10, 10], fingers: [1, 3, 3, 2, 1, 1] }
         ],
         'm': [
             { name: 'Open Dm Shape', desc: 'Standard open D minor.', frets: [-1, -1, 0, 2, 3, 1], fingers: [-1, -1, 0, 2, 3, 1] },
-            { name: 'A Shape (5th Fret, Open D)', desc: 'A-shape minor with the open D string.', frets: [-1, 5, 0, 7, 6, 5], fingers: [-1, 1, 0, 4, 3, 2] },
+            { name: 'A Shape (5th Fret, Open D)', desc: 'A-shape minor with the open D string.', frets: [-1, 5, 0, 7, 6, 5], fingers: [-1, 'T', 0, 3, 2, 1], manualFingers: true },
             { name: 'A Shape (5th Fret, Top 4)', desc: 'Top-4 string A-shape minor voicing.', frets: [-1, -1, 0, 7, 6, 5], fingers: [-1, -1, 0, 3, 2, 1] },
             { name: 'Octave Shape (7th Fret)', desc: '6th-string root with the open D string.', frets: [10, 8, 0, 7, 10, 10], fingers: [3, 2, 0, 1, 4, 4] },
             { name: 'Shell Shape (10th Fret)', desc: 'Top-3 string minor triad barre.', frets: [-1, -1, 0, 10, 10, 10], fingers: [-1, -1, 0, 1, 2, 3] },
