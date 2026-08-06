@@ -993,7 +993,10 @@ window.dictView = {
         legend.className = 'v-legend-row';
         for (let s = 0; s < 6; s++) {
             const cell = document.createElement('div');
-            cell.className = 'v-legend-cell';
+            cell.className = 'v-legend-cell notranslate';
+            // 🌟 X(뮤트)/O(개방현)는 기타 기보 기호지 영어 단어가 아니다. 브라우저 번역이 켜지면
+            //    다른 글자로 바뀌어 다이어그램을 못 읽게 되므로 번역에서 제외한다.
+            cell.translate = false;
             cell.style.left = `${(s / 5) * 100}%`;
             if (frets[s] === -1) { cell.textContent = 'X'; cell.classList.add('mute'); }
             else if (frets[s] === 0) { cell.textContent = 'O'; cell.classList.add('open'); cell.dataset.note = window.getNoteName(5 - s, 0); }

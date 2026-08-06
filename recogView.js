@@ -78,7 +78,8 @@ window.recogView = {
             const currentFret = window.finderUserFrets[s];
             
             openIndicator.textContent = currentFret === 0 ? 'O' : (currentFret === -1 ? 'X' : '');
-            openIndicator.className = `open-indicator ${currentFret === 0 ? 'play' : (currentFret === -1 ? 'mute' : '')}`;
+            openIndicator.className = `open-indicator notranslate ${currentFret === 0 ? 'play' : (currentFret === -1 ? 'mute' : '')}`;
+            openIndicator.translate = false;   // X/O는 기보 기호라 번역되면 안 된다
             
             openIndicator.onclick = () => {
                 window.finderUserFrets[s] = window.finderUserFrets[s] === 0 ? -1 : 0;
