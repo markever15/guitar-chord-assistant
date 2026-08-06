@@ -376,6 +376,11 @@ window.dictView = {
                 allVoicings.push(result0);
             }
 
+            // 🌟 개방현이 없는 폼을 12프렛 올리면 모양이 원본과 완전히 같다 - 프렛 번호만 다른
+            //    같은 카드가 두 장 생기므로 만들지 않는다. 개방현이 있으면 그 줄이 짚는 음으로
+            //    바뀌어 다른 폼이 되니 그때만 만든다.
+            if (!sv.frets.includes(0)) return;
+
             const result12 = processVoicing(sv, 12, `${sv.name} (High)`);
             if (result12 && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result12.frets))) {
                 result12._tier = 1;
@@ -401,6 +406,16 @@ window.dictView = {
                     allVoicings.push(result);
                 }
             });
+        });
+
+        // 🌟 12프렛 아래에 같은 모양이 이미 있으면 프렛 번호만 다른 같은 카드다. 개방현이 끼면
+        //    그 줄이 짚는 음으로 바뀌어 다른 폼이 되므로 그때는 남긴다.
+        const fretKeys = new Set(allVoicings.map(v => v.frets.join(',')));
+        allVoicings = allVoicings.filter(v => {
+            if (v.frets.includes(0)) return true;
+            const lower = v.frets.map(f => (f === -1 ? -1 : f - 12));
+            if (lower.some(f => f !== -1 && f <= 0)) return true;
+            return !fretKeys.has(lower.join(','));
         });
 
         // 🌟 중간 뮤트 자체는 dim·aug 같은 3화음에선 정상이라 남긴다. 다만 손가락을 나눠 짚는
