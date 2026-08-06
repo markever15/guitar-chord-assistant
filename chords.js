@@ -27,6 +27,13 @@ window.excludedVoicings = {
     'D': {
         'Major': [ [-1, 5, 4, 7, 7, 5] ],   // Spread Shape (4th Fret)
         '5': [ [10, -1, 7, 7, 10, 10] ],    // D5 (Split Shape)
+        'aug': [
+            [-1, 5, 0, 3, 3, 2],   // A Shape (2nd Fret)
+            [-1, 5, 4, 3, 3, 2],   // A Shape (2nd Fret) #2
+            [-1, 5, 4, 3, 3, 6],   // A Shape (3rd Fret) #2
+            [-1, 5, 4, 7, 7, 6],   // A Shape (4th Fret)
+            [-1, 5, 8, 7, 7, 6]    // A Shape (5th Fret) #3
+        ],
         'm': [
             [-1, 5, 3, 2, 3, 5],
             [10, 8, 0, 7, 10, 10],    // Octave Shape (7th Fret)
@@ -117,6 +124,13 @@ window.pinnedRepresentatives = {
         ]
     },
     'D': {
+        'aug': [
+            [-1, -1, 0, 3, 3, 2],     // Daug Shape
+            [-1, 5, 4, 3, 3, -1],     // A Shape (3rd Fret) #3
+            [-1, 5, -1, 7, 7, 6],     // Daug (Compact Shape)
+            [-1, -1, 0, 7, 7, 6],     // D Shape (6th Fret) #2
+            [-1, -1, 12, 11, 11, -1]  // Daug (D Shape)
+        ],
         '5': [
             [-1, -1, 0, 2, 3, -1],    // Open D5
             [-1, -1, 0, 2, -1, 5],    // D Shape (2nd Fret)
