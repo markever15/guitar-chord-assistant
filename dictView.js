@@ -116,7 +116,9 @@ function ruleBasedFingers(frets) {
     return out;
 }
 
-const HAND_CHECKED_QUALITIES = new Set(['Major', 'm', '5', 'aug']);
+// 🌟 C의 이 네 품질은 운지를 하나씩 손으로 확인해둔 구간이라 규칙 배정을 돌리지 않는다.
+//    다른 루트까지 끄면 안 된다 - D5처럼 규칙을 못 받아 손가락이 겹쳐 배정되는 폼이 생겼다.
+const HAND_CHECKED = { 'C': new Set(['Major', 'm', '5', 'aug']) };
 
 function computeFingers(frets) {
     const fretted = [];
@@ -421,7 +423,7 @@ window.dictView = {
         }
 
         // 🌟 손으로 확인한 구간을 뺀 나머지는 규칙 기반 배치로 손가락을 다시 매긴다
-        if (!HAND_CHECKED_QUALITIES.has(quality)) {
+        if (!(HAND_CHECKED[root] && HAND_CHECKED[root].has(quality))) {
             allVoicings.forEach(v => {
                 if (v.manualFingers) return;
                 const rf = ruleBasedFingers(v.frets);
