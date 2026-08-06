@@ -60,7 +60,7 @@ window.generatedVoicings = {
             { name: 'E Shape (8th Fret) (Barre)', frets: [8, -1, 10, 8, 8, 8], fingers: [1, -1, 3, 1, 1, 1] },
             { name: 'D Shape (10th Fret)', frets: [-1, -1, 10, 0, 13, 11], fingers: [-1, -1, 1, 0, 3, 2] },
             { name: 'A Shape (13th Fret)', frets: [-1, 15, 13, 0, -1, -1], fingers: [-1, 2, 1, 0, -1, -1] },
-            { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 15, 13, -1, 13, 15], fingers: [-1, 2, 1, -1, 1, 3] },
+            { name: 'A Shape (13th Fret) (Barre)', frets: [-1, 15, 13, -1, 13, 15], fingers: [-1, 3, 1, -1, 2, 4], manualFingers: true },
         ],
         'm7': [
             { name: 'A Shape (1st Fret)', frets: [-1, 3, 1, 3, -1, 3], fingers: [-1, 2, 1, 3, -1, 3] },

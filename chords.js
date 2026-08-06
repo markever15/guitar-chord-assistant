@@ -69,7 +69,6 @@ window.pinnedRepresentatives = {
             [-1, 3, 5, 5, 4, -1],    // Cm (Muted)
             [-1, 3, 5, 5, 4, 3],     // A Shape m (3rd Fret)
             [8, 10, 10, 8, 8, 8],    // E Shape m (8th Fret)
-            [-1, -1, 10, 8, 8, -1],  // D Shape m
             [-1, -1, 10, 12, -1, 11],// High Shape (10th Fret)
             [-1, 15, 13, 0, -1, -1]  // A Shape (13th Fret)
         ],
