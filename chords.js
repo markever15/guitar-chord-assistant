@@ -37,7 +37,7 @@ window.pinnedRepresentatives = {
     'C': {
         'dim': [
             [-1, 3, 1, -1, 4, 2],    // Wide Shape (1~4프렛)
-            [-1, 3, 4, 5, 4, -1],    // A Shape (3~5프렛)
+            [-1, 3, 4, -1, 4, -1],   // A Shape (3rd Fret)
             [-1, -1, 10, 8, 7, -1],  // Cdim Shape
             [-1, -1, 10, 11, -1, 11] // Airy Shape (10프렛)
         ],
