@@ -1042,16 +1042,19 @@ window.dictView = {
         stack.appendChild(legend);
         stack.appendChild(document.createElement('div')).className = isNut ? 'v-nut-bar' : 'v-top-border';
 
-        if (!isNut) {
-            const posLabel = document.createElement('div');
-            posLabel.className = 'v-position-label';
-            posLabel.textContent = startFret;
-            gridWrap.appendChild(posLabel);
-        }
 
         const grid = document.createElement('div');
         grid.className = 'v-grid';
         grid.style.height = `${numRows * 36}px`;
+
+        // 🌟 시작 프렛 숫자. 그리드 안에 넣어야 위치 기준이 흔들리지 않는다 - 바깥에 두면
+        //    기준 요소가 달라져 첫 칸에서 어긋났다. 흐름에 없으니 다이어그램은 가운데를 지킨다.
+        if (!isNut) {
+            const posLabel = document.createElement('div');
+            posLabel.className = 'v-position-label';
+            posLabel.textContent = startFret;
+            grid.appendChild(posLabel);
+        }
 
         for (let s = 0; s < 6; s++) {
             const line = document.createElement('div');
