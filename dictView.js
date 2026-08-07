@@ -834,8 +834,11 @@ window.dictView = {
             //    줄이 많이 울리는(=꽉 찬) 폼을 먼저 보여준다.
             const grip = v => v.frets.map((f, st) => (f > 0 ? st + ':' + f : '')).filter(Boolean).join('|');
             const sounding = v => v.frets.filter(f => f >= 0).length;
+            const lowest = v => { const a = v.frets.filter(f => f > 0); return a.length ? Math.min(...a) : 0; };
             const order = buckets.get(bucket).slice().sort((a, b) => {
                 const va = voicings[a], vb = voicings[b];
+                // 프렛이 낮은 것부터. 같은 프렛 안에서만 짚는 자리가 같은 것끼리 붙인다.
+                if (lowest(va) !== lowest(vb)) return lowest(va) - lowest(vb);
                 const ga = grip(va), gb = grip(vb);
                 if (ga !== gb) return ga < gb ? -1 : 1;
                 return sounding(vb) - sounding(va);

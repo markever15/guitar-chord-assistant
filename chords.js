@@ -12,6 +12,20 @@ window.excludedVoicings = {
         ]
     },
     'F': {
+        'dim': [
+            [1, 2, 3, 1, 0, 4],       // E Shape (1st Fret)
+            [1, 2, -1, 1, 0, 1]       // E Shape (1st Fret) #2
+        ],
+        'aug': [
+            [1, 4, 3, 2, 2, 1],       // E Shape (1st Fret) #2
+            [-1, 8, 7, 6, 6, 5],      // A Shape (5th Fret) #2
+            [-1, 8, 7, 10, 10, 9],    // A Shape (7th Fret) #2
+            [-1, 8, 11, 10, 10, 9]    // A Shape (8th Fret) #2
+        ],
+        'm': [
+            [13, 11, 10, 10, 13, 13], // Fm (Cluster Shape)
+            [1, 3, 3, 1, 1, 4]        // Fm (Stretch Shape)
+        ],
         'Major': [
             [13, 0, 10, 10, 10, 13],  // E Shape (10th Fret) (Barre) #3
             [13, 12, 10, 10, 10, 13], // E Shape (10th Fret) (Barre) #4
@@ -127,11 +141,43 @@ window.pinnedRepresentatives = {
         ]
     },
     'F': {
+        'dim': [
+            [1, 2, 3, 1, -1, -1],     // Open Fdim Shape
+            [-1, -1, 3, 4, -1, 4],    // Fdim (Airy Shape)
+            [-1, 8, 6, -1, 9, 7],     // Fdim (Wide Shape)
+            [-1, 8, 6, -1, -1, 7],    // Fdim (A Shape)
+            [13, -1, -1, 13, 12, -1], // Fdim (E Shape)
+            [-1, -1, 15, 13, 12, -1]  // Fdim (Cdim Shape)
+        ],
+        'aug': [
+            [-1, -1, 3, 2, 2, 1],     // Faug Shape
+            [-1, -1, 3, 6, -1, 5],    // D Shape (3rd Fret)
+            [-1, 8, 7, 6, 6, -1],     // A Shape (6th Fret) #3
+            [-1, 8, -1, 10, 10, 9],   // A Shape (8th Fret)
+            [13, 0, 11, 10, 10, -1],  // E Shape (10th Fret) (Barre)
+            [13, 12, 11, -1, -1, 13]  // E Shape (11th Fret) #3
+        ],
+        '5': [
+            [1, 3, 3, -1, -1, -1],    // F5 Power Chord
+            [-1, -1, 3, 5, 6, -1],    // D Shape (3rd Fret)
+            [-1, 8, -1, 5, 6, -1],    // F5 (A Root)
+            [-1, 8, 10, 10, -1, -1],  // F5 (A5 Shape)
+            [13, -1, -1, 10, 13, 13]  // F5 (Wide Split)
+        ],
+        'm': [
+            [1, 3, 3, 1, 1, 1],       // Fm Barre
+            [-1, -1, 3, 1, 1, 1],     // Fm (Shell Shape)
+            [-1, 8, 6, 5, -1, -1],    // A Shape (5th Fret)
+            [-1, 8, 10, 10, 9, -1],   // Fm (Cm Shape)
+            [-1, 8, 10, 10, 9, 8]     // A Shape (8th Fret) (Barre)
+        ],
         'Major': [
             [1, 0, 3, 2, 1, 1],       // E Shape (1st Fret) #4
             [1, 3, 3, 2, 1, 1],       // Standard F Barre
             [-1, -1, 3, 2, 1, -1],    // F (D Shape)
             [-1, -1, 3, 5, -1, 5],    // D Shape (3rd Fret)
+            [-1, -1, 3, 5, 6, 5],     // D Shape (3rd Fret) #2
+            [-1, 8, 7, 5, 6, 5],      // F (Open Shape)
             [-1, 8, 7, -1, 6, 8],     // A Shape (6th Fret)
             [-1, 8, 10, 10, 10, 8],   // A Shape (8th Fret) (Barre)
             [13, 0, 10, 10, 10, -1]   // E Shape (10th Fret) (Barre)
@@ -1303,12 +1349,20 @@ window.chordDatabase = {
         ]
     },
     'F': {
+        'dim': [
+            { name: 'Open Fdim Shape', desc: 'First-position diminished with the index barring the 1st fret.', frets: [1, 2, 3, 1, -1, -1], fingers: [1, 2, 3, 1, -1, -1], manualFingers: true }
+        ],
+        '5': [
+            { name: 'F5 Power Chord', desc: 'Root, fifth and octave on the bottom three strings.', frets: [1, 3, 3, -1, -1, -1], fingers: [1, 3, 4, -1, -1, -1], manualFingers: true },
+            { name: 'F5 (A Root)', desc: 'Fifth-string root with the octave on the B string.', frets: [-1, 8, -1, 5, 6, -1], fingers: [-1, 4, -1, 1, 2, -1], manualFingers: true },
+            { name: 'F5 (Wide Split)', desc: 'Low root with the fifth and octave up top.', frets: [13, -1, -1, 10, 13, 13], fingers: [2, -1, -1, 1, 3, 4], manualFingers: true }
+        ],
         'Major': [
-            { name: 'Standard F Barre', desc: 'Essential 1st fret full barre chord.', frets: [1, 3, 3, 2, 1, 1], fingers: [1, 3, 3, 2, 1, 1] },
+            { name: 'Standard F Barre', desc: 'Essential 1st fret full barre chord.', frets: [1, 3, 3, 2, 1, 1], fingers: [1, 3, 4, 2, 1, 1], manualFingers: true },
             { name: 'Easy F (No Barre)', desc: 'Small F major shape.', frets: [-1, -1, 3, 2, 1, 1], fingers: [-1, -1, 4, 3, 1, 2] }
         ],
         'm': [
-            { name: 'Fm Barre', desc: 'Standard minor barre.', frets: [1, 3, 3, 1, 1, 1], fingers: [1, 3, 3, 1, 1, 1] }
+            { name: 'Fm Barre', desc: 'Standard minor barre.', frets: [1, 3, 3, 1, 1, 1], fingers: [1, 3, 4, 1, 1, 1], manualFingers: true }
         ],
         'm7': [
             { name: 'Fm7 Barre', desc: 'Standard minor 7th.', frets: [1, 3, 1, 1, 1, 1], fingers: [1, 3, 1, 1, 1, 1] },
@@ -1589,8 +1643,8 @@ window.slashChordDatabase = {
     },
     'F': {
         'Major': [
-            { name: 'F/A', desc: 'Bright lightweight F triad with an open A string bass.', frets: [-1, 0, 3, 2, 1, 1], fingers: [-1, 0, 3, 2, 1, 1] },
-            { name: 'F/C', desc: 'Powerful F inversion with C bass.', frets: [-1, 3, 3, 2, 1, 1], fingers: [-1, 3, 4, 2, 1, 1] }
+            { name: 'F/A', desc: 'Bright lightweight F triad with an open A string bass.', frets: [-1, 0, 3, 2, 1, 1], fingers: [-1, 0, 3, 2, 1, 1], manualFingers: true },
+            { name: 'F/C', desc: 'Powerful F inversion with C bass.', frets: [-1, 3, 3, 2, 1, 1], fingers: [-1, 3, 4, 2, 1, 1], manualFingers: true }
         ],
         'm': [
             { name: 'Fm/G#', desc: 'Fm triad with G# bass on the 4th string.', frets: [-1, -1, 6, 5, 6, 4], fingers: [-1, -1, 3, 2, 4, 1] }
