@@ -44,18 +44,14 @@ window.recogView = {
             line.style.height = '100%'; 
             fb.appendChild(line);
             
-            const num = document.createElement('div'); 
-            num.className = 'fret-number'; 
-            if (i === 0) {
-                // 너트 라벨은 지판 왼쪽 끝에 붙어 있어 중앙 정렬하면 잘리므로 왼쪽 기준으로 놓는다
-                num.style.left = '0px';
-                num.style.marginLeft = '0';
-                num.style.textAlign = 'left';
-            } else {
+            // 🌟 0번 자리(너트)는 라벨을 달지 않는다 - 굵은 너트 선이 이미 그 자리를 말해준다
+            if (i > 0) {
+                const num = document.createElement('div');
+                num.className = 'fret-number';
                 num.style.left = `${cellCenter(i)}px`;
+                num.textContent = i;
+                fn.appendChild(num);
             }
-            num.textContent = i === 0 ? 'Nut' : i;
-            fn.appendChild(num);
         }
 
         window.renderFretInlays(fb, fretX, totalFrets, 180);
@@ -149,6 +145,118 @@ window.recogView = {
         }
     },
 
+    // 🌟 세로 화면용 지판. 줄이 세로 칸, 프렛이 가로 줄이라 사전 다이어그램과 방향이 같다.
+    //    가로 지판은 세로 폰에서 프렛 한 칸이 10px 안팎으로 좁아져 정확히 못 누른다.
+    //    finderUserFrets는 s=0이 1번줄(high e)이므로, 왼쪽부터 6번줄이 오게 뒤집어 그린다.
+    VERTICAL_FRETS: 15,
+    VERTICAL_INLAYS: [3, 5, 7, 9, 12, 15],
+
+    renderFinderVertical: function() {
+        const wrap = document.getElementById('finder-vertical');
+        if (!wrap) return;
+        wrap.innerHTML = '';
+
+        const total = this.VERTICAL_FRETS;
+        const board = document.createElement('div');
+        board.className = 'fv-board';
+
+        const nums = document.createElement('div');
+        nums.className = 'fv-fretnums';
+        const grid = document.createElement('div');
+        grid.className = 'fv-grid';
+
+        // 위쪽 O/X 줄
+        const head = document.createElement('div');
+        head.className = 'fv-head';
+        for (let col = 0; col < 6; col++) {
+            const s = 5 - col;
+            const cur = window.finderUserFrets[s];
+            const b = document.createElement('button');
+            b.className = `fv-mark notranslate ${cur === 0 ? 'open' : (cur === -1 ? 'mute' : '')}`;
+            b.translate = false;
+            b.textContent = cur === 0 ? 'O' : (cur === -1 ? 'X' : '');
+            b.onclick = () => {
+                window.finderUserFrets[s] = cur === 0 ? -1 : 0;
+                this.renderFinder();
+            };
+            head.appendChild(b);
+        }
+        grid.appendChild(head);
+        grid.appendChild(Object.assign(document.createElement('div'), { className: 'fv-nut' }));
+
+        const rows = document.createElement('div');
+        rows.className = 'fv-rows';
+        const showAll = window.finderShowNotesState && window.getNoteName;
+
+        for (let f = 1; f <= total; f++) {
+            const label = document.createElement('div');
+            label.className = 'fv-fretnum';
+            label.textContent = this.VERTICAL_INLAYS.includes(f) || f === 1 ? f : '';
+            nums.appendChild(label);
+
+            const row = document.createElement('div');
+            row.className = 'fv-row';
+            for (let col = 0; col < 6; col++) {
+                const s = 5 - col;
+                const cell = document.createElement('div');
+                cell.className = 'fv-cell';
+                if (this.VERTICAL_INLAYS.includes(f) && col === 2) {
+                    cell.appendChild(Object.assign(document.createElement('div'), { className: 'fv-inlay' }));
+                }
+                const note = window.getNoteName ? window.getNoteName(s, f) : '';
+                if (window.finderUserFrets[s] === f) {
+                    const dot = document.createElement('div');
+                    dot.className = 'fv-dot notranslate';
+                    dot.translate = false;
+                    dot.textContent = note;
+                    cell.appendChild(dot);
+                } else if (showAll) {
+                    const ghost = document.createElement('div');
+                    ghost.className = 'fv-dot ghost notranslate';
+                    ghost.translate = false;
+                    ghost.textContent = note;
+                    cell.appendChild(ghost);
+                }
+                cell.onclick = () => {
+                    window.finderUserFrets[s] = window.finderUserFrets[s] === f ? 0 : f;
+                    this.renderFinder();
+                };
+                row.appendChild(cell);
+            }
+            rows.appendChild(row);
+        }
+
+        grid.appendChild(rows);
+        board.appendChild(nums);
+        board.appendChild(grid);
+        wrap.appendChild(board);
+    },
+
+    // 가로/세로 지판을 함께 갱신한다 - CSS가 화면 방향에 따라 하나만 보여준다
+    renderFinder: function() {
+        this.renderFinderFretboard();
+        this.renderFinderVertical();
+        this.detectChordFromFinder();
+    },
+
+    // 🌟 처음 들어온 사람이 뭘 눌러야 할지 모르는 경우가 많아 익숙한 코드를 하나씩 넣어준다
+    EXAMPLES: [
+        { name: 'C',  frets: [0, 1, 0, 2, 3, -1] },
+        { name: 'G',  frets: [3, 0, 0, 0, 2, 3] },
+        { name: 'Am', frets: [0, 1, 2, 2, 0, -1] },
+        { name: 'Em', frets: [0, 0, 0, 2, 2, 0] },
+        { name: 'D',  frets: [2, 3, 2, 0, -1, -1] },
+        { name: 'F',  frets: [1, 1, 2, 3, 3, 1] }
+    ],
+    exampleIndex: 0,
+
+    loadExample: function() {
+        const ex = this.EXAMPLES[this.exampleIndex % this.EXAMPLES.length];
+        this.exampleIndex++;
+        window.finderUserFrets = ex.frets.slice();
+        this.renderFinder();
+    },
+
     detectChordFromFinder: function() {
         const detectedNotes = [];
         const stringCount = window.stringCount || 6;
@@ -234,10 +342,12 @@ window.addEventListener('DOMContentLoaded', () => {
     if (resetBtn) {
         resetBtn.onclick = () => {
             window.finderUserFrets = [0, 0, 0, 0, 0, 0];
-            window.recogView.renderFinderFretboard();
-            window.recogView.detectChordFromFinder();
+            window.recogView.renderFinder();
         };
     }
+
+    const exampleBtn = document.getElementById('example-finder-btn');
+    if (exampleBtn) exampleBtn.onclick = () => window.recogView.loadExample();
 
     const playFinderBtn = document.getElementById('play-finder-btn');
     if (playFinderBtn) {
@@ -252,14 +362,17 @@ window.addEventListener('DOMContentLoaded', () => {
             window.finderShowNotesState = !window.finderShowNotesState;
             showFinderNotesBtn.classList.toggle('active', window.finderShowNotesState);
             showFinderNotesBtn.textContent = window.finderShowNotesState ? 'Hide Notes' : 'Show Notes';
-            window.recogView.renderFinderFretboard();
+            window.recogView.renderFinder();
         };
     }
 
     // 🌟 1. 다른 스크립트와 무관하게 DOM이 준비되면 무조건 즉시 지판을 그리도록 강제 호출
-    window.recogView.renderFinderFretboard();
-    window.recogView.detectChordFromFinder();
-    
+    window.recogView.renderFinder();
+
+    // 🌟 화면을 돌리면 가로/세로 지판이 바뀌므로 다시 그린다
+    window.addEventListener('orientationchange', () => window.recogView.renderFinder());
+    window.addEventListener('resize', () => window.recogView.renderFinder());
+
     // 🌟 2. 렌더링 직후 브라우저 딜레이로 인해 너비가 0으로 잡혀 숨겨지는 현상 방지 (0.1초 뒤 재확인)
     setTimeout(() => {
         window.recogView.renderFinderFretboard();

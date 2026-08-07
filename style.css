@@ -182,6 +182,36 @@ button.active { background-color: var(--accent-color); color: white; }
 
 /* 🌟 모바일/좁은 화면: 좌우로 나란히 있던 패널을 세로로 쌓고, 프렛보드는 폭을 줄이는 대신
    .fretboard-scroll 안에서 가로 스크롤되게 해서 프렛 하나하나는 계속 탭하기 편한 크기를 유지함 */
+.finder-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.finder-tools { display: flex; gap: 8px; }
+
+/* 🌟 세로 화면용 지판 - 기본은 숨기고, 좁은 세로 화면에서만 가로 지판 대신 쓴다 */
+.finder-vertical { display: none; }
+.fv-board { display: flex; gap: 6px; }
+.fv-fretnums { width: 20px; flex: none; padding-top: 31px; }
+.fv-fretnum { height: 44px; font-size: .75rem; color: #828997; font-weight: bold;
+              display: flex; align-items: center; justify-content: flex-end; }
+.fv-grid { flex: 1; min-width: 0; }
+.fv-head { display: grid; grid-template-columns: repeat(6, 1fr); height: 26px; }
+.fv-mark { background: none; border: none; padding: 0; cursor: pointer;
+           font-weight: bold; font-size: .95rem; color: #4b5263; }
+.fv-mark.open { color: var(--highlight-color); }
+.fv-mark.mute { color: var(--accent-color); }
+.fv-nut { height: 5px; background: #cfd3da; border-radius: 3px; margin-bottom: 2px; }
+.fv-row { display: grid; grid-template-columns: repeat(6, 1fr); height: 44px; }
+.fv-cell { position: relative; border-top: 1px solid var(--fret-color); cursor: pointer; }
+.fv-row:last-child .fv-cell { border-bottom: 1px solid var(--fret-color); }
+.fv-cell::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+                   width: 1px; background: #7d8496; opacity: .5; }
+.fv-inlay { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 9px; height: 9px; border-radius: 50%; background: #3e4452; }
+.fv-dot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+          width: 30px; height: 30px; border-radius: 50%; background: var(--highlight-color);
+          color: #12141a; font-weight: bold; font-size: .78rem;
+          display: flex; align-items: center; justify-content: center; }
+.fv-dot.ghost { background: transparent; border: 1.5px solid var(--highlight-color);
+                color: var(--highlight-color); opacity: .5; width: 26px; height: 26px; font-size: .68rem; }
+
 .rotate-hint { display: none; }
 .dict-back-btn { display: none; }
 
@@ -210,11 +240,20 @@ button.active { background-color: var(--accent-color); color: white; }
 
 /* 🌟 세로로 들고 있으면 프렛 하나가 손가락보다 좁아진다 - 가로로 돌리라고 알려줌 */
 @media (max-width: 900px) and (orientation: portrait) {
-    .rotate-hint {
-        display: block; margin: 0 0 14px 0; padding: 10px 12px;
-        background: #2d313f; border: 1px solid #3e4452; border-radius: 6px;
-        font-size: 0.85rem; color: #abb2bf;
-    }
+    /* 세로로 들면 가로 지판을 감추고 세로 지판을 쓴다 - 회전을 강요하지 않는다 */
+    .finder-board-col .fretboard-container { display: none; }
+    .finder-vertical { display: block; }
+    .rotate-hint { display: none; }
+
+    /* 🌟 인식 결과가 긴 지판 아래에 있으면 코드 이름을 보려고 계속 스크롤해야 한다 - 위로 올린다 */
+    .finder-layout { flex-direction: column-reverse; }
+    .finder-board-col { padding: 14px 12px; }
+
+    /* 제목과 버튼이 한 줄에 다 못 들어간다 - 제목을 위로 빼고 버튼은 2열로 접는다.
+       한 줄에 4개를 밀어넣으면 글자 폭 때문에 줄지 않고 화면 밖으로 넘친다. */
+    .finder-toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
+    .finder-tools { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .finder-tools button { width: 100%; white-space: nowrap; padding: 9px 6px; }
 }
 
 /* 가로로 돌렸을 때는 지판이 화면 폭을 최대한 쓰게 한다 */
