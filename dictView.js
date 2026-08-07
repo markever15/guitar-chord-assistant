@@ -887,6 +887,7 @@ window.dictView = {
             const label = document.createElement('div');
             label.className = 'group-title';
             label.textContent = g.label;
+            label.title = g.label;   // 한 줄로 잘릴 수 있으니 전체 이름은 툴팁으로
             group.appendChild(label);
 
             const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
@@ -894,7 +895,7 @@ window.dictView = {
                 window.currentVoicingIndex = idx;
                 window.selectedSlashVoicing = null;
                 this.renderAll();
-            }, this.shapeGroupLabel(v.name));
+            }, '');   // 카드 위 제목이 이미 이름을 말해주므로 카드 안에는 다시 쓰지 않는다
             group.appendChild(card);
             list.appendChild(group);
         });
@@ -1002,13 +1003,18 @@ window.dictView = {
         const card = document.createElement('div');
         card.className = `v-chord-card ${isActive ? 'active' : ''}`;
 
-        const nameEl = document.createElement('div');
-        nameEl.className = 'v-chord-name notranslate';
-        nameEl.translate = false;
-        nameEl.textContent = nameOverride !== undefined ? nameOverride : this.displayName(voicing.name);
-        // 줄인 이름만으론 어떤 폼인지 못 좁힐 때가 있어 원본은 툴팁으로 남겨둠
-        if (nameEl.textContent !== voicing.name) nameEl.title = voicing.name;
-        card.appendChild(nameEl);
+        // 🌟 빈 이름('')을 넘기면 제목줄 자체를 만들지 않는다 - 대표 폼 화면은 카드 위 라벨이
+        //    이미 이름을 말해주므로, 빈 칸만 남으면 카드 높이가 서로 어긋난다.
+        const nameText = nameOverride !== undefined ? nameOverride : this.displayName(voicing.name);
+        if (nameText) {
+            const nameEl = document.createElement('div');
+            nameEl.className = 'v-chord-name notranslate';
+            nameEl.translate = false;
+            nameEl.textContent = nameText;
+            // 줄인 이름만으론 어떤 폼인지 못 좁힐 때가 있어 원본은 툴팁으로 남겨둠
+            if (nameText !== voicing.name) nameEl.title = voicing.name;
+            card.appendChild(nameEl);
+        }
 
         const diagram = document.createElement('div');
         diagram.className = 'v-chord-diagram';

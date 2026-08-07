@@ -110,6 +110,10 @@ button.active { background-color: var(--accent-color); color: white; }
 /* 🌟 대표 폼을 "개방현 / 5번줄 근음 / 6번줄 근음" 종류별로 나눠 보여주는 레이아웃 - 그리드 대신 라벨+카드 묶음을 가로로 나열 */
 #voicing-list.v-shape-group-row { display: flex; flex-wrap: wrap; gap: 20px; }
 .v-shape-group { display: flex; flex-direction: column; width: 150px; }
+.v-shape-group .group-title {
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    letter-spacing: 0; font-size: 0.72rem;
+}
 .v-shape-group .v-chord-card { width: 100%; }
 
 /* 🌟 "All" 펼침 보기 - 넥 포지션(3프렛 단위) 구간별로 세로로 묶어서, 코드 많은 품질도 훑어보기 쉽게 함 */
@@ -131,12 +135,13 @@ button.active { background-color: var(--accent-color); color: white; }
 .v-nut-bar { width: 116px; height: 4px; background: #cfd3da; border-radius: 2px; margin-bottom: 1px; }
 .v-top-border { width: 116px; height: 1px; background: var(--fret-color); margin-bottom: 1px; }
 
-.v-grid-wrap { position: relative; display: flex; align-items: flex-start; }
+.v-grid-wrap { position: relative; display: flex; align-items: flex-start; justify-content: center; }
 .v-grid-stack { display: flex; flex-direction: column; }
+/* 🌟 프렛 숫자가 흐름 안에 있으면 그만큼 다이어그램이 오른쪽으로 밀려 카드가 치우쳐 보인다.
+   띄워서 왼쪽에 붙이고, 그리드 세로 가운데에 맞춘다. */
 .v-position-label {
-    font-size: 0.95rem; color: #abb2bf; font-weight: bold; margin-right: 6px;
-    /* 🌟 X/O 줄(16+2) + 너트/상단선(1+1) 만큼 내려서 첫 프렛 칸 옆에 오게 한다 */
-    margin-top: 31px; line-height: 1;
+    position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    font-size: 0.75rem; color: #828997; font-weight: bold; line-height: 1;
 }
 .v-grid { position: relative; width: 116px; }
 .v-string-line { position: absolute; top: 0; bottom: 0; width: 1px; background: #4b5263; }
