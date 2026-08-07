@@ -408,13 +408,18 @@ window.dictView = {
             });
         });
 
-        // 🌟 12프렛 아래에 같은 모양이 이미 있으면 프렛 번호만 다른 같은 카드다. 개방현이 끼면
-        //    그 줄이 짚는 음으로 바뀌어 다른 폼이 되므로 그때는 남긴다.
+        // 🌟 12프렛 아래에 같은 모양이 이미 있으면 프렛 번호만 다른 같은 카드다. 개방현·뮤트는
+        //    옮겨도 그대로이므로 짚는 음만 12프렛 내려서 비교한다. 직접 지정한 대표는 남긴다.
         const fretKeys = new Set(allVoicings.map(v => v.frets.join(',')));
+        const pinnedKeys = new Set(
+            ((window.pinnedRepresentatives && window.pinnedRepresentatives[root]
+                && window.pinnedRepresentatives[root][quality]) || []).map(f => f.join(','))
+        );
         allVoicings = allVoicings.filter(v => {
-            if (v.frets.includes(0)) return true;
-            const lower = v.frets.map(f => (f === -1 ? -1 : f - 12));
-            if (lower.some(f => f !== -1 && f <= 0)) return true;
+            if (pinnedKeys.has(v.frets.join(','))) return true;
+            if (!v.frets.some(f => f > 0)) return true;
+            if (v.frets.some(f => f > 0 && f - 12 <= 0)) return true;
+            const lower = v.frets.map(f => (f > 0 ? f - 12 : f));
             return !fretKeys.has(lower.join(','));
         });
 
@@ -824,7 +829,18 @@ window.dictView = {
 
             const grid = document.createElement('div');
             grid.className = 'vertical-voicing-grid';
-            buckets.get(bucket).forEach(idx => {
+            // 🌟 짚는 음이 같고 뮤트/개방현만 다른 폼들이 흩어져 있으면 같은 코드를 여러 번 보는
+            //    느낌이 든다. 구간 안에서 "짚는 자리"가 같은 것끼리 붙여 놓고, 그 안에서는
+            //    줄이 많이 울리는(=꽉 찬) 폼을 먼저 보여준다.
+            const grip = v => v.frets.map((f, st) => (f > 0 ? st + ':' + f : '')).filter(Boolean).join('|');
+            const sounding = v => v.frets.filter(f => f >= 0).length;
+            const order = buckets.get(bucket).slice().sort((a, b) => {
+                const va = voicings[a], vb = voicings[b];
+                const ga = grip(va), gb = grip(vb);
+                if (ga !== gb) return ga < gb ? -1 : 1;
+                return sounding(vb) - sounding(va);
+            });
+            order.forEach(idx => {
                 const v = voicings[idx];
                 const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
                 const card = this.renderVerticalDiagram(v, isActive, () => {

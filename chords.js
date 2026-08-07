@@ -11,6 +11,33 @@ window.excludedVoicings = {
             [-1, 15, 14, 12, 15, 15]
         ]
     },
+    'F': {
+        'Major': [
+            [13, 0, 10, 10, 10, 13],  // E Shape (10th Fret) (Barre) #3
+            [13, 12, 10, 10, 10, 13], // E Shape (10th Fret) (Barre) #4
+            [-1, 8, 7, 10, 10, 8]     // F (Echo Shape)
+        ]
+    },
+    'E': {
+        'dim': [ [-1, -1, 2, 3, 5, 3] ],   // E Shape (2nd Fret)
+        'aug': [
+            [0, 3, 2, 1, 1, 4],       // E Shape (1st Fret) #2
+            [0, 3, 2, 5, 5, 4],       // E Shape (2nd Fret)
+            [0, 3, 6, 5, 5, 4],       // E Shape (3rd Fret) #3
+            [-1, 7, 6, 5, 5, 4],      // Eaug (Open Shape)
+            [0, 7, 6, 5, 5, 8],       // E Shape (5th Fret) #4
+            [-1, 7, 6, 9, 9, 8],      // Eaug (Cluster Shape)
+            [12, 15, 14, 13, 13, 12]  // Eaug Shape (High) - 옥타브 중복
+        ],
+        '5': [ [12, -1, 9, 9, 12, 12] ],   // E5 (Split Shape)
+        'm': [
+            [12, 10, 9, 9, 12, 12],   // Em (Cluster Shape)
+            [12, 14, 14, 12, 12, 15], // Em (Stretch Shape)
+            [0, -1, -1, 0, 0, 3],     // E Shape (3rd Fret) - 개방현 사이 뮤트라 못 죽임
+            [0, -1, -1, -1, 0, 15],   // E Shape (15th Fret) #2 - 같은 이유
+            [-1, -1, 14, 12, 12, 15]  // Em (Reach Shape)
+        ]
+    },
     'D': {
         'Major': [ [-1, 5, 4, 7, 7, 5] ],
         'aug':   [ [-1, 5, 4, 3, 3, 2], [-1, 5, 4, 7, 7, 6] ],
@@ -97,6 +124,61 @@ window.pinnedRepresentatives = {
             [8, 10, 7, 9, -1, -1],   // E Shape 6
             [-1, -1, 10, 12, 10, 0], // Shell Shape (Full G)
             [-1, -1, 10, 12, 10, 12] // Shell Shape (Wide)
+        ]
+    },
+    'F': {
+        'Major': [
+            [1, 0, 3, 2, 1, 1],       // E Shape (1st Fret) #4
+            [1, 3, 3, 2, 1, 1],       // Standard F Barre
+            [-1, -1, 3, 2, 1, -1],    // F (D Shape)
+            [-1, -1, 3, 5, -1, 5],    // D Shape (3rd Fret)
+            [-1, 8, 7, -1, 6, 8],     // A Shape (6th Fret)
+            [-1, 8, 10, 10, 10, 8],   // A Shape (8th Fret) (Barre)
+            [13, 0, 10, 10, 10, -1]   // E Shape (10th Fret) (Barre)
+        ]
+    },
+    'E': {
+        'm': [
+            [0, 2, 2, 0, 0, 0],       // Open Em Shape
+            [0, 7, 5, 0, 0, 0],       // E Shape (5th Fret) #2
+            [-1, 7, 9, 9, 8, -1],     // Em (Cm Shape)
+            [-1, 7, 9, 9, 8, 7],      // Em (A Shape)
+            [12, 14, 14, 12, 12, 12]  // Open Em Shape (High)
+        ],
+        'dim': [
+            [-1, -1, 2, 3, -1, 3],    // Edim (Airy Shape)
+            [0, 7, 5, 0, 8, 6],       // E Shape (5th Fret) #4
+            [0, 7, 8, 0, 8, 6],       // E Shape (6th Fret) #3
+            [0, 7, 8, 0, 8, 0],       // E Shape (7th Fret) #2
+            [0, 10, 8, 0, 11, 0],     // E Shape (8th Fret) #4
+            [-1, -1, 14, 12, 11, -1]  // Edim (Cdim Shape)
+        ],
+        'aug': [
+            [0, 3, 2, 1, 1, 0],       // Eaug Shape
+            [0, 3, 6, -1, -1, 0],     // E Shape (3rd Fret)
+            [-1, 7, 6, 5, 5, -1],     // Eaug (Caug Shape)
+            [-1, 7, -1, 9, 9, 8],     // Eaug (Compact Shape)
+            [0, 11, 10, 9, 9, 0],     // E Shape (9th Fret)
+            [0, 11, -1, 13, 13, 0]    // E Shape (11th Fret)
+        ],
+        '5': [
+            [0, -1, 2, -1, 0, 0],     // E Shape (2nd Fret)
+            [0, 2, 2, -1, 0, 0],      // E Shape (2nd Fret) #4
+            [0, 7, 9, 9, 0, 0],       // E Shape (7th Fret) #3
+            [-1, 7, 9, 9, 0, 0],      // A Shape (7th Fret) #3
+            [12, -1, 9, 9, 0, 0],     // E Shape (9th Fret)
+            [12, 14, 14, -1, -1, -1], // E5 Power Chord (High)
+            [-1, -1, 14, -1, 12, -1]  // E5 (D Shape)
+        ],
+        'Major': [
+            [0, 2, 2, 1, 0, 0],       // Open E Shape
+            [0, -1, 6, 4, 0, 0],      // E Shape (4th Fret) #2
+            [-1, 7, 9, 9, 9, 7],      // A Shape (7th Fret)
+            [-1, 7, 9, 9, 9, 0],      // A Shape (7th Fret) #2
+            [0, 11, 9, 9, 9, 0],      // E Shape (9th Fret)
+            [12, 14, 14, 13, 0, 0],   // E Shape (12th Fret) #6
+            [12, 14, 14, 13, 12, 12], // Open E Shape (High)
+            [-1, -1, 14, 13, 12, -1]  // E (D Shape)
         ]
     },
     'D': {
@@ -193,7 +275,7 @@ window.chordDatabase = {
             { name: 'Stretch Shape (Open 5th)', desc: 'Stretch shape with the open G string as the 5th.', frets: [8, 10, 10, 0, 8, 11], fingers: ['T', 2, 3, 0, 1, 4], manualFingers: true },
             { name: 'D Shape m', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 8, 8, -1], fingers: [-1, -1, 3, 1, 1, -1] },
             { name: 'Shell Shape (8th Fret)', desc: '4-string jazz shell voicing.', frets: [-1, -1, 10, 8, 8, 8], fingers: [-1, -1, 3, 1, 1, 1] },
-            { name: 'Reach Shape (8th Fret)', desc: 'Shell voicing with an extended high E string.', frets: [-1, -1, 10, 8, 8, 11], fingers: [-1, -1, 3, 1, 2, 4] },
+            { name: 'Reach Shape (8th Fret)', desc: 'Shell voicing with an extended high E string.', frets: [-1, -1, 10, 8, 8, 11], fingers: [-1, -1, 3, 1, 2, 4], manualFingers: true },
             { name: 'Reach Shape (Open 5th)', desc: 'Reach shape with the open G string as the 5th.', frets: [-1, -1, 10, 0, 8, 11], fingers: [-1, -1, 2, 0, 1, 3] },
             { name: 'Sparse Shape (10th Fret)', desc: '3-note high-position voicing.', frets: [-1, -1, 10, 0, -1, 11], fingers: [-1, -1, 1, 0, -1, 2] },
             { name: 'High Shape (10th Fret)', desc: 'High-position voicing without the 5th.', frets: [-1, -1, 10, 12, -1, 11], fingers: [-1, -1, 1, 3, -1, 2] }
@@ -1163,7 +1245,7 @@ window.chordDatabase = {
             { name: 'Em7 (No 5th)', desc: 'Simplest Em7 voicing.', frets: [0, 2, 0, 0, 0, 0], fingers: [0, 1, 0, 0, 0, 0] }
         ],
         '5': [
-            { name: 'E5 Power Chord', desc: 'Low rock power chord.', frets: [0, 2, 2, -1, -1, -1], fingers: [0, 1, 2, -1, -1, -1] }
+            { name: 'E5 Power Chord', desc: 'Low rock power chord.', frets: [0, 2, 2, -1, -1, -1], fingers: [0, 1, 2, -1, -1, -1], manualFingers: true }
         ],
         'sus4': [
             { name: 'Open Esus4', desc: 'Suspended 4th moving to E.', frets: [0, 2, 2, 2, 0, 0], fingers: [0, 1, 2, 3, 0, 0] }
