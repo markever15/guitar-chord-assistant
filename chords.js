@@ -12,6 +12,11 @@ window.excludedVoicings = {
         ]
     },
     'G': {
+        'aug': [
+            [3, 6, 5, 4, 4, 3],       // E Shape (3rd Fret) #4
+            [-1, 10, 9, 8, 8, 7],     // A Shape (7th Fret) #3
+            [-1, 10, 9, 12, 12, 11]   // Gaug (Cluster Shape)
+        ],
         'Major': [
             [3, 2, 0, 4, 3, 3],       // E Shape (2nd Fret) #4
             [3, 5, 0, 4, 3, 3],       // E Shape (3rd Fret) #5
@@ -149,6 +154,24 @@ window.pinnedRepresentatives = {
         ]
     },
     'G': {
+        'dim': [
+            [-1, -1, 5, 3, 2, -1],    // Gdim (Cdim Shape)
+            [-1, -1, 5, 6, -1, 6],    // D Shape (5th Fret) #2
+            [-1, 10, 8, -1, 11, 9],   // Gdim (Wide Shape)
+            [-1, 10, 8, -1, 8, 9],    // Gdim (Thin Shape)
+            [-1, 10, 11, -1, 11, 9],  // Gdim (Cluster Shape)
+            [-1, 10, 11, 0, 11, -1]   // A Shape (10th Fret)
+        ],
+        'aug': [
+            [3, 2, 1, 0, 0, -1],      // Gaug Shape
+            [3, 2, 1, 0, 0, 3],       // E Shape (1st Fret) #3
+            [3, -1, -1, 4, 4, -1],    // Gaug (E Shape)
+            [-1, -1, 5, 4, 4, 3],     // Gaug (Cluster Shape)
+            [-1, -1, 5, 4, 4, -1],    // Gaug (D Shape)
+            [-1, 10, 9, 8, 8, -1],    // Gaug (Caug Shape)
+            [-1, 10, 9, -1, -1, 11],  // Gaug (Compact Shape)
+            [-1, 10, -1, 12, 12, 11]  // Gaug (Compact Shape) 10프렛
+        ],
         '5': [
             [3, -1, 0, 0, 3, 3],      // E Shape (3rd Fret) #2
             [3, 5, 5, -1, -1, -1],    // G5 Power Chord
@@ -1473,6 +1496,9 @@ window.chordDatabase = {
         ],
         '5': [
             { name: 'G5 Power Chord', desc: 'Root, fifth and octave on the bottom three strings.', frets: [3, 5, 5, -1, -1, -1], fingers: [1, 3, 4, -1, -1, -1], manualFingers: true }
+        ],
+        'dim7': [
+            { name: 'Gdim7 (Top Four)', desc: 'Symmetrical diminished 7th on the top four strings.', frets: [-1, -1, 2, 3, 2, 3], fingers: [-1, -1, 1, 3, 2, 4], manualFingers: true }
         ],
         '7': [
             { name: 'Open G7 Shape', desc: 'Standard dominant 7th.', frets: [3, 2, 0, 0, 0, 1], fingers: [3, 2, 0, 0, 0, 1] }
