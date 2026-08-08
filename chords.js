@@ -12,6 +12,10 @@ window.excludedVoicings = {
         ]
     },
     'A': {
+        '5': [
+            [5, 0, 2, 2, 5, 5],       // E Shape (2nd Fret) #2
+            [5, -1, 2, 2, 5, 5]       // A5 (Split Shape)
+        ],
         'm': [
             [5, 3, 2, 2, 5, 0],       // E Shape (2nd Fret)
             [5, 3, 2, 2, 5, 5],       // E Shape (2nd Fret) #4
@@ -171,6 +175,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'A': {
+        '5': [
+            [-1, 0, 2, 2, -1, 0],     // A Shape (2nd Fret) #5
+            [5, 7, -1, -1, -1, -1],   // A5 (E Shape)
+            [-1, -1, 7, -1, 5, -1],   // A5 (D Shape)
+            [-1, -1, 7, 9, -1, -1],   // A5 (Duo Shape)
+            [-1, 12, 14, 14, -1, -1], // A5 (A5 Shape)
+            [-1, 12, 14, 14, -1, 12]  // A5 (Layered Shape)
+        ],
         'm': [
             [-1, 0, 2, 2, 1, 0],      // Open Am Shape
             [-1, 0, 2, 5, 5, 0],      // A Shape (2nd Fret)
