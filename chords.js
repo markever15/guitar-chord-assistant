@@ -11,6 +11,14 @@ window.excludedVoicings = {
             [-1, 15, 14, 12, 15, 15]
         ]
     },
+    'G': {
+        'Major': [
+            [3, 2, 0, 4, 3, 3],       // E Shape (2nd Fret) #4
+            [3, 5, 0, 4, 3, 3],       // E Shape (3rd Fret) #5
+            [-1, 10, 9, 12, 12, 10],  // G (Echo Shape)
+            [15, 14, 12, 12, 15, 15]  // Folk G (4 fingers) (High)
+        ]
+    },
     'F': {
         'dim': [
             [1, 2, 3, 1, 0, 4],       // E Shape (1st Fret)
@@ -138,6 +146,38 @@ window.pinnedRepresentatives = {
             [8, 10, 7, 9, -1, -1],   // E Shape 6
             [-1, -1, 10, 12, 10, 0], // Shell Shape (Full G)
             [-1, -1, 10, 12, 10, 12] // Shell Shape (Wide)
+        ]
+    },
+    'G': {
+        '5': [
+            [3, -1, 0, 0, 3, 3],      // E Shape (3rd Fret) #2
+            [3, 5, 5, -1, -1, -1],    // G5 Power Chord
+            [-1, -1, 5, -1, 3, -1],   // G5 (D Shape)
+            [-1, -1, 5, 7, 8, -1],    // D Shape (5th Fret) #2
+            [-1, 10, 0, 0, 8, -1],    // A Shape (8th Fret)
+            [-1, 10, 12, 12, -1, -1]  // G5 (A5 Shape)
+        ],
+        'm': [
+            [3, 5, 5, 3, 3, 3],       // E Shape (3rd Fret) (Barre)
+            [-1, -1, 5, 3, 3, 3],     // D Shape (3rd Fret) (Barre)
+            [-1, 10, 8, 0, 11, 10],   // A Shape (8th Fret) #3
+            [-1, 10, 8, 0, -1, 10],   // A Shape (8th Fret)
+            [-1, 10, 12, 12, 11, -1], // Gm (Cm Shape)
+            [-1, 10, 12, 12, 11, 10], // A Shape (10th Fret) #5
+            [-1, 10, 0, 12, 11, 10]   // A Shape (10th Fret) #3
+        ],
+        'Major': [
+            [3, 2, 0, 0, 3, 3],       // Folk G (4 fingers)
+            [3, 2, 0, 0, 0, 3],       // Open G Shape
+            [3, 5, 5, 4, 3, 3],       // E Shape (3rd Fret) (Barre)
+            [3, 5, 5, 0, 0, 3],       // E Shape (3rd Fret) #6
+            [-1, -1, 5, 4, 3, -1],    // G (D Shape)
+            [-1, -1, 5, 4, 3, 3],     // G (Shell Shape)
+            [-1, -1, 5, 7, 0, 7],     // D Shape (5th Fret)
+            [-1, 10, 9, 7, 8, 7],     // G (Open Shape)
+            [-1, 10, 9, 0, 0, 10],    // A Shape (9th Fret)
+            [-1, 10, 12, 12, 0, 10],  // A Shape (10th Fret) #5
+            [-1, 10, 12, 12, 12, 10]  // G (A Shape)
         ]
     },
     'F': {
@@ -1423,13 +1463,16 @@ window.chordDatabase = {
     'G': {
         'Major': [
             { name: 'Open G Shape', desc: 'Standard open G major.', frets: [3, 2, 0, 0, 0, 3], fingers: [2, 1, 0, 0, 0, 3] },
-            { name: 'Folk G (4 fingers)', desc: 'Popular pop/rock G shape.', frets: [3, 2, 0, 0, 3, 3], fingers: [2, 1, 0, 0, 3, 4] }
+            { name: 'Folk G (4 fingers)', desc: 'Popular pop/rock G shape.', frets: [3, 2, 0, 0, 3, 3], fingers: [2, 1, 0, 0, 3, 4], manualFingers: true }
         ],
         'sus2': [
             { name: 'Open Gsus2', desc: 'Open sounding sus2.', frets: [3, 0, 0, 0, 3, 3], fingers: [1, 0, 0, 0, 2, 3] }
         ],
         'sus4': [
             { name: 'Open Gsus4', desc: 'Suspended 4th variation.', frets: [3, 3, 0, 0, 1, 3], fingers: [2, 2, 0, 0, 1, 3] }
+        ],
+        '5': [
+            { name: 'G5 Power Chord', desc: 'Root, fifth and octave on the bottom three strings.', frets: [3, 5, 5, -1, -1, -1], fingers: [1, 3, 4, -1, -1, -1], manualFingers: true }
         ],
         '7': [
             { name: 'Open G7 Shape', desc: 'Standard dominant 7th.', frets: [3, 2, 0, 0, 0, 1], fingers: [3, 2, 0, 0, 0, 1] }

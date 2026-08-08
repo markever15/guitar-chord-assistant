@@ -839,6 +839,9 @@ window.dictView = {
                 const va = voicings[a], vb = voicings[b];
                 // 프렛이 낮은 것부터. 같은 프렛 안에서만 짚는 자리가 같은 것끼리 붙인다.
                 if (lowest(va) !== lowest(vb)) return lowest(va) - lowest(vb);
+                // 같은 프렛이면 개방현을 쓰는 폼이 먼저 - 실제로는 0프렛부터 잡는 코드다
+                const oa = va.frets.includes(0), ob = vb.frets.includes(0);
+                if (oa !== ob) return oa ? -1 : 1;
                 const ga = grip(va), gb = grip(vb);
                 if (ga !== gb) return ga < gb ? -1 : 1;
                 return sounding(vb) - sounding(va);
