@@ -8972,7 +8972,7 @@ window.generatedVoicings = {
             { name: 'E Shape (4th Fret)', frets: [7, 6, 4, 4, 0, 7], fingers: [3, 2, 1, 1, 0, 4] },
             { name: 'E Shape (4th Fret) #2', frets: [7, 6, 4, 4, 7, 7], fingers: [3, 2, 1, 1, 4, 4] },
             { name: 'E Shape (6th Fret)', frets: [7, 6, -1, -1, 7, 7], fingers: [2, 1, -1, -1, 3, 4] },
-            { name: 'E Shape (7th Fret) (Barre)', frets: [7, 9, 9, 8, 7, 7], fingers: [1, 3, 3, 2, 1, 1] },
+            { name: 'E Shape (7th Fret) (Barre)', frets: [7, 9, 9, 8, 7, 7], fingers: [1, 3, 4, 2, 1, 1], manualFingers: true },
             { name: 'E Shape (7th Fret) (Barre) #2', frets: [7, -1, 9, 8, 7, 7], fingers: [1, -1, 3, 2, 1, 1] },
             { name: 'D Shape (9th Fret)', frets: [-1, -1, 9, 11, -1, 11], fingers: [-1, -1, 1, 2, -1, 2] },
             { name: 'D Shape (9th Fret) #2', frets: [-1, -1, 9, 11, 0, 11], fingers: [-1, -1, 1, 2, 0, 3] },

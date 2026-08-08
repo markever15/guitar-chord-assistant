@@ -423,21 +423,14 @@ window.dictView = {
             return !fretKeys.has(lower.join(','));
         });
 
-        // 🌟 바깥쪽 줄 하나를 개방↔뮤트만 바꾼 폼은 잡는 손 모양이 완전히 같다. 그 줄을 칠지
-        //    말지 차이뿐이라 카드를 두 장 두지 않고 개방현 쪽만 남긴다. 안쪽 줄은 다르다 -
-        //    거기만 죽이려면 손가락으로 덮어야 해서 난이도도 소리도 달라진다.
-        //    최저음이 바뀌는 경우(다른 코드가 된다)와 직접 지정한 대표는 건드리지 않는다.
+        // 🌟 한 줄만 개방↔뮤트가 다르고 나머지가 같은 폼은 잡는 손 모양이 완전히 같다. 그 줄을
+        //    칠지 말지 차이뿐이라 카드를 두 장 두지 않고, 개방현 쪽 하나만 남기되 그 줄을
+        //    "선택"으로 표시해 둘 다 된다는 걸 알린다. 최저음이 바뀌면 다른 코드가 되므로 제외하고,
+        //    직접 지정한 대표는 건드리지 않는다.
         {
             const bassOf = v => {
                 const s = v.frets.findIndex(f => f >= 0);
                 return s === -1 ? null : window.getNoteName(5 - s, v.frets[s]);
-            };
-            const isEdge = (frets, s) => {
-                const rest = frets.map((f, i) => (i === s ? -1 : f));
-                const first = rest.findIndex(f => f !== -1);
-                if (first === -1) return true;
-                const last = 5 - [...rest].reverse().findIndex(f => f !== -1);
-                return s < first || s > last - 1;
             };
             const byFrets = new Map(allVoicings.map(v => [v.frets.join(','), v]));
             allVoicings = allVoicings.filter(v => {
@@ -449,8 +442,8 @@ window.dictView = {
                     const twin = byFrets.get(alt.join(','));
                     if (!twin) continue;
                     if (bassOf(twin) !== bassOf(v)) continue;
-                    if (!isEdge(v.frets, s)) continue;
-                    return false;   // 개방현 쪽(twin)만 남긴다
+                    twin.optional = (twin.optional || []).concat(s);
+                    return false;   // 개방현 쪽(twin)만 남기고, 그 줄은 선택으로 표시된다
                 }
                 return true;
             });
@@ -825,6 +818,13 @@ window.dictView = {
                 allBtn.style.display = 'none';
             }
         }
+        // 🌟 범례는 지금 화면에 (O)가 실제로 있을 때만 - 전체 목록에만 있는데 띄우면 찾게 된다
+        const legend = document.getElementById('optional-legend');
+        if (legend) {
+            const shown = window.showAllVoicings ? voicings : repIndices.map(i => voicings[i]);
+            legend.style.display = shown.some(v => v && v.optional && v.optional.length) ? '' : 'none';
+        }
+
         if (window.showAllVoicings) {
             this.renderVoicingPositionGroups('voicing-list', voicings, 'No practical voicing found for this chord within 14 frets.');
         } else {
@@ -1099,7 +1099,17 @@ window.dictView = {
             cell.translate = false;
             cell.style.left = `${(s / 5) * 100}%`;
             if (frets[s] === -1) { cell.textContent = 'X'; cell.classList.add('mute'); }
-            else if (frets[s] === 0) { cell.textContent = 'O'; cell.classList.add('open'); cell.dataset.note = window.getNoteName(5 - s, 0); }
+            else if (frets[s] === 0) {
+                cell.textContent = 'O';
+                cell.classList.add('open');
+                cell.dataset.note = window.getNoteName(5 - s, 0);
+                // 🌟 뮤트해도 같은 코드가 되는 줄은 괄호로 - 악보에서 선택 음을 괄호로 쓰는 관례
+                if (voicing.optional && voicing.optional.includes(s)) {
+                    cell.textContent = '(O)';
+                    cell.classList.add('optional');
+                    cell.title = 'Optional — play it or leave it out';
+                }
+            }
             legend.appendChild(cell);
         }
         const gridWrap = document.createElement('div');

@@ -138,6 +138,13 @@ button.active { background-color: var(--accent-color); color: white; }
 .v-legend-cell { position: absolute; top: 0; transform: translateX(-50%); width: 16px; text-align: center; font-size: 0.7rem; font-weight: bold; color: #4b5263; }
 .v-legend-cell.mute { color: var(--accent-color); }
 .v-legend-cell.open { color: var(--highlight-color); }
+/* 🌟 뮤트해도 같은 코드가 되는 줄 - 쳐도 되고 빼도 된다. 괄호가 뜻을 말해주므로 너무 흐리게
+   하지 않는다. 글자가 세 자라 칸보다 넓어질 수 있어 폭을 넉넉히 준다. */
+/* 🌟 (O) 표기 설명 - 툴팁은 1초 기다려야 뜨고 모바일에선 아예 안 뜬다 */
+.v-legend-note { font-size: 0.75rem; color: #828997; margin-left: 10px; }
+.v-legend-note .notranslate { color: var(--highlight-color); opacity: 0.7; font-weight: bold; }
+
+.v-legend-cell.optional { color: var(--highlight-color); opacity: 0.8; width: 26px; font-size: 0.62rem; cursor: default; }
 .v-legend-cell.highlighted-open { color: #fff; }
 
 .v-nut-bar { width: var(--v-board-w); height: 4px; background: #cfd3da; border-radius: 2px; margin-bottom: 1px; }

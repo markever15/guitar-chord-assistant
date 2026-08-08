@@ -2,6 +2,13 @@
 
 // 🌟 특정 코드에서 물리적으로 못 잡는 자동 생성 파지법을 프렛 배열로 지정해 목록에서 제외
 window.excludedVoicings = {
+    'B': {
+        'Major': [
+            [-1, 2, 1, 4, 4, 2],      // A Shape (1st Fret) #2
+            [7, 6, 4, 4, 7, 7],       // E Shape (4th Fret) #2
+            [7, -1, 4, -1, 4, -1]     // E Shape (4th Fret) (Barre) #2
+        ]
+    },
     'C': {
         'aug':  [ [-1, 15, 14, 13, 13, 12] ],
         '6':    [ [-1, 15, 14, 14, 13, 15] ],
@@ -12,6 +19,13 @@ window.excludedVoicings = {
         ]
     },
     'A': {
+        'aug': [
+            [5, 0, 3, 6, 6, 5],       // E Shape (3rd Fret)
+            [5, 8, 7, 6, 6, 5],       // E Shape (5th Fret)
+            [-1, 12, 11, 10, 10, 9],  // A Shape (9th Fret) #3
+            [-1, 12, 11, 14, 14, 13], // Aaug (Cluster Shape)
+            [-1, 12, 15, 14, 14, 13]  // Aaug Shape (High)
+        ],
         '5': [
             [5, 0, 2, 2, 5, 5],       // E Shape (2nd Fret) #2
             [5, -1, 2, 2, 5, 5]       // A5 (Split Shape)
@@ -174,7 +188,38 @@ window.pinnedRepresentatives = {
             [-1, -1, 10, 12, 10, 12] // Shell Shape (Wide)
         ]
     },
+    'B': {
+        'Major': [
+            [-1, 2, 4, 4, 4, 2],      // A Shape (2nd Fret) (Barre)
+            [7, -1, 4, 4, 4, -1],     // E Shape (4th Fret) (Barre)
+            [7, 9, 9, 8, 7, 7],       // E Shape (7th Fret) (Barre)
+            [-1, -1, 9, 8, 7, -1],    // B (D Shape)
+            [-1, -1, 9, 11, 0, 11],   // D Shape (9th Fret) #2
+            [-1, 14, 13, -1, 12, 14]  // A Shape (12th Fret)
+        ]
+    },
     'A': {
+        'dim': [
+            [-1, 0, 1, 2, 1, -1],     // A Shape (1st Fret) #2
+            [5, -1, -1, 5, 4, -1],    // Adim (E Shape)
+            [5, 0, -1, 5, 4, 5],      // E Shape (4th Fret)
+            [-1, 0, 10, 8, 10, 8],    // A Shape (8th Fret) #2
+            [-1, 0, 10, -1, 10, 11],  // A Shape (10th Fret) #2
+            [-1, 12, 10, -1, 13, 11]  // Adim (Wide Shape)
+        ],
+        'aug': [
+            [-1, 0, 3, 2, 2, 1],      // Aaug Shape
+            [-1, 0, 3, -1, 2, -1],    // A Shape (2nd Fret)
+            [5, 4, 3, -1, -1, 5],     // E Shape (3rd Fret) #2
+            [-1, 0, 3, 6, 6, -1],     // A Shape (3rd Fret)
+            [-1, -1, 7, 6, 6, 5],     // Aaug (Cluster Shape)
+            [-1, 0, -1, 6, 6, -1],    // A Shape (6th Fret)
+            [-1, 0, 11, 10, 10, 9],   // A Shape (9th Fret) #2
+            [-1, 0, 11, 10, -1, -1],  // A Shape (10th Fret)
+            [-1, 12, 11, 10, 10, -1], // Aaug (Caug Shape)
+            [-1, 12, 11, -1, -1, 13], // Aaug (Compact Shape) 11프렛
+            [-1, 12, -1, 14, 14, 13]  // Aaug (Compact Shape) 12프렛
+        ],
         '5': [
             [-1, 0, 2, 2, -1, 0],     // A Shape (2nd Fret) #5
             [5, 7, -1, -1, -1, -1],   // A5 (E Shape)
