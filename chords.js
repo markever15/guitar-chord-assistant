@@ -11,6 +11,13 @@ window.excludedVoicings = {
             [-1, 15, 14, 12, 15, 15]
         ]
     },
+    'A': {
+        'm': [
+            [5, 3, 2, 2, 5, 0],       // E Shape (2nd Fret)
+            [5, 3, 2, 2, 5, 5],       // E Shape (2nd Fret) #4
+            [5, 7, 7, 5, 5, 8]        // Am (Stretch Shape)
+        ]
+    },
     'G': {
         'aug': [
             [3, 6, 5, 4, 4, 3],       // E Shape (3rd Fret) #4
@@ -77,6 +84,16 @@ window.excludedVoicings = {
             [10, 12, 12, 10, 10, 13]
         ],
         'm9': [ [10, 12, 12, 10, 13, 12] ]
+    }
+};
+
+// 🌟 렌더링 때 만들어지는 폼(옥타브 복사본 등)은 데이터에 손댈 자리가 없어서 자동 계산된
+//    운지가 그대로 나온다. 프렛 배열로 찾아 운지를 덮어쓴다.
+window.fingeringOverrides = {
+    'A': {
+        'm': [
+            { frets: [-1, 12, 14, 14, 13, 12], fingers: [-1, 1, 3, 4, 2, 1] }  // Open Am Shape (High)
+        ]
     }
 };
 
@@ -151,6 +168,27 @@ window.pinnedRepresentatives = {
             [8, 10, 7, 9, -1, -1],   // E Shape 6
             [-1, -1, 10, 12, 10, 0], // Shell Shape (Full G)
             [-1, -1, 10, 12, 10, 12] // Shell Shape (Wide)
+        ]
+    },
+    'A': {
+        'm': [
+            [-1, 0, 2, 2, 1, 0],      // Open Am Shape
+            [-1, 0, 2, 5, 5, 0],      // A Shape (2nd Fret)
+            [-1, 0, 7, 5, 5, 5],      // A Shape (5th Fret) (Barre)
+            [5, 7, 7, 5, 5, 5],       // E Shape (5th Fret) (Barre) #2
+            [-1, 0, 10, 9, 10, 8],    // A Shape (8th Fret) #2
+            [-1, 0, 10, 9, 10, 0],    // A Shape (9th Fret)
+            [-1, 12, 14, 14, 13, -1], // Am (Cm Shape)
+            [-1, 12, 14, 14, 13, 12]  // Open Am Shape (High)
+        ],
+        'Major': [
+            [-1, 0, 2, 2, 2, 0],      // Open A Shape
+            [5, 0, 7, 6, 5, 0],       // E Shape (5th Fret) #3
+            [-1, 0, 7, 6, 5, 0],      // A Shape (5th Fret) #3
+            [5, 7, 7, 6, 5, 5],       // E Shape (5th Fret) (Barre)
+            [-1, 0, 7, 6, -1, 0],     // A Shape (6th Fret) #2
+            [-1, 0, 11, 14, 14, 0],   // A Shape (11th Fret) #2
+            [-1, 12, 14, 14, 14, 12]  // Open A Shape (High)
         ]
     },
     'G': {
@@ -1557,10 +1595,10 @@ window.chordDatabase = {
     },
     'A': {
         'Major': [
-            { name: 'Open A Shape', desc: 'Standard open A major.', frets: [-1, 0, 2, 2, 2, 0], fingers: [-1, 0, 1, 2, 3, 0] }
+            { name: 'Open A Shape', desc: 'Standard open A major.', frets: [-1, 0, 2, 2, 2, 0], fingers: [-1, 0, 1, 2, 3, 0], manualFingers: true }
         ],
         'm': [
-            { name: 'Open Am Shape', desc: 'Standard open A minor.', frets: [-1, 0, 2, 2, 1, 0], fingers: [-1, 0, 2, 3, 1, 0] }
+            { name: 'Open Am Shape', desc: 'Standard open A minor.', frets: [-1, 0, 2, 2, 1, 0], fingers: [-1, 0, 2, 3, 1, 0], manualFingers: true }
         ],
         'm7': [
             { name: 'Open Am7 Shape', desc: 'Standard minor 7th.', frets: [-1, 0, 2, 0, 1, 0], fingers: [-1, 0, 2, 0, 1, 0] },

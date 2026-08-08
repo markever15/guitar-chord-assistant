@@ -423,6 +423,39 @@ window.dictView = {
             return !fretKeys.has(lower.join(','));
         });
 
+        // 🌟 바깥쪽 줄 하나를 개방↔뮤트만 바꾼 폼은 잡는 손 모양이 완전히 같다. 그 줄을 칠지
+        //    말지 차이뿐이라 카드를 두 장 두지 않고 개방현 쪽만 남긴다. 안쪽 줄은 다르다 -
+        //    거기만 죽이려면 손가락으로 덮어야 해서 난이도도 소리도 달라진다.
+        //    최저음이 바뀌는 경우(다른 코드가 된다)와 직접 지정한 대표는 건드리지 않는다.
+        {
+            const bassOf = v => {
+                const s = v.frets.findIndex(f => f >= 0);
+                return s === -1 ? null : window.getNoteName(5 - s, v.frets[s]);
+            };
+            const isEdge = (frets, s) => {
+                const rest = frets.map((f, i) => (i === s ? -1 : f));
+                const first = rest.findIndex(f => f !== -1);
+                if (first === -1) return true;
+                const last = 5 - [...rest].reverse().findIndex(f => f !== -1);
+                return s < first || s > last - 1;
+            };
+            const byFrets = new Map(allVoicings.map(v => [v.frets.join(','), v]));
+            allVoicings = allVoicings.filter(v => {
+                if (pinnedKeys.has(v.frets.join(','))) return true;
+                for (let s = 0; s < 6; s++) {
+                    if (v.frets[s] !== -1) continue;
+                    const alt = v.frets.slice();
+                    alt[s] = 0;
+                    const twin = byFrets.get(alt.join(','));
+                    if (!twin) continue;
+                    if (bassOf(twin) !== bassOf(v)) continue;
+                    if (!isEdge(v.frets, s)) continue;
+                    return false;   // 개방현 쪽(twin)만 남긴다
+                }
+                return true;
+            });
+        }
+
         // 🌟 중간 뮤트 자체는 dim·aug 같은 3화음에선 정상이라 남긴다. 다만 손가락을 나눠 짚는
         //    규칙 배정이 실패하는 폼은 뮤트를 넘는 바레로만 그려지는데, 그러면 없는 음이 울린다.
         allVoicings = allVoicings.filter(v => {
@@ -448,6 +481,17 @@ window.dictView = {
                 if (v.manualFingers) return;
                 const rf = ruleBasedFingers(v.frets);
                 if (rf) { v.fingers = rf; v.manualFingers = true; }
+            });
+        }
+
+        // 🌟 손으로 지정한 운지 덮어쓰기 - 렌더링 때 만들어지는 폼은 데이터에 손댈 자리가 없다
+        const overrides = (window.fingeringOverrides && window.fingeringOverrides[root]
+            && window.fingeringOverrides[root][quality]) || [];
+        if (overrides.length) {
+            const map = new Map(overrides.map(o => [o.frets.join(','), o.fingers]));
+            allVoicings.forEach(v => {
+                const fg = map.get(v.frets.join(','));
+                if (fg) { v.fingers = fg.slice(); v.manualFingers = true; }
             });
         }
 
