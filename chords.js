@@ -582,24 +582,26 @@ window.pinnedRepresentatives = {
     'D': {
         'dim': [
             [-1, -1, 0, 1, 3, 1],     // D Shape (1st Fret) (Barre)
-            [-1, 5, 3, -1, 6, 4],     // A Shape (3rd Fret) #2
-            [10, 8, -1, -1, 9, -1],   // E Shape (8th Fret) #2
+            [-1, 5, 0, 7, 6, 4],      // A Shape (4th Fret) #2
+            [10, 8, 0, -1, 9, -1],    // E Shape (8th Fret) - 4번줄은 선택
             [-1, -1, 12, 10, 9, -1],  // Ddim (Cdim Shape)
             [-1, -1, 12, 13, -1, 13]  // D Shape (12th Fret)
         ],
         'aug': [
             [-1, -1, 0, 3, 3, 2],     // Daug Shape
             [-1, 5, 4, 3, 3, -1],     // A Shape (3rd Fret) #3
-            [-1, 5, -1, 7, 7, 6],     // Daug (Compact Shape)
+            [-1, 5, 0, 7, 7, 6],      // A Shape (5th Fret) #2 - 4번줄은 선택
             [-1, -1, 0, 7, 7, 6],     // D Shape (6th Fret) #2
-            [-1, -1, 12, 11, 11, -1]  // Daug (D Shape)
+            [10, 9, 8, -1, -1, 10],   // E Shape (8th Fret)
+            [-1, -1, 12, 11, 11, 14]  // D Shape (11th Fret) #2
         ],
         '5': [
             [-1, -1, 0, 2, 3, -1],    // Open D5
             [-1, -1, 0, 2, -1, 5],    // D Shape (2nd Fret)
             [-1, 5, 7, 7, -1, 5],     // A Shape (5th Fret) (Barre)
             [-1, 5, 7, 7, -1, -1],    // D5 (A5 Shape)
-            [-1, -1, 12, -1, 10, -1], // D5 (D Shape)
+            [-1, -1, 0, 7, 10, 10],   // D Shape (7th Fret)
+            [10, 12, -1, -1, -1, -1], // D5 (E Shape)
             [-1, -1, 12, 14, 15, -1]  // Open D5 (High)
         ],
         'm': [
@@ -609,14 +611,15 @@ window.pinnedRepresentatives = {
             [-1, 5, 7, 7, 6, -1],     // Dm (Cm Shape)
             [10, 8, 0, 10, 10, 10],   // E Shape (8th Fret)
             [10, 12, 12, 10, 10, 10], // E Shape (10th Fret) (Barre)
-            [-1, -1, 12, 10, 10, 10]  // Dm (Shell Shape)
+            [-1, -1, 12, 10, 10, 10], // Dm (Shell Shape)
+            [-1, -1, 12, 14, 15, 13]  // Open Dm Shape (High)
         ],
         'Major': [
             [-1, -1, 0, 2, 3, 2],     // Open D Shape
             [-1, 5, 7, 7, 7, 5],      // A Shape (5th Fret)
             [10, 0, 7, 7, 7, -1],     // E Shape (7th Fret) (Barre) #2
             [10, 12, 12, 11, 10, 10], // E Shape (10th Fret)
-            [-1, -1, 12, 11, 10, -1], // D (D Shape)
+            [-1, -1, 12, 11, 10, 10], // D (Shell Shape)
             [-1, -1, 12, 14, -1, 14]  // D Shape (12th Fret)
         ]
     }
@@ -1390,13 +1393,12 @@ window.chordDatabase = {
             { name: 'Wide Shape (7th Fret)', desc: 'Spread voicing with the open D string.', frets: [10, 9, 0, 7, 10, 10], fingers: [3, 2, 0, 1, 4, 4] },
             { name: 'Wide Shape (Full)', desc: 'Full 7th-position spread voicing.', frets: [10, 9, 7, 7, 10, 10], fingers: [3, 2, 1, 1, 4, 4] },
             { name: 'E Shape (10th, Open)', desc: 'E-shape barre with open A and D strings.', frets: [10, 0, 0, 11, 10, 10], fingers: ['T', 0, 0, 2, 1, 1], manualFingers: true },
-            { name: 'E Shape (10th, A Root)', desc: 'E-shape with the A string doubling the 5th.', frets: [10, 12, 0, 11, 10, 10], fingers: ['T', 3, 0, 2, 1, 1], manualFingers: true },
             { name: 'E Shape (10th, D Root)', desc: 'E-shape with the D string fretted, A open.', frets: [10, 0, 12, 11, 10, 10], fingers: ['T', 0, 3, 2, 1, 1], manualFingers: true },
             { name: 'E Shape (10th Fret)', desc: 'Full 6-string E-shape barre.', frets: [10, 12, 12, 11, 10, 10], fingers: [1, 3, 3, 2, 1, 1] }
         ],
         'm': [
             { name: 'Open Dm Shape', desc: 'Standard open D minor.', frets: [-1, -1, 0, 2, 3, 1], fingers: [-1, -1, 0, 2, 3, 1] },
-            { name: 'A Shape (5th Fret, Open D)', desc: 'A-shape minor with the open D string.', frets: [-1, 5, 0, 7, 6, 5], fingers: [-1, 'T', 0, 3, 2, 1], manualFingers: true },
+            { name: 'A Shape (5th Fret, Open D)', desc: 'A-shape minor with the open D string.', frets: [-1, 5, 0, 7, 6, 5], fingers: [-1, 1, 0, 4, 3, 2], manualFingers: true },
             { name: 'A Shape (5th Fret, Top 4)', desc: 'Top-4 string A-shape minor voicing.', frets: [-1, -1, 0, 7, 6, 5], fingers: [-1, -1, 0, 3, 2, 1] },
             { name: 'Shell Shape (10th Fret)', desc: 'Top-3 string minor triad barre.', frets: [-1, -1, 0, 10, 10, 10], fingers: [-1, -1, 0, 1, 2, 3] },
         ],
