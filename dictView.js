@@ -96,10 +96,17 @@ function ruleBasedFingers(frets) {
         const strings = fretted.filter(x => x.f === level).map(x => x.s).sort((a, b) => a - b);
         // 한 손가락으로 묶으려면 줄이 실제로 붙어 있어야 한다. 사이에 뮤트/개방현이 끼면
         // 바레했을 때 그 줄까지 눌려버리므로 따로 짚는다.
+        // 🌟 다만 검지 바레는 더 높은 프렛을 짚는 줄 밑을 그대로 지나간다. 그 줄은 위쪽
+        //    손가락이 소리를 정하므로 바레가 끊길 이유가 없다.
         const runs = [];
         strings.forEach(s => {
             const last = runs[runs.length - 1];
-            if (last && last[last.length - 1] === s - 1) last.push(s);
+            if (!last) { runs.push([s]); return; }
+            let bridge = true;
+            for (let k = last[last.length - 1] + 1; k < s; k++) {
+                if (level !== lowest || frets[k] <= 0) { bridge = false; break; }
+            }
+            if (bridge) last.push(s);
             else runs.push([s]);
         });
         for (const run of runs) {
@@ -461,6 +468,25 @@ window.dictView = {
             return v.manualFingers || !!ruleBasedFingers(v.frets);
         });
 
+        // 🌟 직접 지워 온 79개를 되짚어 보니 85%가 규칙 배정이 실패하는 폼이었다. 이런 폼은
+        //    그려질 때 손가락을 아무렇게나 갖다 붙인 엉터리 운지가 나오니 목록에서 뺀다.
+        //    다만 확장 코드는 폼 자체가 몇 개 없어서 다 지우면 코드가 비어버린다. 최소 개수는 남긴다.
+        const MIN_KEEP = 6;
+        const pinnedKeep = new Set(((((window.pinnedRepresentatives || {})[root]) || {})[quality] || [])
+            .map(f => f.join(',')));
+        const playable = [], awkward = [];
+        allVoicings.forEach(v => {
+            if (v.manualFingers || pinnedKeep.has(v.frets.join(',')) || ruleBasedFingers(v.frets)) playable.push(v);
+            else awkward.push(v);
+        });
+        if (awkward.length) {
+            if (playable.length >= MIN_KEEP) allVoicings = playable;
+            else {
+                awkward.sort((a, b) => this.voicingScore(a, root, quality) - this.voicingScore(b, root, quality));
+                allVoicings = playable.concat(awkward.slice(0, MIN_KEEP - playable.length));
+            }
+        }
+
         // 🌟 특정 코드에서 못 잡는(비현실적인) 파지법을 프렛 배열로 지정해 제외
         const excluded = (window.excludedVoicings && window.excludedVoicings[root] && window.excludedVoicings[root][quality]) || [];
         if (excluded.length) {
@@ -573,7 +599,7 @@ window.dictView = {
         let score = 0;
 
         // --- 소리의 풍부함 ---
-        score += (6 - sounding.length) * 12;   // 울리는 줄이 적을수록 손해
+        score += (6 - sounding.length) * 8;    // 울리는 줄이 적을수록 손해
 
         const wanted = (window.chordNotesTable[root] || {})[quality] || [];
         if (wanted.length) {
@@ -587,18 +613,18 @@ window.dictView = {
             const bassIdx = frets.findIndex(f => f >= 0);
             if (bassIdx !== -1) {
                 const open = window.rootOffset[window.openStringNotes[5 - bassIdx]];
-                if (window.chromScale[(open + frets[bassIdx]) % 12] !== wanted[0]) score += 8;
+                if (window.chromScale[(open + frets[bassIdx]) % 12] !== wanted[0]) score += 4;
             }
         }
 
         // --- 잡기 쉬움 ---
         if (fretted.length) {
             const span = Math.max(...fretted) - Math.min(...fretted);
-            score += span <= 1 ? 0 : span === 2 ? 4 : span === 3 ? 16 : 36;
+            score += span <= 1 ? 0 : span === 2 ? 2 : span === 3 ? 16 : 30;
         }
         const first = frets.findIndex(f => f !== -1);
         const last = 5 - [...frets].reverse().findIndex(f => f !== -1);
-        for (let s = first + 1; s < last; s++) if (frets[s] === -1) { score += 10; break; }
+        for (let s = first + 1; s < last; s++) if (frets[s] === -1) { score += 4; break; }
         // 화면에 실제로 그려질 운지가 무리한지 본다 - 손가락이 모자라거나, 검지 아닌 손가락이
         // 두 줄을 겹쳐 눌러야 하거나, 바레가 울리면 안 되는 줄을 지나가는 경우
         const fingers = v.fingers || [];
@@ -618,42 +644,69 @@ window.dictView = {
         }
         if (hard) score += 25;
         if (fretted.length < 2) score += 20;   // 짚는 음이 하나뿐이면 포지션 폼이 아니다
-        if (frets.includes(0)) score -= 4;                 // 개방현은 잡기 쉽고 울림도 좋다
-        if (v._tier === 0 || v._tier === 1) score -= 6;    // 사람이 큐레이션한 폼 우대
+        if (v._tier === 0 || v._tier === 1) score -= 14;   // 사람이 큐레이션한 폼 우대
         return score;
     },
 
+    // 🌟 검지가 최저 프렛에서 울리는 줄 전체를 가로지르는 폼 (E 폼 / A 폼 바레)
+    isFullBarre: function(v) {
+        const frets = v.frets, fingers = v.fingers || [];
+        const first = frets.findIndex(f => f !== -1);
+        if (first === -1) return false;
+        const last = 5 - [...frets].reverse().findIndex(f => f !== -1);
+        if (last - first < 3) return false;
+        for (let s = first; s <= last; s++) if (frets[s] <= 0) return false;   // 중간에 뮤트/개방현이 없어야 한다
+        if (fingers[first] !== 1 || fingers[last] !== 1) return false;
+        const lowest = Math.min(...frets.slice(first, last + 1));
+        return frets[first] === lowest && frets[last] === lowest;
+    },
+
     getBalancedRepresentatives: function(voicings, root, quality) {
+        // 🌟 직접 지정해 온 대표 291개를 되짚어 보니 한 구간에서 하나만 고른 경우는 드물었다.
+        //    구간마다 성격이 다른 폼을 최대 두 개까지, 그 구간 최고점과 크게 벌어지지 않는
+        //    것만 고른다. 짚는 자리가 똑같은 폼은 같은 코드를 두 번 보여주는 셈이라 건너뛴다.
+        const PER_BAND = 2;
+        const SLACK = 14;
         const picked = [];
+        const scored = voicings.map((v, idx) => {
+            const activeFrets = v.frets.filter(f => f > 0);
+            return { idx, minFret: activeFrets.length ? Math.min(...activeFrets) : 0,
+                score: this.voicingScore(v, root, quality),
+                sounding: v.frets.filter(f => f >= 0).length,
+                fullBarre: this.isFullBarre(v),
+                grip: v.frets.map((f, s) => (f > 0 ? s + ':' + f : '')).filter(Boolean).join('|') };
+        });
         this.POSITION_BANDS.forEach(([lo, hi]) => {
-            let best = null;
-            voicings.forEach((v, idx) => {
-                const activeFrets = v.frets.filter(f => f > 0);
-                const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
-                if (minFret < lo || minFret > hi) return;
-                if (v.frets.filter(f => f >= 0).length < 3) return;
-                const score = this.voicingScore(v, root, quality);
-                if (!best || score < best.score) best = { idx, minFret, score };
-            });
-            // 🌟 그 구간에 쓸 만한 폼이 없으면 억지로 채우지 않고 건너뛴다
-            if (best && best.score <= 32) picked.push(best);
+            const band = scored.filter(c => c.minFret >= lo && c.minFret <= hi && c.sounding >= 3)
+                .sort((a, b) => a.score - b.score);
+            if (!band.length) return;
+            const chosen = [];
+            for (const c of band) {
+                if (chosen.length >= PER_BAND) break;
+                // 🌟 그 구간에 쓸 만한 폼이 없으면 억지로 채우지 않고 건너뛴다
+                if (c.score > 32 || c.score - band[0].score > SLACK) break;
+                if (chosen.some(o => o.grip === c.grip)) continue;
+                chosen.push(c);
+            }
+            // 🌟 검지로 전 줄을 눌러 잡는 풀 바레는 그 자리를 대표하는 폼이라 점수와 상관없이
+            //    구간마다 하나는 들어가야 한다. 통째로 옮겨 다른 코드로 쓸 수 있기 때문이다.
+            if (!chosen.some(c => c.fullBarre)) {
+                const barre = band.find(c => c.fullBarre);
+                if (barre) chosen.push(barre);
+            }
+            chosen.forEach(c => picked.push(c));
         });
 
         // 🌟 구간 기준만으로 3개가 안 되면(확장 코드처럼 폼 자체가 적은 경우) 구간을 무시하고
         //    점수순으로 채운다 - 대표 칸이 비어 보이는 것보다는 낫다
         if (picked.length < 3) {
             const taken = new Set(picked.map(c => c.idx));
-            voicings.map((v, idx) => {
-                const activeFrets = v.frets.filter(f => f > 0);
-                return { idx, minFret: activeFrets.length ? Math.min(...activeFrets) : 0,
-                    score: this.voicingScore(v, root, quality), sounding: v.frets.filter(f => f >= 0).length };
-            })
-                .filter(c => !taken.has(c.idx) && c.sounding >= 3)
+            scored.filter(c => !taken.has(c.idx) && c.sounding >= 3)
                 .sort((a, b) => a.score - b.score)
                 .slice(0, 3 - picked.length)
                 .forEach(c => picked.push(c));
-            picked.sort((a, b) => a.minFret - b.minFret);
         }
+        picked.sort((a, b) => a.minFret - b.minFret);
         return picked;
     },
 
@@ -1163,13 +1216,26 @@ window.dictView = {
             const fret = parseInt(fretStr);
             const rowIdx = fret - startFret;
             if (rowIdx < 0 || rowIdx >= numRows) return;
-            const minS = Math.min(...strs), maxS = Math.max(...strs);
+            // 🌟 검지 바레는 더 높은 프렛을 짚는 줄 밑도 그대로 지나간다. 바레 막대를 거기까지
+            //    늘리고 그 줄에는 옅은 점을 찍어, 손가락이 실제로 어디까지 닿는지 보이게 한다.
+            let minS = Math.min(...strs), maxS = Math.max(...strs);
+            while (minS > 0 && frets[minS - 1] > fret) minS--;
+            while (maxS < 5 && frets[maxS + 1] > fret) maxS++;
             const bar = document.createElement('div');
             bar.className = 'v-barre-bar';
             bar.style.top = `${((rowIdx + 0.5) / numRows) * 100}%`;
             bar.style.left = `${(minS / 5) * 100}%`;
             bar.style.width = `${((maxS - minS) / 5) * 100}%`;
             grid.appendChild(bar);
+            for (let s = minS; s <= maxS; s++) {
+                if (frets[s] <= fret) continue;
+                const ghost = document.createElement('div');
+                ghost.className = 'v-dot ghost';
+                ghost.style.left = `${(s / 5) * 100}%`;
+                ghost.style.top = `${((rowIdx + 0.5) / numRows) * 100}%`;
+                ghost.title = 'Covered by the index barre';
+                grid.appendChild(ghost);
+            }
         });
 
         for (let s = 0; s < 6; s++) {
