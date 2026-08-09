@@ -884,12 +884,14 @@ window.dictView = {
                 const va = voicings[a], vb = voicings[b];
                 // 프렛이 낮은 것부터. 같은 프렛 안에서만 짚는 자리가 같은 것끼리 붙인다.
                 if (lowest(va) !== lowest(vb)) return lowest(va) - lowest(vb);
-                // 같은 프렛이면 개방현을 쓰는 폼이 먼저 - 실제로는 0프렛부터 잡는 코드다
-                const oa = va.frets.includes(0), ob = vb.frets.includes(0);
-                if (oa !== ob) return oa ? -1 : 1;
                 // 그다음은 손이 덜 올라가는 폼 먼저. 최저 프렛만 같고 위로 몇 프렛까지 뻗는지가
                 // 다르면 2프렛에서 끝나는 오픈 코드가 5프렛까지 가는 바레보다 앞에 와야 한다.
+                // 다이어그램이 몇 프렛부터 그려지는지도 이 값으로 정해지므로, 이걸 먼저 봐야
+                // 프렛 번호가 없는(=너트부터 그려지는) 카드들이 흩어지지 않고 앞에 모인다.
                 if (highest(va) !== highest(vb)) return highest(va) - highest(vb);
+                // 그리는 범위까지 같으면 개방현을 쓰는 폼이 먼저 - 실제로는 0프렛부터 잡는 코드다
+                const oa = va.frets.includes(0), ob = vb.frets.includes(0);
+                if (oa !== ob) return oa ? -1 : 1;
                 const ga = grip(va), gb = grip(vb);
                 if (ga !== gb) return ga < gb ? -1 : 1;
                 return sounding(vb) - sounding(va);
@@ -1065,8 +1067,10 @@ window.dictView = {
         const activeFrets = frets.filter(f => f > 0);
         const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
         const maxFret = activeFrets.length ? Math.max(...activeFrets) : 0;
-        // 🌟 프렛 1~4 안에 다 들어가는 파지법은 항상 너트(1프렛)부터 그림 (포지션 라벨 없이 오픈 코드처럼 보이게)
-        const startFret = (maxFret > 0 && maxFret <= 4) ? 1 : (minFret > 0 ? minFret : 1);
+        // 🌟 프렛 1~4 안에 다 들어가는 파지법은 너트(1프렛)부터 그려 오픈 코드처럼 보이게 한다.
+        //    다만 짚는 자리가 3프렛 이상에서 시작하면 위쪽 칸이 텅 비고 점이 바닥에 몰려서 오히려
+        //    읽기 어렵다. 그런 경우엔 옆 카드들처럼 짚는 프렛부터 그린다.
+        const startFret = (maxFret > 0 && maxFret <= 4 && minFret <= 2) ? 1 : (minFret > 0 ? minFret : 1);
         const isNut = startFret === 1;
         const numRows = Math.max(4, maxFret - startFret + 1);
 
@@ -1242,9 +1246,9 @@ window.dictView = {
 
         const sDb = window.slashChordDatabase || {};
         const rootGroup = sDb[root] || {};
-        let targetQuality = (quality === 'm' || quality === 'dim' || quality === 'dim7') ? 'm' : (quality === 'Major' ? 'Major' : 'None');
-
-        const items = rootGroup[targetQuality] || [];
+        // 🌟 dim을 m으로 대신 보여주면 C#dim 자리에 C#m/E 같은 다른 코드가 뜬다.
+        //    슬래시 코드는 반드시 같은 퀄리티끼리만 붙인다.
+        const items = rootGroup[quality] || [];
         if (compSection) compSection.style.display = items.length === 0 ? 'none' : 'block';
         this.renderVerticalVoicingGrid('slash-chord-shelf', items);
     },
