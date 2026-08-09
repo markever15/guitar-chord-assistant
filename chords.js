@@ -2,7 +2,38 @@
 
 // 🌟 특정 코드에서 물리적으로 못 잡는 자동 생성 파지법을 프렛 배열로 지정해 목록에서 제외
 window.excludedVoicings = {
+    'C#': {
+        'm': [
+            [9, 7, 6, 6, 9, 0],       // E Shape (6th Fret)
+            [9, 7, 6, 9, 9, 0],       // E Shape (6th Fret) #2
+            [9, 7, 6, 6, 9, 9],       // E Shape (6th Fret) #3
+            [9, 11, 11, 9, 9, 12],    // E Shape (9th Fret) (Barre) #3
+            [-1, -1, 11, 9, 9, 12]    // D Shape (9th Fret) #2
+        ],
+        'Major': [
+            [-1, 4, -1, 1, 2, 1],     // A Shape (1st Fret) (Barre) #2
+            [-1, 4, 3, 6, 6, 4]       // A Shape (3rd Fret)
+        ],
+        'aug': [
+            [-1, 4, 3, 2, 2, 1],      // A Shape (1st Fret) #3
+            [-1, 4, 7, 6, 6, 5],      // A Shape (4th Fret)
+            [9, 0, 7, 10, 10, 9],     // E Shape (7th Fret)
+            [9, 12, 11, 10, 10, 9]    // E Shape (9th Fret) #2
+        ]
+    },
     'B': {
+        'aug': [
+            [-1, 2, 1, 4, 4, 3],      // A Shape (1st Fret) #5
+            [-1, 2, 5, 4, 4, 3],      // A Shape (2nd Fret) #2
+            [7, 10, 9, 8, 8, 7],      // E Shape (7th Fret)
+            [-1, 14, 13, 12, 12, 11]  // Baug (Open Shape)
+        ],
+        'm': [
+            [7, 5, 4, 4, 7, 7],       // E Shape (4th Fret) #3
+            [7, 5, 4, 4, 0, 7],       // E Shape (4th Fret) #2
+            [7, 9, 9, 7, 0, 10],      // E Shape (7th Fret) #4
+            [7, 9, 0, 7, 7, 10]       // E Shape (7th Fret) #2
+        ],
         'Major': [
             [-1, 2, 1, 4, 4, 2],      // A Shape (1st Fret) #2
             [7, 6, 4, 4, 7, 7],       // E Shape (4th Fret) #2
@@ -188,7 +219,78 @@ window.pinnedRepresentatives = {
             [-1, -1, 10, 12, 10, 12] // Shell Shape (Wide)
         ]
     },
+    'C#': {
+        '5': [
+            [-1, 4, -1, -1, 2, 4],    // A Shape (2nd Fret)
+            [-1, 4, 6, 6, -1, -1],    // C#5 (A5 Shape)
+            [-1, 4, -1, 6, -1, 4],    // A Shape (4th Fret) (Barre) #2
+            [9, -1, 6, 6, -1, -1],    // E Shape (6th Fret) (Barre)
+            [9, 11, -1, -1, -1, -1],  // C#5 (E Shape)
+            [-1, -1, 11, 13, -1, -1]  // D Shape (11th Fret)
+        ],
+        'm': [
+            [-1, 4, -1, 1, -1, 0],    // A Shape (1st Fret)
+            [-1, 4, 6, 6, -1, 0],     // A Shape (4th Fret)
+            [-1, 4, 6, 6, 5, 0],      // A Shape (4th Fret) #4
+            [-1, 4, 6, 6, 5, 4],      // A Shape (4th Fret) #3
+            [9, -1, 6, 6, -1, 0],     // E Shape (6th Fret) (Barre)
+            [-1, -1, -1, 6, 9, 0],    // Shell (6th Fret)
+            [9, 11, 11, 9, 9, 9],     // E Shape (9th Fret) (Barre) #2
+            [-1, -1, 11, 9, 9, 9],    // D Shape (9th Fret) (Barre)
+            [-1, -1, 11, 13, -1, 12]  // C#m (High Shape)
+        ],
+        'Major': [
+            [-1, 4, 3, -1, 2, 4],     // A Shape (2nd Fret)
+            [-1, 4, 6, 6, 6, 4],      // A Shape (4th Fret) (Barre)
+            [-1, 4, -1, 6, 6, 4],     // A Shape (4th Fret) (Barre) #2
+            [9, -1, 6, 6, 6, -1],     // E Shape (6th Fret) (Barre)
+            [9, 11, 11, 10, 9, 9],    // E Shape (9th Fret) (Barre)
+            [-1, -1, 11, 10, 9, -1],  // C# (D Shape)
+            [-1, -1, 11, 10, 9, 9],   // C# (Shell Shape)
+            [-1, -1, 11, 13, -1, 13]  // D Shape (11th Fret)
+        ],
+        'aug': [
+            [-1, 4, -1, 2, -1, 1],    // A Shape (1st Fret) #2
+            [-1, 4, 3, 2, 2, -1],     // A Shape (2nd Fret) #2
+            [-1, 4, -1, 6, 6, 5],     // A Shape (4th Fret) #2
+            [9, 0, -1, -1, 6, -1],    // E Shape (6th Fret)
+            [9, 8, 7, -1, -1, 9],     // E Shape (7th Fret) #2
+            [-1, -1, 11, 10, 10, 9],  // C#aug (Cluster Shape)
+            [9, -1, -1, 10, 10, -1],  // C#aug (E Shape)
+            [-1, -1, 11, 10, 10, -1], // D Shape (10th Fret) #2
+            [-1, -1, 11, 14, -1, 13]  // D Shape (11th Fret)
+        ]
+    },
     'B': {
+        'aug': [
+            [-1, 2, 1, -1, -1, 3],    // Baug (Compact Shape) 1프렛
+            [-1, 2, -1, 4, 4, 3],     // Baug (Compact Shape) 2프렛
+            [7, 6, 5, 0, 0, 7],       // E Shape (5th Fret) #2
+            [-1, -1, 9, 8, 8, 7],     // Baug (Cluster Shape)
+            [-1, -1, 9, 8, 8, -1],    // Baug (D Shape)
+            [-1, -1, 9, 12, 12, 11],  // D Shape (9th Fret) #4
+            [-1, 14, -1, 0, 0, 11],   // A Shape (11th Fret)
+            [-1, 14, 13, 12, 12, -1]  // Baug Shape (High)
+        ],
+        '5': [
+            [-1, 2, 4, 4, 0, -1],     // A Shape (2nd Fret)
+            [7, -1, 4, 4, 0, -1],     // E Shape (4th Fret) (Barre)
+            [7, 9, -1, -1, -1, -1],   // B5 (E Shape)
+            [-1, -1, 9, -1, 7, -1],   // B5 (D Shape)
+            [7, 9, 9, -1, 0, 7],      // E Shape (7th Fret) #2
+            [-1, 14, -1, 11, 0, -1],  // A Shape (11th Fret)
+            [-1, 14, -1, -1, 12, 14]  // A Shape (12th Fret)
+        ],
+        'm': [
+            [-1, 2, 4, 4, 3, 2],      // A Shape (2nd Fret) #5
+            [-1, 2, 4, 4, 3, -1],     // Bm (Cm Shape)
+            [-1, 2, 0, 4, 3, 2],      // A Shape (2nd Fret) #4
+            [7, 5, 0, 7, 7, 7],       // E Shape (5th Fret)
+            [7, 9, 9, 7, 7, 7],       // E Shape (7th Fret) (Barre)
+            [-1, -1, 9, 7, 7, 7],     // D Shape (7th Fret) (Barre)
+            [-1, -1, 9, 11, 0, 10],   // D Shape (9th Fret)
+            [-1, 14, 0, 11, 0, -1]    // A Shape (11th Fret)
+        ],
         'Major': [
             [-1, 2, 4, 4, 4, 2],      // A Shape (2nd Fret) (Barre)
             [7, -1, 4, 4, 4, -1],     // E Shape (4th Fret) (Barre)
@@ -1777,13 +1879,24 @@ window.chordDatabase = {
 };
 
 window.slashChordDatabase = {
+    'C#': {
+        'm': [
+            { name: 'C#m/E', desc: 'Compact C#m with the 3rd in the bass and the high E ringing.', frets: [-1, -1, 2, 1, 2, 0], fingers: [-1, -1, 2, 1, 3, 0], manualFingers: true },
+            { name: 'C#m/G#', desc: 'C#m inversion with G# in the bass.', frets: [4, 4, 2, 1, 2, 0], fingers: [4, 4, 2, 1, 3, 0], auto: true }
+        ],
+        'Major': [
+            { name: 'C#/F', desc: 'C# inversion with F in the bass.', frets: [1, 4, 3, 1, 2, 1], fingers: [1, 4, 3, 1, 2, 1], auto: true },
+            { name: 'C#/G#', desc: 'C# inversion with G# in the bass.', frets: [4, 4, 3, 1, 2, 1], fingers: [4, 4, 3, 1, 2, 1], auto: true }
+        ]
+    },
     'C': {
         'Major': [
             { name: 'C/E', desc: 'C major chord with an open E string bass.', frets: [0, 3, 2, 0, 1, 0], fingers: [0, 3, 2, 0, 1, 0] },
             { name: 'C/G', desc: 'Full, rich sounding C chord with G bass.', frets: [3, 3, 2, 0, 1, 0], fingers: [3, 4, 2, 0, 1, 0] }
         ],
         'm': [
-            { name: 'Cm/Eb', desc: 'Cm chord with Eb bass on the 5th string.', frets: [-1, 6, 5, 5, 4, -1], fingers: [-1, 4, 2, 3, 1, -1] }
+            { name: 'Cm/Eb', desc: 'Cm chord with Eb bass on the 5th string.', frets: [-1, 6, 5, 5, 4, -1], fingers: [-1, 4, 2, 3, 1, -1] },
+            { name: 'Cm/G', desc: 'Cm inversion with G in the bass.', frets: [3, 3, 1, 0, 1, 3], fingers: [3, 3, 1, 0, 2, 4], auto: true }
         ]
     },
     'D': {
@@ -1802,7 +1915,8 @@ window.slashChordDatabase = {
             { name: 'E/B', desc: 'E chord powered by B string bass.', frets: [-1, 2, 2, 1, 0, 0], fingers: [-1, 2, 3, 1, 0, 0] }
         ],
         'm': [
-            { name: 'Em/G', desc: 'Em chord with G bass on the 6th string 3rd fret.', frets: [3, 2, 2, 0, 0, 0], fingers: [3, 1, 2, 0, 0, 0] }
+            { name: 'Em/G', desc: 'Em chord with G bass on the 6th string 3rd fret.', frets: [3, 2, 2, 0, 0, 0], fingers: [3, 1, 2, 0, 0, 0] },
+            { name: 'Em/B', desc: 'Em inversion with B in the bass.', frets: [7, 7, 5, 0, 0, 0], fingers: [2, 2, 1, 0, 0, 0], auto: true }
         ]
     },
     'F': {
@@ -1811,7 +1925,8 @@ window.slashChordDatabase = {
             { name: 'F/C', desc: 'Powerful F inversion with C bass.', frets: [-1, 3, 3, 2, 1, 1], fingers: [-1, 3, 4, 2, 1, 1], manualFingers: true }
         ],
         'm': [
-            { name: 'Fm/G#', desc: 'Fm triad with G# bass on the 4th string.', frets: [-1, -1, 6, 5, 6, 4], fingers: [-1, -1, 3, 2, 4, 1] }
+            { name: 'Fm/G#', desc: 'Fm triad with G# bass on the 4th string.', frets: [-1, -1, 6, 5, 6, 4], fingers: [-1, -1, 3, 2, 4, 1] },
+            { name: 'Fm/C', desc: 'Fm inversion with C in the bass.', frets: [8, 8, 10, 10, 9, 8], fingers: [1, 1, 3, 3, 2, 1], auto: true }
         ]
     },
     'G': {
@@ -1820,7 +1935,8 @@ window.slashChordDatabase = {
             { name: 'G/D', desc: 'Big open G chord with D bass.', frets: [-1, -1, 0, 0, 0, 3], fingers: [-1, -1, 0, 0, 0, 3] }
         ],
         'm': [
-            { name: 'Gm/Bb', desc: 'Gm chord with Bb bass on the 5th string.', frets: [-1, 1, 0, 0, 3, 3], fingers: [-1, 1, 0, 0, 3, 4] }
+            { name: 'Gm/Bb', desc: 'Gm chord with Bb bass on the 5th string.', frets: [-1, 1, 0, 0, 3, 3], fingers: [-1, 1, 0, 0, 3, 4] },
+            { name: 'Gm/D', desc: 'Gm inversion with D in the bass.', frets: [10, 10, 0, 0, 11, 10], fingers: [1, 2, 0, 0, 4, 3], auto: true }
         ]
     },
     'A': {
@@ -1830,15 +1946,60 @@ window.slashChordDatabase = {
         ],
         'm': [
             { name: 'Am/G', desc: 'Beautiful minor line-cliche melody descending chord.', frets: [3, 0, 2, 2, 1, 0], fingers: [3, 0, 1, 2, 1, 0] },
-            { name: 'Am/F#', desc: 'Half-diminished flavor slash chord (Am6 vibe).', frets: [2, 0, 2, 2, 1, 0], fingers: [2, 0, 3, 4, 1, 0] }
+            { name: 'Am/F#', desc: 'Half-diminished flavor slash chord (Am6 vibe).', frets: [2, 0, 2, 2, 1, 0], fingers: [2, 0, 3, 4, 1, 0] },
+            { name: 'Am/E', desc: 'Am inversion with E in the bass.', frets: [0, 0, 2, 2, 1, 0], fingers: [0, 0, 2, 3, 1, 0], auto: true },
+            { name: 'Am/C', desc: 'Am inversion with C in the bass.', frets: [8, 0, 7, 5, 5, 0], fingers: [4, 0, 3, 1, 2, 0], auto: true }
         ]
     },
     'B': {
         'Major': [
-            { name: 'B/Eb', desc: 'Major inversion commonly used for stepping up to E.', frets: [-1, 6, 4, 4, 4, -1], fingers: [-1, 3, 1, 1, 1, -1] }
+            { name: 'B/Eb', desc: 'Major inversion commonly used for stepping up to E.', frets: [-1, 6, 4, 4, 4, -1], fingers: [-1, 3, 1, 1, 1, -1] },
+            { name: 'B/F#', desc: 'B inversion with F# in the bass.', frets: [2, 2, 1, 4, 0, 2], fingers: [2, 2, 1, 4, 0, 3], auto: true }
         ],
         'm': [
-            { name: 'Bm/A', desc: 'Bm barre chord with open A bass string.', frets: [-1, 0, 4, 4, 3, 2], fingers: [-1, 0, 3, 4, 2, 1] }
+            { name: 'Bm/A', desc: 'Bm barre chord with open A bass string.', frets: [-1, 0, 4, 4, 3, 2], fingers: [-1, 0, 3, 4, 2, 1] },
+            { name: 'Bm/F#', desc: 'Bm inversion with F# in the bass.', frets: [2, 2, 0, 4, 0, 2], fingers: [1, 1, 0, 3, 0, 2], auto: true },
+            { name: 'Bm/D', desc: 'Bm inversion with D in the bass.', frets: [10, 9, 0, 7, 0, 7], fingers: [4, 3, 0, 1, 0, 2], auto: true }
+        ]
+    },
+    'Eb': {
+        'Major': [
+            { name: 'Eb/G', desc: 'Eb inversion with G in the bass.', frets: [3, 1, 1, 0, 4, 3], fingers: [2, 1, 1, 0, 4, 3], auto: true },
+            { name: 'Eb/Bb', desc: 'Eb inversion with Bb in the bass.', frets: [6, 6, 5, 0, 4, 3], fingers: [4, 4, 3, 0, 2, 1], auto: true }
+        ],
+        'm': [
+            { name: 'Ebm/F#', desc: 'Ebm inversion with F# in the bass.', frets: [2, 1, 1, 3, 4, -1], fingers: [2, 1, 1, 3, 4, -1], auto: true },
+            { name: 'Ebm/Bb', desc: 'Ebm inversion with Bb in the bass.', frets: [6, 6, 8, 8, 7, 6], fingers: [1, 1, 3, 3, 2, 1], auto: true }
+        ]
+    },
+    'F#': {
+        'Major': [
+            { name: 'F#/Bb', desc: 'F# inversion with Bb in the bass.', frets: [6, 9, 8, 6, 7, 6], fingers: [1, 4, 3, 1, 2, 1], auto: true },
+            { name: 'F#/C#', desc: 'F# inversion with C# in the bass.', frets: [9, 9, 8, 6, 7, 6], fingers: [4, 4, 3, 1, 2, 1], auto: true }
+        ],
+        'm': [
+            { name: 'F#m/A', desc: 'F#m inversion with A in the bass.', frets: [5, 0, 4, 2, 2, 2], fingers: [4, 0, 3, 1, 1, 1], auto: true },
+            { name: 'F#m/C#', desc: 'F#m inversion with C# in the bass.', frets: [9, 0, 11, 11, 10, 9], fingers: [1, 0, 4, 4, 3, 2], auto: true }
+        ]
+    },
+    'G#': {
+        'Major': [
+            { name: 'G#/Eb', desc: 'G# inversion with Eb in the bass.', frets: [11, 11, 10, 8, 9, 8], fingers: [4, 4, 3, 1, 2, 1], auto: true },
+            { name: 'G#/C', desc: 'G# inversion with C in the bass.', frets: [8, 11, 10, 8, 9, 8], fingers: [1, 4, 3, 1, 2, 1], auto: true }
+        ],
+        'm': [
+            { name: 'G#m/B', desc: 'G#m inversion with B in the bass.', frets: [7, 6, 6, 4, 0, 4], fingers: [4, 3, 3, 1, 0, 2], auto: true },
+            { name: 'G#m/Eb', desc: 'G#m inversion with Eb in the bass.', frets: [11, 11, 9, 8, 0, 11], fingers: [3, 3, 2, 1, 0, 4], auto: true }
+        ]
+    },
+    'Bb': {
+        'Major': [
+            { name: 'Bb/F', desc: 'Bb inversion with F in the bass.', frets: [1, 1, 0, 3, 3, 1], fingers: [1, 1, 0, 3, 3, 2], auto: true },
+            { name: 'Bb/D', desc: 'Bb inversion with D in the bass.', frets: [-1, 5, 0, 3, 6, 6], fingers: [-1, 2, 0, 1, 3, 4], auto: true }
+        ],
+        'm': [
+            { name: 'Bbm/F', desc: 'Bbm inversion with F in the bass.', frets: [1, 1, 3, 3, 2, 1], fingers: [1, 1, 3, 3, 2, 1], auto: true },
+            { name: 'Bbm/C#', desc: 'Bbm inversion with C# in the bass.', frets: [9, 8, 8, 6, 6, 6], fingers: [4, 3, 3, 1, 1, 1], auto: true }
         ]
     }
 };
