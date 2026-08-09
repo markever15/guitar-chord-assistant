@@ -269,7 +269,7 @@ window.pinnedRepresentatives = {
             [-1, 3, 5, 5, 4, 3],     // A Shape m (3rd Fret)
             [8, 10, 10, 8, 8, 8],    // E Shape m (8th Fret)
             [-1, -1, 10, 8, 8, 8],   // Shell Shape (8th Fret)
-            [-1, -1, 10, 12, -1, 11],// High Shape (10th Fret)
+            [-1, -1, 10, 0, 13, 11],// D Shape (10th Fret)
             [-1, 15, 13, 0, -1, -1]  // A Shape (13th Fret)
         ],
         'aug': [
@@ -286,7 +286,7 @@ window.pinnedRepresentatives = {
             [-1, 3, 5, 5, -1, -1],   // A5 Shape (3rd Fret)
             [-1, 3, 5, 5, -1, 3],    // Layered Shape (3rd Fret)
             [8, 10, 10, 0, 8, 8],    // Thumb Shape (8th Fret)
-            [-1, -1, 10, 0, 8, 8],   // D Shape (8th Fret) (Barre)
+            [8, 10, -1, -1, -1, -1], // E Shape 5
             [-1, -1, 10, 12, 13, -1],// D Shape (10th Fret) #2
             [-1, 15, -1, 0, 13, -1]  // A Shape (13th Fret)
         ],
@@ -643,7 +643,6 @@ window.chordDatabase = {
             { name: 'Open Shape (High G)', desc: 'Open C with the high E string fretted for a brighter top note.', frets: [-1, 3, 2, 0, 1, 3], fingers: [-1, 3, 2, 0, 1, 4] },
             { name: 'Echo Shape (2nd Fret)', desc: 'Open C with the B string moved up to double the 3rd.', frets: [-1, 3, 2, 0, 5, 0], fingers: [-1, 2, 1, 0, 3, 0] },
             { name: 'Echo Shape (Bright)', desc: 'Echo shape with the high E string also fretted.', frets: [-1, 3, 2, 0, 5, 3], fingers: [-1, 2, 1, 0, 4, 3] },
-            { name: 'Echo Shape (Full)', desc: 'Echo shape with the G string fretted instead of open.', frets: [-1, 3, 2, 5, 5, 3], fingers: [-1, 'T', 1, 3, 4, 2], manualFingers: true },
             { name: 'Drone Shape (3rd Fret)', desc: 'A-shape barre with the open G string as the 5th.', frets: [-1, 3, 5, 0, 5, 3], fingers: [-1, 1, 3, 0, 4, 2] },
             { name: 'Drone Shape (Double Open)', desc: 'Drone shape with the high E string also left open.', frets: [-1, 3, 5, 0, 5, 0], fingers: [-1, 1, 2, 0, 3, 0] },
             { name: 'Ring Shape (3rd Fret)', desc: 'A-shape barre with the high E string left open to ring.', frets: [-1, 3, 5, 5, 5, 0], fingers: [-1, 1, 2, 3, 4, 0], manualFingers: true },
@@ -664,12 +663,9 @@ window.chordDatabase = {
             { name: 'Trim Shape (Open 5th)', desc: 'Split shape with the D string left out.', frets: [-1, 3, -1, 0, 4, 3], fingers: [-1, 1, -1, 0, 3, 2] },
             { name: 'Wide Shape (Open 5th)', desc: 'Spread voicing using the open G string as the 5th.', frets: [-1, 3, 5, 0, 4, 3], fingers: [-1, 1, 4, 0, 3, 2] },
             { name: 'A Shape m (3rd Fret)', desc: 'Full 5-string minor barre shape.', frets: [-1, 3, 5, 5, 4, 3], fingers: [-1, 1, 3, 4, 2, 1], manualFingers: true },
-            { name: 'Cluster Shape (5th Fret)', desc: 'Wide partial barre voicing.', frets: [8, 6, 5, 5, 8, 8], fingers: ['T', 2, 1, 1, 3, 4], manualFingers: true },
-            { name: 'Cluster Shape (Open 5th)', desc: 'Cluster voicing with the open G string as the 5th.', frets: [8, 6, 5, 0, 8, 8], fingers: ['T', 2, 1, 0, 3, 4], manualFingers: true },
             { name: 'Bare Shape (Open 5th)', desc: 'Cluster shape with the D string left out.', frets: [8, 6, -1, 0, 8, 8], fingers: [2, 1, -1, 0, 3, 4], manualFingers: true },
             { name: 'E Shape m (8th Fret)', desc: 'Full 6-string minor barre shape.', frets: [8, 10, 10, 8, 8, 8], fingers: [1, 3, 4, 1, 1, 1], manualFingers: true },
             { name: 'Stretch Shape (8th Fret)', desc: 'E-shape barre with an extended high E string.', frets: [8, 10, 10, 8, 8, 11], fingers: [1, 3, 3, 1, 1, 4] },
-            { name: 'Stretch Shape (Open 5th)', desc: 'Stretch shape with the open G string as the 5th.', frets: [8, 10, 10, 0, 8, 11], fingers: ['T', 2, 3, 0, 1, 4], manualFingers: true },
             { name: 'D Shape m', desc: '4th string root, no barre needed.', frets: [-1, -1, 10, 8, 8, -1], fingers: [-1, -1, 3, 1, 1, -1] },
             { name: 'Shell Shape (8th Fret)', desc: '4-string jazz shell voicing.', frets: [-1, -1, 10, 8, 8, 8], fingers: [-1, -1, 3, 1, 1, 1] },
             { name: 'Reach Shape (8th Fret)', desc: 'Shell voicing with an extended high E string.', frets: [-1, -1, 10, 8, 8, 11], fingers: [-1, -1, 3, 1, 2, 4], manualFingers: true },
@@ -706,7 +702,7 @@ window.chordDatabase = {
             { name: 'Split Shape (5th Fret)', desc: 'Power chord with the A string left out.', frets: [8, -1, 5, 5, 8, 8], fingers: ['T', -1, 1, 1, 3, 4], manualFingers: true },
             { name: 'Split Shape (Open 5th)', desc: 'Split shape with the open G string as the 5th.', frets: [8, -1, 5, 0, 8, 8], fingers: ['T', -1, 1, 0, 3, 4], manualFingers: true },
             { name: 'Sparse Shape (8th Fret)', desc: 'Power chord with the A and D strings left out.', frets: [8, -1, -1, 0, 8, 8], fingers: [1, -1, -1, 0, 2, 3] },
-            { name: 'Thumb Shape (8th Fret)', desc: 'Thumb wraps the 6th string so the open G can ring through.', frets: [8, 10, 10, 0, 8, 8], fingers: ['T', 3, 4, 0, 1, 1], manualFingers: true },
+            { name: 'Barre Shape (8th Fret)', desc: 'Index holds the 6th string and the top two while the open G rings through.', frets: [8, 10, 10, 0, 8, 8], fingers: [1, 3, 4, 0, 1, 1], manualFingers: true },
             { name: 'D Shape 5', desc: '4th string root power chord.', frets: [-1, -1, 10, -1, 8, -1], fingers: [-1, -1, 2, -1, 1, -1] },
             { name: 'Duo Shape (10th Fret)', desc: 'Sparse high-position 2-note power chord.', frets: [-1, -1, 10, 0, -1, -1], fingers: [-1, -1, 1, 0, -1, -1] },
             { name: 'Duo Shape (Wide)', desc: 'Duo shape voiced an octave apart.', frets: [-1, -1, 10, 12, -1, -1], fingers: [-1, -1, 1, 2, -1, -1] }
@@ -2056,8 +2052,7 @@ window.slashChordDatabase = {
         ],
         'm': [
             { name: 'Cm/Eb', desc: 'Cm chord with Eb bass on the 5th string.', frets: [-1,  6,  5,  5,  4, -1], fingers: [-1,  4,  2,  3,  1, -1], manualFingers: true },
-            { name: 'Cm/G', desc: 'Cm inversion with G in the bass.', frets: [ 3,  3,  1,  0,  1,  3], fingers: [ 3,  3,  1,  0,  2,  4], manualFingers: true, auto: true },
-            { name: 'Cm/Bb', desc: 'Cm over a Bb bass — the bass note sits outside the chord.', frets: [-1,  1,  1,  0,  1,  3], fingers: [-1,  1,  1,  0,  2,  3], manualFingers: true, auto: true },
+            { name: 'Cm/Bb', desc: 'Cm over a Bb bass — the bass note sits outside the chord.', frets: [-1,  1,  1,  0,  1,  3], fingers: [-1,  1,  2,  0,  3,  4], manualFingers: true, auto: true },
             { name: 'Cm/A', desc: 'Cm over a A bass — the bass note sits outside the chord.', frets: [-1,  0,  1,  0,  1,  3], fingers: [-1,  0,  1,  0,  2,  3], manualFingers: true, auto: true },
             { name: 'Cm/D', desc: 'Cm over a D bass — the bass note sits outside the chord.', frets: [-1,  5,  5,  5,  4, -1], fingers: [-1,  2,  3,  4,  1, -1], manualFingers: true, auto: true }
         ],

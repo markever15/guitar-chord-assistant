@@ -1241,8 +1241,8 @@ window.dictView = {
             const fret = parseInt(fretStr);
             const rowIdx = fret - startFret;
             if (rowIdx < 0 || rowIdx >= numRows) return;
-            // 🌟 검지 바레는 더 높은 프렛을 짚는 줄 밑도 그대로 지나간다. 바레 막대를 거기까지
-            //    늘리고 그 줄에는 옅은 점을 찍어, 손가락이 실제로 어디까지 닿는지 보이게 한다.
+            // 🌟 검지 바레는 더 높은 프렛을 짚는 줄 밑도 그대로 지나간다. 막대를 거기까지 늘려
+            //    손가락이 실제로 어디까지 닿는지 보이게 한다.
             let minS = Math.min(...strs), maxS = Math.max(...strs);
             while (minS > 0 && frets[minS - 1] > fret) minS--;
             while (maxS < 5 && frets[maxS + 1] > fret) maxS++;
@@ -1252,15 +1252,6 @@ window.dictView = {
             bar.style.left = `${(minS / 5) * 100}%`;
             bar.style.width = `${((maxS - minS) / 5) * 100}%`;
             grid.appendChild(bar);
-            for (let s = minS; s <= maxS; s++) {
-                if (frets[s] <= fret) continue;
-                const ghost = document.createElement('div');
-                ghost.className = 'v-dot ghost';
-                ghost.style.left = `${(s / 5) * 100}%`;
-                ghost.style.top = `${((rowIdx + 0.5) / numRows) * 100}%`;
-                ghost.title = 'Covered by the index barre';
-                grid.appendChild(ghost);
-            }
         });
 
         for (let s = 0; s < 6; s++) {
