@@ -231,7 +231,7 @@ window.pinnedRepresentatives = {
     'C': {
         'dim': [
             [-1, 3, 1, -1, 4, 2],    // Wide Shape (1~4프렛)
-            [-1, 3, 4, -1, 4, -1],   // A Shape (3rd Fret)
+            [-1, 3, 4, 5, 4, -1],    // A Shape (3rd Fret) #2
             [-1, -1, 10, 8, 7, -1],  // Cdim Shape
             [-1, -1, 10, 11, -1, 11] // Airy Shape (10프렛)
         ],
@@ -277,7 +277,8 @@ window.pinnedRepresentatives = {
             [-1, 3, 6, -1, -1, 0],   // A Shape (3rd Fret)
             [-1, 3, -1, 5, 5, 4],    // Compact Shape (3rd Fret)
             [8, -1, 6, -1, -1, 0],   // E Shape (6th Fret)
-            [-1, -1, 10, 9, 9, -1],  // D Shape aug
+            [-1, -1, 10, 9, 9, 8],   // Cluster Shape (8th Fret)
+            [-1, -1, 10, 9, 9, 0],   // Airy Shape (9th Fret) - 1번줄은 선택
             [-1, -1, 10, 13, 13, 0], // D Shape (10th Fret)
             [-1, 15, -1, 13, -1, 0]  // A Shape (13th Fret)
         ],
@@ -1155,12 +1156,8 @@ window.chordDatabase = {
             { name: 'Cluster Shape (8th Fret)', desc: 'Close-position augmented triad.', frets: [-1, -1, 10, 9, 9, 8], fingers: [-1, -1, 4, 2, 3, 1] },
             { name: 'Open Shape (8th Fret)', desc: 'Augmented triad with open high E string.', frets: [8, -1, 10, 9, 9, 0], fingers: [1, -1, 4, 2, 3, 0] },
             { name: 'Airy Shape (9th Fret)', desc: 'Augmented triad with open high E string.', frets: [-1, -1, 10, 9, 9, 0], fingers: [-1, -1, 2, 1, 1, 0], manualFingers: true },
-            { name: 'Cluster Shape (2nd Fret)', desc: 'Close-position augmented triad.', frets: [-1, 3, 2, 5, 5, 4], fingers: [-1, 'T', 1, 3, 4, 2], manualFingers: true },
             { name: 'Open Shape (3rd Fret)', desc: 'Augmented triad with open high E string.', frets: [-1, 3, 6, 5, 5, 0], fingers: [-1, 1, 4, 2, 3, 0] },
             { name: 'Open Shape (5th Fret)', desc: 'Augmented triad with open high E string.', frets: [8, 7, 6, 5, 5, 0], fingers: [4, 3, 2, 1, 1, 0] },
-            { name: 'Open Shape (6th Fret)', desc: 'Augmented triad with open high E string.', frets: [8, 7, 6, 9, 9, 0], fingers: ['T', 2, 1, 3, 4, 0], manualFingers: true },
-            { name: 'Open Shape (7th Fret)', desc: 'Augmented triad with open high E string.', frets: [8, 7, 10, 9, 9, 0], fingers: ['T', 1, 4, 2, 3, 0], manualFingers: true },
-            { name: 'Open Shape (8th Fret Wide)', desc: 'Augmented triad with open high E string.', frets: [8, 11, 10, 9, 9, 0], fingers: ['T', 3, 2, 1, 1, 0], manualFingers: true },
             { name: 'Cluster Shape (9th Fret)', desc: 'Close-position augmented triad.', frets: [-1, -1, 10, 9, 9, 12], fingers: [-1, -1, 2, 1, 1, 4] },
             { name: 'Compact Shape (2nd Fret)', desc: 'Augmented triad with muted G and B strings.', frets: [-1, 3, 2, -1, -1, 4], fingers: [-1, 2, 1, -1, -1, 3] },
             { name: 'Compact Shape (3rd Fret)', desc: 'Augmented triad with muted D string.', frets: [-1, 3, -1, 5, 5, 4], fingers: [-1, 1, -1, 3, 4, 2] }

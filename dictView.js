@@ -83,7 +83,7 @@ const CHORD_SEARCH_QUALITY_ALIASES = {
 //    손가락이 모자라면 null을 돌려주고, 그런 폼은 computeFingers 결과를 그대로 쓴다(엄지가 필요한
 //    자리들이 여기 걸린다).
 //    C의 Major/m/5/aug는 사람이 하나씩 확인해 손으로 지정해둔 구간이라 이 배치를 적용하지 않는다.
-function ruleAssign(frets) {
+function ruleAssign(frets, allowBridge) {
     const fretted = [];
     frets.forEach((f, s) => { if (f > 0) fretted.push({ s, f }); });
     if (!fretted.length) return null;
@@ -96,15 +96,19 @@ function ruleAssign(frets) {
         const strings = fretted.filter(x => x.f === level).map(x => x.s).sort((a, b) => a - b);
         // 한 손가락으로 묶으려면 줄이 실제로 붙어 있어야 한다. 사이에 뮤트/개방현이 끼면
         // 바레했을 때 그 줄까지 눌려버리므로 따로 짚는다.
-        // 🌟 다만 검지 바레는 더 높은 프렛을 짚는 줄 밑을 그대로 지나간다. 그 줄은 위쪽
-        //    손가락이 소리를 정하므로 바레가 끊길 이유가 없다.
+        // 🌟 검지 바레는 더 높은 프렛을 짚는 줄 밑을 그대로 지나갈 수 있다. 다만 그렇게 잡아야만
+        //    하는 게 아니라면 손가락을 따로 쓰는 쪽이 정석이다 - 오픈 D(x x 0 2 3 2)를 바레로
+        //    그리면 안 된다. 그래서 손가락을 따로 쓰는 배치를 먼저 시도하고, 그게 안 될 때만
+        //    바레로 건너뛴다(allowBridge).
         const runs = [];
         strings.forEach(s => {
             const last = runs[runs.length - 1];
             if (!last) { runs.push([s]); return; }
-            let bridge = true;
-            for (let k = last[last.length - 1] + 1; k < s; k++) {
-                if (level !== lowest || frets[k] <= 0) { bridge = false; break; }
+            const prevS = last[last.length - 1];
+            let bridge = prevS === s - 1;                       // 그냥 붙어 있으면 한 손가락
+            if (!bridge && allowBridge && level === lowest) {
+                bridge = true;
+                for (let k = prevS + 1; k < s; k++) if (frets[k] <= 0) bridge = false;
             }
             if (bridge) last.push(s);
             else runs.push([s]);
@@ -127,7 +131,7 @@ function ruleAssign(frets) {
 const fingerCache = new Map();
 function ruleBasedFingers(frets) {
     const key = frets.join(',');
-    if (!fingerCache.has(key)) fingerCache.set(key, ruleAssign(frets));
+    if (!fingerCache.has(key)) fingerCache.set(key, ruleAssign(frets, false) || ruleAssign(frets, true));
     const hit = fingerCache.get(key);
     return hit ? hit.slice() : null;
 }
