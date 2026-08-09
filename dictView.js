@@ -83,7 +83,7 @@ const CHORD_SEARCH_QUALITY_ALIASES = {
 //    손가락이 모자라면 null을 돌려주고, 그런 폼은 computeFingers 결과를 그대로 쓴다(엄지가 필요한
 //    자리들이 여기 걸린다).
 //    C의 Major/m/5/aug는 사람이 하나씩 확인해 손으로 지정해둔 구간이라 이 배치를 적용하지 않는다.
-function ruleBasedFingers(frets) {
+function ruleAssign(frets) {
     const fretted = [];
     frets.forEach((f, s) => { if (f > 0) fretted.push({ s, f }); });
     if (!fretted.length) return null;
@@ -121,6 +121,15 @@ function ruleBasedFingers(frets) {
         }
     }
     return out;
+}
+
+// 🌟 프렛 배열마다 한 번만 계산해 두고 재사용한다.
+const fingerCache = new Map();
+function ruleBasedFingers(frets) {
+    const key = frets.join(',');
+    if (!fingerCache.has(key)) fingerCache.set(key, ruleAssign(frets));
+    const hit = fingerCache.get(key);
+    return hit ? hit.slice() : null;
 }
 
 // 🌟 C의 이 네 품질은 운지를 하나씩 손으로 확인해둔 구간이라 규칙 배정을 돌리지 않는다.
@@ -456,6 +465,19 @@ window.dictView = {
             });
         }
 
+        // 🌟 손으로 지정한 운지 덮어쓰기 - 렌더링 때 만들어지는 폼은 데이터에 손댈 자리가 없다.
+        //    운지 규칙으로 걸러내기 전에 얹어야, 규칙이 못 푸는 폼도 손운지로 살릴 수 있다
+        const overrides = (window.fingeringOverrides && window.fingeringOverrides[root]
+            && window.fingeringOverrides[root][quality]) || [];
+        const overrideKeys = new Set(overrides.map(o => o.frets.join(',')));
+        if (overrides.length) {
+            const map = new Map(overrides.map(o => [o.frets.join(','), o.fingers]));
+            allVoicings.forEach(v => {
+                const fg = map.get(v.frets.join(','));
+                if (fg) { v.fingers = fg.slice(); v.manualFingers = true; }
+            });
+        }
+
         // 🌟 중간 뮤트 자체는 dim·aug 같은 3화음에선 정상이라 남긴다. 다만 손가락을 나눠 짚는
         //    규칙 배정이 실패하는 폼은 뮤트를 넘는 바레로만 그려지는데, 그러면 없는 음이 울린다.
         allVoicings = allVoicings.filter(v => {
@@ -487,6 +509,20 @@ window.dictView = {
             }
         }
 
+        // 🌟 다섯 줄 이상 울리는데 그 한가운데 뮤트가 하나 끼어 있고 양옆이 다 짚는 줄이면,
+        //    스트로크로 훑을 때 그 줄만 손가락 옆면으로 죽여야 한다. 바레 위에서는 사실상
+        //    불가능하고 굳이 쓸 일도 없어서 뺀다. 줄이 적게 울리는 폼은 그 줄을 안 뜯으면
+        //    그만이라 남긴다.
+        allVoicings = allVoicings.filter(v => {
+            const key = v.frets.join(',');
+            if (pinnedKeep.has(key) || overrideKeys.has(key)) return true;   // 손으로 넣은 건 예외
+            if (v.frets.filter(f => f >= 0).length < 5) return true;
+            for (let s = 1; s < 5; s++) {
+                if (v.frets[s] === -1 && v.frets[s - 1] > 0 && v.frets[s + 1] > 0) return false;
+            }
+            return true;
+        });
+
         // 🌟 특정 코드에서 못 잡는(비현실적인) 파지법을 프렛 배열로 지정해 제외
         const excluded = (window.excludedVoicings && window.excludedVoicings[root] && window.excludedVoicings[root][quality]) || [];
         if (excluded.length) {
@@ -500,17 +536,6 @@ window.dictView = {
                 if (v.manualFingers) return;
                 const rf = ruleBasedFingers(v.frets);
                 if (rf) { v.fingers = rf; v.manualFingers = true; }
-            });
-        }
-
-        // 🌟 손으로 지정한 운지 덮어쓰기 - 렌더링 때 만들어지는 폼은 데이터에 손댈 자리가 없다
-        const overrides = (window.fingeringOverrides && window.fingeringOverrides[root]
-            && window.fingeringOverrides[root][quality]) || [];
-        if (overrides.length) {
-            const map = new Map(overrides.map(o => [o.frets.join(','), o.fingers]));
-            allVoicings.forEach(v => {
-                const fg = map.get(v.frets.join(','));
-                if (fg) { v.fingers = fg.slice(); v.manualFingers = true; }
             });
         }
 
