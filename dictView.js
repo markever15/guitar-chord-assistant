@@ -1241,11 +1241,9 @@ window.dictView = {
             const fret = parseInt(fretStr);
             const rowIdx = fret - startFret;
             if (rowIdx < 0 || rowIdx >= numRows) return;
-            // 🌟 검지 바레는 더 높은 프렛을 짚는 줄 밑도 그대로 지나간다. 막대를 거기까지 늘려
-            //    손가락이 실제로 어디까지 닿는지 보이게 한다.
-            let minS = Math.min(...strs), maxS = Math.max(...strs);
-            while (minS > 0 && frets[minS - 1] > fret) minS--;
-            while (maxS < 5 && frets[maxS + 1] > fret) maxS++;
+            // 🌟 막대는 검지가 실제로 누르는 줄까지만 그린다. 더 높은 프렛을 짚는 줄 밑을
+            //    지나가더라도 거기까지 늘리면 막대만 툭 튀어나와 보인다.
+            const minS = Math.min(...strs), maxS = Math.max(...strs);
             const bar = document.createElement('div');
             bar.className = 'v-barre-bar';
             bar.style.top = `${((rowIdx + 0.5) / numRows) * 100}%`;
