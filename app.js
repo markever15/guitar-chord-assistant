@@ -1,13 +1,14 @@
 // app.js
 
-// 🌟 사전이 첫 화면이라 아무것도 안 고른 빈 상태로 열리면 "Select a Chord"만 보인다.
-//    처음 온 사람이 3초 안에 이 사이트가 뭘 하는 곳인지 알 수 있게 코드 하나를 깔아둔다.
+// 🌟 사전이 첫 화면이다. 넓은 화면은 선택 패널과 코드가 나란히 보이므로 C 메이저를 깔아두면
+//    열자마자 다이어그램이 보인다. 좁은 화면은 "고르는 화면"과 "코드 보는 화면"이 나뉘어서,
+//    퀄리티까지 정해져 있으면 선택 패널을 건너뛰고 결과부터 열린다. 그래서 좁은 화면에서는
+//    루트만 C로 잡아두고 퀄리티는 비워, 고르는 화면에서 시작하게 한다.
+const NARROW = window.matchMedia
+    ? window.matchMedia('(max-width: 900px)').matches
+    : window.innerWidth <= 900;
 window.currentRoot = 'C';
-window.currentQuality = 'Major';
-// 🌟 좁은 화면은 "고르는 화면"과 "코드 보는 화면"이 나뉜다. 코드가 이미 골라져 있으면 곧장
-//    결과 화면으로 열리는데, 처음 온 사람에게는 고르는 화면부터 보이는 편이 뭘 하는 곳인지
-//    분명하다. 넓은 화면은 둘 다 한 번에 보이므로 이 값의 영향을 받지 않는다.
-window.dictShowPicker = true;
+window.currentQuality = NARROW ? null : 'Major';
 window.currentVoicingIndex = 0;
 window.showAllNotesState = false;
 window.showAllVoicings = false;
