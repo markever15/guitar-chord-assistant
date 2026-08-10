@@ -23,6 +23,8 @@ body { background-color: var(--bg-color); color: var(--text-color); padding: 20p
 
 /* Sticky Container 스타일 */
 .sticky-container {
+    position: sticky;
+    top: 20px;
     background: #14161d;
     padding: 20px;
     border: 1px solid #2d313f;
@@ -38,8 +40,13 @@ body { background-color: var(--bg-color); color: var(--text-color); padding: 20p
    (오픈 스트링 O/X 표시는 이 스크롤 영역 밖에 있어서 스크롤해도 계속 보임) */
 .fretboard-scroll { position: relative; overflow-x: auto; }
 .fretboard { position: relative; width: 100%; min-width: 720px; height: calc(var(--fb-string-gap) * 6); background: transparent; overflow: visible; }
-/* 🌟 왼쪽은 셀렉터(루트/퀄리티)만 있는 짧은 패널이라 스크롤해도 계속 보이게 고정 */
-.left-panel { flex: 0.9; min-width: 280px; position: sticky; top: 20px; align-self: flex-start; z-index: 60; }
+/* 🌟 왼쪽은 셀렉터(루트/퀄리티)만 있는 짧은 패널이라 스크롤해도 계속 보이게 고정.
+   다만 고정은 셀렉터 상자에만 걸어야 한다. 칸 전체를 고정하면 그 안에 놓인 광고까지
+   화면에 붙어 따라다니게 되고, 그건 애드센스 정책 위반이다. */
+.left-panel { flex: 0.9; min-width: 280px; z-index: 60; }
+/* 🌟 align-self: flex-start면 이 칸이 내용 높이만큼만 잡혀서, 안쪽 sticky 상자가 그 안에서만
+   움직인다(=광고 높이만큼만 내려가다 멈춘다). 기본값 stretch로 두어 오른쪽 목록만큼 키를
+   맞춰야 셀렉터가 스크롤 내내 따라온다. */
 .right-panel { flex: 1.6; min-width: 320px; }
 
 /* Chord Finder 탭 레이아웃 */
@@ -283,7 +290,8 @@ button.active { background-color: var(--accent-color); color: white; }
     .dict-layout { flex-direction: column; }
     /* 🌟 sticky를 풀어주지 않으면 세로로 쌓인 뒤에도 선택 패널이 화면에 붙어 따라다니면서
        아래 코드 카드를 가린다 */
-    .left-panel { min-width: 0; width: 100%; position: static; }
+    .left-panel { min-width: 0; width: 100%; }
+    .sticky-container { position: static; }
     .right-panel { min-width: 0; width: 100%; position: static; }
 
     /* 🌟 좁은 화면에선 "고르는 화면"과 "코드 보는 화면"을 한 번에 하나씩만 보여준다 */
@@ -381,7 +389,17 @@ button.active { background-color: var(--accent-color); color: white; }
 }
 /* 팁 글 광고: 본문 중간 하나, 글 끝 하나. 글이 600~800단어라 중간 자리가 문단 사이에 묻힌다. */
 .ad-slot-inline { margin: 26px 0; min-height: 250px; }
+/* 🌟 얇고 긴 가로 배너. 셀렉터 아래처럼 세로를 많이 못 내주는 자리에 쓴다. */
+.ad-slot-banner { margin-top: 18px; min-height: 100px; }
 .ad-slot-end { margin-top: 28px; min-height: 250px; }
+/* 🌟 넓은 화면의 페이지 맨 아래 가로 배너. 폭이 넉넉해 90px 높이로도 광고가 성립한다.
+   좁은 화면에서는 그 폭이 안 나오므로 숨기고, 대신 콘텐츠 아래 사각형 자리를 쓴다. */
+.ad-slot-leaderboard { display: none; margin-top: 28px; min-height: 90px; }
+@media (min-width: 901px) {
+    .ad-slot-leaderboard { display: flex; }
+    /* 하단 배너가 같은 역할을 하므로 목록 아래 사각형은 넓은 화면에서 뺀다 */
+    #dict-ad-slot { display: none !important; }
+}
 /* 결과 화면에 방금 짚은 모양을 그려 준다 */
 .recog-shape { margin-bottom: 16px; display: flex; }
 .recog-shape:empty { display: none; }
@@ -394,6 +412,8 @@ button.active { background-color: var(--accent-color); color: white; }
 }
 @media (max-width: 900px) {
     .ad-slot { min-height: 280px; margin-top: 16px; }
+    /* 얇은 배너는 좁은 화면에서도 얇아야 한다 - 위 규칙에 덮이지 않게 여기서 다시 잡는다 */
+    .ad-slot-banner { min-height: 100px; margin-top: 16px; }
 }
 
 /* 🌟 사이트 공통 푸터. 애드센스는 개인정보처리방침·소개·연락처로 가는 길이 있는지를 본다. */
