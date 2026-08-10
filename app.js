@@ -1,7 +1,9 @@
 // app.js
 
-window.currentRoot = null;
-window.currentQuality = null;
+// 🌟 사전이 첫 화면이라 아무것도 안 고른 빈 상태로 열리면 "Select a Chord"만 보인다.
+//    처음 온 사람이 3초 안에 이 사이트가 뭘 하는 곳인지 알 수 있게 코드 하나를 깔아둔다.
+window.currentRoot = 'C';
+window.currentQuality = 'Major';
 window.currentVoicingIndex = 0;
 window.showAllNotesState = false;
 window.showAllVoicings = false;
