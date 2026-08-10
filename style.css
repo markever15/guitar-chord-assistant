@@ -370,6 +370,9 @@ button.active { background-color: var(--accent-color); color: white; }
 /* 🌟 광고 자리. 지금은 빈 자리만 잡아둔 상태로, 승인 후 이 안에 애드센스 코드가 들어간다.
    높이를 미리 잡아두면 광고가 늦게 떠도 위쪽 카드가 밀리지 않는다. */
 .ad-slot {
+    /* 🌟 승인 전까지는 자리만 잡아두고 감춘다. 빈 점선 상자가 방문자에게 보이면 미완성으로
+       읽힌다. 승인 후 이 한 줄을 지우면 자리가 그대로 살아난다. */
+    display: none !important;
     margin-top: 20px;
     min-height: 250px;
     display: flex;
@@ -393,3 +396,22 @@ button.active { background-color: var(--accent-color); color: white; }
 @media (max-width: 900px) {
     .ad-slot { min-height: 280px; margin-top: 16px; }
 }
+
+/* 🌟 사이트 공통 푸터. 애드센스는 개인정보처리방침·소개·연락처로 가는 길이 있는지를 본다. */
+.site-footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid #2d313f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.site-footer-nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.site-footer-nav a { color: var(--text-color); text-decoration: none; font-size: 0.85rem; font-weight: bold; }
+.site-footer-nav a:hover { color: var(--text-light); text-decoration: underline; }
+.site-footer-note { margin: 0; font-size: 0.8rem; color: #6b7280; }
+.tip-page-updated { margin-top: -6px; font-size: 0.82rem; color: #828997; }
+.tip-page-article h2 { font-size: 1.05rem; color: var(--text-light); margin: 22px 0 8px; }
+.tip-page-article a { color: var(--selected-card-border); }
