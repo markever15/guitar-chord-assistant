@@ -139,6 +139,10 @@ window.excludedVoicings = {
 // 🌟 렌더링 때 만들어지는 폼(옥타브 복사본 등)은 데이터에 손댈 자리가 없어서 자동 계산된
 //    운지가 그대로 나온다. 프렛 배열로 찾아 운지를 덮어쓴다.
 window.fingeringOverrides = {
+    'E': {
+        // 규칙은 같은 프렛에 붙어 있는 두 줄을 검지 바레로 묶지만, 오픈 Em은 중지·약지로 잡는 게 정석이다
+        'm': [ { frets: [ 0,  2,  2,  0,  0,  0], fingers: [ 0,  2,  3,  0,  0,  0] } ]
+    },
     'C': {
         '9': [ { frets: [-1,  3,  2,  3,  3,  3], fingers: [-1,  2,  1,  3,  3,  3] } ],
         'm': [ { frets: [-1,  3,  1,  0,  4,  3], fingers: [-1,  2,  1,  0,  4,  3] } ],
@@ -483,7 +487,6 @@ window.pinnedRepresentatives = {
             [3, 2, 0, 0, 0, 3],       // Open G Shape
             [3, 5, 5, 4, 3, 3],       // E Shape (3rd Fret) (Barre)
             [3, 5, 5, 0, 0, 3],       // E Shape (3rd Fret) #6
-            [-1, -1, 5, 4, 3, -1],    // G (D Shape)
             [-1, -1, 5, 4, 3, 3],     // G (Shell Shape)
             [-1, -1, 5, 7, 0, 7],     // D Shape (5th Fret)
             [-1, 10, 9, 7, 8, 7],     // G (Open Shape)
@@ -495,15 +498,18 @@ window.pinnedRepresentatives = {
     'F': {
         'dim': [
             [1, 2, 3, 1, -1, -1],     // Open Fdim Shape
-            [-1, -1, 3, 4, -1, 4],    // Fdim (Airy Shape)
+            [-1, -1, 3, 4, 0, 4],     // D Shape (3rd Fret) #2
             [-1, 8, 6, -1, 9, 7],     // Fdim (Wide Shape)
             [-1, 8, 6, -1, -1, 7],    // Fdim (A Shape)
+            [-1, 8, 9, -1, 9, 7],     // Fdim (Cluster Shape)
+            [13, 11, -1, -1, 0, 13],  // E Shape (11th Fret) #2
             [13, -1, -1, 13, 12, -1], // Fdim (E Shape)
             [-1, -1, 15, 13, 12, -1]  // Fdim (Cdim Shape)
         ],
         'aug': [
             [-1, -1, 3, 2, 2, 1],     // Faug Shape
             [-1, -1, 3, 6, -1, 5],    // D Shape (3rd Fret)
+            [-1, 8, -1, 6, 6, 5],     // A Shape (5th Fret)
             [-1, 8, 7, 6, 6, -1],     // A Shape (6th Fret) #3
             [-1, 8, -1, 10, 10, 9],   // A Shape (8th Fret)
             [13, 0, 11, 10, 10, -1],  // E Shape (10th Fret) (Barre)
@@ -519,6 +525,7 @@ window.pinnedRepresentatives = {
         'm': [
             [1, 3, 3, 1, 1, 1],       // Fm Barre
             [-1, -1, 3, 1, 1, 1],     // Fm (Shell Shape)
+            [-1, -1, 3, 5, 6, 4],     // D Shape (3rd Fret)
             [-1, 8, 6, 5, -1, -1],    // A Shape (5th Fret)
             [-1, 8, 10, 10, 9, -1],   // Fm (Cm Shape)
             [-1, 8, 10, 10, 9, 8]     // A Shape (8th Fret) (Barre)
@@ -526,11 +533,11 @@ window.pinnedRepresentatives = {
         'Major': [
             [1, 0, 3, 2, 1, 1],       // E Shape (1st Fret) #4
             [1, 3, 3, 2, 1, 1],       // Standard F Barre
-            [-1, -1, 3, 2, 1, -1],    // F (D Shape)
-            [-1, -1, 3, 5, -1, 5],    // D Shape (3rd Fret)
+            [-1, -1, 3, 2, 1, 1],     // D Shape (1st Fret)
             [-1, -1, 3, 5, 6, 5],     // D Shape (3rd Fret) #2
             [-1, 8, 7, 5, 6, 5],      // F (Open Shape)
             [-1, 8, 7, -1, 6, 8],     // A Shape (6th Fret)
+            [-1, -1, -1, 10, 10, 8],  // D Shape (8th Fret)
             [-1, 8, 10, 10, 10, 8],   // A Shape (8th Fret) (Barre)
             [13, 0, 10, 10, 10, -1]   // E Shape (10th Fret) (Barre)
         ]
@@ -538,13 +545,14 @@ window.pinnedRepresentatives = {
     'E': {
         'm': [
             [0, 2, 2, 0, 0, 0],       // Open Em Shape
-            [0, 7, 5, 0, 0, 0],       // E Shape (5th Fret) #2
+            [0, 7, 5, 0, 0, 7],       // E Shape (5th Fret) #4
             [-1, 7, 9, 9, 8, -1],     // Em (Cm Shape)
             [-1, 7, 9, 9, 8, 7],      // Em (A Shape)
             [12, 14, 14, 12, 12, 12]  // Open Em Shape (High)
         ],
         'dim': [
-            [-1, -1, 2, 3, -1, 3],    // Edim (Airy Shape)
+            [0, 1, 2, 0, -1, 3],      // Edim (Full Shape)
+            [0, -1, -1, 3, 5, 3],     // E Shape (3rd Fret) (Barre)
             [0, 7, 5, 0, 8, 6],       // E Shape (5th Fret) #4
             [0, 7, 8, 0, 8, 6],       // E Shape (6th Fret) #3
             [0, 7, 8, 0, 8, 0],       // E Shape (7th Fret) #2
@@ -554,19 +562,18 @@ window.pinnedRepresentatives = {
         'aug': [
             [0, 3, 2, 1, 1, 0],       // Eaug Shape
             [0, 3, 6, -1, -1, 0],     // E Shape (3rd Fret)
-            [-1, 7, 6, 5, 5, -1],     // Eaug (Caug Shape)
+            [0, 7, 6, 5, 5, 0],       // E Shape (5th Fret) #2 - 6·1번줄은 선택
             [-1, 7, -1, 9, 9, 8],     // Eaug (Compact Shape)
             [0, 11, 10, 9, 9, 0],     // E Shape (9th Fret)
-            [0, 11, -1, 13, 13, 0]    // E Shape (11th Fret)
+            [0, 11, -1, 13, 13, 0],   // E Shape (11th Fret)
+            [-1, -1, 14, 13, 13, 12]  // Eaug (Cluster Shape)
         ],
         '5': [
-            [0, -1, 2, -1, 0, 0],     // E Shape (2nd Fret)
-            [0, 2, 2, -1, 0, 0],      // E Shape (2nd Fret) #4
+            [0, 2, 2, 4, 0, 0],       // E Shape (2nd Fret) #2
+            [0, 2, 2, -1, -1, -1],    // E5 Power Chord
             [0, 7, 9, 9, 0, 0],       // E Shape (7th Fret) #3
-            [-1, 7, 9, 9, 0, 0],      // A Shape (7th Fret) #3
             [12, -1, 9, 9, 0, 0],     // E Shape (9th Fret)
-            [12, 14, 14, -1, -1, -1], // E5 Power Chord (High)
-            [-1, -1, 14, -1, 12, -1]  // E5 (D Shape)
+            [12, 14, 14, -1, -1, -1]  // E5 Power Chord (High)
         ],
         'Major': [
             [0, 2, 2, 1, 0, 0],       // Open E Shape
@@ -576,7 +583,7 @@ window.pinnedRepresentatives = {
             [0, 11, 9, 9, 9, 0],      // E Shape (9th Fret)
             [12, 14, 14, 13, 0, 0],   // E Shape (12th Fret) #6
             [12, 14, 14, 13, 12, 12], // Open E Shape (High)
-            [-1, -1, 14, 13, 12, -1]  // E (D Shape)
+            [-1, -1, 14, 13, 12, 12]  // E (Shell Shape)
         ]
     },
     'D': {
@@ -1968,14 +1975,16 @@ window.slashChordDatabase = {
     'C#': {
         'Major': [
             { name: 'C#/F', desc: 'C# inversion with F in the bass.', frets: [ 1,  4,  3,  1,  2,  1], fingers: [ 1,  4,  3,  1,  2,  1], manualFingers: true, auto: true },
-            { name: 'C#/G#', desc: 'C# inversion with G# in the bass.', frets: [ 4,  4,  3,  1,  2,  1], fingers: [ 4,  4,  3,  1,  2,  1], manualFingers: true, auto: true },
+            { name: 'C#/G#', desc: 'C# inversion with G# in the bass.', frets: [ 4,  4,  6,  6,  6,  4], fingers: [ 1,  1,  3,  3,  3,  1], manualFingers: true, auto: true },
             { name: 'C#/Bb', desc: 'C# over a Bb bass — the bass note sits outside the chord.', frets: [-1,  1,  3,  1,  2, -1], fingers: [-1,  1,  4,  2,  3, -1], manualFingers: true, auto: true },
+            { name: 'C#/B', desc: 'C# over its b7 — reads as a C#7 in third inversion.', frets: [-1,  2,  3,  1,  2, -1], fingers: [-1,  2,  4,  1,  3, -1], manualFingers: true, auto: true },
             { name: 'C#/C', desc: 'C# over a C bass — the bass note sits outside the chord.', frets: [-1,  3,  3,  1,  2, -1], fingers: [-1,  3,  4,  1,  2, -1], manualFingers: true, auto: true },
-            { name: 'C#/Eb', desc: 'C# over a Eb bass — the bass note sits outside the chord.', frets: [-1,  6,  6,  6,  6, -1], fingers: [-1,  1,  1,  1,  1, -1], manualFingers: true, auto: true }
+            { name: 'C#/Eb', desc: 'C# over a Eb bass — the bass note sits outside the chord.', frets: [-1,  6,  6,  6,  6, -1], fingers: [-1,  1,  1,  1,  1, -1], manualFingers: true, auto: true },
+            { name: 'C#/F#', desc: 'C# over its 4th — the bass reframes it as a F# sonority.', frets: [-1, -1,  4,  6,  6,  4], fingers: [-1, -1,  1,  3,  4,  1], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'C#m/E', desc: 'Compact C#m with the 3rd in the bass and the high E ringing.', frets: [-1, -1,  2,  1,  2,  0], fingers: [-1, -1,  2,  1,  3,  0], manualFingers: true },
-            { name: 'C#m/G#', desc: 'C#m inversion with G# in the bass.', frets: [ 4,  4,  2,  1,  2,  0], fingers: [ 4,  4,  2,  1,  3,  0], manualFingers: true, auto: true },
+            { name: 'C#m/G#', desc: 'C#m inversion with G# in the bass.', frets: [ 4,  4,  6,  6,  5,  4], fingers: [ 1,  1,  3,  4,  2,  1], manualFingers: true, auto: true },
             { name: 'C#m/B', desc: 'C#m over a B bass — the bass note sits outside the chord.', frets: [-1,  2,  2,  1,  2,  0], fingers: [-1,  2,  3,  1,  4,  0], manualFingers: true, auto: true },
             { name: 'C#m/Bb', desc: 'C#m over a Bb bass — the bass note sits outside the chord.', frets: [-1,  1,  2,  1,  2,  0], fingers: [-1,  1,  3,  2,  4,  0], manualFingers: true, auto: true },
             { name: 'C#m/Eb', desc: 'C#m over a Eb bass — the bass note sits outside the chord.', frets: [-1,  6,  6,  6,  5,  0], fingers: [-1,  2,  3,  4,  1,  0], manualFingers: true, auto: true }
@@ -2046,11 +2055,14 @@ window.slashChordDatabase = {
             { name: 'C/E', desc: 'C major chord with an open E string bass.', frets: [ 0,  3,  2,  0,  1,  0], fingers: [ 0,  3,  2,  0,  1,  0], manualFingers: true },
             { name: 'C/G', desc: 'Full, rich sounding C chord with G bass.', frets: [ 3,  3,  2,  0,  1,  0], fingers: ['T',  3,  2,  0,  1,  0], manualFingers: true },
             { name: 'C/A', desc: 'C over a A bass — the bass note sits outside the chord.', frets: [-1,  0,  2,  0,  1,  0], fingers: [-1,  0,  2,  0,  1,  0], manualFingers: true, auto: true },
+            { name: 'C/Bb', desc: 'C over its b7 — reads as a C7 in third inversion.', frets: [-1,  1,  2,  0,  1,  0], fingers: [-1,  2,  3,  0,  1,  0], manualFingers: true, auto: true },
             { name: 'C/B', desc: 'C over a B bass — the bass note sits outside the chord.', frets: [-1,  2,  2,  0,  1,  0], fingers: [-1,  2,  3,  0,  1,  0], manualFingers: true, auto: true },
-            { name: 'C/D', desc: 'C over a D bass — the bass note sits outside the chord.', frets: [-1,  5,  5,  5,  5,  0], fingers: [-1,  1,  1,  1,  1,  0], manualFingers: true, auto: true }
+            { name: 'C/D', desc: 'C over a D bass — the bass note sits outside the chord.', frets: [-1,  5,  5,  5,  5,  0], fingers: [-1,  1,  1,  1,  1,  0], manualFingers: true, auto: true },
+            { name: 'C/F', desc: 'C over its 4th — the bass reframes it as a F sonority.', frets: [ 1,  3,  2,  0,  1,  0], fingers: ["T",  3,  2,  0,  1,  0], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'Cm/Eb', desc: 'Cm chord with Eb bass on the 5th string.', frets: [-1,  6,  5,  5,  4, -1], fingers: [-1,  4,  2,  3,  1, -1], manualFingers: true },
+            { name: 'Cm/G', desc: 'Cm in second inversion — G bass.', frets: [ 3,  3,  5,  5,  4,  3], fingers: [ 1,  1,  3,  4,  2,  1], manualFingers: true, auto: true },
             { name: 'Cm/Bb', desc: 'Cm over a Bb bass — the bass note sits outside the chord.', frets: [-1,  1,  1,  0,  1,  3], fingers: [-1,  1,  2,  0,  3,  4], manualFingers: true, auto: true },
             { name: 'Cm/A', desc: 'Cm over a A bass — the bass note sits outside the chord.', frets: [-1,  0,  1,  0,  1,  3], fingers: [-1,  0,  1,  0,  2,  3], manualFingers: true, auto: true },
             { name: 'Cm/D', desc: 'Cm over a D bass — the bass note sits outside the chord.', frets: [-1,  5,  5,  5,  4, -1], fingers: [-1,  2,  3,  4,  1, -1], manualFingers: true, auto: true }
@@ -2122,8 +2134,10 @@ window.slashChordDatabase = {
             { name: 'D/F#', desc: 'Essential transitional chord with F# bass.', frets: [ 2,  0,  0,  2,  3,  2], fingers: ['T',  0,  0,  1,  3,  2], manualFingers: true },
             { name: 'D/A', desc: 'Standard open D chord leaving the A string open.', frets: [-1,  0,  0,  2,  3,  2], fingers: [-1,  0,  0,  1,  3,  2], manualFingers: true },
             { name: 'D/B', desc: 'D over a B bass — the bass note sits outside the chord.', frets: [-1,  2,  0,  2,  3,  2], fingers: [-1,  1,  0,  2,  4,  3], manualFingers: true, auto: true },
+            { name: 'D/C', desc: 'D over its b7 — reads as a D7 in third inversion.', frets: [-1,  3,  0,  2,  3,  2], fingers: [-1,  3,  0,  1,  4,  2], manualFingers: true, auto: true },
             { name: 'D/C#', desc: 'D over a C# bass — the bass note sits outside the chord.', frets: [-1,  4,  0,  2,  3,  2], fingers: [-1,  4,  0,  1,  3,  2], manualFingers: true, auto: true },
-            { name: 'D/E', desc: 'D over a E bass — the bass note sits outside the chord.', frets: [ 0,  0,  0,  2,  3,  2], fingers: [ 0,  0,  0,  1,  3,  2], manualFingers: true, auto: true }
+            { name: 'D/E', desc: 'D over a E bass — the bass note sits outside the chord.', frets: [ 0,  0,  0,  2,  3,  2], fingers: [ 0,  0,  0,  1,  3,  2], manualFingers: true, auto: true },
+            { name: 'D/G', desc: 'D over its 4th — the bass reframes it as a G sonority.', frets: [ 3,  0,  0,  2,  3,  2], fingers: ["T",  0,  0,  1,  3,  2], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'Dm/F', desc: 'Beautiful emotional Dm with F bass on the 1st fret.', frets: [ 1, -1,  0,  2,  3,  1], fingers: ['T', -1,  0,  2,  3,  1], manualFingers: true },
@@ -2201,8 +2215,10 @@ window.slashChordDatabase = {
             { name: 'E/G#', desc: 'Bright inversion frequently used to step smoothly into A.', frets: [ 4, -1,  2,  1,  0,  0], fingers: [ 4, -1,  2,  1,  0,  0], manualFingers: true },
             { name: 'E/B', desc: 'E chord powered by B string bass.', frets: [-1,  2,  2,  1,  0,  0], fingers: [-1,  2,  3,  1,  0,  0], manualFingers: true },
             { name: 'E/C#', desc: 'E over a C# bass — the bass note sits outside the chord.', frets: [-1,  4,  2,  1,  0,  0], fingers: [-1,  4,  2,  1,  0,  0], manualFingers: true, auto: true },
+            { name: 'E/D', desc: 'E over its b7 — reads as a E7 in third inversion.', frets: [-1, -1,  0,  1,  0,  0], fingers: [-1, -1,  0,  1,  0,  0], manualFingers: true, auto: true },
             { name: 'E/Eb', desc: 'E over a Eb bass — the bass note sits outside the chord.', frets: [-1,  6,  6,  4,  0,  0], fingers: [-1,  3,  4,  1,  0,  0], manualFingers: true, auto: true },
-            { name: 'E/F#', desc: 'E over a F# bass — the bass note sits outside the chord.', frets: [ 2,  2,  2,  1,  0,  0], fingers: ['T',  2,  3,  1,  0,  0], manualFingers: true, auto: true }
+            { name: 'E/F#', desc: 'E over a F# bass — the bass note sits outside the chord.', frets: [ 2,  2,  2,  1,  0,  0], fingers: ['T',  2,  3,  1,  0,  0], manualFingers: true, auto: true },
+            { name: 'E/A', desc: 'E over its 4th — the bass reframes it as a A sonority.', frets: [-1,  0,  2,  1,  0,  0], fingers: [-1,  0,  2,  1,  0,  0], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'Em/G', desc: 'Em chord with G bass on the 6th string 3rd fret.', frets: [ 3,  2,  2,  0,  0,  0], fingers: [ 2,  1,  1,  0,  0,  0], manualFingers: true },
@@ -2280,8 +2296,10 @@ window.slashChordDatabase = {
             { name: 'F/A', desc: 'Bright lightweight F triad with an open A string bass.', frets: [-1,  0,  3,  2,  1,  1], fingers: [-1,  0,  3,  2,  1,  1], manualFingers: true },
             { name: 'F/C', desc: 'Powerful F inversion with C bass.', frets: [-1,  3,  3,  2,  1,  1], fingers: [-1,  3,  4,  2,  1,  1], manualFingers: true },
             { name: 'F/D', desc: 'F over a D bass — the bass note sits outside the chord.', frets: [-1,  5,  7,  5,  6, -1], fingers: [-1,  1,  4,  2,  3, -1], manualFingers: true, auto: true },
+            { name: 'F/Eb', desc: 'F over its b7 — reads as a F7 in third inversion.', frets: [-1, -1,  1,  2,  1,  1], fingers: [-1, -1,  1,  2,  1,  1], manualFingers: true, auto: true },
             { name: 'F/E', desc: 'F over a E bass — the bass note sits outside the chord.', frets: [ 0,  0,  3,  2,  1,  1], fingers: [ 0,  0,  3,  2,  1,  1], manualFingers: true, auto: true },
-            { name: 'F/G', desc: 'F over a G bass — the bass note sits outside the chord.', frets: [ 3,  0,  3,  2,  1,  1], fingers: ['T',  0,  3,  2,  1,  1], manualFingers: true, auto: true }
+            { name: 'F/G', desc: 'F over a G bass — the bass note sits outside the chord.', frets: [ 3,  0,  3,  2,  1,  1], fingers: ['T',  0,  3,  2,  1,  1], manualFingers: true, auto: true },
+            { name: 'F/Bb', desc: 'F over its 4th — the bass reframes it as a Bb sonority.', frets: [-1,  1,  3,  2,  1,  1], fingers: [-1,  1,  3,  2,  1,  1], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'Fm/G#', desc: 'Fm triad with G# bass on the 4th string.', frets: [-1, -1,  6,  5,  6,  4], fingers: [-1, -1,  3,  2,  4,  1], manualFingers: true },
@@ -2293,7 +2311,7 @@ window.slashChordDatabase = {
         '7': [
             { name: 'F7/A', desc: 'F7 inversion with A in the bass.', frets: [-1,  0,  1,  2,  1,  1], fingers: [-1,  0,  1,  4,  2,  3], manualFingers: true, auto: true },
             { name: 'F7/Eb', desc: 'F7 inversion with Eb in the bass.', frets: [-1, -1,  1,  2,  1,  1], fingers: [-1, -1,  1,  4,  2,  3], manualFingers: true, auto: true },
-            { name: 'F7/G', desc: 'F7 over a G bass — the bass note sits outside the chord.', frets: [ 3,  3,  3,  5,  4,  5], fingers: ['T',  1,  1,  3,  2,  4], manualFingers: true, auto: true },
+            { name: 'F7/G', desc: 'F7 over a G bass — the bass note sits outside the chord.', frets: [ 3,  3,  3,  5,  4,  5], fingers: [ 1,  1,  1,  3,  2,  4], manualFingers: true, auto: true },
             { name: 'F7/Bb', desc: 'F7 over a Bb bass — the bass note sits outside the chord.', frets: [-1,  1,  1,  2,  1,  1], fingers: [-1,  1,  1,  4,  2,  3], manualFingers: true, auto: true }
         ],
         'm7': [
@@ -2357,8 +2375,10 @@ window.slashChordDatabase = {
             { name: 'G/B', desc: 'The most popular acoustic slash chord for descending basslines.', frets: [-1,  2,  0,  0,  3,  3], fingers: [-1,  1,  0,  0,  2,  3], manualFingers: true },
             { name: 'G/D', desc: 'Big open G chord with D bass.', frets: [-1, -1,  0,  0,  0,  3], fingers: [-1, -1,  0,  0,  0,  1], manualFingers: true },
             { name: 'G/E', desc: 'G over a E bass — the bass note sits outside the chord.', frets: [ 0,  2,  0,  0,  0,  3], fingers: [ 0,  1,  0,  0,  0,  2], manualFingers: true, auto: true },
-            { name: 'G/F#', desc: 'G over a F# bass — the bass note sits outside the chord.', frets: [ 2,  2,  0,  0,  0,  3], fingers: [ 1,  1,  0,  0,  0,  2], manualFingers: true, auto: true },
-            { name: 'G/A', desc: 'G over a A bass — the bass note sits outside the chord.', frets: [-1,  0,  0,  0,  0,  3], fingers: [-1,  0,  0,  0,  0,  1], manualFingers: true, auto: true }
+            { name: 'G/F', desc: 'G over a F bass — the bass note sits outside the chord.', frets: [ 1, -1,  0,  0,  0,  3], fingers: [ 1, -1,  0,  0,  0,  3], manualFingers: true, auto: true },
+            { name: 'G/F#', desc: 'G over a F# bass — the bass note sits outside the chord.', frets: [ 2,  2,  0,  0,  0,  3], fingers: [ 1,  2,  0,  0,  0,  4], manualFingers: true, auto: true },
+            { name: 'G/A', desc: 'G over a A bass — the bass note sits outside the chord.', frets: [-1,  0,  0,  0,  0,  3], fingers: [-1,  0,  0,  0,  0,  1], manualFingers: true, auto: true },
+            { name: 'G/C', desc: 'G over its 4th — the bass reframes it as a C sonority.', frets: [-1,  3,  0,  0,  0,  3], fingers: [-1,  1,  0,  0,  0,  2], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'Gm/Bb', desc: 'Gm chord with Bb bass on the 5th string.', frets: [-1,  1,  0,  0,  3,  3], fingers: [-1,  1,  0,  0,  3,  4], manualFingers: true },
@@ -2436,8 +2456,10 @@ window.slashChordDatabase = {
             { name: 'A/C#', desc: 'Acoustic standard step chord moving gracefully to Bm.', frets: [-1,  4,  2,  2,  2, -1], fingers: [-1,  3,  1,  1,  1, -1], manualFingers: true },
             { name: 'A/E', desc: 'Heavy A chord with low E bass.', frets: [ 0,  0,  2,  2,  2,  0], fingers: [ 0,  0,  1,  1,  1,  0], manualFingers: true },
             { name: 'A/F#', desc: 'A over a F# bass — the bass note sits outside the chord.', frets: [ 2,  0,  2,  2,  2,  0], fingers: ['T',  0,  1,  1,  1,  0], manualFingers: true, auto: true },
+            { name: 'A/G', desc: 'A over its b7 — reads as a A7 in third inversion.', frets: [ 3,  0,  2,  2,  2,  0], fingers: ["T",  0,  1,  1,  1,  0], manualFingers: true, auto: true },
             { name: 'A/G#', desc: 'A over a G# bass — the bass note sits outside the chord.', frets: [ 4,  0,  2,  2,  2,  0], fingers: [ 3,  0,  1,  1,  1,  0], manualFingers: true, auto: true },
-            { name: 'A/B', desc: 'A over a B bass — the bass note sits outside the chord.', frets: [-1,  2,  2,  2,  2,  0], fingers: [-1,  1,  1,  1,  1,  0], manualFingers: true, auto: true }
+            { name: 'A/B', desc: 'A over a B bass — the bass note sits outside the chord.', frets: [-1,  2,  2,  2,  2,  0], fingers: [-1,  1,  1,  1,  1,  0], manualFingers: true, auto: true },
+            { name: 'A/D', desc: 'A over its 4th — the bass reframes it as a D sonority.', frets: [-1, -1,  0,  2,  2,  0], fingers: [-1, -1,  0,  1,  2,  0], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'Am/G', desc: 'Beautiful minor line-cliche melody descending chord.', frets: [ 3,  0,  2,  2,  1,  0], fingers: ['T',  0,  2,  3,  1,  0], manualFingers: true },
@@ -2517,8 +2539,10 @@ window.slashChordDatabase = {
             { name: 'B/Eb', desc: 'Major inversion commonly used for stepping up to E.', frets: [-1,  6,  4,  4,  4, -1], fingers: [-1,  3,  1,  1,  1, -1], manualFingers: true },
             { name: 'B/F#', desc: 'B inversion with F# in the bass.', frets: [ 2,  2,  1,  4,  0,  2], fingers: [ 2,  2,  1,  4,  0,  3], manualFingers: true, auto: true },
             { name: 'B/G#', desc: 'B over a G# bass — the bass note sits outside the chord.', frets: [ 4,  6,  4,  4,  0, -1], fingers: ['T',  3,  1,  1,  0, -1], manualFingers: true, auto: true },
+            { name: 'B/A', desc: 'B over its b7 — reads as a B7 in third inversion.', frets: [-1,  0,  1,  4,  0,  2], fingers: [-1,  0,  1,  4,  0,  2], manualFingers: true, auto: true },
             { name: 'B/Bb', desc: 'B over a Bb bass — the bass note sits outside the chord.', frets: [-1,  1,  1,  4,  0,  2], fingers: [-1,  1,  1,  4,  0,  2], manualFingers: true, auto: true },
-            { name: 'B/C#', desc: 'B over a C# bass — the bass note sits outside the chord.', frets: [-1,  4,  4,  4,  4, -1], fingers: [-1,  1,  1,  1,  1, -1], manualFingers: true, auto: true }
+            { name: 'B/C#', desc: 'B over a C# bass — the bass note sits outside the chord.', frets: [-1,  4,  4,  4,  4, -1], fingers: [-1,  1,  1,  1,  1, -1], manualFingers: true, auto: true },
+            { name: 'B/E', desc: 'B over its 4th — the bass reframes it as a E sonority.', frets: [ 0, -1,  4,  4,  4, -1], fingers: [ 0, -1,  1,  1,  1, -1], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'Bm/A', desc: 'Bm barre chord with open A bass string.', frets: [-1,  0,  4,  4,  3,  2], fingers: [-1,  0,  3,  4,  2,  1], manualFingers: true },
@@ -2594,18 +2618,20 @@ window.slashChordDatabase = {
     },
     'Eb': {
         'Major': [
-            { name: 'Eb/G', desc: 'Eb inversion with G in the bass.', frets: [ 3,  1,  1,  0,  4,  3], fingers: [ 2,  1,  1,  0,  4,  3], manualFingers: true, auto: true },
-            { name: 'Eb/Bb', desc: 'Eb inversion with Bb in the bass.', frets: [ 6,  6,  5,  0,  4,  3], fingers: [ 4,  4,  3,  0,  2,  1], manualFingers: true, auto: true },
+            { name: 'Eb/G', desc: 'Eb inversion with G in the bass.', frets: [ 3,  6,  5,  3,  4,  3], fingers: [ 1,  4,  3,  1,  2,  1], manualFingers: true, auto: true },
+            { name: 'Eb/Bb', desc: 'Eb inversion with Bb in the bass.', frets: [-1,  1,  1,  3,  4,  3], fingers: [-1,  1,  1,  3,  4,  3], manualFingers: true, auto: true },
             { name: 'Eb/C', desc: 'Eb over a C bass — the bass note sits outside the chord.', frets: [-1,  3,  5,  0,  4,  6], fingers: [-1,  1,  3,  0,  2,  4], manualFingers: true, auto: true },
+            { name: 'Eb/C#', desc: 'Eb over its b7 — reads as a Eb7 in third inversion.', frets: [-1,  4,  5,  0,  4,  6], fingers: [-1,  1,  3,  0,  2,  4], manualFingers: true, auto: true },
             { name: 'Eb/D', desc: 'Eb over a D bass — the bass note sits outside the chord.', frets: [-1,  5,  5,  0,  4,  6], fingers: [-1,  2,  3,  0,  1,  4], manualFingers: true, auto: true },
-            { name: 'Eb/F', desc: 'Eb over a F bass — the bass note sits outside the chord.', frets: [ 1,  1,  1,  0,  4,  3], fingers: [ 1,  1,  1,  0,  4,  3], manualFingers: true, auto: true }
+            { name: 'Eb/F', desc: 'Eb over a F bass — the bass note sits outside the chord.', frets: [ 1,  1,  1,  0,  4,  3], fingers: [ 1,  1,  1,  0,  4,  3], manualFingers: true, auto: true },
+            { name: 'Eb/G#', desc: 'Eb over its 4th — the bass reframes it as a G# sonority.', frets: [-1, -1,  6,  8,  8,  6], fingers: [-1, -1,  1,  3,  4,  1], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'Ebm/F#', desc: 'Ebm inversion with F# in the bass.', frets: [ 2,  1,  1,  3,  4, -1], fingers: ['T',  1,  1,  3,  4, -1], manualFingers: true, auto: true },
             { name: 'Ebm/Bb', desc: 'Ebm inversion with Bb in the bass.', frets: [ 6,  6,  8,  8,  7,  6], fingers: [ 1,  1,  3,  3,  2,  1], manualFingers: true, auto: true },
             { name: 'Ebm/C#', desc: 'Ebm over a C# bass — the bass note sits outside the chord.', frets: [-1,  4,  4,  3,  4, -1], fingers: [-1,  2,  3,  1,  4, -1], manualFingers: true, auto: true },
             { name: 'Ebm/C', desc: 'Ebm over a C bass — the bass note sits outside the chord.', frets: [-1,  3,  4,  3,  4, -1], fingers: [-1,  1,  3,  2,  4, -1], manualFingers: true, auto: true },
-            { name: 'Ebm/F', desc: 'Ebm over a F bass — the bass note sits outside the chord.', frets: [ 1,  1,  1,  3,  4,  2], fingers: ['T',  1,  1,  3,  4,  2], manualFingers: true, auto: true }
+            { name: 'Ebm/F', desc: 'Ebm over a F bass — the bass note sits outside the chord.', frets: [ 1,  1,  1,  3,  4,  2], fingers: [ 1,  1,  1,  3,  4,  2], manualFingers: true, auto: true }
         ],
         '7': [
             { name: 'Eb7/G', desc: 'Eb7 inversion with G in the bass.', frets: [ 3,  1,  1,  0,  2,  3], fingers: ['T',  1,  1,  0,  2,  3], manualFingers: true, auto: true },
@@ -2616,8 +2642,8 @@ window.slashChordDatabase = {
         'm7': [
             { name: 'Ebm7/F#', desc: 'Ebm7 inversion with F# in the bass.', frets: [ 2,  1,  1,  3,  2, -1], fingers: ['T',  1,  1,  3,  2, -1], manualFingers: true, auto: true },
             { name: 'Ebm7/Bb', desc: 'Ebm7 inversion with Bb in the bass.', frets: [-1,  1,  1,  3,  2,  2], fingers: [-1,  1,  1,  4,  2,  3], manualFingers: true, auto: true },
-            { name: 'Ebm7/F', desc: 'Ebm7 over a F bass — the bass note sits outside the chord.', frets: [ 1,  1,  1,  3,  2,  2], fingers: ['T',  1,  1,  4,  2,  3], manualFingers: true, auto: true },
-            { name: 'Ebm7/G#', desc: 'Ebm7 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  4,  6], fingers: ['T',  1,  1,  3,  2,  4], manualFingers: true, auto: true }
+            { name: 'Ebm7/F', desc: 'Ebm7 over a F bass — the bass note sits outside the chord.', frets: [ 1,  1,  1,  3,  2,  2], fingers: [ 1,  1,  1,  4,  2,  3], manualFingers: true, auto: true },
+            { name: 'Ebm7/G#', desc: 'Ebm7 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  4,  6], fingers: [ 1,  1,  1,  3,  2,  4], manualFingers: true, auto: true }
         ],
         'maj7': [
             { name: 'Ebmaj7/G', desc: 'Ebmaj7 inversion with G in the bass.', frets: [ 3,  5,  0,  0,  4,  6], fingers: ['T',  2,  0,  0,  1,  3], manualFingers: true, auto: true },
@@ -2634,7 +2660,7 @@ window.slashChordDatabase = {
             { name: 'Ebsus4/D', desc: 'Ebsus4 over a D bass — the bass note sits outside the chord.', frets: [-1,  5,  6,  3,  4, -1], fingers: [-1,  3,  4,  1,  2, -1], manualFingers: true, auto: true }
         ],
         'sus2': [
-            { name: 'Ebsus2/F', desc: 'Ebsus2 inversion with F in the bass.', frets: [ 1,  1,  1,  3,  4,  1], fingers: ['T',  1,  1,  3,  4,  2], manualFingers: true, auto: true },
+            { name: 'Ebsus2/F', desc: 'Ebsus2 inversion with F in the bass.', frets: [ 1,  1,  1,  3,  4,  1], fingers: [ 1,  1,  1,  3,  4,  2], manualFingers: true, auto: true },
             { name: 'Ebsus2/Bb', desc: 'Ebsus2 inversion with Bb in the bass.', frets: [-1,  1,  1,  3,  4,  1], fingers: [-1,  1,  1,  3,  4,  2], manualFingers: true, auto: true }
         ],
         '6': [
@@ -2664,16 +2690,18 @@ window.slashChordDatabase = {
         'm6': [
             { name: 'Ebm6/F#', desc: 'Ebm6 inversion with F# in the bass.', frets: [ 2,  1,  1,  3,  1, -1], fingers: ['T',  1,  1,  3,  2, -1], manualFingers: true, auto: true },
             { name: 'Ebm6/Bb', desc: 'Ebm6 inversion with Bb in the bass.', frets: [-1,  1,  1,  3,  1,  2], fingers: [-1,  1,  1,  4,  2,  3], manualFingers: true, auto: true },
-            { name: 'Ebm6/F', desc: 'Ebm6 over a F bass — the bass note sits outside the chord.', frets: [ 1,  1,  1,  3,  1,  2], fingers: ['T',  1,  1,  4,  2,  3], manualFingers: true, auto: true }
+            { name: 'Ebm6/F', desc: 'Ebm6 over a F bass — the bass note sits outside the chord.', frets: [ 1,  1,  1,  3,  1,  2], fingers: [ 1,  1,  1,  4,  2,  3], manualFingers: true, auto: true }
         ]
     },
     'F#': {
         'Major': [
             { name: 'F#/Bb', desc: 'F# inversion with Bb in the bass.', frets: [ 6,  9,  8,  6,  7,  6], fingers: [ 1,  4,  3,  1,  2,  1], manualFingers: true, auto: true },
-            { name: 'F#/C#', desc: 'F# inversion with C# in the bass.', frets: [ 9,  9,  8,  6,  7,  6], fingers: [ 4,  4,  3,  1,  2,  1], manualFingers: true, auto: true },
+            { name: 'F#/C#', desc: 'F# inversion with C# in the bass.', frets: [ 9,  9, 11, 11, 11,  9], fingers: [ 1,  1,  3,  3,  3,  1], manualFingers: true, auto: true },
             { name: 'F#/Eb', desc: 'F# over a Eb bass — the bass note sits outside the chord.', frets: [-1,  6,  8,  6,  7, -1], fingers: [-1,  1,  4,  2,  3, -1], manualFingers: true, auto: true },
-            { name: 'F#/F', desc: 'F# over a F bass — the bass note sits outside the chord.', frets: [ 1,  1,  4,  3,  2, -1], fingers: ['T',  1,  4,  3,  2, -1], manualFingers: true, auto: true },
-            { name: 'F#/G#', desc: 'F# over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  3, -1, -1], fingers: ['T',  2,  3,  1, -1, -1], manualFingers: true, auto: true }
+            { name: 'F#/E', desc: 'F# over its b7 — reads as a F#7 in third inversion.', frets: [ 0, -1,  4,  3,  2, -1], fingers: [ 0, -1,  3,  2,  1, -1], manualFingers: true, auto: true },
+            { name: 'F#/F', desc: 'F# over a F bass — the bass note sits outside the chord.', frets: [ 1, -1, -1,  3,  2,  2], fingers: [ 1, -1, -1,  4,  2,  3], manualFingers: true, auto: true },
+            { name: 'F#/G#', desc: 'F# over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  3, -1, -1], fingers: ['T',  2,  3,  1, -1, -1], manualFingers: true, auto: true },
+            { name: 'F#/B', desc: 'F# over its 4th — the bass reframes it as a B sonority.', frets: [-1,  2,  4,  3,  2, -1], fingers: [-1,  1,  4,  3,  2, -1], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'F#m/A', desc: 'F#m inversion with A in the bass.', frets: [ 5,  0,  4,  2,  2,  2], fingers: [ 4,  0,  3,  1,  1,  1], manualFingers: true, auto: true },
@@ -2686,7 +2714,7 @@ window.slashChordDatabase = {
             { name: 'F#7/E', desc: 'F#7 inversion with E in the bass.', frets: [ 0,  4,  4,  3,  2,  0], fingers: [ 0,  3,  4,  2,  1,  0], manualFingers: true, auto: true },
             { name: 'F#7/Bb', desc: 'F#7 inversion with Bb in the bass.', frets: [ 6,  4,  4,  6,  5,  0], fingers: [ 3,  1,  1,  4,  2,  0], manualFingers: true, auto: true },
             { name: 'F#7/Eb', desc: 'F#7 over a Eb bass — the bass note sits outside the chord.', frets: [-1,  6,  8,  6,  7,  0], fingers: [-1,  1,  4,  2,  3,  0], manualFingers: true, auto: true },
-            { name: 'F#7/G#', desc: 'F#7 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  5,  6], fingers: ['T',  1,  1,  3,  2,  4], manualFingers: true, auto: true },
+            { name: 'F#7/G#', desc: 'F#7 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  5,  6], fingers: [ 1,  1,  1,  3,  2,  4], manualFingers: true, auto: true },
             { name: 'F#7/B', desc: 'F#7 over a B bass — the bass note sits outside the chord.', frets: [-1,  2,  2,  3,  2,  2], fingers: [-1,  1,  1,  4,  2,  3], manualFingers: true, auto: true }
         ],
         'm7': [
@@ -2699,7 +2727,7 @@ window.slashChordDatabase = {
         'maj7': [
             { name: 'F#maj7/C#', desc: 'F#maj7 inversion with C# in the bass.', frets: [-1,  4,  3,  3,  2,  2], fingers: [-1,  4,  2,  3,  1,  1], manualFingers: true, auto: true },
             { name: 'F#maj7/F', desc: 'F#maj7 inversion with F in the bass.', frets: [ 1,  1,  4,  3,  2, -1], fingers: ['T',  1,  4,  3,  2, -1], manualFingers: true, auto: true },
-            { name: 'F#maj7/G#', desc: 'F#maj7 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  6,  6], fingers: ['T',  1,  1,  2,  3,  4], manualFingers: true, auto: true },
+            { name: 'F#maj7/G#', desc: 'F#maj7 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  6,  6], fingers: [ 1,  1,  1,  2,  3,  4], manualFingers: true, auto: true },
             { name: 'F#maj7/B', desc: 'F#maj7 over a B bass — the bass note sits outside the chord.', frets: [ 7,  9,  8,  6,  6,  6], fingers: [ 2,  4,  3,  1,  1,  1], manualFingers: true, auto: true }
         ],
         'sus4': [
@@ -2710,13 +2738,13 @@ window.slashChordDatabase = {
             { name: 'F#sus4/F', desc: 'F#sus4 over a F bass — the bass note sits outside the chord.', frets: [ 1,  4,  4,  4,  0, -1], fingers: ['T',  1,  1,  1,  0, -1], manualFingers: true, auto: true }
         ],
         'sus2': [
-            { name: 'F#sus2/G#', desc: 'F#sus2 inversion with G# in the bass.', frets: [ 4,  4,  4,  6,  7,  4], fingers: ['T',  1,  1,  3,  4,  2], manualFingers: true, auto: true },
+            { name: 'F#sus2/G#', desc: 'F#sus2 inversion with G# in the bass.', frets: [ 4,  4,  4,  6,  7,  4], fingers: [ 1,  1,  1,  3,  4,  2], manualFingers: true, auto: true },
             { name: 'F#sus2/C#', desc: 'F#sus2 inversion with C# in the bass.', frets: [-1,  4,  4,  6,  7,  4], fingers: [-1,  1,  1,  3,  4,  2], manualFingers: true, auto: true }
         ],
         '6': [
             { name: 'F#6/Bb', desc: 'F#6 inversion with Bb in the bass.', frets: [-1,  1,  1,  3,  2,  2], fingers: [-1,  1,  1,  4,  2,  3], manualFingers: true, auto: true },
             { name: 'F#6/C#', desc: 'F#6 inversion with C# in the bass.', frets: [-1,  4,  4,  6,  4,  6], fingers: [-1,  1,  1,  3,  2,  4], manualFingers: true, auto: true },
-            { name: 'F#6/G#', desc: 'F#6 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  4,  6], fingers: ['T',  1,  1,  3,  2,  4], manualFingers: true, auto: true }
+            { name: 'F#6/G#', desc: 'F#6 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  4,  6], fingers: [ 1,  1,  1,  3,  2,  4], manualFingers: true, auto: true }
         ],
         'add9': [
             { name: 'F#add9/Bb', desc: 'F#add9 inversion with Bb in the bass.', frets: [-1,  1,  4,  1,  2, -1], fingers: [-1,  1,  4,  2,  3, -1], manualFingers: true, auto: true },
@@ -2739,17 +2767,19 @@ window.slashChordDatabase = {
         'm6': [
             { name: 'F#m6/A', desc: 'F#m6 inversion with A in the bass.', frets: [-1,  0,  1,  2,  2,  2], fingers: [-1,  0,  1,  2,  3,  4], manualFingers: true, auto: true },
             { name: 'F#m6/Eb', desc: 'F#m6 inversion with Eb in the bass.', frets: [-1, -1,  1,  2,  2,  2], fingers: [-1, -1,  1,  2,  3,  4], manualFingers: true, auto: true },
-            { name: 'F#m6/G#', desc: 'F#m6 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  4,  5], fingers: ['T',  1,  1,  4,  2,  3], manualFingers: true, auto: true },
+            { name: 'F#m6/G#', desc: 'F#m6 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  4,  4,  6,  4,  5], fingers: [ 1,  1,  1,  4,  2,  3], manualFingers: true, auto: true },
             { name: 'F#m6/B', desc: 'F#m6 over a B bass — the bass note sits outside the chord.', frets: [ 7,  0,  4,  6,  4, -1], fingers: [ 4,  0,  1,  3,  2, -1], manualFingers: true, auto: true }
         ]
     },
     'G#': {
         'Major': [
-            { name: 'G#/Eb', desc: 'G# inversion with Eb in the bass.', frets: [11, 11, 10,  8,  9,  8], fingers: [ 4,  4,  3,  1,  2,  1], manualFingers: true, auto: true },
             { name: 'G#/C', desc: 'G# inversion with C in the bass.', frets: [ 8, 11, 10,  8,  9,  8], fingers: [ 1,  4,  3,  1,  2,  1], manualFingers: true, auto: true },
+            { name: 'G#/Eb', desc: 'G# inversion with Eb in the bass.', frets: [11, 11, 13, 13, 13, 11], fingers: [ 1,  1,  3,  3,  3,  1], manualFingers: true, auto: true },
             { name: 'G#/F', desc: 'G# over a F bass — the bass note sits outside the chord.', frets: [ 1,  3,  1,  1, -1, -1], fingers: ['T',  3,  1,  1, -1, -1], manualFingers: true, auto: true },
+            { name: 'G#/F#', desc: 'G# over its b7 — reads as a G#7 in third inversion.', frets: [ 2,  3,  1,  1, -1, -1], fingers: ["T",  3,  1,  1, -1, -1], manualFingers: true, auto: true },
             { name: 'G#/G', desc: 'G# over a G bass — the bass note sits outside the chord.', frets: [ 3,  3,  1,  1,  1, -1], fingers: [ 3,  4,  1,  1,  1, -1], manualFingers: true, auto: true },
-            { name: 'G#/Bb', desc: 'G# over a Bb bass — the bass note sits outside the chord.', frets: [-1,  1,  1,  1,  1, -1], fingers: [-1,  1,  1,  1,  1, -1], manualFingers: true, auto: true }
+            { name: 'G#/Bb', desc: 'G# over a Bb bass — the bass note sits outside the chord.', frets: [-1,  1,  1,  1,  1, -1], fingers: [-1,  1,  1,  1,  1, -1], manualFingers: true, auto: true },
+            { name: 'G#/C#', desc: 'G# over its 4th — the bass reframes it as a C# sonority.', frets: [-1,  4,  6,  5,  4, -1], fingers: [-1,  1,  4,  3,  1, -1], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'G#m/B', desc: 'G#m inversion with B in the bass.', frets: [ 7,  6,  6,  4,  0,  4], fingers: [ 4,  3,  3,  1,  0,  2], manualFingers: true, auto: true },
@@ -2820,11 +2850,13 @@ window.slashChordDatabase = {
     },
     'Bb': {
         'Major': [
-            { name: 'Bb/F', desc: 'Bb inversion with F in the bass.', frets: [ 1,  1,  0,  3,  3,  1], fingers: ['T',  1,  0,  3,  4,  2], manualFingers: true, auto: true },
             { name: 'Bb/D', desc: 'Bb inversion with D in the bass.', frets: [-1,  5,  0,  3,  6,  6], fingers: [-1,  2,  0,  1,  3,  4], manualFingers: true, auto: true },
-            { name: 'Bb/G', desc: 'Bb over a G bass — the bass note sits outside the chord.', frets: [ 3,  5,  0,  3,  6, -1], fingers: ['T',  3,  0,  1,  4, -1], manualFingers: true, auto: true },
+            { name: 'Bb/F', desc: 'Bb inversion with F in the bass.', frets: [ 1,  1,  0,  3,  3,  1], fingers: ["T", "T",  0,  3,  4,  1], manualFingers: true, auto: true },
+            { name: 'Bb/G', desc: 'Bb over a G bass — the bass note sits outside the chord.', frets: [ 3, -1,  3,  3,  3, -1], fingers: [ 2, -1,  3,  3,  3, -1], manualFingers: true, auto: true },
+            { name: 'Bb/G#', desc: 'Bb over its b7 — reads as a Bb7 in third inversion.', frets: [ 4, -1,  3,  3,  3, -1], fingers: [ 3, -1,  1,  1,  1, -1], manualFingers: true, auto: true },
             { name: 'Bb/A', desc: 'Bb over a A bass — the bass note sits outside the chord.', frets: [-1,  0,  0,  3,  3,  1], fingers: [-1,  0,  0,  3,  4,  1], manualFingers: true, auto: true },
-            { name: 'Bb/C', desc: 'Bb over a C bass — the bass note sits outside the chord.', frets: [ 8,  8,  0,  7,  6,  6], fingers: [ 3,  4,  0,  2,  1,  1], manualFingers: true, auto: true }
+            { name: 'Bb/C', desc: 'Bb over a C bass — the bass note sits outside the chord.', frets: [ 8,  8,  0,  7,  6,  6], fingers: [ 3,  4,  0,  2,  1,  1], manualFingers: true, auto: true },
+            { name: 'Bb/Eb', desc: 'Bb over its 4th — the bass reframes it as a Eb sonority.', frets: [-1, -1,  1,  3,  3,  1], fingers: [-1, -1,  1,  3,  4,  1], manualFingers: true, auto: true }
         ],
         'm': [
             { name: 'Bbm/F', desc: 'Bbm inversion with F in the bass.', frets: [ 1,  1,  3,  3,  2,  1], fingers: [ 1,  1,  3,  3,  2,  1], manualFingers: true, auto: true },
@@ -2853,7 +2885,7 @@ window.slashChordDatabase = {
             { name: 'Bbmaj7/Eb', desc: 'Bbmaj7 over a Eb bass — the bass note sits outside the chord.', frets: [-1,  6,  3,  3,  3,  5], fingers: [-1,  4,  1,  1,  1,  3], manualFingers: true, auto: true }
         ],
         'sus4': [
-            { name: 'Bbsus4/F', desc: 'Bbsus4 inversion with F in the bass.', frets: [ 1,  1,  1,  3,  4,  1], fingers: ['T',  1,  1,  3,  4,  2], manualFingers: true, auto: true },
+            { name: 'Bbsus4/F', desc: 'Bbsus4 inversion with F in the bass.', frets: [ 1,  1,  1,  3,  4,  1], fingers: [ 1,  1,  1,  3,  4,  2], manualFingers: true, auto: true },
             { name: 'Bbsus4/Eb', desc: 'Bbsus4 inversion with Eb in the bass.', frets: [-1, -1,  1,  3,  4,  1], fingers: [-1, -1,  1,  3,  4,  2], manualFingers: true, auto: true },
             { name: 'Bbsus4/G', desc: 'Bbsus4 over a G bass — the bass note sits outside the chord.', frets: [ 3,  6,  3,  3, -1, -1], fingers: ['T',  4,  1,  1, -1, -1], manualFingers: true, auto: true },
             { name: 'Bbsus4/G#', desc: 'Bbsus4 over a G# bass — the bass note sits outside the chord.', frets: [ 4,  6,  3,  3,  4, -1], fingers: ['T',  4,  1,  1,  2, -1], manualFingers: true, auto: true },

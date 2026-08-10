@@ -443,30 +443,45 @@ window.dictView = {
             return !fretKeys.has(lower.join(','));
         });
 
-        // 🌟 한 줄만 개방↔뮤트가 다르고 나머지가 같은 폼은 잡는 손 모양이 완전히 같다. 그 줄을
-        //    칠지 말지 차이뿐이라 카드를 두 장 두지 않고, 개방현 쪽 하나만 남기되 그 줄을
-        //    "선택"으로 표시해 둘 다 된다는 걸 알린다. 최저음이 바뀌면 다른 코드가 되므로 제외하고,
-        //    직접 지정한 대표는 건드리지 않는다.
+        // 🌟 짚는 자리가 똑같고 나머지 줄이 개방이냐 뮤트냐만 다른 폼들은 잡는 손 모양이 완전히
+        //    같다. 그 줄을 칠지 말지 차이뿐이라 카드를 여러 장 둘 이유가 없다. 개방현이 가장 많은
+        //    하나만 남기고, 갈리는 줄을 "선택"으로 표시해 둘 다 된다는 걸 알린다.
+        //    최저음이 달라지면 다른 코드가 되므로 그런 조합은 묶지 않고, 직접 지정한 대표도 건드리지 않는다.
         {
             const bassOf = v => {
                 const s = v.frets.findIndex(f => f >= 0);
                 return s === -1 ? null : window.getNoteName(5 - s, v.frets[s]);
             };
-            const byFrets = new Map(allVoicings.map(v => [v.frets.join(','), v]));
-            allVoicings = allVoicings.filter(v => {
-                if (pinnedKeys.has(v.frets.join(','))) return true;
-                for (let s = 0; s < 6; s++) {
-                    if (v.frets[s] !== -1) continue;
-                    const alt = v.frets.slice();
-                    alt[s] = 0;
-                    const twin = byFrets.get(alt.join(','));
-                    if (!twin) continue;
-                    if (bassOf(twin) !== bassOf(v)) continue;
-                    twin.optional = (twin.optional || []).concat(s);
-                    return false;   // 개방현 쪽(twin)만 남기고, 그 줄은 선택으로 표시된다
-                }
-                return true;
+            // 짚는 자리(f > 0)가 같은 폼끼리 모은다
+            const groups = new Map();
+            allVoicings.forEach(v => {
+                const key = v.frets.map((f, s) => (f > 0 ? s + ':' + f : '')).filter(Boolean).join('|');
+                if (!groups.has(key)) groups.set(key, []);
+                groups.get(key).push(v);
             });
+            const dropped = new Set();
+            groups.forEach(list => {
+                if (list.length < 2) return;
+                // 개방현이 제일 많은 폼을 대표로 삼는다
+                const openCount = v => v.frets.filter(f => f === 0).length;
+                const keep = list.slice().sort((a, b) => openCount(b) - openCount(a))[0];
+                list.forEach(v => {
+                    if (v === keep) return;
+                    if (pinnedKeys.has(v.frets.join(','))) return;
+                    if (bassOf(v) !== bassOf(keep)) return;
+                    // 갈리는 줄은 keep 쪽이 개방, 이쪽이 뮤트인 자리뿐이어야 한다
+                    const diff = [];
+                    for (let s = 0; s < 6; s++) {
+                        if (v.frets[s] === keep.frets[s]) continue;
+                        if (v.frets[s] === -1 && keep.frets[s] === 0) diff.push(s);
+                        else return;                       // 그 외 차이가 있으면 다른 폼이다
+                    }
+                    if (!diff.length) return;
+                    keep.optional = (keep.optional || []).concat(diff.filter(s => !(keep.optional || []).includes(s)));
+                    dropped.add(v);
+                });
+            });
+            if (dropped.size) allVoicings = allVoicings.filter(v => !dropped.has(v));
         }
 
         // 🌟 손으로 지정한 운지 덮어쓰기 - 렌더링 때 만들어지는 폼은 데이터에 손댈 자리가 없다.
@@ -1235,14 +1250,18 @@ window.dictView = {
             grid.appendChild(line);
         }
 
-        // 검지(1번) 바레 표시줄
+        // 바레 표시줄 - 검지뿐 아니라 한 손가락이 같은 프렛에서 두 줄 이상을 누르면 다 그린다.
+        //    (약지로 3번줄과 1번줄을 함께 누르고 그 사이 2번줄은 새끼가 더 높은 프렛을 짚는 식)
         const barreMap = {};
         fingers.forEach((fg, s) => {
-            if (fg === 1 && frets[s] > 0) { (barreMap[frets[s]] = barreMap[frets[s]] || []).push(s); }
+            if (typeof fg === 'number' && fg > 0 && frets[s] > 0) {
+                const key = `${fg}:${frets[s]}`;
+                (barreMap[key] = barreMap[key] || []).push(s);
+            }
         });
-        Object.entries(barreMap).forEach(([fretStr, strs]) => {
+        Object.entries(barreMap).forEach(([key, strs]) => {
             if (strs.length < 2) return;
-            const fret = parseInt(fretStr);
+            const fret = parseInt(key.split(':')[1]);
             const rowIdx = fret - startFret;
             if (rowIdx < 0 || rowIdx >= numRows) return;
             // 🌟 막대는 검지가 실제로 누르는 줄까지만 그린다. 더 높은 프렛을 짚는 줄 밑을
