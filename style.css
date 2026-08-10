@@ -380,8 +380,15 @@ button.active { background-color: var(--accent-color); color: white; }
     background: rgba(255, 255, 255, 0.015);
 }
 /* 팁 글 광고: 본문 중간 하나, 글 끝 하나. 글이 600~800단어라 중간 자리가 문단 사이에 묻힌다. */
+/* 🌟 팁 글은 600~800단어에 섹션이 대여섯 개라, 첫 섹션 다음 한 번 끊기는 건 자연스럽다.
+   읽는 흐름 안에 있는 자리라 글 끝보다 노출이 훨씬 낫다. 도구 페이지에는 쓰지 않는다. */
 .ad-slot-inline { margin: 26px 0; min-height: 250px; }
+/* 🌟 얇은 가로 배너. 넓은 화면은 728x90, 좁은 화면은 320x100이 정확히 들어간다. */
+.ad-slot-banner { margin-top: 28px; min-height: 90px; }
 .ad-slot-end { margin-top: 28px; min-height: 250px; }
+/* 🌟 팁 목록 탭에는 글 목록 아래에 이미 큰 자리가 있다. 페이지마다 광고는 하나씩만 두기로
+   했으므로, 그 탭이 열려 있을 때는 아래 배너를 내보내지 않는다. */
+#tab-blog.active ~ .ad-slot-banner { display: none !important; }
 /* 결과 화면에 방금 짚은 모양을 그려 준다 */
 .recog-shape { margin-bottom: 16px; display: flex; }
 .recog-shape:empty { display: none; }
@@ -394,6 +401,8 @@ button.active { background-color: var(--accent-color); color: white; }
 }
 @media (max-width: 900px) {
     .ad-slot { min-height: 280px; margin-top: 16px; }
+    /* 얇은 배너는 좁은 화면에서도 얇아야 한다 - 위 규칙에 덮이지 않게 다시 잡는다 */
+    .ad-slot-banner { min-height: 100px; margin-top: 18px; }
 }
 
 /* 🌟 사이트 공통 푸터. 애드센스는 개인정보처리방침·소개·연락처로 가는 길이 있는지를 본다. */

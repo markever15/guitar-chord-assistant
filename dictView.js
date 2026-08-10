@@ -866,11 +866,6 @@ window.dictView = {
         const formulaTitle = document.getElementById('formula-title');
         this.syncMobilePane();
 
-        // 🌟 코드를 고르기 전에는 오른쪽 칸에 보여줄 게 없다. 그 상태에서 광고만 떠 있으면
-        //    사이트를 처음 연 사람이 제일 먼저 보는 게 광고가 된다. 코드를 고른 뒤에만 띄운다.
-        const adSlot = document.getElementById('dict-ad-slot');
-        if (adSlot) adSlot.style.display = (window.currentRoot && window.currentQuality) ? '' : 'none';
-
         if (!window.currentRoot || !window.currentQuality) {
             if (formulaTitle) { formulaTitle.textContent = "Select a Chord"; formulaTitle.translate = true; }
             document.getElementById('notes-badges').innerHTML = '';
