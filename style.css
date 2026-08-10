@@ -383,6 +383,9 @@ button.active { background-color: var(--accent-color); color: white; }
     background: rgba(255, 255, 255, 0.015);
 }
 .finder-ad-slot { display: none; }
+/* 팁 글 광고: 본문 중간 하나, 글 끝 하나. 글이 600~800단어라 중간 자리가 문단 사이에 묻힌다. */
+.ad-slot-inline { margin: 26px 0; min-height: 250px; }
+.ad-slot-end { margin-top: 28px; min-height: 250px; }
 /* 결과 화면에 방금 짚은 모양을 그려 준다 */
 .recog-shape { margin-top: 16px; display: flex; }
 .recog-shape:empty { display: none; }
