@@ -415,3 +415,12 @@ button.active { background-color: var(--accent-color); color: white; }
 .tip-page-updated { margin-top: -6px; font-size: 0.82rem; color: #828997; }
 .tip-page-article h2 { font-size: 1.05rem; color: var(--text-light); margin: 22px 0 8px; }
 .tip-page-article a { color: var(--selected-card-border); }
+
+/* 팁 글 안의 참고 표 */
+.tip-table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-size: 0.88rem; }
+.tip-table th, .tip-table td { border-bottom: 1px solid #2d313f; padding: 7px 10px; text-align: left; }
+.tip-table th { color: var(--text-light); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.tip-table td:first-child { color: var(--text-light); }
+.tip-page-article ol { padding-left: 20px; }
+.tip-page-article li { margin-bottom: 6px; }
+.tip-page-article code { background: #1b1d23; border: 1px solid #2d313f; border-radius: 4px; padding: 1px 5px; font-size: 0.85em; }
