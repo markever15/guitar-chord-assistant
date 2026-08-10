@@ -358,6 +358,24 @@ window.recogView = {
         this.detectChordFromFinder();
     },
 
+    // 🌟 결과 화면에는 지판이 없다. 방금 짚은 모양을 코드 사전과 같은 다이어그램으로 그려
+    //    "이걸 짚은 게 맞다"를 눈으로 확인하게 한다. finderUserFrets는 s=0이 1번줄이고
+    //    사전 다이어그램은 6번줄부터라 뒤집어 넘긴다.
+    renderShapeCard: function(rootKey) {
+        const box = document.getElementById('recog-shape');
+        if (!box || !window.dictView) return;
+        box.innerHTML = '';
+        const frets = [...window.finderUserFrets].reverse();
+        if (!frets.some(f => f > 0)) return;          // 개방현만 눌린 상태면 그릴 게 없다
+        const prevRoot = window.currentRoot;
+        window.currentRoot = rootKey;                 // 근음만 다른 색으로 찍히게 한다
+        try {
+            box.appendChild(window.dictView.renderVerticalDiagram({ frets, name: '' }, false, null, ''));
+        } finally {
+            window.currentRoot = prevRoot;
+        }
+    },
+
     // 🌟 세로 화면에서는 지판과 결과를 한 화면에 같이 두면 지판이 눌린다. 사전과 같은 방식으로
     //    "짚는 화면"과 "결과 화면"을 오간다. 넓은 화면에서는 CSS가 둘 다 보여주므로 영향이 없다.
     showFinderResult: function(on) {
@@ -408,6 +426,7 @@ window.recogView = {
             nameEl.translate = true;
             document.getElementById('recog-detected-notes').textContent = "Notes: None";
             document.getElementById('analysis-status').textContent = '';
+            this.renderShapeCard(null);
             return;
         }
 
@@ -463,6 +482,8 @@ window.recogView = {
         const detectedEl = document.getElementById('recog-detected-name');
         detectedEl.translate = false;   // 코드 이름은 번역 대상이 아니다
         detectedEl.textContent = matchedChordName;
+
+        this.renderShapeCard(bestMatch ? bestMatch.rootKey : null);
     }
 };
 
