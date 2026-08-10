@@ -462,18 +462,20 @@ window.dictView = {
             const dropped = new Set();
             groups.forEach(list => {
                 if (list.length < 2) return;
-                // 개방현이 제일 많은 폼을 대표로 삼는다
+                // 🌟 직접 지정한 대표도 병합에 참여한다 - 다만 남는 쪽을 그 폼으로 삼는다.
+                //    대표 조회가 프렛 배열을 그대로 찾기 때문에, 지정한 폼이 병합으로 사라지면
+                //    카드 자체가 안 나온다. 지정한 폼이 없을 때만 개방현이 제일 많은 폼을 남긴다.
                 const openCount = v => v.frets.filter(f => f === 0).length;
-                const keep = list.slice().sort((a, b) => openCount(b) - openCount(a))[0];
+                const keep = list.find(v => pinnedKeys.has(v.frets.join(',')))
+                    || list.slice().sort((a, b) => openCount(b) - openCount(a))[0];
                 list.forEach(v => {
                     if (v === keep) return;
-                    if (pinnedKeys.has(v.frets.join(','))) return;
                     if (bassOf(v) !== bassOf(keep)) return;
-                    // 갈리는 줄은 keep 쪽이 개방, 이쪽이 뮤트인 자리뿐이어야 한다
+                    // 갈리는 줄은 한쪽이 개방, 다른 쪽이 뮤트인 자리뿐이어야 한다
                     const diff = [];
                     for (let s = 0; s < 6; s++) {
                         if (v.frets[s] === keep.frets[s]) continue;
-                        if (v.frets[s] === -1 && keep.frets[s] === 0) diff.push(s);
+                        if (v.frets[s] <= 0 && keep.frets[s] <= 0) diff.push(s);
                         else return;                       // 그 외 차이가 있으면 다른 폼이다
                     }
                     if (!diff.length) return;
