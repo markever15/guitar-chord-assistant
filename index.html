@@ -49,13 +49,14 @@
                     <button class="finder-back-btn" id="finder-back-btn">← Back to the fretboard</button>
                     <div style="background: #1e222b; border: 1px solid #3e4452; padding: 20px; border-radius: 8px;">
                         <h4 style="margin: 0 0 12px 0; color: var(--selected-card-border);">🕵️ Analysis Result</h4>
+                        <!-- 🌟 짚은 모양을 먼저 보여주고 그 아래에 이름을 붙인다. 결과 화면에는
+                             지판이 없으니, 무엇을 짚었는지부터 눈으로 확인하는 순서가 자연스럽다. -->
+                        <div class="recog-shape" id="recog-shape"></div>
                         <div id="recog-detected-name" style="font-size: 1.8rem; font-weight: bold; color: var(--highlight-color); margin-bottom: 5px;">Unknown</div>
                         <div id="recog-detected-notes" style="font-size: 0.9rem; color: #abb2bf; margin-bottom: 15px;">Notes: None</div>
                         <div class="analysis-status" id="analysis-status" style="margin:0; font-size:0.85rem; color:#828997;"></div>
-                        <!-- 🌟 지금 짚은 모양을 그대로 그려준다 - 결과 화면에서 지판이 안 보이므로 -->
-                        <div class="recog-shape" id="recog-shape"></div>
                     </div>
-                    <!-- 🌟 광고 자리. 결과만 보이는 화면일 때만 나온다 (승인 후 코드로 교체) -->
+                    <!-- 🌟 광고 자리. 분석 결과를 다 읽은 다음 자리다 (승인 후 코드로 교체) -->
                     <div class="ad-slot finder-ad-slot" aria-hidden="true">
                         <span class="ad-slot-label">Advertisement</span>
                     </div>

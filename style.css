@@ -332,9 +332,6 @@ button.active { background-color: var(--accent-color); color: white; }
     .finder-layout:not(.finder-result-view) .finder-result-col { display: none; }
     .finder-layout.finder-result-view .finder-board-col { display: none; }
     .finder-identify-btn, .finder-back-btn { display: block; }
-    /* 🌟 결과 화면은 코드 이름만 있고 지판이 없다. 여기서만 광고를 띄운다 - 지판과 나란히
-       보이는 넓은 화면에서는 짚는 내내 광고가 떠 있게 되므로 내보내지 않는다. */
-    .finder-ad-slot { display: flex; }
 }
 
 /* 좁은 화면에서는 지판이 화면 폭을 최대한 쓰게 한다 - 높이와는 상관없는 문제다 */
@@ -382,12 +379,12 @@ button.active { background-color: var(--accent-color); color: white; }
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.015);
 }
-.finder-ad-slot { display: none; }
+.finder-ad-slot { margin-top: 16px; }
 /* 팁 글 광고: 본문 중간 하나, 글 끝 하나. 글이 600~800단어라 중간 자리가 문단 사이에 묻힌다. */
 .ad-slot-inline { margin: 26px 0; min-height: 250px; }
 .ad-slot-end { margin-top: 28px; min-height: 250px; }
 /* 결과 화면에 방금 짚은 모양을 그려 준다 */
-.recog-shape { margin-top: 16px; display: flex; }
+.recog-shape { margin-bottom: 16px; display: flex; }
 .recog-shape:empty { display: none; }
 .recog-shape .v-chord-card { cursor: default; }
 .ad-slot-label {
