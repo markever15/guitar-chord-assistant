@@ -257,7 +257,7 @@ window.generatedVoicings = {
             { name: 'E Shape (5th Fret) (Barre)', frets: [8, 0, 5, 5, 0, 0], fingers: [4, 0, 1, 1, 0, 0] },
             { name: 'E Shape (8th Fret)', frets: [8, 0, -1, 0, 0, 0], fingers: [1, 0, -1, 0, 0, 0] },
             { name: 'A Shape (12th Fret)', frets: [-1, 15, 14, 14, 12, 15], fingers: [-1, 3, 2, 2, 1, 4] },
-            { name: 'A Shape (14th Fret)', frets: [-1, 15, 14, 14, 0, 15], fingers: [-1, 3, 1, 2, 0, 4] },
+            { name: 'A Shape (14th Fret)', frets: [-1, 15, 14, 14, 0, 15], fingers: [-1, 3, 1, 2, 0, 4], manualFingers: true },
         ],
         'm7add13': [
             { name: 'E Shape (5th Fret)', frets: [8, -1, 8, 8, 8, 5], fingers: [2, -1, 2, 2, 2, 1] },
@@ -1230,7 +1230,7 @@ window.generatedVoicings = {
         'maj9': [
             { name: 'A Shape (2nd Fret) (Barre)', frets: [-1, 5, 2, 2, 2, 2], fingers: [-1, 4, 1, 1, 1, 1] },
             { name: 'A Shape (2nd Fret)', frets: [-1, 5, 4, 2, 2, 0], fingers: [-1, 4, 3, 1, 2, 0] },
-            { name: 'A Shape (4th Fret)', frets: [-1, 5, 4, 6, 5, 5], fingers: [-1, 2, 1, 4, 3, 3] },
+            { name: 'A Shape (4th Fret)', frets: [-1, 5, 4, 6, 5, 5], fingers: [-1, 2, 1, 4, 3, 3], manualFingers: true },
             { name: 'A Shape (5th Fret)', frets: [-1, 5, 7, 6, 7, 0], fingers: [-1, 1, 3, 2, 4, 0] },
             { name: 'E Shape (7th Fret) (Barre)', frets: [10, 7, 7, 7, 7, 9], fingers: [4, 1, 1, 1, 1, 3] },
             { name: 'E Shape (7th Fret) (Barre) #2', frets: [10, 7, 7, -1, 7, 9], fingers: [4, 1, 1, -1, 1, 3] },
@@ -1530,7 +1530,7 @@ window.generatedVoicings = {
             { name: 'E Shape (10th Fret) #5', frets: [10, 0, 10, 10, 12, 13], fingers: [1, 0, 2, 2, 3, 4] },
         ],
         'm(maj7)add13': [
-            { name: 'A Shape (3rd Fret)', frets: [-1, 5, 3, 6, 0, 5], fingers: [-1, 2, 1, 4, 0, 3] },
+            { name: 'A Shape (3rd Fret)', frets: [-1, 5, 3, 6, 0, 5], fingers: [-1, 2, 1, 4, 0, 3] , manualFingers: true },
             { name: 'A Shape (5th Fret)', frets: [-1, 5, 7, 6, 6, 7], fingers: [-1, 1, 3, 2, 2, 4] },
             { name: 'E Shape (7th Fret)', frets: [10, 0, 7, 10, 0, 9], fingers: [3, 0, 1, 4, 0, 2] },
             { name: 'E Shape (7th Fret) (Barre)', frets: [10, 8, 7, 7, 0, 9], fingers: [4, 2, 1, 1, 0, 3] },
