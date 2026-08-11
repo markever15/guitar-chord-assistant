@@ -140,6 +140,21 @@ function ruleBasedFingers(frets) {
 //    다른 루트까지 끄면 안 된다 - D5처럼 규칙을 못 받아 손가락이 겹쳐 배정되는 폼이 생겼다.
 const HAND_CHECKED = { 'C': new Set(['Major', 'm', '5', 'aug']) };
 
+// 🌟 목록을 정돈할 때 쓰는 두 값. 나는 음이 같은 폼끼리 붙이고, 그 안에서 손가락이 적은
+//    기본형부터 보여주기 위한 것이다 - "All" 목록과 대표 목록 양쪽에서 같은 기준을 쓴다.
+function voicingNoteKey(v) {
+    const set = new Set();
+    v.frets.forEach((f, st) => { if (f >= 0) set.add(window.getNoteName(5 - st, f)); });
+    return [...set].sort().join(',');
+}
+function voicingFingerCount(v) {
+    const used = new Set();
+    (v.fingers || []).forEach((x, st) => {
+        if (v.frets[st] > 0 && typeof x === 'number' && x > 0) used.add(x);
+    });
+    return used.size || v.frets.filter(f => f > 0).length;
+}
+
 // 🌟 이 개수 이하면 대표를 추리지 않고 전부 보여준다 (Chord Dictionary의 "All" 버튼도 감춤).
 //    카드 한 장이 164px + 간격 20px이라 데스크탑 기본 폭에서 한 줄에 4장 - 8이면 딱 두 줄이고
 //    거기까지는 스크롤 없이 한 화면에 들어온다.
@@ -996,10 +1011,20 @@ window.dictView = {
             const sounding = v => v.frets.filter(f => f >= 0).length;
             const lowest = v => { const a = v.frets.filter(f => f > 0); return a.length ? Math.min(...a) : 0; };
             const highest = v => { const a = v.frets.filter(f => f > 0); return a.length ? Math.max(...a) : 0; };
+            // 🌟 한 구간 안에서 나는 음이 똑같은 폼이 여럿 나오는 자리가 있다. 예를 들어 C6/9는
+            //    6번줄 8프렛에 근음을 놓으면 나머지 개방현만으로 화음이 완성돼서, 손가락을 더
+            //    얹어봐야 같은 음을 다른 옥타브에 겹치는 변형만 아홉 개가 생긴다. 흩어 놓으면
+            //    "비슷한 게 왜 이렇게 많지"로 읽히므로 음집합이 같은 것끼리 붙이고, 그 안에서는
+            //    손가락이 적은 기본형부터 보여준다 - 변형이 무엇을 더 짚는 것인지 바로 보인다.
+            const noteKey = voicingNoteKey;
+            const fingerCount = voicingFingerCount;
             const order = buckets.get(bucket).slice().sort((a, b) => {
                 const va = voicings[a], vb = voicings[b];
                 // 프렛이 낮은 것부터. 같은 프렛 안에서만 짚는 자리가 같은 것끼리 붙인다.
                 if (lowest(va) !== lowest(vb)) return lowest(va) - lowest(vb);
+                const na = noteKey(va), nb = noteKey(vb);
+                if (na !== nb) return na < nb ? -1 : 1;
+                if (fingerCount(va) !== fingerCount(vb)) return fingerCount(va) - fingerCount(vb);
                 // 그다음은 손이 덜 올라가는 폼 먼저. 최저 프렛만 같고 위로 몇 프렛까지 뻗는지가
                 // 다르면 2프렛에서 끝나는 오픈 코드가 5프렛까지 가는 바레보다 앞에 와야 한다.
                 // 다이어그램이 몇 프렛부터 그려지는지도 이 값으로 정해지므로, 이걸 먼저 봐야
@@ -1058,6 +1083,17 @@ window.dictView = {
                 const fa = categories[a.key] ? categories[a.key].minFret : Infinity;
                 const fb = categories[b.key] ? categories[b.key].minFret : Infinity;
                 return fa - fb;
+            });
+        } else {
+            // 🌟 지정한 대표도 같은 기준으로 정돈한다 - 프렛이 먼저고, 같은 자리에 둘 이상이면
+            //    나는 음이 같은 것끼리 붙인 뒤 손가락이 적은 폼을 앞에 둔다. chords.js에 적어둔
+            //    줄 순서는 더 이상 화면 순서를 정하지 않으므로 넣을 자리를 신경 쓸 필요가 없다.
+            groups.sort((a, b) => {
+                if (a.pin.minFret !== b.pin.minFret) return a.pin.minFret - b.pin.minFret;
+                const va = voicings[a.pin.idx], vb = voicings[b.pin.idx];
+                const na = voicingNoteKey(va), nb = voicingNoteKey(vb);
+                if (na !== nb) return na < nb ? -1 : 1;
+                return voicingFingerCount(va) - voicingFingerCount(vb);
             });
         }
 

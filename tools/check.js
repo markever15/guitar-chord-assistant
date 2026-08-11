@@ -100,7 +100,13 @@ function decode(code, base) {
 }
 
 function cmdValidate(win) {
-    const gen = win.generatedVoicings || {};
+    // 🌟 손으로 넣는 chordDatabase도 같이 본다. 여기만 빠져 있으면 chords.js에 잘못된 폼을
+    //    넣어도 validate가 통과해버린다 - 생략형이 다른 코드가 되는 경우가 특히 그렇다.
+    //    두 곳에 같은 프렛이 있는 건 정상이므로(수동 폼을 자동 생성이 보강한다) 중복은 출처별로 센다.
+    const sources = [
+        ['chordDatabase', win.chordDatabase || {}],
+        ['generatedVoicings', win.generatedVoicings || {}]
+    ];
     const table = win.chordNotesTable || {};
     let checked = 0;
     const badNotes = [];
@@ -111,37 +117,42 @@ function cmdValidate(win) {
     // 데이터에는 두되 어느 것이 그런지는 구분되게 세어둔다.
     const autos = [];
 
-    for (const root of Object.keys(gen)) {
-        for (const quality of Object.keys(gen[root])) {
-            const target = (table[root] || {})[quality];
-            if (!target) { noFormula.push(`${root} ${quality}`); continue; }
+    const perSource = {};
+    for (const [src, book] of sources) {
+        perSource[src] = 0;
+        for (const root of Object.keys(book)) {
+            for (const quality of Object.keys(book[root])) {
+                const target = (table[root] || {})[quality];
+                if (!target) { noFormula.push(`${src}: ${root} ${quality}`); continue; }
 
-            const seen = new Map();
-            for (const v of gen[root][quality]) {
-                checked++;
-                const notes = notesOf(win, v.frets);
-                const verdict = classify(win, notes, root, quality);
-                if (verdict === 'partial') {
-                    partials.push({ root, quality, name: v.name, frets: v.frets.join(','),
-                                    missing: target.filter(n => !notes.includes(n)) });
-                } else if (verdict !== 'exact') {
-                    badNotes.push({ root, quality, name: v.name, frets: v.frets.join(','), notes, target,
-                                    why: verdict === 'foreign'
-                                        ? `코드에 없는 음: ${notes.filter(n => !target.includes(n)).join(', ')}`
-                                        : `${verdict.becomes}와 같아짐` });
-                }
-                if (v.auto) autos.push(`${root} ${quality} "${v.name}" [${v.frets.join(',')}]`);
-                const key = v.frets.join(',');
-                if (seen.has(key)) {
-                    dups.push({ root, quality, frets: key, a: seen.get(key), b: v.name });
-                } else {
-                    seen.set(key, v.name);
+                const seen = new Map();
+                for (const v of book[root][quality]) {
+                    checked++; perSource[src]++;
+                    const notes = notesOf(win, v.frets);
+                    const verdict = classify(win, notes, root, quality);
+                    if (verdict === 'partial') {
+                        partials.push({ src, root, quality, name: v.name, frets: v.frets.join(','),
+                                        missing: target.filter(n => !notes.includes(n)) });
+                    } else if (verdict !== 'exact') {
+                        badNotes.push({ src, root, quality, name: v.name, frets: v.frets.join(','), notes, target,
+                                        why: verdict === 'foreign'
+                                            ? `코드에 없는 음: ${notes.filter(n => !target.includes(n)).join(', ')}`
+                                            : `${verdict.becomes}와 같아짐` });
+                    }
+                    if (v.auto) autos.push(`${root} ${quality} "${v.name}" [${v.frets.join(',')}]`);
+                    const key = v.frets.join(',');
+                    if (seen.has(key)) {
+                        dups.push({ src, root, quality, frets: key, a: seen.get(key), b: v.name });
+                    } else {
+                        seen.set(key, v.name);
+                    }
                 }
             }
         }
     }
 
-    console.log(`검사한 보이싱: ${checked}개`);
+    console.log(`검사한 보이싱: ${checked}개 `
+        + `(chordDatabase ${perSource.chordDatabase}, generatedVoicings ${perSource.generatedVoicings})`);
 
     if (noFormula.length) {
         console.log(`\n! chordNotesTable에 공식이 없는 quality (${noFormula.length}):`);
