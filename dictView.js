@@ -140,6 +140,11 @@ function ruleBasedFingers(frets) {
 //    다른 루트까지 끄면 안 된다 - D5처럼 규칙을 못 받아 손가락이 겹쳐 배정되는 폼이 생겼다.
 const HAND_CHECKED = { 'C': new Set(['Major', 'm', '5', 'aug']) };
 
+// 🌟 이 개수 이하면 대표를 추리지 않고 전부 보여준다 (Chord Dictionary의 "All" 버튼도 감춤).
+//    카드 한 장이 164px + 간격 20px이라 데스크탑 기본 폭에서 한 줄에 4장 - 8이면 딱 두 줄이고
+//    거기까지는 스크롤 없이 한 화면에 들어온다.
+const FEW_ENOUGH_TO_SHOW_ALL = 8;
+
 function computeFingers(frets) {
     const fretted = [];
     frets.forEach((f, s) => { if (f > 0) fretted.push({ s, f }); });
@@ -902,7 +907,19 @@ window.dictView = {
 
         this.renderChordFormula();
 
-        const categories = this.getShapeRepresentatives(voicings, window.currentRoot, window.currentQuality);
+        let categories = this.getShapeRepresentatives(voicings, window.currentRoot, window.currentQuality);
+        // 🌟 폼 자체가 몇 개 없는 코드는 대표를 골라 봐야 "All"을 눌러 두세 장 더 보는 게 전부다.
+        //    그럴 바엔 처음부터 다 보여주고 버튼을 감춘다 - 아래 repIndices가 전체가 되므로
+        //    "대표 수 < 전체 수" 조건이 깨지면서 버튼은 알아서 사라진다.
+        if (voicings.length <= FEW_ENOUGH_TO_SHOW_ALL) {
+            categories = {
+                pinned: voicings.map((v, idx) => {
+                    const active = v.frets.filter(f => f > 0);
+                    return { idx, minFret: active.length ? Math.min(...active) : 0 };
+                }).sort((a, b) => a.minFret - b.minFret)
+            };
+            window.showAllVoicings = false;
+        }
         const repIndices = (categories.pinned
             ? categories.pinned
             : [categories.open, categories.aShape, categories.eShape, categories.dShape, categories.compact]
