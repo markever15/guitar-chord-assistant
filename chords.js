@@ -243,19 +243,21 @@ window.pinnedRepresentatives = {
             [-1, 3, 2, 0, 0, 0],    // Open Cmaj7 Shape
             [-1, 3, 5, 5, 0, 0],    // Open Shape (Doubled Root)
             [-1, 3, 5, 4, 5, 3],    // Jazz Shape (3rd Fret)
+            [8, 7, 9, 0, 0, 0],    // Spread Shape (Open Top)
             [8, 10, 10, 0, 0, 0],   // E Shape maj7 (Doubled Root)
             [8, 10, 9, 9, 8, 8],    // E Shape maj7 (8th Fret)
-            [-1, -1, 10, 0, 0, 12], // D Shape (10th Fret)
-            [-1, 15, -1, 0, 0, 12]  // A Shape (12th Fret)
+            [-1, -1, 10, 0, 0, 0],  // Shell Shape (10th Fret)
+            [-1, 15, 14, 12, 12, 12] // Open Cmaj7 Shape (High)
         ],
         'add9': [
             [-1, 3, 0, 0, 1, 0],   // Compact Shape (Nut)
             [-1, 3, 2, 0, 3, 0],   // Open Cadd9
             [-1, 3, 2, 0, 3, 3],   // Full Shape (3rd Fret)
-            [8, -1, 0, 0, 5, -1],  // E Shape add9 (No 5th)
+            [-1, 3, 0, 0, 5, 0],   // Open Shape (Nut)
             [8, 5, 5, 5, 5, 0],    // E Shape (5th Fret) (Barre)
             [8, 7, 0, 0, 8, 0],    // Airy Shape (8th Fret)
             [8, 7, 0, 0, 8, 8],    // Full Shape (8th Fret)
+            [8, 10, 0, 9, 8, 0],   // Open Shape (Wide)
             [-1, 15, 0, 0, 13, 0]  // A Shape (13th Fret)
         ],
         'Major': [
@@ -298,9 +300,9 @@ window.pinnedRepresentatives = {
         '6': [
             [-1, 3, 2, 2, 1, 0],     // Bright Shape (No 5th)
             [-1, 3, 5, 0, 5, 5],     // Drone Shape (3rd Fret)
-            [8, 0, 5, 5, 5, 5],      // E Shape (5th Fret) (Barre) #2
+            [8, 0, 5, 5, 5, 0],     // E Shape (5th Fret) (Barre)
             [8, 10, 7, 9, -1, -1],   // E Shape 6
-            [-1, -1, 10, 12, 10, 0], // Shell Shape (Full G)
+            [-1, -1, 10, 0, 10, 0],  // Shell Shape (10th Fret)
             [-1, -1, 10, 12, 10, 12] // Shell Shape (Wide)
         ]
     },
