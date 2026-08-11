@@ -327,6 +327,14 @@ window.pinnedRepresentatives = {
             [8, 0, 10, 9, 8, 0],     // Open Shape (High E)
             [-1, -1, 10, 0, 10, 0],  // Shell Shape (10th Fret)
             [-1, -1, 10, 12, 10, 12] // Shell Shape (Wide)
+        ],
+        '6/9': [
+            [-1, 3, 2, 2, 3, 3],     // Full Shape (3rd Fret)
+            [-1, 3, 5, 2, 3, 0],     // Reach Shape (Nut)
+            [8, 0, 0, 0, 5, 0],      // E Shape (5th Fret)
+            [8, 0, 0, 7, 8, 0],      // Open Shape (8th Fret)
+            [8, 7, 7, 7, 8, 8],      // Full Shape (8th Fret)
+            [8, 10, 0, 9, 10, 0]     // Open Shape (Full 10th)
         ]
     },
     'C#': {
