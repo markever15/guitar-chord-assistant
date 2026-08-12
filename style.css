@@ -131,6 +131,8 @@ button.active { background-color: var(--accent-color); color: white; }
     /* 카드 폭을 고정한다 - 1fr로 늘리면 화면 폭에 따라 박스만 커져서 안이 휑해진다 */
     grid-template-columns: repeat(auto-fill, var(--v-card-w));
 }
+/* 🌟 대표 목록 안에서 생략형과 전체음을 가르는 제목 줄 - 그리드 한 행을 통째로 차지한다 */
+#voicing-list.v-shape-group-row .v-section-title { grid-column: 1 / -1; font-size: 0.72rem; font-weight: bold; color: #828997; letter-spacing: 0.04em; text-transform: uppercase; margin: 4px 0 -8px; }
 .v-shape-group { display: flex; flex-direction: column; min-width: 0; width: var(--v-card-w); }
 .v-shape-group .group-title {
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;

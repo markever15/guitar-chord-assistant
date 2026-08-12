@@ -154,6 +154,33 @@ function voicingFingerCount(v) {
     });
     return used.size || v.frets.filter(f => f > 0).length;
 }
+// 🌟 확장 코드는 여섯 음을 여섯 줄에 다 넣기 어려워서 5도를 빼고 잡는 게 오히려 기본이다.
+//    그런 폼을 위쪽에, 음이 다 들어간 폼을 아래쪽에 두면 "먼저 이걸 잡고, 필요하면 이쪽"으로
+//    읽힌다. 0이면 생략형, 1이면 전체음.
+function voicingIsComplete(v) {
+    const target = ((window.chordNotesTable || {})[window.currentRoot] || {})[window.currentQuality];
+    if (!target) return 1;
+    const set = new Set();
+    v.frets.forEach((f, st) => { if (f >= 0) set.add(window.getNoteName(5 - st, f)); });
+    return target.every(n => set.has(n)) ? 1 : 0;
+}
+
+// 🌟 어떤 음이 빠졌는지를 도수 이름으로 돌려준다. 카드에 폼 이름을 쓰지 않는 대신 이 값으로
+//    묶어서 "5th omitted" 같은 제목을 붙인다. 음이 다 들어 있으면 빈 배열.
+const DEGREE_NAME = { 0: 'root', 1: 'b9', 2: '9th', 3: 'b3', 4: '3rd', 5: '11th',
+                      6: 'b5', 7: '5th', 8: '#5', 9: '6th', 10: 'b7', 11: '7th' };
+function voicingOmittedDegrees(v) {
+    const root = window.currentRoot;
+    const target = ((window.chordNotesTable || {})[root] || {})[window.currentQuality];
+    if (!target || !window.chromScale) return [];
+    const idx = n => window.chromScale.indexOf(n);
+    const set = new Set();
+    v.frets.forEach((f, st) => { if (f >= 0) set.add(window.getNoteName(5 - st, f)); });
+    return target.filter(n => !set.has(n))
+        .map(n => (idx(n) - idx(root) + 12) % 12)
+        .sort((a, b) => a - b)
+        .map(semi => DEGREE_NAME[semi] || String(semi));
+}
 
 // 🌟 이 개수 이하면 대표를 추리지 않고 전부 보여준다 (Chord Dictionary의 "All" 버튼도 감춤).
 //    카드 한 장이 164px + 간격 20px이라 데스크탑 기본 폭에서 한 줄에 4장 - 8이면 딱 두 줄이고
@@ -982,18 +1009,34 @@ window.dictView = {
             return;
         }
 
+        // 🌟 음을 생략한 폼이 섞여 있는 코드는 넥 위치보다 "다 울리느냐"가 먼저 궁금하다. 확장
+        //    코드에서 5도를 뺀 폼은 타협이 아니라 실제로 잡는 방식이라, 그쪽을 위에 몰아 놓고
+        //    음이 다 들어간 폼을 아래에 둔다. 생략형이 아예 없으면 예전처럼 넥 구간으로 나눈다.
+        const hasOmitted = voicings.some(v => voicingIsComplete(v) === 0);
+        const omitKey = v => voicingOmittedDegrees(v).join(', ');
         const buckets = new Map();
         voicings.forEach((v, idx) => {
-            const activeFrets = v.frets.filter(f => f > 0);
-            const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
-            const bucket = Math.floor(minFret / 3);
+            let bucket;
+            if (hasOmitted) {
+                bucket = omitKey(v) || '';               // '' = 전체음, 그 외 = 빠진 도수
+            } else {
+                const activeFrets = v.frets.filter(f => f > 0);
+                const minFret = activeFrets.length ? Math.min(...activeFrets) : 0;
+                bucket = Math.floor(minFret / 3);
+            }
             if (!buckets.has(bucket)) buckets.set(bucket, []);
             buckets.get(bucket).push(idx);
         });
 
-        const bucketLabel = (bucket) => bucket === 0 ? 'Open Position' : `Frets ${bucket * 3}-${bucket * 3 + 2}`;
+        const bucketLabel = (bucket) => hasOmitted
+            ? (bucket === '' ? 'All notes' : `${bucket} omitted`)
+            : (bucket === 0 ? 'Open Position' : `Frets ${bucket * 3}-${bucket * 3 + 2}`);
 
-        [...buckets.keys()].sort((a, b) => a - b).forEach(bucket => {
+        const bucketOrder = hasOmitted
+            ? (a, b) => (a === '' ? 1 : b === '' ? -1
+                : (a.split(', ').length - b.split(', ').length) || (a < b ? -1 : 1))
+            : (a, b) => a - b;
+        [...buckets.keys()].sort(bucketOrder).forEach(bucket => {
             const section = document.createElement('div');
             section.className = 'v-position-section';
 
@@ -1066,7 +1109,7 @@ window.dictView = {
             ? categories.pinned.map((c, i) => ({
                 key: 'pinned' + i,
                 // 같은 폼 이름이 여러 포지션에서 나오므로 프렛을 붙여 구분한다
-                label: this.displayName(voicings[c.idx].name) + (c.minFret > 0 ? ` · ${c.minFret}fr` : ''),
+                label: this.displayName(voicings[c.idx].name),
                 pin: c
             }))
             : [
@@ -1089,8 +1132,11 @@ window.dictView = {
             //    나는 음이 같은 것끼리 붙인 뒤 손가락이 적은 폼을 앞에 둔다. chords.js에 적어둔
             //    줄 순서는 더 이상 화면 순서를 정하지 않으므로 넣을 자리를 신경 쓸 필요가 없다.
             groups.sort((a, b) => {
-                if (a.pin.minFret !== b.pin.minFret) return a.pin.minFret - b.pin.minFret;
                 const va = voicings[a.pin.idx], vb = voicings[b.pin.idx];
+                // 생략형이 위, 음이 다 들어간 폼이 아래. 그 안에서는 넥 아래쪽부터.
+                const ca = voicingIsComplete(va), cb = voicingIsComplete(vb);
+                if (ca !== cb) return ca - cb;
+                if (a.pin.minFret !== b.pin.minFret) return a.pin.minFret - b.pin.minFret;
                 const na = voicingNoteKey(va), nb = voicingNoteKey(vb);
                 if (na !== nb) return na < nb ? -1 : 1;
                 return voicingFingerCount(va) - voicingFingerCount(vb);
@@ -1098,6 +1144,16 @@ window.dictView = {
         }
 
         let any = false;
+        // 🌟 생략형과 전체음 사이에 제목 줄을 하나 끼운다. 두 묶음이 다 있을 때만 - 한쪽뿐이면
+        //    제목이 분류가 아니라 군더더기가 된다.
+        const sectionOf = g => {
+            const c = g.pin || categories[g.key];
+            return c ? (voicingOmittedDegrees(voicings[c.idx]).join(', ') || '') : null;
+        };
+        const sections = new Set(groups.map(sectionOf).filter(s => s !== null));
+        const showSectionTitles = categories.pinned && sections.size > 1;
+        let lastSection = null;
+
         groups.forEach(g => {
             const candidate = g.pin || categories[g.key];
             if (!candidate) return;
@@ -1105,14 +1161,22 @@ window.dictView = {
             const idx = candidate.idx;
             const v = voicings[idx];
 
+            if (showSectionTitles) {
+                const section = sectionOf(g);
+                if (section !== lastSection) {
+                    const head = document.createElement('div');
+                    head.className = 'v-section-title';
+                    head.textContent = section === '' ? 'All notes' : `${section} omitted`;
+                    list.appendChild(head);
+                    lastSection = section;
+                }
+            }
+
             const group = document.createElement('div');
             group.className = 'v-shape-group';
 
-            const label = document.createElement('div');
-            label.className = 'group-title';
-            label.textContent = g.label;
-            label.title = g.label;   // 한 줄로 잘릴 수 있으니 전체 이름은 툴팁으로
-            group.appendChild(label);
+            // 🌟 폼 이름은 카드에 쓰지 않는다 - 같은 이름이 여러 번 나와 구분에 도움이 안 되고,
+            //    무엇이 다른지는 위쪽 제목(빠진 도수)과 다이어그램이 말해준다.
 
             const isActive = !window.selectedSlashVoicing && idx === window.currentVoicingIndex;
             const card = this.renderVerticalDiagram(v, isActive, () => {

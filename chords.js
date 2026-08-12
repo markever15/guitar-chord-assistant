@@ -257,10 +257,12 @@ window.pinnedRepresentatives = {
             [-1, 15, 15, 0, 0, 12]  // A Shape (12th Fret)
         ],
         'maj11': [
+            [-1, 3, 3, 4, 3, 0],    // A Shape (3rd Fret) (No 5th)
             [8, 8, 5, 7, 0, 0],     // Open Shape (Wide)
             [8, 8, 9, 7, 8, 0],     // Cmaj11 Shape
             [8, 10, 0, 10, 0, 0],   // Open Shape (8th Fret)
-            [8, 8, 9, 9, 8, 10]     // Full Shape (8th Fret)
+            [8, 8, 0, 9, 0, 0],     // Airy Shape (9th Fret) (No 5th)
+            [8, 8, 0, 0, 0, 0]      // Airy Shape (8th Fret)
         ],
         'maj9': [
             [-1, 3, 2, 4, 3, 3],    // Cmaj9 Shape
@@ -438,6 +440,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'A': {
+        'maj11': [
+            [-1,  0,  0,  4,  2,  4],   // Open Shape (2nd Fret) (No 5th)
+            [ 5,  0,  0,  6,  0,  4],   // E Shape (4th Fret) #4 (No 5th)
+            [ 5,  4,  0,  6,  0,  4],   // E Shape (4th Fret) #2 (No 5th)
+            [ 5,  5,  6,  6,  0,  0],   // 4프렛 전체음 (개방 2줄)
+            [ 5,  4,  6,  7,  0,  0],   // 4프렛 전체음
+            [ 5,  5,  6,  6,  5,  7]    // E Shape (5th Fret) (Barre)
+        ],
         'dim': [
             [-1, 0, 1, 2, 1, -1],     // A Shape (1st Fret) #2
             [5, -1, -1, 5, 4, -1],    // Adim (E Shape)
@@ -488,6 +498,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'G': {
+        'maj11': [
+            [ 3,  0,  4,  5,  0,  3],   // A Shape (3rd Fret) (No 5th)
+            [ 3,  0,  4,  5,  0,  5],   // A Shape (3rd Fret) #2 (No 5th)
+            [ 3,  0,  0,  4,  1,  2],   // Open Shape (Nut)
+            [ 3,  0,  0,  5,  0,  2],   // E Shape (2nd Fret)
+            [ 3,  3,  4,  4,  3,  5],   // E Shape (3rd Fret) (Barre)
+            [15,  0,  0, 16, 13, 14]    // E Shape (13th Fret)
+        ],
         'dim': [
             [-1, -1, 5, 3, 2, -1],    // Gdim (Cdim Shape)
             [-1, -1, 5, 6, -1, 6],    // D Shape (5th Fret) #2
@@ -537,6 +555,16 @@ window.pinnedRepresentatives = {
         ]
     },
     'F': {
+        'maj11': [
+            [-1,  8,  8,  0, 10,  0],   // A Shape (8th Fret) (No 5th)
+            [-1,  8,  8,  0,  5,  5],   // A Shape (5th Fret) (No 5th)
+            [-1,  8,  7,  0,  5,  6],   // Spread Shape (5th Fret) (No 5th)
+            [ 1,  1,  2,  2,  1,  3],   // E Shape (1st Fret) (Barre)
+            [13,  0, 10,  0, 11,  0],   // E Shape (10th Fret)
+            [13, 12, 10,  0, 11,  0],   // E Shape (10th Fret) #4
+            [13, 13, 10,  0, 10,  0],   // E Shape (10th Fret) #2
+            [13, 13, 10, 12, 10,  0]    // E Shape (10th Fret) #3
+        ],
         'dim': [
             [1, 2, 3, 1, -1, -1],     // Open Fdim Shape
             [-1, -1, 3, 4, 0, 4],     // D Shape (3rd Fret) #2
@@ -1285,6 +1313,13 @@ window.chordDatabase = {
             { name: 'Shell Shape (Full G)', desc: 'm11 shell with added D string.', frets: [8, 10, 0, 10, 11, 11], fingers: [1, 2, 0, 3, 4, 4] }
         ],
         'maj11': [
+            { name: 'A Shape (3rd Fret) (No 5th)', desc: 'Low-position maj11; the 5th is left out.', frets: [-1,  3,  3,  4,  3,  0], fingers: [-1,  1,  1,  2,  1,  0], manualFingers: true },
+            { name: 'Open Shape (7th Fret) (No 5th)', desc: 'Three open strings; the 5th is left out.', frets: [ 8,  8,  0,  7,  0,  0], fingers: [ 2,  3,  0,  1,  0,  0], manualFingers: true },
+            { name: 'Spread Shape (7th Fret) (No 5th)', desc: 'Wide voicing with the high E fretted; the 5th is left out.', frets: [ 8,  8,  0,  9,  0,  7], fingers: [ 2,  3,  0,  4,  0,  1], manualFingers: true },
+            { name: 'Spread Shape (8th Fret) (No 5th)', desc: 'Root doubled on top; the 5th is left out.', frets: [ 8,  8,  0,  9,  0,  8], fingers: [ 1,  1,  0,  3,  0,  2], manualFingers: true },
+            { name: 'Cluster Shape (7th Fret) (No 5th)', desc: 'Close voicing on the middle strings; the 5th is left out.', frets: [ 8,  8,  9,  7,  0,  0], fingers: [ 2,  3,  4,  1,  0,  0], manualFingers: true },
+            { name: 'Airy Shape (9th Fret) (No 5th)', desc: 'Open outer strings with the 3rd on the G string; the 5th is left out.', frets: [ 8,  8,  0,  9,  0,  0], fingers: [ 1,  2,  0,  3,  0,  0], manualFingers: true },
+            { name: 'Airy Shape (10th Fret) (No 5th)', desc: 'Open outer strings with the 11th on the G string; the 5th is left out.', frets: [ 8,  8,  0, 10,  0,  0], fingers: [ 1,  2,  0,  3,  0,  0], manualFingers: true },
             { name: 'Cmaj11 Shape', desc: '', frets: [8, 8, 9, 7, 8, 0], fingers: [2, 2, 4, 1, 3, 0] },
             { name: 'A Shape maj11 (No 3rd/5th)', desc: '5th string root maj11 shell.', frets: [-1, 3, 3, 4, 3, -1], fingers: [-1, 1, 1, 2, 1, -1], manualFingers: true },
             { name: 'D Shape maj11 (No 3rd/5th)', desc: '4th string root jazz maj11 shell.', frets: [8, 7, 0, 0, 6, 7], fingers: [4, 2, 0, 0, 1, 3] },
@@ -1703,9 +1738,9 @@ window.chordDatabase = {
             { name: 'E Shape (8th, Open G/Top)', desc: '6th-string root, open G and high E strings.', frets: [10, 8, 10, 0, 10, 0], fingers: [2, 1, 3, 0, 4, 0] }
         ],
         'maj11': [
-            { name: 'A Shape (5th Fret)', desc: '5th-string root, open high E string; the 5th is left out.', frets: [-1,  5,  5,  6,  7,  0], fingers: [-1,  1,  1,  2,  3,  0], manualFingers: true },
-            { name: 'Open Shape (2nd Fret)', desc: 'Low-position maj11 leaning on two open strings; the 5th is left out.', frets: [-1,  5,  4,  0,  2,  0], fingers: [-1,  3,  2,  0,  1,  0], manualFingers: true },
-            { name: 'E Shape (7th, Open D/G)', desc: '6th-string root with the D and G strings open; the 5th is left out.', frets: [10,  7,  0,  0,  7,  9], fingers: [ 4,  1,  0,  0,  2,  3], manualFingers: true },
+            { name: 'A Shape (5th Fret) (No 5th)', desc: '5th-string root, open high E string; the 5th is left out.', frets: [-1,  5,  5,  6,  7,  0], fingers: [-1,  1,  1,  2,  3,  0], manualFingers: true },
+            { name: 'Open Shape (2nd Fret) (No 5th)', desc: 'Low-position maj11 leaning on two open strings; the 5th is left out.', frets: [-1,  5,  4,  0,  2,  0], fingers: [-1,  3,  2,  0,  1,  0], manualFingers: true },
+            { name: 'E Shape (7th, Open D/G) (No 5th)', desc: '6th-string root with the D and G strings open; the 5th is left out.', frets: [10,  7,  0,  0,  7,  9], fingers: [ 4,  1,  0,  0,  2,  3], manualFingers: true },
             { name: 'E Shape (10th, Open Top)', desc: '6th-string root, open high E string.', frets: [10, 10, 11, 11, 10, 0], fingers: [1, 1, 2, 2, 1, 0] },
             { name: 'E Shape (8th, Open A)', desc: '6th-string root with the A string open.', frets: [10, 0, 11, 11, 8, 0], fingers: [2, 0, 3, 4, 1, 0] }
         ],
@@ -1793,6 +1828,11 @@ window.chordDatabase = {
         ]
     },
     'F': {
+        'maj11': [
+            { name: 'A Shape (8th Fret) (No 5th)', desc: '5th-string root with the G and high E strings open; the 5th is left out.', frets: [-1,  8,  8,  0, 10,  0], fingers: [-1,  1,  2,  0,  3,  0], manualFingers: true },
+            { name: 'A Shape (5th Fret) (No 5th)', desc: 'Reaches back to the 5th fret for the 3rd and 6th; the 5th is left out.', frets: [-1,  8,  8,  0,  5,  5], fingers: [-1,  4,  4,  0,  1,  2], manualFingers: true },
+            { name: 'Spread Shape (5th Fret) (No 5th)', desc: 'Wide voicing across five frets; the 5th is left out.', frets: [-1,  8,  7,  0,  5,  6], fingers: [-1,  4,  3,  0,  1,  2], manualFingers: true }
+        ],
         'dim': [
             { name: 'Open Fdim Shape', desc: 'First-position diminished with the index barring the 1st fret.', frets: [1, 2, 3, 1, -1, -1], fingers: [1, 2, 3, 1, -1, -1], manualFingers: true }
         ],
@@ -1865,6 +1905,15 @@ window.chordDatabase = {
         ]
     },
     'G': {
+        'maj11': [
+            { name: 'Open Shape (Nut)', desc: 'Open-position maj11 with the A and D strings ringing.', frets: [ 3,  0,  0,  4,  1,  2], fingers: [ 3,  0,  0,  4,  1,  2], manualFingers: true },
+            { name: 'Open Shape (Nut) (No 5th)', desc: 'Same grip with the 3rd on the D string; the 5th is left out.', frets: [ 3,  0,  4,  4,  1,  2], fingers: [ 3,  0,  4,  4,  1,  2], manualFingers: true },
+            { name: 'A Shape (3rd Fret) (No 5th)', desc: 'Two open strings carry the 9th and 13th; the 5th is left out.', frets: [ 3,  0,  4,  5,  0,  3], fingers: [ 1,  0,  2,  4,  0,  1], manualFingers: true },
+            { name: 'A Shape (3rd Fret) #2 (No 5th)', desc: 'Reaches to the 5th fret on the high E; the 5th is left out.', frets: [ 3,  0,  4,  5,  0,  5], fingers: [ 1,  0,  2,  3,  0,  4], manualFingers: true },
+            { name: 'Barre Shape (3rd Fret) (No 5th)', desc: 'Index barre with the G and B strings open; the 5th is left out.', frets: [ 3,  3,  4,  0,  0,  5], fingers: [ 1,  1,  2,  0,  0,  4], manualFingers: true },
+            { name: 'Barre Shape (3rd Fret) #2 (No 5th)', desc: 'Index barre with the B string open; the 5th is left out.', frets: [ 3,  3,  4,  4,  0,  5], fingers: [ 1,  1,  2,  3,  0,  4], manualFingers: true },
+            { name: 'Barre Shape (3rd Fret) #3 (No 5th)', desc: 'Index barre reaching the 5th fret twice; the 5th is left out.', frets: [ 3,  3,  4,  5,  0,  5], fingers: [ 1,  1,  2,  3,  0,  4], manualFingers: true }
+        ],
         'Major': [
             { name: 'Open G Shape', desc: 'Standard open G major.', frets: [3, 2, 0, 0, 0, 3], fingers: [2, 1, 0, 0, 0, 3] },
             { name: 'Folk G (4 fingers)', desc: 'Popular pop/rock G shape.', frets: [3, 2, 0, 0, 3, 3], fingers: [2, 1, 0, 0, 3, 4], manualFingers: true }
@@ -1937,6 +1986,15 @@ window.chordDatabase = {
         ]
     },
     'A': {
+        'maj11': [
+            { name: 'Open Shape (2nd Fret) (No 5th)', desc: 'Two open strings carry the root and 11th; the 5th is left out.', frets: [-1,  0,  0,  4,  2,  4], fingers: [-1,  0,  0,  3,  1,  4], manualFingers: true },
+            { name: 'Open Shape (4th Fret) (No 5th)', desc: 'Only two fretted notes; the 5th is left out.', frets: [-1,  0,  0,  6,  0,  4], fingers: [-1,  0,  0,  3,  0,  1], manualFingers: true },
+            { name: 'E Shape (4th Fret) (No 5th)', desc: '6th-string root with the D and B strings open; the 5th is left out.', frets: [ 5,  4,  0,  4,  0,  4], fingers: [ 3,  1,  0,  2,  0,  4], manualFingers: true },
+            { name: 'E Shape (4th Fret) #2 (No 5th)', desc: 'The 3rd moves up to the G string; the 5th is left out.', frets: [ 5,  4,  0,  6,  0,  4], fingers: [ 3,  1,  0,  4,  0,  2], manualFingers: true },
+            { name: 'E Shape (4th Fret) #3 (No 5th)', desc: 'Root doubled on the A string; the 5th is left out.', frets: [ 5,  5,  0,  6,  0,  4], fingers: [ 2,  3,  0,  4,  0,  1], manualFingers: true },
+            { name: 'E Shape (4th Fret) #4 (No 5th)', desc: 'Three open strings under a 6th-string root; the 5th is left out.', frets: [ 5,  0,  0,  6,  0,  4], fingers: [ 2,  0,  0,  3,  0,  1], manualFingers: true },
+            { name: 'E Shape (4th Fret) (Barre) (No 5th)', desc: 'Only the B string rings open; the 5th is left out.', frets: [ 5,  5,  6,  6,  0,  4], fingers: [ 2,  2,  3,  4,  0,  1], manualFingers: true }
+        ],
         'Major': [
             { name: 'Open A Shape', desc: 'Standard open A major.', frets: [-1, 0, 2, 2, 2, 0], fingers: [-1, 0, 1, 2, 3, 0], manualFingers: true }
         ],
