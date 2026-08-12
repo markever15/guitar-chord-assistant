@@ -232,6 +232,44 @@ window.fingeringOverrides = {
 // 🌟 대표 폼을 자동 선정에 맡기지 않고 직접 지정하는 코드. 프렛 배열 순서대로 카드가 나오고,
 //    라벨은 그 폼의 이름을 쓴다. 여기 없는 코드는 기존 카테고리 자동 선정 그대로.
 window.pinnedRepresentatives = {
+    'Bb': {
+        'maj11': [
+            [ 6,  6,  0,  5,  3,  5],   // E Shape (3rd Fret) (No 5th)
+            [ 6,  0,  0,  5,  4,  6],   // E Shape (4th Fret) (No 5th)
+            [-1, 13,  0, 14, 13, 11],   // A Shape (11th Fret) (No 5th)
+            [ 6,  6,  3,  5,  3,  5],   // E Shape (3rd Fret) (Barre)
+            [ 6,  0,  0,  8,  6,  8],   // E Shape (6th Fret)
+            [ 6,  6,  7,  7,  6,  8]    // E Shape (6th Fret) (Barre)
+        ]
+    },
+    'G#': {
+        'maj11': [
+            [ 4,  4, -1,  3,  1,  3],   // E Shape (1st Fret) (No 5th)
+            [ 4,  4,  5,  5, -1,  6],   // E Shape (4th Fret) (No 5th)
+            [-1, 11, 11,  0, 11,  8],   // A Shape (8th Fret) (No 5th)
+            [ 4,  4,  1,  3,  1,  3],   // E Shape (1st Fret) (Barre)
+            [ 4,  4,  5,  5,  4,  6],   // E Shape (4th Fret) (Barre)
+            [16, 16, 13, 15, 13, 15]    // E Shape (13th Fret) (Barre)
+        ]
+    },
+    'F#': {
+        'maj11': [
+            [ 2,  1, -1,  1,  0,  1],   // E Shape (1st Fret) (No 5th)
+            [ 2,  2,  3,  3,  0,  4],   // E Shape (2nd Fret) (No 5th)
+            [ 2,  2,  3,  3,  2,  4],   // E Shape (2nd Fret) (Barre)
+            [ 2,  4,  3,  3,  0,  4],   // E Shape (2nd Fret)
+            [14, 14, 11, 13, 11, 13]    // E Shape (11th Fret) (Barre)
+        ]
+    },
+    'Eb': {
+        'maj11': [
+            [-1,  6,  0,  0,  6,  4],   // E Shape (4th Fret) (No 5th)
+            [11, 11,  0, 10,  8, 10],   // E Shape (8th Fret) (No 5th)
+            [11,  8,  8,  0,  9, 10],   // E Shape (8th Fret) (Barre)
+            [11, 11, 12,  0, 11, 13],   // E Shape (11th Fret) (Open G)
+            [11, 11, 12, 12, 11, 13]    // E Shape (11th Fret) (Barre) #2
+        ]
+    },
     'C': {
         'dim': [
             [-1, 3, 1, -1, 4, 2],    // Wide Shape (1~4프렛)
@@ -680,6 +718,15 @@ window.pinnedRepresentatives = {
         ]
     },
     'D': {
+        'maj11': [
+            [-1,  5,  4,  0,  2,  0],   // Open Shape (2nd Fret) (No 5th)
+            [-1,  5,  5,  6,  7,  0],   // A Shape (5th Fret) (No 5th)
+            [10,  7,  0,  0,  7,  9],   // E Shape (7th, Open D/G) (No 5th)
+            [10,  7,  7,  0,  7,  9],   // E Shape (7th Fret) (Barre)
+            [10, 10,  7,  9,  7,  9],   // E Shape (7th Fret) (Barre) #2
+            [10, 10, 11, 11, 10,  0],   // E Shape (10th, Open Top)
+            [10, 10, 11, 11, 10, 12]    // E Shape (10th Fret) (Barre)
+        ],
         '6': [
             [-1, -1, 0, 2, 0, 2],      // Open D6 Shape
             [-1, 5, 4, 7, 0, 5],       // A-Root Full (4th Fret)
@@ -768,6 +815,39 @@ window.chordNotesTable = {
 };
 
 window.chordDatabase = {
+    'Bb': {
+        'maj11': [
+            { name: 'E Shape (3rd Fret) (No 5th)', desc: 'D string open under a 6th-string root; the 5th is left out.', frets: [ 6,  6,  0,  5,  3,  5], fingers: [ 4,  4,  0,  2,  1,  3], manualFingers: true },
+            { name: 'E Shape (4th Fret) (No 5th)', desc: 'Two open strings in the middle; the 5th is left out.', frets: [ 6,  0,  0,  5,  4,  6], fingers: [ 3,  0,  0,  2,  1,  4], manualFingers: true },
+            { name: 'E Shape (4th Fret) #2 (No 5th)', desc: 'Same grip with the high E muted; the 5th is left out.', frets: [ 6,  0,  0,  5,  4, -1], fingers: [ 3,  0,  0,  2,  1, -1], manualFingers: true },
+            { name: 'A Shape (11th Fret) (No 5th)', desc: '5th-string root with the D string open; the 5th is left out.', frets: [-1, 13,  0, 14, 13, 11], fingers: [-1,  2,  0,  4,  3,  1], manualFingers: true }
+        ]
+    },
+    'G#': {
+        'maj11': [
+            { name: 'E Shape (1st Fret) (No 5th)', desc: 'D string muted under a 6th-string root; the 5th is left out.', frets: [ 4,  4, -1,  3,  1,  3], fingers: [ 4,  4, -1,  2,  1,  3], manualFingers: true },
+            { name: 'E Shape (4th Fret) (No 5th)', desc: 'Index barre with the B string muted; the 5th is left out.', frets: [ 4,  4,  5,  5, -1,  6], fingers: [ 1,  1,  2,  3, -1,  4], manualFingers: true },
+            { name: 'A Shape (8th Fret) (No 5th)', desc: '5th-string root with the G string open; the 5th is left out.', frets: [-1, 11, 11,  0, 11,  8], fingers: [-1,  3,  3,  0,  4,  1], manualFingers: true },
+            { name: 'A Shape (9th Fret) (No 5th)', desc: 'The 3rd drops to the D string; the 5th is left out.', frets: [-1, 11, 10,  0, 11,  9], fingers: [-1,  3,  2,  0,  4,  1], manualFingers: true }
+        ]
+    },
+    'F#': {
+        'maj11': [
+            { name: 'E Shape (1st Fret) (No 5th)', desc: 'Index covers two strings at the first fret; the 5th is left out.', frets: [ 2,  1, -1,  1,  0,  1], fingers: [ 3,  1, -1,  2,  0,  4], manualFingers: true },
+            { name: 'E Shape (1st Fret) #2 (No 5th)', desc: 'Same idea with the D string fretted; the 5th is left out.', frets: [ 2,  1,  3,  1,  0, -1], fingers: [ 3,  1,  4,  2,  0, -1], manualFingers: true },
+            { name: 'E Shape (1st Fret) #3 (No 5th)', desc: 'Reaches the 4th fret on the high E; the 5th is left out.', frets: [ 2,  1,  3,  1,  0,  4], fingers: [ 2,  1,  3,  1,  0,  4], manualFingers: true },
+            { name: 'E Shape (1st Fret) #4 (No 5th)', desc: 'The G string moves up to the 3rd fret; the 5th is left out.', frets: [ 2,  1,  3,  3,  0,  4], fingers: [ 2,  1,  3,  3,  0,  4], manualFingers: true },
+            { name: 'E Shape (2nd Fret) (No 5th)', desc: 'Index barre with the B string open; the 5th is left out.', frets: [ 2,  2,  3,  3,  0,  4], fingers: [ 1,  1,  2,  3,  0,  4], manualFingers: true }
+        ]
+    },
+    'Eb': {
+        'maj11': [
+            { name: 'E Shape (4th Fret) (No 5th)', desc: 'Two open strings in the middle; the 5th is left out.', frets: [-1,  6,  0,  0,  6,  4], fingers: [-1,  3,  0,  0,  4,  1], manualFingers: true },
+            { name: 'E Shape (8th Fret) (No 5th)', desc: 'D string open under a 6th-string root; the 5th is left out.', frets: [11, 11,  0, 10,  8, 10], fingers: [ 4,  4,  0,  2,  1,  3], manualFingers: true },
+            { name: 'E Shape (11th Fret) (Open G)', desc: 'Index barre with the G string ringing open.', frets: [11, 11, 12,  0, 11, 13], fingers: [ 1,  1,  3,  0,  1,  4], manualFingers: true },
+            { name: 'E Shape (11th Fret) (Open D)', desc: 'Index barre with the D string ringing open.', frets: [11, 11,  0, 12, 11, 13], fingers: [ 1,  1,  0,  3,  1,  4], manualFingers: true }
+        ]
+    },
     'C#': {
         'maj11': [
             { name: 'A Shape (6th Fret) (No 5th)', desc: 'D string muted; the 5th is left out.', frets: [ 9,  9, -1,  8,  6,  8], fingers: [ 4,  4, -1,  2,  1,  3], manualFingers: true },
