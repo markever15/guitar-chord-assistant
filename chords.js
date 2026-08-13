@@ -379,9 +379,11 @@ window.pinnedRepresentatives = {
         '6/9': [
             [-1, 3, 2, 2, 3, 3],     // Full Shape (3rd Fret)
             [-1, 3, 5, 2, 3, 0],     // Reach Shape (Nut)
+            [-1, 3, 0, 0, 5, 5],     // Airy Shape (Nut)
             [8, 0, 0, 0, 5, 0],      // E Shape (5th Fret)
+            [8, 0, 0, 0, 8, 0],      // Airy Shape (8th Fret)
+            [8, 7, 7, 7, 8, 0],      // Full Shape (8th Fret, Open E)
             [8, 0, 0, 7, 8, 0],      // Open Shape (8th Fret)
-            [8, 7, 7, 7, 8, 8],      // Full Shape (8th Fret)
             [8, 10, 0, 9, 10, 0]     // Open Shape (Full 10th)
         ]
     },
@@ -550,6 +552,15 @@ window.pinnedRepresentatives = {
         ]
     },
     'G': {
+        '6/9': [
+            [ 3,  0,  0,  0,  0,  0],   // E Shape (3rd Fret)
+            [ 3,  2,  0,  2,  0,  0],   // E Shape (2nd Fret) #3
+            [ 3,  2,  2,  2,  3,  0],   // E Shape (2nd Fret) (Barre)
+            [ 3,  0,  5,  4,  3,  0],   // E Shape (3rd Fret) #8
+            [-1, 10,  7,  7,  0,  0],   // A Shape (7th Fret) (Barre)
+            [-1, 10,  9,  9, 10, 10],   // A Shape (9th Fret) (Barre)
+            [15,  0,  0,  0, 12,  0]    // E Shape (12th Fret) #2
+        ],
         'maj11': [
             [ 3,  0,  4,  5,  0,  3],   // A Shape (3rd Fret) (No 5th)
             [ 3,  0,  4,  5,  0,  5],   // A Shape (3rd Fret) #2 (No 5th)
@@ -607,15 +618,20 @@ window.pinnedRepresentatives = {
         ]
     },
     'F': {
+        '6/9': [
+            [ 1,  0,  0,  0,  1,  1],   // E Shape (1st Fret) #2
+            [-1,  8,  0,  0, 10,  8],   // A Shape (8th Fret)
+            [13, 10, 10, 10, 10, 10],   // E Shape (10th Fret) (Barre)
+            [13, 12, 12, 12, 13, 13]    // F6/9 (Full Shape)
+        ],
         'maj11': [
             [-1,  8,  8,  0, 10,  0],   // A Shape (8th Fret) (No 5th)
             [-1,  8,  8,  0,  5,  5],   // A Shape (5th Fret) (No 5th)
             [-1,  8,  7,  0,  5,  6],   // Spread Shape (5th Fret) (No 5th)
             [ 1,  1,  2,  2,  1,  3],   // E Shape (1st Fret) (Barre)
             [13,  0, 10,  0, 11,  0],   // E Shape (10th Fret)
-            [13, 12, 10,  0, 11,  0],   // E Shape (10th Fret) #4
             [13, 13, 10,  0, 10,  0],   // E Shape (10th Fret) #2
-            [13, 13, 10, 12, 10,  0]    // E Shape (10th Fret) #3
+            [13, 13, 14, 14, 13, 15]    // E Shape (13th Fret) (Barre)
         ],
         'dim': [
             [1, 2, 3, 1, -1, -1],     // Open Fdim Shape
@@ -664,6 +680,15 @@ window.pinnedRepresentatives = {
         ]
     },
     'E': {
+        '6/9': [
+            [ 0,  4,  4,  1,  0,  0],   // E Shape (1st Fret)
+            [ 0,  2,  4,  4,  2,  4],   // E Shape (2nd Fret)
+            [ 0,  4,  4,  4,  5,  4],   // E Shape (4th Fret) (Barre)
+            [ 0,  4,  4,  6,  0,  4],   // E Shape (4th Fret)
+            [ 0,  7,  6,  6,  7,  7],   // E Shape (6th Fret)
+            [ 0,  9,  9,  9,  9,  9],   // E Shape (9th Fret) (Barre)
+            [12, 14, 14, 13, 14, 14]    // E Shape (12th Fret)
+        ],
         'maj11': [
             [ 0,  0,  1,  1,  0,  2],   // E Shape (1st Fret)
             [ 0,  2,  4,  2,  4,  4],   // E Shape (2nd Fret)
@@ -718,6 +743,13 @@ window.pinnedRepresentatives = {
         ]
     },
     'D': {
+        '6/9': [
+            [-1,  5,  4,  2,  0,  0],   // A Shape (2nd Fret)
+            [10,  7,  7,  7,  7,  7],   // E Shape (7th Fret) (Barre)
+            [10,  9,  9,  9, 10,  0],   // E Shape (9th Fret)
+            [10,  0,  9, 11,  0,  0],   // E Shape (9th, Open A/B/Top)
+            [10,  0,  0, 11,  0,  0]    // E Shape (10th Fret)
+        ],
         'maj11': [
             [-1,  5,  4,  0,  2,  0],   // Open Shape (2nd Fret) (No 5th)
             [-1,  5,  5,  6,  7,  0],   // A Shape (5th Fret) (No 5th)
