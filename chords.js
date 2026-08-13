@@ -262,6 +262,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'Eb': {
+        '6/9': [
+            [-1,  6,  5,  5,  6,  6],   // A Shape (5th Fret) (Barre)
+            [-1,  6,  8,  0,  6,  8],   // A Shape (6th Fret)
+            [11,  8,  8,  8,  8,  8],   // E Shape (8th Fret) (Barre)
+            [11,  8,  8, 10,  8,  8],   // E Shape (8th Fret) (Barre) - 9도 추가
+            [11, 10, 10, 10, 11, 11],   // E Shape (10th Fret) (Barre) - 근음이 맨 위
+            [11, 10, 10, 10, 11, 13]    // E Shape (10th Fret) (Barre) - 9도가 맨 위
+        ],
         'maj11': [
             [-1,  6,  0,  0,  6,  4],   // E Shape (4th Fret) (No 5th)
             [11, 11,  0, 10,  8, 10],   // E Shape (8th Fret) (No 5th)
@@ -388,6 +396,13 @@ window.pinnedRepresentatives = {
         ]
     },
     'C#': {
+        '6/9': [
+            [-1,  4,  3,  3,  4,  4],   // A Shape (3rd Fret) (Barre)
+            [ 9,  6,  6,  6,  6,  6],   // E Shape (6th Fret) (Barre)
+            [ 9,  8,  6,  8,  6,  6],   // 6프렛 다른 배열
+            [ 9,  8,  8,  8,  9,  9],   // E Shape (8th Fret) (Barre)
+            [ 9, 11, 11, 10, 11, 11]    // A Shape (9th Fret)
+        ],
         'maj11': [
             [ 9,  9, -1,  8,  6,  8],   // A Shape (6th Fret) (No 5th)
             [ 9,  9, 10, 10, -1, 11],   // E Shape (9th Fret) (No 5th)
@@ -494,6 +509,16 @@ window.pinnedRepresentatives = {
         ]
     },
     'A': {
+        '6/9': [
+            [-1,  0,  2,  4,  2,  2],   // A Shape (2nd Fret) (Barre)
+            [-1,  0,  4,  4,  2,  0],   // A Shape (2nd Fret)
+            [ 5,  2,  2,  2,  2,  2],   // E Shape (2nd Fret) (Barre)
+            [ 5,  4,  4,  4,  0,  0],   // E Shape (4th Fret)
+            [ 5,  4,  4,  6,  0,  0],   // E Shape (4th Fret) #2
+            [ 5,  4,  4,  4,  5,  5],   // E Shape (4th Fret) (Barre) #2
+            [-1,  0,  9,  6,  7,  0],   // A Shape (6th Fret)
+            [-1, 12, 11, 11,  0,  0]    // A Shape (11th Fret) #3
+        ],
         'maj11': [
             [-1,  0,  0,  4,  2,  4],   // Open Shape (2nd Fret) (No 5th)
             [ 5,  0,  0,  6,  0,  4],   // E Shape (4th Fret) #4 (No 5th)
@@ -2196,6 +2221,9 @@ window.chordDatabase = {
         ]
     },
     'B': {
+        '6/9': [
+            { name: 'E Shape (4th Fret) (Barre)', desc: 'Index barre at the 4th fret with the root on the 6th string.', frets: [ 7,  4,  4,  6,  4,  4], fingers: [ 4,  1,  1,  3,  1,  1], manualFingers: true }
+        ],
         'maj11': [
             { name: 'A Shape (4th Fret) (No 5th)', desc: 'Low-position maj11 with the D string muted; the 5th is left out.', frets: [ 7,  7, -1,  6,  4,  6], fingers: [ 4,  4, -1,  2,  1,  3], manualFingers: true },
             { name: 'E Shape (6th Fret) (No 5th)', desc: 'Both outer high strings open; the 5th is left out.', frets: [ 7,  6,  8,  6,  0,  0], fingers: [ 3,  1,  4,  2,  0,  0], manualFingers: true },
