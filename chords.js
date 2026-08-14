@@ -233,6 +233,21 @@ window.fingeringOverrides = {
 //    라벨은 그 폼의 이름을 쓴다. 여기 없는 코드는 기존 카테고리 자동 선정 그대로.
 window.pinnedRepresentatives = {
     'Bb': {
+        'maj7add11': [
+            [-1,  1,  0,  2,  4,  1],   // A Shape (1st Fret)
+            [ 6,  0,  0,  8,  6,  6],   // E Shape (6th Fret)
+            [ 6,  6,  7,  7,  6,  6],   // E Shape (6th Fret) (Barre)
+            [-1, 13, 13, 10, 10, 10]    // A Shape (10th Fret) (Barre)
+        ],
+        '6/9': [
+            [-1,  1,  0,  0,  1,  1],   // A Shape (1st Fret)
+            [ 6,  3,  3,  3,  3,  3],   // E Shape (3rd Fret) (Barre)
+            [ 6,  3,  3,  0,  3, -1],   // E Shape (3rd Fret) - 3도가 맨 위
+            [ 6,  5,  5,  5,  6,  6],   // E Shape (5th Fret)
+            [ 6,  8,  0,  0,  6,  8],   // E Shape (6th Fret)
+            [ 6,  8,  8,  7,  8,  8],   // E Shape (8th Fret) - 6현 풀
+            [-1, 13, 12,  0, 13, 13]    // A Shape (12th Fret) (Barre)
+        ],
         'maj11': [
             [ 6,  6,  0,  5,  3,  5],   // E Shape (3rd Fret) (No 5th)
             [ 6,  0,  0,  5,  4,  6],   // E Shape (4th Fret) (No 5th)
@@ -294,13 +309,16 @@ window.pinnedRepresentatives = {
             [-1, 15, 14, 14, 0, 15]  // A Shape (14th Fret)
         ],
         'maj7add11': [
-            [-1, 3, 2, 0, 0, 1],    // Compact Shape (Nut)
-            [-1, 3, 3, 0, 0, 0],    // Airy Shape (Nut)
-            [-1, 3, 3, 4, 5, 3],    // Full Shape (3rd Fret)
-            [8, 8, 5, 0, 0, 0],     // Airy Shape (5th Fret)
-            [8, 8, 9, 9, 8, 0],     // Open Shape (Full)
-            [8, 10, 10, 10, 0, 0],  // Spread Shape (Full)
-            [-1, 15, 15, 0, 0, 12]  // A Shape (12th Fret)
+            [-1, 3, 2, 0, 0, 1],       // Compact Shape (Nut)
+            [-1, 3, 3, 4, 5, 3],       // Full Shape (3rd Fret)
+            [-1, 3, 5, 4, 6, 0],       // Echo Shape (Nut)
+            [-1, 3, 3, 5, 0, 0],       // Wide Shape (3rd Fret) (No 5th)
+            [8, 8, 5, 0, 0, 0],        // Airy Shape (5th Fret)
+            [8, 8, 9, 9, 0, 7],        // Open Shape (7th Fret) (No 5th)
+            [8, 8, 9, 9, 8, 8],        // Full Shape (8th Fret)
+            [8, 10, 10, 10, 0, 0],     // Spread Shape (Full)
+            [-1, 15, 15, 12, 12, 12],  // Airy Shape (Nut) (High)
+            [-1, 15, 15, 0, 0, 12]     // A Shape (12th Fret)
         ],
         'maj11': [
             [-1, 3, 3, 4, 3, 0],    // A Shape (3rd Fret) (No 5th)
@@ -768,6 +786,15 @@ window.pinnedRepresentatives = {
         ]
     },
     'D': {
+        'maj7add11': [
+            [-1,  5,  5,  2,  2,  2],   // A Shape (2nd Fret) (Barre)
+            [-1,  5,  4,  2,  2,  3],   // Dmaj7add11 (Compact Shape) - 11도가 맨 위
+            [-1,  5,  5,  6,  7,  5],   // A Shape (5th Fret) (Barre) - 5도가 맨 위
+            [-1, -1,  0,  0,  2,  2],   // Airy Shape (2nd Fret) (No 5th)
+            [-1, -1,  0,  0,  7,  9],   // Open Shape (7th Fret) (No 5th)
+            [10,  0,  0,  0,  7,  9],   // E Shape (7th Fret)
+            [10, 10, 11, 11, 10, 10]    // E Shape (10th Fret) (Barre)
+        ],
         '6/9': [
             [-1,  5,  4,  2,  0,  0],   // A Shape (2nd Fret)
             [10,  7,  7,  7,  7,  7],   // E Shape (7th Fret) (Barre)
@@ -1201,6 +1228,10 @@ window.chordDatabase = {
             { name: 'Compact Shape (Nut)', desc: 'Open-position maj7add11 voicing.', frets: [-1, 3, 2, 0, 0, 1], fingers: [-1, 3, 2, 0, 0, 1] },
             { name: 'Airy Shape (Nut)', desc: 'Open-string maj7add11 voicing.', frets: [-1, 3, 3, 0, 0, 0], fingers: [-1, 1, 2, 0, 0, 0], manualFingers: true },
             { name: 'Full Shape (3rd Fret)', desc: 'Closed maj7add11 voicing.', frets: [-1, 3, 3, 4, 5, 3], fingers: [-1, 1, 1, 3, 4, 1], manualFingers: true },
+            { name: 'Compact Shape (3rd Fret) (No 5th)', desc: 'Two open strings on top; the 5th is left out.', frets: [-1,  3,  3,  4,  0,  0], fingers: [-1,  1,  2,  3,  0,  0], manualFingers: true },
+            { name: 'Wide Shape (3rd Fret) (No 5th)', desc: 'The 11th moves up to the G string; the 5th is left out.', frets: [-1,  3,  3,  5,  0,  0], fingers: [-1,  1,  1,  3,  0,  0], manualFingers: true },
+            { name: 'Stacked Shape (3rd Fret) (No 5th)', desc: 'Four fretted notes with the high E open; the 5th is left out.', frets: [-1,  3,  3,  4,  5,  0], fingers: [-1,  1,  1,  2,  3,  0], manualFingers: true },
+            { name: 'Open Shape (7th Fret) (No 5th)', desc: '6th-string root with the B string open; the 5th is left out.', frets: [ 8,  8,  9,  9,  0,  7], fingers: [ 2,  2,  3,  4,  0,  1], manualFingers: true },
             { name: 'Full Shape (8th Fret)', desc: '6-string closed maj7add11 chord.', frets: [8, 8, 9, 9, 8, 8], fingers: [1, 1, 2, 2, 1, 1] },
             { name: 'Airy Shape (8th Fret)', desc: 'Open-string maj7add11 voicing.', frets: [8, 8, 9, 0, 0, 0], fingers: [1, 2, 3, 0, 0, 0], manualFingers: true },
             { name: 'Open Shape (8th Fret)', desc: 'maj7add11 with open D string.', frets: [8, 8, 9, 0, 8, 0], fingers: [1, 2, 3, 0, 4, 0], manualFingers: true },
@@ -1659,6 +1690,13 @@ window.chordDatabase = {
         ]
     },
     'D': {
+        'maj7add11': [
+            { name: 'Airy Shape (2nd Fret) (No 5th)', desc: 'Two open strings under a pair on top; the 5th is left out.', frets: [-1, -1,  0,  0,  2,  2], fingers: [-1, -1,  0,  0,  1,  2], manualFingers: true },
+            { name: 'Open Shape (7th Fret) (No 5th)', desc: 'Open D and G with the top voices high up; the 5th is left out.', frets: [-1, -1,  0,  0,  7,  9], fingers: [-1, -1,  0,  0,  1,  3], manualFingers: true },
+            { name: 'Wide Shape (12th Fret) (No 5th)', desc: 'Open D under a 12th-fret G; the 5th is left out.', frets: [-1, -1,  0, 12, 14, 14], fingers: [-1, -1,  0,  1,  3,  4], manualFingers: true },
+            { name: 'Wide Shape (12th Fret) #2 (No 5th)', desc: 'The G string stays open instead; the 5th is left out.', frets: [-1, -1, 12,  0, 14, 14], fingers: [-1, -1,  1,  0,  3,  4], manualFingers: true },
+            { name: 'Airy Shape (14th Fret) (No 5th)', desc: 'Open D and G with both top voices at the 14th; the 5th is left out.', frets: [-1, -1,  0,  0, 14, 14], fingers: [-1, -1,  0,  0,  1,  2], manualFingers: true }
+        ],
         'Major': [
             { name: 'Open D Shape', desc: 'Standard acoustic open D.', frets: [-1, -1, 0, 2, 3, 2], fingers: [-1, -1, 0, 1, 3, 2] },
             { name: 'A-String Root (2nd Fret)', desc: 'Root on the A string, open D ringing.', frets: [-1, 5, 0, 2, 3, 2], fingers: [-1, 4, 0, 1, 2, 1] },
