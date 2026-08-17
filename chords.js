@@ -327,6 +327,7 @@ window.pinnedRepresentatives = {
         ],
         'maj7add13': [
             [-1,  3,  5,  2,  0,  0],   // A Shape (2nd Fret) #2
+            [-1,  3,  5,  4,  5,  5],   // A Shape (3rd Fret) - 13도가 맨 위
             [ 8,  0,  5,  5,  0,  0],   // E Shape (5th Fret) (Barre)
             [ 8,  7,  7,  0,  0,  0],   // Open Shape (7th Fret)
             [ 8,  7,  7,  0,  0,  8],   // Full Shape (7th Fret) - 근음이 맨 위
