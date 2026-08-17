@@ -235,8 +235,11 @@ window.pinnedRepresentatives = {
     'Bb': {
         'maj7add11': [
             [-1,  1,  0,  2,  4,  1],   // A Shape (1st Fret)
+            [ 6,  6,  3,  3,  3,  5],   // E Shape (3rd Fret) (Barre)
             [ 6,  0,  0,  8,  6,  6],   // E Shape (6th Fret)
             [ 6,  6,  7,  7,  6,  6],   // E Shape (6th Fret) (Barre)
+            [-1, -1,  8,  8, 10, 10],   // Compact Shape (8th Fret) (No 5th)
+            [-1, 13,  0, 10, 10, 11],   // A Shape (10th Fret) #2
             [-1, 13, 13, 10, 10, 10]    // A Shape (10th Fret) (Barre)
         ],
         '6/9': [
@@ -979,6 +982,9 @@ window.chordNotesTable = {
 
 window.chordDatabase = {
     'Bb': {
+        'maj7add11': [
+            { name: 'Compact Shape (8th Fret) (No 5th)', desc: 'Only the top four strings ring; the 5th is left out.', frets: [-1, -1,  8,  8, 10, 10], fingers: [-1, -1,  1,  2,  3,  4], manualFingers: true }
+        ],
         'maj11': [
             { name: 'E Shape (3rd Fret) (No 5th)', desc: 'D string open under a 6th-string root; the 5th is left out.', frets: [ 6,  6,  0,  5,  3,  5], fingers: [ 4,  4,  0,  2,  1,  3], manualFingers: true },
             { name: 'E Shape (4th Fret) (No 5th)', desc: 'Two open strings in the middle; the 5th is left out.', frets: [ 6,  0,  0,  5,  4,  6], fingers: [ 3,  0,  0,  2,  1,  4], manualFingers: true },
