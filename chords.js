@@ -1384,6 +1384,7 @@ window.chordDatabase = {
             { name: 'Open Shape (Full)', desc: '7add13 with open A and high E strings.', frets: [8, 0, 8, 5, 8, 0], fingers: [2, 0, 3, 1, 4, 0] }
         ],
         'maj7add13': [
+            { name: 'A Shape (3rd Fret)', desc: '5th-string root with the 13th on top.', frets: [-1,  3,  5,  4,  5,  5], fingers: [-1,  1,  3,  2,  4,  4], manualFingers: true },
             { name: 'Airy Shape (7th Fret)', desc: 'Open-string maj7add13 voicing.', frets: [8, 0, 7, 0, 0, 0], fingers: [2, 0, 1, 0, 0, 0] },
             { name: 'Open Shape (7th Fret)', desc: 'maj7add13 with open G, B and high E strings.', frets: [8, 7, 7, 0, 0, 0], fingers: [3, 1, 2, 0, 0, 0], manualFingers: true },
             { name: 'Open Shape (7th Fret Wide)', desc: 'maj7add13 with open G and B strings.', frets: [8, 7, 7, 0, 0, 7], fingers: [4, 1, 2, 0, 0, 3], manualFingers: true },
