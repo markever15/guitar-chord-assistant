@@ -326,12 +326,13 @@ window.pinnedRepresentatives = {
             [-1, -1, 10, 11, -1, 11] // Airy Shape (10프렛)
         ],
         'maj7add13': [
-            [-1, 3, 5, 2, 0, 0],     // A Shape (2nd Fret) #2
-            [8, 0, 5, 0, 0, 0],      // E Shape (5th Fret)
-            [8, 7, 7, 0, 0, 0],      // Open Shape (7th Fret)
-            [8, 0, 9, 0, 8, 0],      // Open Shape (8th Fret)
-            [8, 0, 10, 0, 0, 0],     // Airy Shape (10th Fret)
-            [-1, 15, 14, 14, 0, 15]  // A Shape (14th Fret)
+            [-1,  3,  5,  2,  0,  0],   // A Shape (2nd Fret) #2
+            [ 8,  0,  5,  5,  0,  0],   // E Shape (5th Fret) (Barre)
+            [ 8,  7,  7,  0,  0,  0],   // Open Shape (7th Fret)
+            [ 8,  7,  7,  0,  0,  8],   // Full Shape (7th Fret) - 근음이 맨 위
+            [ 8,  0,  9,  0,  0,  0],   // Airy Shape (8th Fret)
+            [ 8, 10,  9,  0, 10,  0],   // Open Shape (10th Fret Wide)
+            [-1, 15, 14, 14,  0, 15]    // A Shape (14th Fret)
         ],
         'maj7add11': [
             [-1, 3, 2, 0, 0, 1],       // Compact Shape (Nut)
