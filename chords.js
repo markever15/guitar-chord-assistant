@@ -728,6 +728,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'F': {
+        'maj7add13': [
+            [ 1,  0,  0,  2,  1,  0],   // E Shape (1st Fret)
+            [ 1,  3,  2,  2,  3,  0],   // Open Shape (1st Fret) #3 - 엄지
+            [-1,  8,  0,  5,  5,  5],   // A Shape (5th Fret) (Barre)
+            [ 1,  3,  2,  2,  3,  1],   // E Shape (1st Fret) (Barre) - 근음이 맨 위
+            [-1,  8,  0,  9, 10,  8],   // A Shape (8th Fret)
+            [-1,  8, 10,  9, 10, 10]    // Fmaj7add13 (A Shape) - 9도가 맨 위
+        ],
         'maj7add11': [
             [ 1,  1,  2,  2,  1,  1],   // E Shape (1st Fret) (Barre) #2
             [ 1,  1,  3,  2,  1,  0],   // E Shape (1st Fret) (Barre) #3
@@ -870,6 +878,16 @@ window.pinnedRepresentatives = {
         ]
     },
     'D': {
+        'maj7add13': [
+            [-1,  5,  4,  4,  2,  5],   // A Shape (2nd Fret)
+            [-1,  5,  4,  6,  0,  5],   // Open Dmaj7add13 Shape
+            [-1,  5,  7,  6,  7,  7],   // A Shape (5th Fret) - 7도가 맨 위
+            [10,  0,  9,  7,  7,  9],   // E Shape (7th Fret) (Barre)
+            [10,  9,  7,  7,  0,  9],   // E Shape (7th Fret) (Barre) #2
+            [10,  0,  9, 11,  0,  9],   // E Shape (9th Fret)
+            [10,  0,  0, 11,  0,  9],   // E Shape (9th Fret) #2
+            [10,  9,  9, -1, 10,  9]    // E Shape (9th Fret) (Barre)
+        ],
         'maj7add11': [
             [-1,  5,  5,  2,  2,  2],   // A Shape (2nd Fret) (Barre)
             [-1,  5,  4,  2,  2,  3],   // Dmaj7add11 (Compact Shape) - 11도가 맨 위
@@ -1965,6 +1983,7 @@ window.chordDatabase = {
             { name: 'Daug Shape', desc: 'Tense augmented passing chord.', frets: [-1, -1, 0, 3, 3, 2], fingers: [-1, -1, 0, 2, 3, 1] }
         ],
         'maj7add13': [
+            { name: 'E Shape (9th Fret)', desc: 'Open A and B strings under a 6th-string root.', frets: [10,  0,  9, 11,  0,  9], fingers: [ 3,  0,  1,  4,  0,  2], manualFingers: true },
             { name: 'Open Dmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [-1, 5, 4, 6, 0, 5], fingers: [-1, 2, 1, 4, 0, 3] }
         ],
         'maj13': [
@@ -2098,6 +2117,7 @@ window.chordDatabase = {
             { name: 'Eaug Shape', desc: 'Open augmented shape.', frets: [0, 3, 2, 1, 1, 0], fingers: [0, 4, 3, 1, 2, 0] }
         ],
         'maj7add13': [
+            { name: 'Open Shape (6th Fret)', desc: 'Open low E and B strings around a 6th-fret cluster.', frets: [ 0,  6,  6,  6,  0,  4], fingers: [ 0,  2,  3,  4,  0,  1], manualFingers: true },
             { name: 'Open Emaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [0, 4, 1, 1, 0, 0], fingers: [0, 4, 1, 1, 0, 0] }
         ],
         'm7add13': [
@@ -2178,6 +2198,10 @@ window.chordDatabase = {
             { name: 'Faug Shape', desc: 'Mid-neck augmented shape.', frets: [-1, -1, 3, 2, 2, 1], fingers: [-1, -1, 4, 2, 3, 1] }
         ],
         'maj7add13': [
+            { name: 'E Shape (1st Fret) (Barre)', desc: 'Full barre with the 13th on the B string.', frets: [ 1,  3,  2,  2,  3,  1], fingers: [ 1,  3,  2,  2,  4,  1], manualFingers: true },
+            { name: 'Open Shape (1st Fret)', desc: 'Open D and high E around a 6th-string root.', frets: [ 1,  3,  0,  2,  1,  0], fingers: [ 1,  4,  0,  3,  2,  0], manualFingers: true },
+            { name: 'Open Shape (1st Fret) #2', desc: 'The 13th moves up to the B string.', frets: [ 1,  3,  0,  2,  3,  0], fingers: [ 1,  3,  0,  2,  4,  0], manualFingers: true },
+            { name: 'Open Shape (1st Fret) #3', desc: 'Five fretted notes with the high E open.', frets: [ 1,  3,  2,  2,  3,  0], fingers: ['T',  3,  1,  2,  4,  0], manualFingers: true },
             { name: 'Open Fmaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [1, 0, 0, -1, 1, 0], fingers: [1, 0, 0, -1, 2, 0] }
         ],
         'm7add13': [
