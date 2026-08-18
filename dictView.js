@@ -449,6 +449,13 @@ window.dictView = {
             if (!sv.frets.includes(0)) return;
 
             const result12 = processVoicing(sv, 12, `${sv.name} (High)`);
+            // 🌟 개방현이 짚는 음으로 바뀌면서 벌림이 커질 수 있다. 다이어그램은 네 칸짜리라
+            //    그보다 넓은 폼 하나 때문에 그 카드만 다섯 칸으로 그려져 옆 카드와 비율이 어긋난다.
+            //    원본이 이미 목록에 있으니 옥타브분만 버린다.
+            if (result12) {
+                const pressed = result12.frets.filter(f => f > 0);
+                if (pressed.length && Math.max(...pressed) - Math.min(...pressed) > 3) return;
+            }
             if (result12 && !allVoicings.some(existing => JSON.stringify(existing.frets) === JSON.stringify(result12.frets))) {
                 result12._tier = 1;
                 allVoicings.push(result12);

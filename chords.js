@@ -2117,6 +2117,7 @@ window.chordDatabase = {
             { name: 'Eaug Shape', desc: 'Open augmented shape.', frets: [0, 3, 2, 1, 1, 0], fingers: [0, 4, 3, 1, 2, 0] }
         ],
         'maj7add13': [
+            { name: 'Full Shape (1st Fret)', desc: 'Open low and high E around a four-finger cluster.', frets: [ 0,  2,  1,  1,  2,  0], fingers: [ 0,  1,  2,  3,  4,  0], manualFingers: true },
             { name: 'Open Shape (6th Fret)', desc: 'Open low E and B strings around a 6th-fret cluster.', frets: [ 0,  6,  6,  6,  0,  4], fingers: [ 0,  2,  3,  4,  0,  1], manualFingers: true },
             { name: 'Open Emaj7add13 Shape', desc: 'Open-position maj7add13 voicing.', frets: [0, 4, 1, 1, 0, 0], fingers: [0, 4, 1, 1, 0, 0] }
         ],
