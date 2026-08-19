@@ -233,6 +233,13 @@ window.fingeringOverrides = {
 //    라벨은 그 폼의 이름을 쓴다. 여기 없는 코드는 기존 카테고리 자동 선정 그대로.
 window.pinnedRepresentatives = {
     'Bb': {
+        'maj7add13': [
+            [ 6,  0,  3,  3,  3,  3],   // E Shape (3rd Fret) (Barre) - 3도가 맨 위
+            [ 6,  0,  3,  0,  3, -1],   // E Shape (3rd Fret) - 3도가 맨 위
+            [ 6,  0,  0,  0,  6,  5],   // E Shape (5th Fret) - 7도가 맨 위
+            [ 6,  5,  7,  0,  6, -1],   // E Shape (5th Fret) #2 - 5도가 맨 위
+            [ 6,  0,  0,  0,  6,  6]    // E Shape (6th Fret) - 근음이 맨 위
+        ],
         'maj7add11': [
             [-1,  1,  0,  2,  4,  1],   // A Shape (1st Fret)
             [ 6,  6,  3,  3,  3,  5],   // E Shape (3rd Fret) (Barre)
@@ -1030,6 +1037,10 @@ window.chordDatabase = {
         ]
     },
     'G#': {
+        'maj7add13': [
+            { name: 'E Shape (4th Fret) (Barre)', desc: 'Full barre with the 13th on the B string.', frets: [ 4,  6,  5,  5,  6,  4], fingers: [ 1,  3,  2,  2,  4,  1], manualFingers: true },
+            { name: 'Open Shape (1st Fret)', desc: 'Open G string with the 7th on top.', frets: [ 4,  3,  3,  0,  4,  1], fingers: [ 3,  2,  2,  0,  4,  1], manualFingers: true }
+        ],
         'maj7add11': [
             { name: 'Compact Shape (6th Fret) (No 5th)', desc: 'Only the top four strings ring; the 5th is left out.', frets: [-1, -1,  6,  6,  8,  8], fingers: [-1, -1,  1,  2,  3,  4], manualFingers: true },
             { name: 'Open Shape (9th Fret) (No 5th)', desc: 'The G string rings open in the middle; the 5th is left out.', frets: [-1, 11, 10,  0,  9,  9], fingers: [-1,  4,  3,  0,  1,  1], manualFingers: true }
@@ -1059,6 +1070,10 @@ window.chordDatabase = {
         ]
     },
     'Eb': {
+        'maj7add13': [
+            { name: 'A Shape (6th Fret)', desc: '5th-string root with the 13th on top.', frets: [-1,  6,  8,  7,  8,  8], fingers: [-1,  1,  3,  2,  4,  4], manualFingers: true },
+            { name: 'Open Shape (11th Fret)', desc: 'Open D and G strings under an 11th-fret root.', frets: [11, 13,  0,  0, 13, 11], fingers: [ 1,  3,  0,  0,  4,  2], manualFingers: true }
+        ],
         'maj7add11': [
             { name: 'Compact Shape (1st Fret) (No 5th)', desc: 'Only the top four strings ring; the 5th is left out.', frets: [-1, -1,  1,  1,  3,  3], fingers: [-1, -1,  1,  2,  3,  4], manualFingers: true },
             { name: 'Open Shape (4th Fret) (No 5th)', desc: 'Open D and G under a 5th-string root; the 5th is left out.', frets: [-1,  6,  0,  0,  4,  4], fingers: [-1,  3,  0,  0,  1,  2], manualFingers: true },
