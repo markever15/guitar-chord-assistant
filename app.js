@@ -100,14 +100,49 @@ function activateTab(targetId) {
     }
 }
 
+// 🌟 "?c=C&q=maj7" 형태로 코드를 지정해 들어올 수 있게 한다. 정적 코드 페이지(chords/**)에서
+//    "대화형 사전에서 열기"를 눌렀을 때 보던 코드가 그대로 선택된 채로 열리도록 하는 통로이고,
+//    사람이 특정 코드를 링크로 공유할 때도 같은 주소를 쓴다.
+//    품질 이름에는 #·/ 같은 글자가 들어가므로(예: 6/9, m7#5) 반드시 인코딩해서 넘긴다.
+function applyChordFromQuery() {
+    const params = new URLSearchParams(location.search);
+    const root = params.get('c');
+    const quality = params.get('q');
+    if (!root) return false;
+
+    // 대소문자나 표기 흔들림(c#, EB)을 데이터의 표기로 맞춘다.
+    const roots = Object.keys(window.rootOffset || {});
+    const matchedRoot = roots.find(r => r.toLowerCase() === root.toLowerCase());
+    if (!matchedRoot) return false;
+
+    let matchedQuality = null;
+    if (quality) {
+        const qualities = Object.keys((window.chordNotesTable || {})[matchedRoot] || {});
+        matchedQuality = qualities.find(q => q.toLowerCase() === quality.toLowerCase()) || null;
+        if (!matchedQuality) return false;
+    }
+
+    window.currentRoot = matchedRoot;
+    window.currentQuality = matchedQuality;
+    window.currentVoicingIndex = 0;
+    window.showAllVoicings = false;
+    // 좁은 화면은 고르는 화면과 보는 화면이 나뉘어 있다. 코드를 지정해 들어왔으면 바로 결과를 보여준다.
+    window.dictShowPicker = false;
+    return true;
+}
+
 function initTabSystem() {
     document.querySelectorAll('.nav-tab').forEach(tab => {
         tab.addEventListener('click', () => activateTab(tab.getAttribute('data-target')));
     });
 
     // 🌟 tips/*.html 같은 외부 페이지에서 "../index.html#tab-blog" 형태로 돌아왔을 때 해당 탭을 열어줌
+    const picked = applyChordFromQuery();
     if (location.hash) {
         activateTab(location.hash.slice(1));
+    } else if (picked) {
+        // 해시 없이 ?c=... 만 붙여 들어와도 사전 탭이 열려야 뜻이 통한다.
+        activateTab('tab-dictionary');
     }
     window.addEventListener('hashchange', () => {
         if (location.hash) activateTab(location.hash.slice(1));

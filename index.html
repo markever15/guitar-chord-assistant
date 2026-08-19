@@ -15,6 +15,9 @@
 <body>
 
 <div class="container">
+    <h1 class="site-title">Guitar Chord Assistant</h1>
+    <p class="site-tagline">A free chord dictionary and reverse chord finder — every voicing checked by hand for the fingering you would actually use.</p>
+
     <nav class="main-nav">
         <button class="nav-tab active" data-target="tab-recognizer">🔍 Chord Finder</button>
         <button class="nav-tab" data-target="tab-dictionary">📖 Chord Dictionary</button>
@@ -61,6 +64,23 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 🌟 도구만 있고 읽을 글이 없으면 크롤러에게도, 처음 온 사람에게도 빈 화면이다.
+                 지판 아래에 쓰는 법을 적어 둔다. -->
+            <section class="intro-block">
+                <h2>How to use the Chord Finder</h2>
+                <p>The Chord Finder works backwards from the usual chord chart. You already have your fingers somewhere on the neck and you want to know what it is called &mdash; so tap that shape onto the fretboard above and it will name it for you.</p>
+                <ol>
+                    <li><strong>Tap the frets you are holding.</strong> One tap per string. Tap the same spot again to clear it.</li>
+                    <li><strong>Set the strings you are not playing.</strong> The <span class="notranslate">O</span> and <span class="notranslate">X</span> markers down the left side switch each string between ringing open and muted.</li>
+                    <li><strong>Read the result.</strong> The panel names the chord and lists the notes you are actually sounding. <em>Show Notes</em> marks where else those notes live on the neck, and <em>Play</em> sounds the shape back so you can check it by ear.</li>
+                </ol>
+                <p>If nothing comes back, the shape usually has a note in it that no standard chord contains &mdash; mute a string and try again. Stuck? <em>Example</em> drops in a shape to start from.</p>
+
+                <h2>Looking up a chord you already know the name of</h2>
+                <p>That is the other direction, and it lives in the <a href="#" data-goto-tab="tab-dictionary">Chord Dictionary</a> tab: pick a root, pick a quality, and you get every playable voicing with the fingering marked on each diagram. Shapes that leave out a note are labelled, so you always know what you are hearing.</p>
+                <p>You can also browse the whole dictionary as plain pages &mdash; <a href="chords/">every chord grouped by root and family</a>, no tapping required.</p>
+            </section>
         </div>
     </div>
 
@@ -91,6 +111,9 @@
                         <div class="group-title">Chord Quality</div>
                         <div id="quality-buttons"></div>
                     </div>
+                    <!-- 🌟 같은 사전을 스크립트 없이 읽는 정적 페이지로 가는 문. 검색으로 들어온
+                         사람이 반대로 앱을 찾는 길도 저쪽 페이지에 나 있다. -->
+                    <a class="browse-all-link" href="chords/">📖 Browse every chord as a page →</a>
                 </div>
             </div>
             <div class="right-panel">
@@ -211,6 +234,69 @@
     </div>
     <!-- 🌟 광고 자리. 페이지마다 이 하나뿐이다. 얇은 가로 배너라 넓은 화면은 728x90,
          좁은 화면은 320x100이 들어간다. (승인 후 애드센스 코드로 교체) -->
+    <!-- 🌟 도구 아래에 두는 소개 글. 첫 화면은 지판이 차지하고, 여기는 스크롤해서 만난다.
+         자바스크립트를 끄면 위쪽 도구는 빈 상자로 보이므로, 이 사이트가 무엇이고 어떻게
+         쓰는지 읽을 수 있는 글이 HTML 안에 있어야 한다. -->
+    <section class="site-intro">
+        <h2>What this site does</h2>
+        <p>
+            Most chord charts hand you one diagram per chord and leave it there. That is fine for
+            an open G, but it falls apart the moment you need a Cmaj7add11 in the middle of a song
+            and the only shape you can find needs six frets of reach. This site takes the opposite
+            approach: it lists <strong>every voicing that is actually playable</strong>, shows the
+            fingering for each one, and marks which notes are missing when a shape leaves one out.
+        </p>
+
+        <h2>The chord dictionary</h2>
+        <p>
+            Pick a root and a chord quality and you get the full set of shapes for it, sorted from
+            the nut upward. Each diagram carries a finger number on every dot, an
+            <span class="notranslate" translate="no">X</span> over strings you mute, and an
+            <span class="notranslate" translate="no">O</span> over strings you let ring. Where a
+            thumb-over grip is the sensible way to hold a shape, the diagram says
+            <span class="notranslate" translate="no">T</span> instead of a finger number rather
+            than pretending your index can be in two places at once.
+        </p>
+        <p>
+            Extended chords rarely fit all their notes on six strings, so shapes that drop a note
+            are grouped separately and labelled with the degree they omit — <em>5th omitted</em>,
+            for instance. Nothing is filed under a chord name it does not earn: a voicing is only
+            listed if the notes left ringing still spell that chord and nothing simpler. Drop the
+            5th from a 6/9 and what remains is a 7sus2 a whole step up, so those shapes are left
+            out entirely rather than filed under the wrong name.
+        </p>
+
+        <h2>The chord finder</h2>
+        <p>
+            The Chord Finder runs the other direction. Tap the fretboard to build the shape your
+            fingers are already holding and it tells you what the chord is called, which notes are
+            sounding, and what else that grip could be read as. It is the fastest way to name
+            something you stumbled onto, or to check whether the shape you half-remember from a
+            video is the chord you think it is.
+        </p>
+
+        <h2>Slash chords and inversions</h2>
+        <p>
+            Chords with a bass note other than the root get their own section under each chord.
+            These are the shapes that make a progression walk downward instead of jumping around,
+            and they are listed only where the alternate bass adds something the plain voicing
+            cannot.
+        </p>
+
+        <h2>Where to start</h2>
+        <p>
+            If you are new to reading these diagrams, the
+            <a href="tips/reading-fretboard-diagrams.html">fretboard diagram guide</a> covers the
+            notation in a few minutes. From there,
+            <a href="tips/essential-chord-progressions.html">essential chord progressions</a>
+            gives you something to play, and
+            <a href="tips/barre-chords-tips.html">barre chord tips</a> deals with the shapes that
+            stop most players in their first year. The Tips tab has fifteen articles in all,
+            covering capos, transposing, voice leading, and the extended chords this dictionary
+            spends most of its time on.
+        </p>
+    </section>
+
     <div class="ad-slot ad-slot-banner" aria-hidden="true"><span class="ad-slot-label">Advertisement</span></div>
     <footer class="site-footer">
         <nav class="site-footer-nav">
