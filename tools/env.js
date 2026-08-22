@@ -36,5 +36,7 @@ require(path.join(dir, 'chords.js'));
 require(path.join(dir, 'generatedVoicings.js'));
 require(path.join(dir, 'app.js'));
 require(path.join(dir, 'dictView.js'));
+require(path.join(dir, 'chordContext.js'));
+require(path.join(dir, 'progView.js'));
 
 module.exports = global.window;

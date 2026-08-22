@@ -527,3 +527,100 @@ a.nav-tab.active { background-color: var(--accent-color); color: #fff; }
 .browse-all-link:hover { background: #3e4452; color: var(--text-light); }
 .open-in-app { margin-top: 30px; padding: 12px 14px; background: #1b1d23;
                border: 1px solid #2d313f; border-radius: 8px; font-size: 0.88rem; }
+
+/* 🌟 진행(Progression) 탭 */
+.prog-mode-row { display: flex; gap: 6px; }
+.prog-mode-row button { flex: 1; padding: 8px; font-weight: bold; font-size: 0.85rem; }
+.prog-mode-row button.active { background-color: var(--accent-color); color: #fff; }
+
+.prog-degree-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+.prog-degree { display: flex; flex-direction: column; align-items: center; gap: 2px;
+               padding: 8px 4px; background: #2d313f; border: none; border-radius: 6px;
+               color: var(--text-light); cursor: pointer; font-weight: bold; font-size: 0.85rem; }
+.prog-degree:hover { background: #3e4452; }
+.prog-roman { font-size: 0.68rem; color: var(--highlight-color); font-weight: bold; letter-spacing: 0.04em; }
+
+.prog-strip { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-height: 38px;
+              padding: 10px 12px; background: #1b1d23; border: 1px solid #2d313f; border-radius: 8px; }
+.prog-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 8px 5px 12px;
+             background: var(--accent-color); color: #fff; border-radius: 6px; font-weight: bold; font-size: 0.9rem; }
+.prog-chip-x { background: transparent; border: none; color: #fff; cursor: pointer;
+               font-size: 1rem; line-height: 1; padding: 0 2px; opacity: 0.75; }
+.prog-chip-x:hover { opacity: 1; }
+.prog-empty { color: #828997; font-size: 0.85rem; margin: 0; }
+
+.prog-voicing-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+.prog-voicing-cell { display: flex; flex-direction: column; align-items: center; }
+.prog-voicing-cap { font-size: 0.82rem; color: var(--text-light); margin-bottom: 4px; }
+.prog-analysis { margin: 14px 0 0; font-size: 0.85rem; color: #828997; line-height: 1.6; }
+.prog-analysis strong { color: var(--text-light); }
+
+.prog-preset-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+.prog-preset { display: flex; flex-direction: column; gap: 3px; text-align: left;
+               padding: 10px 12px; background: #222530; border: 1px solid #2d313f;
+               border-radius: 6px; cursor: pointer; color: var(--text-color); }
+.prog-preset:hover { border-color: var(--selected-card-border); }
+.prog-preset-name { font-weight: bold; color: var(--text-light); font-size: 0.88rem; line-height: 1.35; }
+.prog-preset-chords { color: var(--highlight-color); font-size: 0.8rem; font-weight: bold; }
+.prog-preset-note { font-size: 0.75rem; color: #828997; line-height: 1.5; }
+.prog-flavor-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.prog-flavor-row button { padding: 6px 10px; font-size: 0.78rem; font-weight: bold; }
+.prog-flavor-row button.active { background-color: var(--accent-color); color: #fff; }
+.prog-flavor-hint { margin: 8px 0 0; font-size: 0.74rem; color: #828997; line-height: 1.5; }
+.prog-chip { padding: 0; overflow: hidden; }
+.prog-chip-name { background: transparent; border: none; color: #fff; cursor: pointer;
+                  font-weight: bold; font-size: 0.9rem; padding: 6px 4px 6px 12px; }
+.prog-chip-name:hover { text-decoration: underline; }
+
+/* 🌟 진행의 코드 하나를 눌러 다른 폼으로 바꾸기 */
+.prog-voicing-cell.picking .v-chord-card { border-color: var(--selected-card-border); }
+.prog-locked { font-size: 0.8rem; }
+.prog-swap-btn { margin-top: 6px; width: 100%; padding: 5px 8px; font-size: 0.72rem;
+                 font-weight: bold; background: #2d313f; color: var(--text-color);
+                 border: none; border-radius: 5px; cursor: pointer; }
+.prog-swap-btn:hover { background: #3e4452; color: var(--text-light); }
+.prog-picker { margin-top: 14px; padding: 14px; background: #1b1d23;
+               border: 1px solid var(--selected-card-border); border-radius: 8px; }
+.prog-picker-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+                    margin-bottom: 10px; font-size: 0.85rem; color: #828997; }
+.prog-picker-head strong { color: var(--text-light); font-size: 1rem; }
+.prog-auto-btn { margin-left: auto; padding: 5px 10px; font-size: 0.75rem; font-weight: bold;
+                 background: #2d313f; color: var(--text-color); border: none;
+                 border-radius: 5px; cursor: pointer; }
+.prog-auto-btn:hover { color: var(--text-light); }
+.prog-picker-grid { display: grid; grid-template-columns: repeat(auto-fill, var(--v-card-w));
+                    gap: 10px; justify-content: start; max-height: 420px; overflow-y: auto; }
+
+/* 🌟 "이 코드를 어디에 쓰나" - 사전과 진행 탭을 잇는 다리 */
+.ctx-block { margin-top: 24px; padding-top: 18px; border-top: 1px solid #2d313f; }
+.ctx-line { font-size: 0.85rem; color: #828997; margin: 10px 0 8px; line-height: 1.6; }
+.ctx-line strong { color: var(--highlight-color); }
+.ctx-keys { display: flex; flex-wrap: wrap; gap: 6px; }
+.ctx-key { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px;
+           background: #222530; border: 1px solid #2d313f; border-radius: 6px; font-size: 0.82rem; }
+.ctx-roman { color: var(--highlight-color); font-weight: bold; font-size: 0.72rem; }
+.ctx-progs { margin-top: 4px; }
+.ctx-prog { display: flex; justify-content: space-between; align-items: center; gap: 10px;
+            width: 100%; text-align: left; padding: 9px 12px; margin-bottom: 6px;
+            background: #222530; border: 1px solid #2d313f; border-radius: 6px;
+            color: var(--text-color); cursor: pointer; }
+.ctx-prog:hover { border-color: var(--selected-card-border); }
+.ctx-prog-name { font-weight: bold; color: var(--text-light); font-size: 0.87rem; }
+.ctx-prog-key { font-size: 0.78rem; color: var(--highlight-color); white-space: nowrap; }
+.ctx-empty { font-size: 0.85rem; color: #828997; line-height: 1.6; margin-top: 20px;
+             padding-top: 18px; border-top: 1px solid #2d313f; }
+/* 정적 페이지의 "이 코드를 어디에 쓰나" */
+.ctx-static { margin: 10px 0 4px; font-size: 0.86rem; color: #828997; line-height: 1.7; max-width: 760px; }
+.ctx-static p { margin: 6px 0; line-height: 1.7; }
+.ctx-static strong { color: var(--highlight-color); }
+.ctx-static strong.notranslate { color: var(--text-light); }
+
+/* 🌟 기능 사이를 잇는 링크들 */
+.recog-links { display: flex; flex-direction: column; gap: 6px; margin-top: 14px;
+               padding-top: 14px; border-top: 1px solid #3e4452; }
+.recog-link { text-align: left; padding: 9px 12px; background: #2d313f; color: var(--text-color);
+              border: none; border-radius: 6px; cursor: pointer; font-size: 0.83rem; font-weight: bold; }
+.recog-link:hover { background: #3e4452; color: var(--text-light); }
+.prog-dict-link { display: block; margin-top: 5px; font-size: 0.7rem; text-align: center;
+                  color: var(--selected-card-border); text-decoration: none; }
+.prog-dict-link:hover { text-decoration: underline; }

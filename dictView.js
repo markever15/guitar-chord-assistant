@@ -955,6 +955,10 @@ window.dictView = {
         }
 
         this.renderChordFormula();
+        // 🌟 폼 목록 아래에 "이 코드가 어느 조성의 몇 번째 자리인가"를 붙인다.
+        if (window.chordContext) {
+            window.chordContext.render('chord-context', window.currentRoot, window.currentQuality);
+        }
 
         let categories = this.getShapeRepresentatives(voicings, window.currentRoot, window.currentQuality);
         // 🌟 폼 자체가 몇 개 없는 코드는 대표를 골라 봐야 "All"을 눌러 두세 장 더 보는 게 전부다.

@@ -20,6 +20,7 @@
 
     <nav class="main-nav">
         <button class="nav-tab active" data-target="tab-recognizer">🔍 Chord Finder</button>
+        <button class="nav-tab" data-target="tab-progressions">🎼 Progressions</button>
         <button class="nav-tab" data-target="tab-dictionary">📖 Chord Dictionary</button>
         <button class="nav-tab" data-target="tab-blog">✍️ Tips</button>
     </nav>
@@ -61,6 +62,9 @@
                         <div id="recog-detected-name" style="font-size: 1.8rem; font-weight: bold; color: var(--highlight-color); margin-bottom: 5px;">Unknown</div>
                         <div id="recog-detected-notes" style="font-size: 0.9rem; color: #abb2bf; margin-bottom: 15px;">Notes: None</div>
                         <div class="analysis-status" id="analysis-status" style="margin:0; font-size:0.85rem; color:#828997;"></div>
+                        <!-- 🌟 이름을 알아낸 다음이 진짜 시작이다. 다른 폼을 보거나 진행에 넣어 볼
+                             수 있어야 도구가 이어진다. 코드를 못 찾으면 감춘다. -->
+                        <div class="recog-links" id="recog-links" style="display:none;"></div>
                     </div>
                 </div>
             </div>
@@ -81,6 +85,70 @@
                 <p>That is the other direction, and it lives in the <a href="#" data-goto-tab="tab-dictionary">Chord Dictionary</a> tab: pick a root, pick a quality, and you get every playable voicing with the fingering marked on each diagram. Shapes that leave out a note are labelled, so you always know what you are hearing.</p>
                 <p>You can also browse the whole dictionary as plain pages &mdash; <a href="chords/">every chord grouped by root and family</a>, no tapping required.</p>
             </section>
+        </div>
+    </div>
+
+    <!-- 🌟 진행 탭. 사전이 "어떤 폼이 있나"라면 여기는 "이 진행에서 어느 폼을 쓸까"에 답한다. -->
+    <div id="tab-progressions" class="page-view">
+        <div class="chord-header-container">
+            <div class="chord-formula-bar">
+                <span class="formula-title">Build a Progression</span>
+            </div>
+            <div style="display:flex; gap:8px;">
+                <button class="side-btn active" id="prog-bias-btn">🪕 Open chords</button>
+                <button class="side-btn" id="prog-play-btn">🔊 Play</button>
+                <button class="side-btn" id="prog-clear-btn">Clear</button>
+            </div>
+        </div>
+
+        <div class="dict-layout">
+            <div class="left-panel">
+                <div class="sticky-container">
+                    <div class="control-group">
+                        <div class="group-title">Key</div>
+                        <div class="root-grid" id="prog-key-buttons"></div>
+                    </div>
+                    <div class="control-group" style="margin-top:16px;">
+                        <div class="group-title">Mode</div>
+                        <div class="prog-mode-row" id="prog-mode-buttons">
+                            <button data-mode="major" class="active">Major</button>
+                            <button data-mode="minor">Minor</button>
+                        </div>
+                    </div>
+                    <div class="control-group" style="margin-top:16px;">
+                        <div class="group-title">Chord flavour</div>
+                        <div class="prog-flavor-row" id="prog-flavors"></div>
+                        <p class="prog-flavor-hint" id="prog-flavor-hint"></p>
+                    </div>
+                    <div class="control-group" style="margin-top:14px;">
+                        <div class="group-title">Chords in this key</div>
+                        <div class="prog-degree-grid" id="prog-diatonic"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="comp-header"><span class="comp-title">🎼 Your progression</span></div>
+                <div class="prog-strip" id="prog-strip"></div>
+                <div id="prog-result"></div>
+
+                <div class="composition-section" style="margin-top:22px;">
+                    <div class="comp-header"><span class="comp-title">Start from a known progression</span></div>
+                    <div class="prog-preset-list" id="prog-presets"></div>
+                </div>
+
+                <section class="intro-block" style="margin-top:26px;">
+                    <h2>Why the voicings change</h2>
+                    <p>Pick the same four chords twice and you may get different shapes. That is the point: this picks the set where your fingers move least between one chord and the next, rather than the shapes you happened to learn first.</p>
+                    <p>The <strong>top note</strong> line underneath matters more than it looks. The highest string is the one an ear follows as a melody, so a progression whose top note steps by a tone or two sounds connected, while one that leaps sounds like four separate chords.</p>
+                    <p>Switch <strong>Open chords</strong> off when you want everything in one position further up the neck &mdash; useful with a band, or when a capo is already taking the open strings.</p>
+
+                    <h2>Beyond plain triads</h2>
+                    <p>Three-note chords are where a key starts, not where it stops. <strong>Chord flavour</strong> restacks every degree at once: sevenths for jazz and soul, add9 for something open and modern, sixths when a seventh sounds too final, sus when you want to sit between major and minor.</p>
+                    <p>The degrees are not interchangeable, so the flavour adapts. In a major key the <span class="notranslate">V</span> becomes a dominant seventh while the <span class="notranslate">I</span> and <span class="notranslate">IV</span> become major sevenths &mdash; that difference is what makes the <span class="notranslate">V</span> pull home. Where a flavour would drag in a note from outside the key, that chord stays a triad.</p>
+                    <p><strong>Tap any chord in your progression</strong> to change just that one. Most songs are not one flavour all the way through; a single <span class="notranslate">m7</span> in a row of triads is often the whole idea.</p>
+                </section>
+            </div>
         </div>
     </div>
 
@@ -131,6 +199,9 @@
                     <button id="voicing-all-btn" style="display:none; padding:4px 10px; font-size:0.8rem;">All</button>
                 </div>
                 <div class="vertical-voicing-grid" id="voicing-list"></div>
+                <!-- 🌟 "이 코드를 어디에 쓰나"로 이어 주는 자리. 사전은 폼까지만 답하고
+                     정작 곡을 쓸 때 필요한 건 이 코드가 어느 조성의 몇 번째 자리인가다. -->
+                <div id="chord-context"></div>
             </div>
         </div>
     </div>
@@ -313,6 +384,8 @@
 <script src="generatedVoicings.js"></script>
 <script src="app.js"></script>
 <script src="dictView.js"></script>
+<script src="chordContext.js"></script>
+<script src="progView.js"></script>
 <script src="recogView.js"></script>
 </body>
 </html>

@@ -51,6 +51,7 @@ function head(title, desc, canonical, depth) {
 <div class="container">
     <nav class="main-nav">
         <a class="nav-tab" href="${up}index.html#tab-recognizer">🔍 Chord Finder</a>
+        <a class="nav-tab" href="${up}index.html#tab-progressions">🎼 Progressions</a>
         <a class="nav-tab active" href="${up}chords/">📖 Chord Dictionary</a>
         <a class="nav-tab" href="${up}index.html#tab-blog">✍️ Tips</a>
     </nav>
@@ -73,6 +74,33 @@ function foot(depth) {
 </body>
 </html>
 `;
+}
+
+// 🌟 "이 코드를 어디에 쓰나". 다이어그램만 늘어놓은 페이지에 실제로 읽을 것을 준다.
+//    사전 탭과 같은 계산(chordContext)을 쓰므로 화면과 페이지가 어긋나지 않는다.
+function contextBlock(root, quality, depth) {
+    const cc = w.chordContext;
+    if (!cc) return '';
+    const { places, progressions } = cc.summarise(root, quality, 4);
+    const label = chordName(root, quality);
+    if (!places.length) {
+        return `<p class="ctx-static">${cc.outsideText(root, quality)}</p>`;
+    }
+    let html = `<div class="ctx-static"><p>${cc.placementText(root, quality, places)}`
+        + (cc.needsList(places)
+            ? ' ' + cc.displayPlaces(places)
+                .map(p => `${esc(p.roman)} of <span class="notranslate">${esc(cc.keyLabel(p))}</span>`).join(', ') + '.'
+            : '')
+        + `</p>`;
+    if (progressions.length) {
+        html += `<p>Progressions that actually use it: `
+            + progressions.map(pr => {
+                const q = `?c=${encodeURIComponent(pr.key)}&amp;m=${pr.mode}&amp;p=${encodeURIComponent(pr.name)}`;
+                return `<a href="${'../'.repeat(depth)}index.html${q}#tab-progressions">${esc(pr.name)}</a> `
+                     + `<span class="notranslate">(${esc(pr.key)} ${esc(pr.mode)})</span>`;
+            }).join(', ') + `.</p>`;
+    }
+    return html + '</div>';
 }
 
 function collect(root, groupName) {
@@ -133,6 +161,7 @@ function categoryPage(root, groupName) {
                     &middot; <a href="${'../'.repeat(depth)}index.html?c=${encodeURIComponent(root)}&amp;q=${encodeURIComponent(e.q)}#tab-dictionary">open &amp; play</a></span>
             </div>
             <div class="vertical-voicing-grid">${e.vs.map(diagram).join('')}</div>
+            ${contextBlock(root, e.q, depth)}
             <details class="chord-table-wrap">
                 <summary>Fret and finger numbers for ${esc(chordName(root, e.q))}</summary>
                 <table class="chord-table">
@@ -216,6 +245,7 @@ function rootPage(root) {
                     &middot; <a href="${'../'.repeat(depth)}index.html?c=${encodeURIComponent(root)}&amp;q=${encodeURIComponent(e.q)}#tab-dictionary">open &amp; play</a></span>
             </div>
             <div class="vertical-voicing-grid">${e.vs.map(diagram).join('')}</div>
+            ${contextBlock(root, e.q, depth)}
             <details class="chord-table-wrap">
                 <summary>Fret and finger numbers for ${esc(chordName(root, e.q))}</summary>
                 <table class="chord-table">

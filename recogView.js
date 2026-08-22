@@ -427,6 +427,7 @@ window.recogView = {
             document.getElementById('recog-detected-notes').textContent = "Notes: None";
             document.getElementById('analysis-status').textContent = '';
             this.renderShapeCard(null);
+            this.renderResultLinks(null);
             return;
         }
 
@@ -484,6 +485,55 @@ window.recogView = {
         detectedEl.textContent = matchedChordName;
 
         this.renderShapeCard(bestMatch ? bestMatch.rootKey : null);
+        this.renderResultLinks(bestMatch);
+    },
+
+    // 🌟 이름을 알아낸 다음으로 이어 주는 문. 여기서 끊기면 파인더는 퀴즈로 끝난다.
+    renderResultLinks: function(match) {
+        const host = document.getElementById('recog-links');
+        if (!host) return;
+        if (!match) { host.style.display = 'none'; host.innerHTML = ''; return; }
+
+        const { rootKey, qualityKey } = match;
+        const label = rootKey + (qualityKey === 'Major' ? '' : qualityKey);
+        const count = (window.dictView ? window.dictView.getChordVoicings(rootKey, qualityKey).length : 0);
+        host.style.display = '';
+        host.innerHTML = '';
+
+        const mk = (text, onClick) => {
+            const b = document.createElement('button');
+            b.className = 'recog-link';
+            b.innerHTML = text;
+            b.addEventListener('click', onClick);
+            host.appendChild(b);
+        };
+
+        mk(`📖 All ${count} ways to play <span class="notranslate">${label}</span>`, () => {
+            window.currentRoot = rootKey;
+            window.currentQuality = qualityKey;
+            window.currentVoicingIndex = 0;
+            window.showAllVoicings = false;
+            window.dictShowPicker = false;
+            if (window.dictView) { window.dictView.updateButtons(); }
+            const tab = document.querySelector('.nav-tab[data-target="tab-dictionary"]');
+            if (tab) tab.click();
+        });
+
+        // 이 코드가 어느 조성에 속하는지 알면 그 조성의 진행으로 바로 넘어갈 수 있다.
+        const places = (window.chordContext ? window.chordContext.placements(rootKey, qualityKey) : []);
+        if (places.length && window.progView && window.progView.loadPreset) {
+            const p = places[0];
+            const progs = window.chordContext.progressionsFor(p, rootKey, qualityKey);
+            if (progs.length) {
+                mk(`🎼 Put <span class="notranslate">${label}</span> in a progression`, () => {
+                    window.progView.loadPreset(progs[0].key, progs[0].mode, progs[0].name);
+                });
+            } else {
+                mk(`🎼 Write in <span class="notranslate">${p.key} ${p.mode}</span>, where this is the ${p.roman}`, () => {
+                    window.progView.loadPreset(p.key, p.mode, null);
+                });
+            }
+        }
     }
 };
 

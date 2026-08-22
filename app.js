@@ -94,6 +94,8 @@ function activateTab(targetId) {
 
     if (targetId === 'tab-dictionary' && window.dictView) {
         window.dictView.renderAll();
+    } else if (targetId === 'tab-progressions' && window.progView) {
+        window.progView.renderAll();
     } else if (targetId === 'tab-recognizer' && window.recogView) {
         window.recogView.renderFinderFretboard();
         window.recogView.detectChordFromFinder();
@@ -136,6 +138,14 @@ function initTabSystem() {
         tab.addEventListener('click', () => activateTab(tab.getAttribute('data-target')));
     });
 
+    // 🌟 정적 코드 페이지에서 "이 진행 열기"로 들어오는 통로. ?c=키&m=모드&p=진행이름
+    const params = new URLSearchParams(location.search);
+    const progName = params.get('p');
+    if (progName && window.progView && window.progView.loadPreset) {
+        window.progView.loadPreset(params.get('c') || 'C', params.get('m') || 'major', progName);
+        return;
+    }
+
     // 🌟 tips/*.html 같은 외부 페이지에서 "../index.html#tab-blog" 형태로 돌아왔을 때 해당 탭을 열어줌
     const picked = applyChordFromQuery();
     if (location.hash) {
@@ -158,5 +168,8 @@ window.addEventListener('load', () => {
     }
     if (window.recogView) {
         window.recogView.renderFinderFretboard();
+    }
+    if (window.progView) {
+        window.progView.init();
     }
 });
