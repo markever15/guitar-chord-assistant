@@ -326,6 +326,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'C': {
+        'm7': [
+            [-1,  3,  1,  3,  1,  3],   // Weave Shape (1st Fret)
+            [-1,  3,  5,  3,  4,  3],   // Am7 Shape (3rd Fret)
+            [-1,  3,  5,  0,  4,  6],   // Open Shape (3rd Fret)
+            [ 8, 10,  8,  8,  8,  8],   // E Shape (8th Fret) (Barre)
+            [ 8, -1,  8,  8,  8, -1],   // E Shape m7 (8th Fret)
+            [-1, -1, 10,  0, 11, 11]    // Shell Shape (10th Fret)
+        ],
         'dim': [
             [-1, 3, 1, -1, 4, 2],    // Wide Shape (1~4프렛)
             [-1, 3, 4, 5, 4, -1],    // A Shape (3rd Fret) #2
