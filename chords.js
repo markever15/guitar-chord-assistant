@@ -910,6 +910,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'D': {
+        'm7': [
+            [-1, -1,  0,  2,  1,  1],   // Open Dm7 Shape
+            [-1,  5,  7,  5,  6,  5],   // A Shape (5th Fret) (Barre)
+            [-1,  5,  3,  5,  3,  5],   // A Shape (3rd Fret)
+            [-1, -1,  0, 10, 10,  8],   // Shell
+            [10, 12, 10, 10, 13, 10],   // Dm7 (E Shape)
+            [-1, -1, 12, 14, 13, 13]    // Open Dm7 Shape (High)
+        ],
         'maj7add13': [
             [-1,  5,  4,  4,  2,  5],   // A Shape (2nd Fret)
             [-1,  5,  4,  6,  0,  5],   // Open Dmaj7add13 Shape
@@ -1889,6 +1897,8 @@ window.chordDatabase = {
             { name: 'Shell Shape (10th Fret)', desc: 'Top-3 string minor triad barre.', frets: [-1, -1, 0, 10, 10, 10], fingers: [-1, -1, 0, 1, 2, 3] },
         ],
         'm7': [
+            { name: 'A Shape (3rd Fret)', desc: 'Index barre under two higher voices.', frets: [-1,  5,  3,  5,  3,  5], fingers: [-1,  2,  1,  3,  1,  4], manualFingers: true },
+            { name: 'Open Shape (6th Fret) (No 5th)', desc: 'Open D string with the top three voices high up; the 5th is left out.', frets: [-1, -1,  0,  7,  6,  8], fingers: [-1, -1,  0,  2,  1,  3], manualFingers: true },
             { name: 'Open Dm7 Shape', desc: 'Easy open minor 7th.', frets: [-1, -1, 0, 2, 1, 1], fingers: [-1, -1, 0, 3, 1, 2] },
             { name: 'A-Root (5th Fret)', desc: 'A-string root, upper structure.', frets: [-1, 5, 0, 5, 6, 5], fingers: [-1, 1, 0, 2, 4, 3] },
             { name: 'D-Root (5th Fret)', desc: 'Open D root, top voicing.', frets: [-1, -1, 0, 5, 6, 5], fingers: [-1, -1, 0, 1, 3, 2] },
