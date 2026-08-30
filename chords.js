@@ -513,6 +513,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'C#': {
+        'm6': [
+            [-1,  4,  2,  3,  2,  4],   // A Shape (2nd Fret) (Barre)
+            [-1,  4,  6,  3,  5,  0],   // A Shape (3rd Fret) #2
+            [-1,  4,  6,  6,  5,  6],   // A Shape (4th Fret) - 5도가 맨 위
+            [ 9, 11, -1, -1, 11,  0],   // E Shape (9th Fret) #2 - 손가락 셋
+            [ 9, 11, 11,  9, 11,  9],   // E Shape m6 (Full Barre) - 근음이 맨 위
+            [-1, -1, 11, 13, 11, 12]    // D Shape (11th Fret) #2
+        ],
         'm7': [
             [-1,  4,  2,  4,  0,  0],   // A Shape (2nd Fret) (Open Top) (No 5th)
             [-1,  4,  2,  4,  0,  4],   // A Shape (2nd Fret)
@@ -671,6 +679,7 @@ window.pinnedRepresentatives = {
             [-1,  0,  2,  2,  1,  2],   // A Shape (1st Fret)
             [-1,  0,  4,  5,  5,  5],   // A Shape (4th Fret) - 근음이 맨 위
             [ 5,  0,  7,  5,  7,  0],   // E Shape (5th Fret)
+            [ 5,  7,  7,  5,  7,  5],   // E Shape m6 (Full Barre) - 개방현 없는 유일한 여섯 줄
             [-1,  0,  7,  9,  7,  8],   // A Shape (7th Fret) - 3음이 맨 위
             [-1, 12, 10, 11, 10,  0],   // A Shape (10th Fret)
             [-1, 12, 10, 11, 10, 12],   // A Shape (10th Fret) #5 - 개방현 없는 유일한 폼
@@ -778,6 +787,7 @@ window.pinnedRepresentatives = {
             [ 3,  1,  0,  0,  3,  0],   // E Shape (1st Fret)
             [ 3,  5,  5,  3,  3,  0],   // E Shape (3rd Fret) (Barre)
             [-1, -1,  5,  3,  3,  0],   // D Shape (3rd Fret)
+            [ 3,  5,  5,  3,  5,  3],   // E Shape m6 (Full Barre) - 근음이 맨 위
             [-1, -1,  5,  7,  5,  6],   // D Shape (5th Fret) - 5도가 맨 위
             [-1, 10,  8,  9,  8, 10],   // A Shape (8th Fret) - 7도 자리(6음 아래) D가 맨 위
             [-1, 10,  0,  0, 11,  0]    // A Shape (10th Fret)
@@ -1278,6 +1288,12 @@ window.chordDatabase = {
         ]
     },
     'C#': {
+        'm6': [
+            { name: 'A Shape (4th Fret)', desc: 'Ring finger across two strings at the 6th fret.', frets: [-1,  4,  6,  6,  5,  6], fingers: [-1,  1,  3,  3,  2,  4], manualFingers: true },
+            { name: 'E Shape (7th Fret)', desc: 'Pinky across two strings with the high E left open.', frets: [ 9,  7,  8,  9,  9,  0], fingers: [ 3,  1,  2,  4,  4,  0], manualFingers: true },
+            { name: 'E Shape m6 (Full Barre)', desc: 'Full 6-string E-shape minor 6th barre.', frets: [ 9, 11, 11,  9, 11,  9], fingers: [ 1,  2,  3,  1,  4,  1], manualFingers: true },
+            { name: 'E Shape (9th Fret) (Open Top)', desc: 'Same barre with the high E left open.', frets: [ 9, 11, 11,  9, 11,  0], fingers: [ 1,  2,  3,  1,  4,  0], manualFingers: true }
+        ],
         'm7': [
             { name: 'A Shape (2nd Fret) (No 5th)', desc: 'Open high E on top of an A-shape grip; the 5th is left out.', frets: [-1,  4,  2,  4,  2,  0], fingers: [-1,  3,  1,  4,  2,  0], manualFingers: true },
             { name: 'A Shape (2nd Fret) (Open Top) (No 5th)', desc: 'Both top strings left open; the 5th is left out.', frets: [-1,  4,  2,  4,  0,  0], fingers: [-1,  3,  1,  4,  0,  0], manualFingers: true }
@@ -2391,6 +2407,10 @@ window.chordDatabase = {
         ]
     },
     'F': {
+        'm6': [
+            { name: 'E Shape m6 (Full Barre)', desc: 'Full 6-string E-shape minor 6th barre.', frets: [ 1,  3,  3,  1,  3,  1], fingers: [ 1,  2,  3,  1,  4,  1], manualFingers: true },
+            { name: 'E Shape (1st Fret) (Open D)', desc: 'Open D string inside a 6th-string root.', frets: [ 1,  3,  0,  1,  1,  4], fingers: [ 1,  3,  0,  2,  2,  4], manualFingers: true }
+        ],
         'maj7add11': [
             { name: 'Compact Shape (3rd Fret) (No 5th)', desc: 'Only the top four strings ring; the 5th is left out.', frets: [-1, -1,  3,  3,  5,  5], fingers: [-1, -1,  1,  2,  3,  4], manualFingers: true }
         ],
@@ -2478,6 +2498,12 @@ window.chordDatabase = {
         ]
     },
     'G': {
+        'm6': [
+            { name: 'E Shape (1st Fret) (Top D)', desc: 'Pinky across two strings at the 3rd fret.', frets: [ 3,  1,  0,  3,  3,  0], fingers: [ 3,  1,  0,  4,  4,  0], manualFingers: true },
+            { name: 'E Shape (1st Fret) (Full)', desc: 'Only the high E is left open.', frets: [ 3,  1,  2,  3,  3,  0], fingers: [ 3,  1,  2,  4,  4,  0], manualFingers: true },
+            { name: 'E Shape (1st Fret) (Top G)', desc: 'Open G string with the top two voices at the 3rd fret.', frets: [ 3,  1,  2,  0,  3,  3], fingers: [ 3,  1,  2,  0,  4,  4], manualFingers: true },
+            { name: 'E Shape m6 (Full Barre)', desc: 'Full 6-string E-shape minor 6th barre.', frets: [ 3,  5,  5,  3,  5,  3], fingers: [ 1,  2,  3,  1,  4,  1], manualFingers: true }
+        ],
         'm7': [
             { name: 'E Shape (1st Fret)', desc: 'Ring finger on the low root with the top three voices at the 3rd fret.', frets: [ 3,  1,  0,  3,  3,  1], fingers: [ 3,  1,  0,  4,  4,  2], manualFingers: true },
             { name: 'Open Shape (5th Fret) (No 5th)', desc: 'Open G string under the top two voices; the 5th is left out.', frets: [-1, -1,  5,  0,  6,  6], fingers: [-1, -1,  1,  0,  2,  3], manualFingers: true },
@@ -2574,6 +2600,10 @@ window.chordDatabase = {
         ]
     },
     'A': {
+        'm6': [
+            { name: 'E Shape (3rd Fret)', desc: 'Pinky across two strings with the high E left open.', frets: [ 5,  3,  4,  5,  5,  0], fingers: [ 3,  1,  2,  4,  4,  0], manualFingers: true },
+            { name: 'E Shape m6 (Full Barre)', desc: 'Full 6-string E-shape minor 6th barre.', frets: [ 5,  7,  7,  5,  7,  5], fingers: [ 1,  2,  3,  1,  4,  1], manualFingers: true }
+        ],
         'maj7add11': [
             { name: 'Open Shape (4th Fret)', desc: 'Two open strings under a spread top voicing.', frets: [-1,  0,  0,  6,  5,  4], fingers: [-1,  0,  0,  3,  2,  1], manualFingers: true },
             { name: 'Airy Shape (2nd Fret) (No 5th)', desc: 'Open A and D with the 7th on top; the 5th is left out.', frets: [-1,  0,  0,  2,  2,  4], fingers: [-1,  0,  0,  1,  2,  3], manualFingers: true },
@@ -2664,6 +2694,10 @@ window.chordDatabase = {
         ]
     },
     'B': {
+        'm6': [
+            { name: 'A Shape (2nd Fret)', desc: 'Ring finger across two strings at the 4th fret.', frets: [-1,  2,  4,  4,  3,  4], fingers: [-1,  1,  3,  3,  2,  4], manualFingers: true },
+            { name: 'E Shape m6 (Full Barre)', desc: 'Full 6-string E-shape minor 6th barre.', frets: [ 7,  9,  9,  7,  9,  7], fingers: [ 1,  2,  3,  1,  4,  1], manualFingers: true }
+        ],
         'maj7add11': [
             { name: 'Open Shape (1st Fret) (No 5th)', desc: 'Two open strings on top; the 5th is left out.', frets: [-1,  2,  1,  3,  0,  0], fingers: [-1,  2,  1,  3,  0,  0], manualFingers: true },
             { name: 'A Shape (2nd Fret) (No 5th)', desc: 'The high E rings open instead of the 5th; the 5th is left out.', frets: [-1,  2,  2,  3,  4,  0], fingers: [-1,  1,  2,  3,  4,  0], manualFingers: true },
