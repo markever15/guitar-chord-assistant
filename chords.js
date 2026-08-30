@@ -102,6 +102,9 @@ window.excludedVoicings = {
         ]
     },
     'E': {
+        'm6': [
+            [ 0,  2,  2,  4,  2,  3]   // E Shape (2nd Fret) #5
+        ],
         'dim': [ [-1, -1, 2, 3, 5, 3] ],   // E Shape (2nd Fret)
         'aug': [
             [0, 3, 2, 1, 1, 4],       // E Shape (1st Fret) #2
@@ -144,7 +147,10 @@ window.fingeringOverrides = {
         'm': [ { frets: [ 0,  2,  2,  0,  0,  0], fingers: [ 0,  2,  3,  0,  0,  0] } ],
         // 검지 바레로 묶이면 1·2번 두 개만 쓰게 된다. 손가락을 하나씩 나눠 짚는 편이 잡기 쉽다
         'm7': [ { frets: [ 0,  2,  2,  0,  3,  0], fingers: [ 0,  1,  2,  0,  3,  0] },
-                { frets: [ 0,  2,  2,  0,  3,  3], fingers: [ 0,  1,  2,  0,  3,  4] } ]
+                { frets: [ 0,  2,  2,  0,  3,  3], fingers: [ 0,  1,  2,  0,  3,  4] } ],
+        // 5·4번줄이 같은 2프렛이라 규칙이 검지 바레로 묶는다. 여기도 나눠 짚는 편이 낫다
+        'm6': [ { frets: [ 0,  2,  2,  0,  2,  0], fingers: [ 0,  1,  2,  0,  3,  0] },
+                { frets: [ 0,  2,  2,  0,  2,  3], fingers: [ 0,  1,  2,  0,  3,  4] } ]
     },
     'C': {
         '9': [ { frets: [-1,  3,  2,  3,  3,  3], fingers: [-1,  2,  1,  3,  3,  3] } ],
@@ -236,6 +242,13 @@ window.fingeringOverrides = {
 //    라벨은 그 폼의 이름을 쓴다. 여기 없는 코드는 기존 카테고리 자동 선정 그대로.
 window.pinnedRepresentatives = {
     'Bb': {
+        'm6': [
+            [-1,  1,  3,  0,  2,  1],   // A Shape (1st Fret)
+            [-1,  1,  3,  0,  2,  3],   // A Shape (1st Fret) #2 - 5도가 맨 위
+            [-1, -1,  8,  0,  6,  9],   // D Shape (6th Fret)
+            [-1, -1,  8, 10,  8,  9],   // D Shape (8th Fret)
+            [-1, 13, 11, 12, 11, 13]    // A Shape (11th Fret)
+        ],
         'm7': [
             [-1,  1,  3,  1,  2,  1],   // A Shape (1st Fret) (Barre)
             [-1,  1, -1,  1,  2,  1],   // A Shape (1st Fret) (Barre) #2
@@ -646,6 +659,15 @@ window.pinnedRepresentatives = {
         ]
     },
     'A': {
+        'm6': [
+            [-1,  0,  2,  2,  1,  2],   // A Shape (1st Fret)
+            [-1,  0,  4,  5,  5,  5],   // A Shape (4th Fret) - 근음이 맨 위
+            [ 5,  0,  7,  5,  7,  0],   // E Shape (5th Fret)
+            [-1,  0,  7,  9,  7,  8],   // A Shape (7th Fret) - 3음이 맨 위
+            [-1, 12, 10, 11, 10,  0],   // A Shape (10th Fret)
+            [-1, 12, 10, 11, 10, 12],   // A Shape (10th Fret) #5 - 개방현 없는 유일한 폼
+            [-1,  0, 14, -1, 13, 14]    // A Shape (13th Fret)
+        ],
         'm7': [
             [-1,  0,  2,  0,  1,  0],   // Open Am7 Shape
             [ 5,  3,  5,  0,  5,  0],   // E Shape (3rd Fret)
@@ -744,6 +766,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'G': {
+        'm6': [
+            [ 3,  1,  0,  0,  3,  0],   // E Shape (1st Fret)
+            [ 3,  5,  5,  3,  3,  0],   // E Shape (3rd Fret) (Barre)
+            [-1, -1,  5,  3,  3,  0],   // D Shape (3rd Fret)
+            [-1, -1,  5,  7,  5,  6],   // D Shape (5th Fret) - 5도가 맨 위
+            [-1, 10,  8,  9,  8, 10],   // A Shape (8th Fret) - 7도 자리(6음 아래) D가 맨 위
+            [-1, 10,  0,  0, 11,  0]    // A Shape (10th Fret)
+        ],
         'm7': [
             [ 3,  1,  0,  0,  3,  1],   // E Shape (1st Fret)
             [ 3,  5,  3,  3,  3,  3],   // E Shape (3rd Fret) (Barre)
@@ -922,6 +952,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'E': {
+        'm6': [
+            [ 0,  2,  2,  0,  2,  0],   // E Shape (2nd Fret)
+            [ 0,  2,  2,  0,  2,  3],   // E Shape (2nd Fret) #2
+            [-1, -1,  2,  4,  2,  3],   // D Shape (2nd Fret) - 개방현 없는 유일한 폼
+            [ 0,  4,  5,  4,  5,  0],   // E Shape (4th Fret)
+            [ 0,  7,  5,  6,  0,  0],   // E Shape (5th Fret)
+            [ 0,  7, -1,  0,  0,  9]    // E Shape (7th Fret)
+        ],
         'm7': [
             [ 0,  2,  2,  0,  3,  0],   // Open Em7 Shape
             [-1, -1,  2,  4,  3,  3],   // D Shape (2nd Fret)
@@ -1002,6 +1040,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'D': {
+        'm6': [
+            [-1, -1,  0,  2,  0,  1],   // Open Dm6 Shape
+            [-1,  5,  3,  2,  0, -1],   // A Shape (2nd Fret)
+            [-1,  5,  3, -1,  0,  5],   // A Shape (3rd Fret)
+            [-1, -1,  0, 10, 10,  7],   // D Shape (7th Fret)
+            [10, 12, 12, 10,  0, -1],   // E Shape (10th Fret) (Barre)
+            [-1, -1, 12, 14, 12, 13]    // Dm6 (Shell Shape)
+        ],
         'm7': [
             [-1, -1,  0,  2,  1,  1],   // Open Dm7 Shape
             [-1,  5,  7,  5,  6,  5],   // A Shape (5th Fret) (Barre)
