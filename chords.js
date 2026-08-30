@@ -236,6 +236,14 @@ window.fingeringOverrides = {
 //    라벨은 그 폼의 이름을 쓴다. 여기 없는 코드는 기존 카테고리 자동 선정 그대로.
 window.pinnedRepresentatives = {
     'Bb': {
+        'm7': [
+            [-1,  1,  3,  1,  2,  1],   // A Shape (1st Fret) (Barre)
+            [-1,  1, -1,  1,  2,  1],   // A Shape (1st Fret) (Barre) #2
+            [ 6,  8,  6,  6,  6,  6],   // E Shape (6th Fret) (Barre)
+            [ 6, -1,  6,  6,  6, -1],   // Bbm7 (E Shape)
+            [-1, -1,  8, 10,  9,  9],   // D Shape (8th Fret)
+            [-1, 13, 11, 13, 11, 13]    // Weave Shape (11th Fret)
+        ],
         'maj7add13': [
             [ 6,  0,  3,  3,  3,  3],   // E Shape (3rd Fret) (Barre) - 3도가 맨 위
             [ 6,  0,  3,  0,  3, -1],   // E Shape (3rd Fret) - 3도가 맨 위
@@ -271,6 +279,15 @@ window.pinnedRepresentatives = {
         ]
     },
     'G#': {
+        'm7': [
+            [ 4,  2,  1,  1,  0,  2],   // E Shape (1st Fret) (Barre) - 7도가 맨 위
+            [ 4,  6,  4,  4,  4,  4],   // E Shape (4th Fret) (Barre)
+            [ 4, -1,  4,  4,  4, -1],   // G#m7 (E Shape)
+            [-1, -1,  6,  8,  7,  7],   // D Shape (6th Fret)
+            [-1, 11,  9, 11,  0, 11],   // Weave Shape (9th Fret) (Open B)
+            [-1, 11, 13, 11,  0, -1],   // A Shape (11th Fret) (Barre)
+            [-1, 11, 13, 11, 12, 11]    // A Shape (11th Fret) (Barre) #2
+        ],
         'maj7add11': [
             [ 4,  3,  1,  0,  2, -1],   // E Shape (1st Fret) (Barre) #3
             [ 4,  4,  1,  0,  1, -1],   // E Shape (1st Fret) (Barre) #4
@@ -289,6 +306,15 @@ window.pinnedRepresentatives = {
         ]
     },
     'F#': {
+        'm7': [
+            [ 2,  4,  4,  2,  2,  0],   // E Shape (2nd Fret) (Barre)
+            [ 2, -1,  2,  2,  2, -1],   // F#m7 (E Shape)
+            [-1, -1,  4,  6,  5,  5],   // D Shape (4th Fret) - 3음이 맨 위
+            [-1,  9,  7,  6, -1,  0],   // A Shape (6th Fret)
+            [-1,  9,  7,  9,  7,  0],   // A Shape (7th Fret) (No 5th)
+            [-1,  9, 11,  9, 10,  9],   // A Shape (9th Fret) (Barre)
+            [14,  0, 11, -1, -1,  0]    // E Shape (11th Fret)
+        ],
         'maj7add11': [
             [ 2,  2,  3,  3,  0,  1],   // E Shape (1st Fret) (No 5th)
             [ 2,  2,  3,  3,  2,  2],   // E Shape (2nd Fret) (Barre)
@@ -1108,6 +1134,12 @@ window.chordNotesTable = {
 
 window.chordDatabase = {
     'Bb': {
+        'm7': [
+            { name: 'A Shape (1st Fret) (Top G#)', desc: 'Ring finger across two strings with the 3rd on top.', frets: [-1,  1,  3,  3,  2,  4], fingers: [-1,  1,  3,  3,  2,  4], manualFingers: true },
+            { name: 'E Shape (6th Fret) (Barre)', desc: 'Index barre under the two voices at the 8th fret.', frets: [ 6,  8,  8,  6,  9,  6], fingers: [ 1,  3,  3,  1,  4,  1], manualFingers: true },
+            { name: 'D Shape (6th Fret) (No 5th)', desc: 'Only the top four strings ring; the 5th is left out.', frets: [-1, -1,  8,  6,  9,  6], fingers: [-1, -1,  3,  1,  4,  2], manualFingers: true },
+            { name: 'Weave Shape (11th Fret)', desc: 'Index barre under two higher voices.', frets: [-1, 13, 11, 13, 11, 13], fingers: [-1,  2,  1,  3,  1,  4], manualFingers: true }
+        ],
         'maj7add11': [
             { name: 'Compact Shape (8th Fret) (No 5th)', desc: 'Only the top four strings ring; the 5th is left out.', frets: [-1, -1,  8,  8, 10, 10], fingers: [-1, -1,  1,  2,  3,  4], manualFingers: true }
         ],
@@ -1119,6 +1151,11 @@ window.chordDatabase = {
         ]
     },
     'G#': {
+        'm7': [
+            { name: 'E Shape (2nd Fret) (No 5th)', desc: 'Open B string inside a 6th-string root; the 5th is left out.', frets: [ 4,  2,  4,  4,  0,  2], fingers: [ 3,  1,  4,  4,  0,  2], manualFingers: true },
+            { name: 'Weave Shape (9th Fret)', desc: 'Index barre under two higher voices.', frets: [-1, 11,  9, 11,  9, 11], fingers: [-1,  2,  1,  3,  1,  4], manualFingers: true },
+            { name: 'Weave Shape (9th Fret) (Open B)', desc: 'Same grip with the B string left open.', frets: [-1, 11,  9, 11,  0, 11], fingers: [-1,  2,  1,  3,  0,  4], manualFingers: true }
+        ],
         'maj7add13': [
             { name: 'E Shape (4th Fret) (Barre)', desc: 'Full barre with the 13th on the B string.', frets: [ 4,  6,  5,  5,  6,  4], fingers: [ 1,  3,  2,  2,  4,  1], manualFingers: true },
             { name: 'Open Shape (1st Fret)', desc: 'Open G string with the 7th on top.', frets: [ 4,  3,  3,  0,  4,  1], fingers: [ 3,  2,  2,  0,  4,  1], manualFingers: true }
@@ -1135,6 +1172,11 @@ window.chordDatabase = {
         ]
     },
     'F#': {
+        'm7': [
+            { name: 'E Shape (2nd Fret) (Barre)', desc: 'Index barre with the high E left open.', frets: [ 2,  4,  2,  2,  2,  0], fingers: [ 1,  3,  1,  1,  1,  0], manualFingers: true },
+            { name: 'A Shape (7th Fret) (No 5th)', desc: 'Open high E on top; the 5th is left out.', frets: [-1,  9,  7,  9,  7,  0], fingers: [-1,  3,  1,  4,  2,  0], manualFingers: true },
+            { name: 'Weave Shape (7th Fret)', desc: 'Index barre under two higher voices.', frets: [-1,  9,  7,  9,  7,  9], fingers: [-1,  2,  1,  3,  1,  4], manualFingers: true }
+        ],
         'maj7add11': [
             { name: 'E Shape (1st Fret)', desc: 'B string open under a 6th-string root.', frets: [ 2,  4,  3,  3,  0,  1], fingers: ['T',  4,  2,  3,  0,  1], manualFingers: true },
             { name: 'E Shape (1st Fret) #2', desc: 'The 5th moves up to the D string.', frets: [ 2,  4,  4,  3,  0,  1], fingers: ['T',  3,  4,  2,  0,  1], manualFingers: true },
