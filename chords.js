@@ -375,6 +375,14 @@ window.pinnedRepresentatives = {
         ]
     },
     'C': {
+        'm6': [
+            [-1,  3,  1,  2,  1,  3],   // Twist Shape (Nut)
+            [-1,  3,  5,  0,  4,  5],   // Drone Shape (3rd Fret)
+            [ 8,  6,  7,  0,  8,  8],   // Airy Shape (8th Fret) - 근음이 맨 위
+            [ 8,  0, -1,  0, -1, 11],   // E Shape (8th Fret) - 손가락 둘
+            [ 8, 10, 10,  8, 10,  8],   // E Shape m6 (Full Barre) - 개방현 없음
+            [-1, -1, 10, 12, 10, 11]    // Shell Shape (Full G)
+        ],
         'm7': [
             [-1,  3,  1,  3,  1,  3],   // Weave Shape (1st Fret)
             [-1,  3,  5,  3,  4,  3],   // Am7 Shape (3rd Fret)
@@ -1180,6 +1188,11 @@ window.chordNotesTable = {
 
 window.chordDatabase = {
     'Bb': {
+        'm6': [
+            { name: 'A Shape (1st Fret) (Full)', desc: 'Ring finger across two strings at the 3rd fret.', frets: [-1,  1,  3,  3,  2,  3], fingers: [-1,  1,  3,  3,  2,  4], manualFingers: true },
+            { name: 'E Shape (4th Fret)', desc: 'Open G string inside a 6th-string root.', frets: [ 6,  4,  5,  0,  6,  6], fingers: [ 3,  1,  2,  0,  4,  4], manualFingers: true },
+            { name: 'E Shape (6th Fret) (Barre)', desc: 'Index barre with three voices at the 8th fret.', frets: [ 6,  8,  8,  6,  8,  6], fingers: [ 1,  2,  3,  1,  4,  1], manualFingers: true }
+        ],
         'm7': [
             { name: 'A Shape (1st Fret) (Top G#)', desc: 'Ring finger across two strings with the 3rd on top.', frets: [-1,  1,  3,  3,  2,  4], fingers: [-1,  1,  3,  3,  2,  4], manualFingers: true },
             { name: 'E Shape (6th Fret) (Barre)', desc: 'Index barre under the two voices at the 8th fret.', frets: [ 6,  8,  8,  6,  9,  6], fingers: [ 1,  3,  3,  1,  4,  1], manualFingers: true },
@@ -1489,9 +1502,9 @@ window.chordDatabase = {
         'm6': [
             { name: 'Twist Shape (Nut)', desc: 'Open-position minor 6th voicing.', frets: [-1, 3, 1, 2, 1, 3], fingers: [-1, 3, 1, 2, 1, 4] },
             { name: 'Drone Shape (3rd Fret)', desc: 'Open G string as the 5th.', frets: [-1, 3, 5, 0, 4, 5], fingers: [-1, 1, 3, 0, 2, 4] },
-            { name: 'Layer Shape (3rd Fret)', desc: 'Drone shape with the G string fretted instead of open.', frets: [-1, 3, 5, 5, 4, 5], fingers: [-1, 1, 3, 3, 2, 4] },
-            { name: 'Airy Shape (8th Fret)', desc: '4-note voicing with the G string left open.', frets: [8, 6, 7, 0, 8, 8], fingers: [3, 1, 2, 0, 4, 4] },
-            { name: 'E Shape m6 (Full Barre)', desc: 'Full 6-string E-shape minor 6th barre.', frets: [8, 10, 10, 8, 10, 8], fingers: [1, 2, 2, 1, 3, 1] },
+            { name: 'Layer Shape (3rd Fret)', desc: 'Drone shape with the G string fretted instead of open.', frets: [-1, 3, 5, 5, 4, 5], fingers: [-1, 1, 3, 3, 2, 4], manualFingers: true },
+            { name: 'Airy Shape (8th Fret)', desc: '4-note voicing with the G string left open.', frets: [8, 6, 7, 0, 8, 8], fingers: [3, 1, 2, 0, 4, 4], manualFingers: true },
+            { name: 'E Shape m6 (Full Barre)', desc: 'Full 6-string E-shape minor 6th barre.', frets: [8, 10, 10, 8, 10, 8], fingers: [1, 2, 3, 1, 4, 1], manualFingers: true },
             { name: 'E Shape m6 (Wide)', desc: 'E-shape m6 with the 6th voiced up on the high E string.', frets: [8, 10, 10, 8, 10, 11], fingers: [1, 2, 2, 1, 3, 4] },
             { name: 'E Shape m6 (Open G)', desc: 'E-shape m6 with the open G string as the 5th.', frets: [8, 10, 10, 0, 10, 11], fingers: [1, 2, 2, 0, 3, 4] },
             { name: 'Cluster Shape (5th Fret)', desc: 'Wide voicing near the 5th fret.', frets: [8, 6, 5, 5, 8, 5], fingers: [3, 2, 1, 1, 4, 1] },
@@ -2031,6 +2044,9 @@ window.chordDatabase = {
         ]
     },
     'D': {
+        'm6': [
+            { name: 'A Shape (3rd Fret) (Open B)', desc: 'Open B string between two fretted voices.', frets: [-1,  5,  3,  4,  0,  5], fingers: [-1,  3,  1,  2,  0,  4], manualFingers: true }
+        ],
         'maj7add11': [
             { name: 'Airy Shape (2nd Fret) (No 5th)', desc: 'Two open strings under a pair on top; the 5th is left out.', frets: [-1, -1,  0,  0,  2,  2], fingers: [-1, -1,  0,  0,  1,  2], manualFingers: true },
             { name: 'Open Shape (7th Fret) (No 5th)', desc: 'Open D and G with the top voices high up; the 5th is left out.', frets: [-1, -1,  0,  0,  7,  9], fingers: [-1, -1,  0,  0,  1,  3], manualFingers: true },
